@@ -321,7 +321,7 @@
         <a href="#solution">Solution</a>
         <a href="#usecases">Use cases</a>
         <a href="#api">API</a>
-        <a href="apply-en.html">Become a decision maker</a>
+        <a href="apply-en.html">Become a Sentinel</a>
         <a href="faq-en.html">FAQ</a>
         <a href="#pricing">Pricing</a>
         <div class="nav-lang"><a href="index.html">FR</a><span>·</span><a href="index-en.html" class="active">EN</a>
@@ -344,6 +344,7 @@
         <h1>The <span class="highlight gradient-text-animated">decision authority</span> layer for AI agents</h1>
 
         <p class="hero-subtitle">AI agents can analyze and prepare.</p>
+        <p class="hero-subtitle">Arbitrium — the threshold where automation stops and human authority takes over.</p>
 
         <ul class="hero-points">
           <li>They can't sign, attest, or assume legal responsibility.</li>
@@ -446,7 +447,7 @@
           <div class="icon"><svg class="hl-icon">
               <use href="#icon-checkmark" />
             </svg></div>
-          <h4>Verified decision makers</h4>
+          <h4>Verified Sentinels</h4>
           <p>Qualifications and authorizations verified</p>
         </div>
 
@@ -588,7 +589,19 @@
           </div>
           <div class="step-connector"></div>
           <h4>HumanLayer routes</h4>
-          <p>To a qualified decision maker based on required criteria</p>
+          <p>To a qualified Sentinel based on required criteria</p>
+        </div>
+
+        <div class="solution-step">
+          <div class="step-icon">
+            <svg class="hl-icon hl-lg">
+              <use href="#icon-target" />
+            </svg>
+            <span class="step-number">3</span>
+          </div>
+          <div class="step-connector"></div>
+          <h4>Arbitrium threshold reached</h4>
+          <p>When the Arbitrium threshold is reached, HumanLayer routes the request to a qualified Sentinel.</p>
         </div>
 
         <div class="solution-step">
@@ -596,10 +609,10 @@
             <svg class="hl-icon hl-lg">
               <use href="#icon-user" />
             </svg>
-            <span class="step-number">3</span>
+            <span class="step-number">4</span>
           </div>
           <div class="step-connector"></div>
-          <h4>The decision maker decides</h4>
+          <h4>The Sentinel decides</h4>
           <p>Structured decision with comments and justification</p>
         </div>
 
@@ -608,7 +621,7 @@
             <svg class="hl-icon hl-lg">
               <use href="#icon-check" />
             </svg>
-            <span class="step-number">4</span>
+            <span class="step-number">5</span>
           </div>
           <h4>Back to the agent</h4>
           <p>Decision logged, auditable, ready to execute</p>
@@ -894,7 +907,7 @@
             </svg></div>
           <div class="why-content">
             <h4>Verified Authority Network</h4>
-            <p>Qualified decision makers, traceable accreditations</p>
+            <p>Qualified Sentinels, traceable accreditations</p>
           </div>
         </div>
 
@@ -998,7 +1011,8 @@
       <div class="section-title reveal">
         <span class="label">Developers</span>
         <h2>HumanLayer Systems API</h2>
-        <p>HumanLayer integrates like Stripe or Twilio — but for decisions</p>
+        <p>HumanLayer integrates like Stripe or Twilio — but for decisions. Arbitrium is exposed as an escalation state
+          in the system.</p>
       </div>
 
       <div class="api-content">
@@ -1091,7 +1105,7 @@
             result = decision.<span class="method">wait_for_completion</span>()
 
             <span class="keyword">if</span> result.status == <span class="string">"rejected"</span>:
-            <span class="comment"># Decision rejected by the decision maker</span>
+            <span class="comment"># Decision rejected by the Sentinel</span>
             log_rejection(
             <span class="property">reason</span>=result.rejection_reason,
             <span class="property">decided_by</span>=result.decider_id,
@@ -1113,13 +1127,13 @@
     </div>
   </section>
 
-  <!-- Become a Decision Maker CTA -->
+  <!-- Become a Sentinel CTA -->
   <section class="apply-cta" id="apply">
     <div class="container">
       <div class="apply-cta-content reveal">
         <div class="apply-cta-text">
           <span class="label">Join the network</span>
-          <h2>Are you an expert? Become a HumanLayer decision maker</h2>
+          <h2>Are you an expert? Become a HumanLayer Sentinel</h2>
           <p>Lawyer, physician, analyst, CISO... Monetize your decision authority by validating AI agents' requests.
             Full flexibility, paid per decision.</p>
         </div>
@@ -1127,7 +1141,7 @@
           <a href="apply-en.html" class="btn btn-primary btn-large">
             <svg class="hl-icon">
               <use href="#icon-user" />
-            </svg> Apply as a decision maker
+            </svg> Apply as a Sentinel
           </a>
           <p class="apply-cta-note">Application reviewed within 48 hours</p>
         </div>
@@ -1160,7 +1174,7 @@
             <li>Structured verification</li>
             <li>30-minute SLA</li>
             <li>Full audit trail</li>
-            <li>Verified decision makers</li>
+            <li>Verified Sentinels</li>
           </ul>
           <a href="#" class="btn btn-secondary">Get started</a>
         </div>
