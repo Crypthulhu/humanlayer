@@ -20,112 +20,14 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="icons.css">
 
-    <style>
-        .legal-page {
-            padding: 120px 0 80px;
-            min-height: 100vh;
-        }
-
-        .legal-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .legal-content h1 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            color: var(--text-primary);
-        }
-
-        .legal-content h2 {
-            font-size: 1.5rem;
-            margin: 2rem 0 1rem;
-            color: var(--primary);
-        }
-
-        .legal-content p,
-        .legal-content li {
-            line-height: 1.8;
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-        }
-
-        .legal-content ul {
-            padding-left: 1.5rem;
-        }
-
-        .legal-content ul li {
-            margin-bottom: 0.5rem;
-        }
-
-        .legal-back {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--primary);
-            text-decoration: none;
-            margin-bottom: 2rem;
-        }
-
-        .legal-back:hover {
-            text-decoration: underline;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            margin-top: 2rem;
-        }
-
-        .contact-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 24px;
-            transition: all 0.3s ease;
-        }
-
-        .contact-card:hover {
-            border-color: var(--primary);
-            background: rgba(192, 57, 43, 0.05);
-            transform: translateY(-2px);
-        }
-
-        .contact-card h3 {
-            font-size: 1.2rem;
-            color: var(--text-primary);
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .contact-card p {
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-        }
-
-        .contact-card a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .contact-card a:hover {
-            text-decoration: underline;
-        }
-
-        .contact-icon {
-            width: 24px;
-            height: 24px;
-            color: var(--primary);
-        }
-    </style>
+    
 </head>
 
 <body>
     <div class="bg-animation"></div>
+    <div class="grid-overlay"></div>
+    <div class="cursor-glow"></div>
+    <div class="scroll-progress" id="scroll-progress"></div>
 
     <nav class="nav" id="nav">
         <div class="container nav-container">
@@ -142,35 +44,46 @@
 
     <section class="legal-page">
         <div class="container">
-            <div class="legal-content">
+            <div class="legal-hero">
                 <a href="index.html" class="legal-back">← Retour à l'accueil</a>
-
-                <h1>Contactez-nous</h1>
-
-                <p>Nous sommes là pour répondre à vos questions.</p>
-
-                <div class="contact-card" style="max-width: 400px; margin: 2rem 0;">
-                    <h3>
-                        <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="1.5">
-                            <rect x="2" y="4" width="20" height="16" rx="3" />
-                            <path d="M2 7l10 6 10-6" />
-                        </svg>
-                        Écrivez-nous
-                    </h3>
-                    <p>Pour toute question sur HumanLayer et nos services.</p>
-                    <a href="mailto:hello@in6.ai">hello@in6.ai</a>
+                <div class="legal-eyebrow">Contact</div>
+                <h1 class="legal-title">Contactez-nous</h1>
+                <p class="legal-summary">Nous sommes là pour répondre à vos questions et accompagner votre déploiement.</p>
+                <div class="legal-meta">
+                    <span>Réponse sous 24-48h ouvrables</span>
+                    <span>hello@in6.ai</span>
                 </div>
+            </div>
 
-                <h2>Siège social</h2>
-                <p>
-                    <strong>HumanLayer Systems Inc.</strong><br>
-                    1250, avenue de la Station<br>
-                    Shawinigan (Québec) G9N 8K9
-                </p>
-
-                <h2>Horaires de support</h2>
-                <p>Notre équipe répond généralement sous 24-48 heures ouvrables.</p>
+            <div class="legal-card">
+                <div class="legal-content">
+                    <div class="contact-grid">
+                        <div class="contact-card">
+                            <h3>
+                                <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.5">
+                                    <rect x="2" y="4" width="20" height="16" rx="3" />
+                                    <path d="M2 7l10 6 10-6" />
+                                </svg>
+                                Écrivez-nous
+                            </h3>
+                            <p>Pour toute question sur HumanLayer et nos services.</p>
+                            <a href="mailto:hello@in6.ai">hello@in6.ai</a>
+                        </div>
+                        <div class="contact-card">
+                            <h3>Siège social</h3>
+                            <p>
+                                <strong>HumanLayer Systems Inc.</strong><br>
+                                1250, avenue de la Station<br>
+                                Shawinigan (Québec) G9N 8K9
+                            </p>
+                        </div>
+                        <div class="contact-card">
+                            <h3>Horaires de support</h3>
+                            <p>Notre équipe répond généralement sous 24-48 heures ouvrables.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
