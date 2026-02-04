@@ -13,7 +13,7 @@ HumanLayer Systems Inc. develops a decision authority layer for artificial intel
 
 ## Innovation clé / Key Innovation
 
-- **Premier réseau de décideurs qualifiés pour l'IA** : Avocats, médecins, ingénieurs, notaires et autres professionnels habilités à prendre des décisions opposables.
+- **Premier réseau de intercesseurs qualifiés pour l'IA** : Avocats, médecins, ingénieurs, notaires et autres professionnels habilités à prendre des décisions opposables.
 - **API temps réel** : Intégration directe dans les workflows d'agents IA avec latence minimale.
 - **Traçabilité complète** : Chaque décision est horodatée, signée et archivée pour audit.
 - **Conformité réglementaire** : RGPD, Loi 25 (Québec), EU AI Act ready.
@@ -40,7 +40,7 @@ HumanLayer Systems Inc. develops a decision authority layer for artificial intel
 ## Architecture technique / Technical Architecture
 
 ```
-Agent IA → API HumanLayer → Routage intelligent → Décideur qualifié → Décision signée → Agent IA
+Agent IA → API HumanLayer → Routage intelligent → Intercesseur qualifié → Décision signée → Agent IA
 AI Agent → HumanLayer API → Intelligent routing → Qualified decider → Signed decision → AI Agent
 ```
 
@@ -48,14 +48,14 @@ AI Agent → HumanLayer API → Intelligent routing → Qualified decider → Si
 
 - **Accueil FR** : https://humanlayer.systems/
 - **Home EN** : https://humanlayer.systems/index-en.html
-- **Devenir décideur FR** : https://humanlayer.systems/apply.html
+- **Devenir intercesseur FR** : https://humanlayer.systems/apply.html
 - **Become a decider EN** : https://humanlayer.systems/apply-en.html
 - **FAQ FR** : https://humanlayer.systems/faq.html
 - **FAQ EN** : https://humanlayer.systems/faq-en.html
 
 ## FAQs spécialisées / Specialized FAQs
 
-- Décideurs / Deciders: /faq-decideurs.html, /faq-decideurs-en.html
+- Intercesseurs / Deciders: /faq-decideurs.html, /faq-decideurs-en.html
 - Développeurs / Developers: /faq-developpeurs.html, /faq-developpeurs-en.html
 - Investisseurs / Investors: /faq-investisseurs.html, /faq-investisseurs-en.html
 - Régulateurs / Regulators: /faq-regulateurs.html, /faq-regulateurs-en.html
@@ -71,7 +71,7 @@ AI Agent → HumanLayer API → Intelligent routing → Qualified decider → Si
 
 ## Mots-clés / Keywords
 
-FR: décision humaine IA, human-in-the-loop, gouvernance IA, conformité IA, agents autonomes, décideur qualifié, API décision, traçabilité IA, responsabilité IA, Loi 25, RGPD, EU AI Act
+FR: décision humaine IA, human-in-the-loop, gouvernance IA, conformité IA, agents autonomes, intercesseur qualifié, API décision, traçabilité IA, responsabilité IA, Loi 25, RGPD, EU AI Act
 
 EN: human decision AI, human-in-the-loop, AI governance, AI compliance, autonomous agents, qualified decider, decision API, AI traceability, AI accountability, Law 25, GDPR, EU AI Act
 
