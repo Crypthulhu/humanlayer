@@ -19,61 +19,14 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="icons.css">
 
-    <style>
-        .legal-page {
-            padding: 120px 0 80px;
-            min-height: 100vh;
-        }
-
-        .legal-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .legal-content h1 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            color: var(--text-primary);
-        }
-
-        .legal-content h2 {
-            font-size: 1.5rem;
-            margin: 2rem 0 1rem;
-            color: var(--primary);
-        }
-
-        .legal-content p,
-        .legal-content li {
-            line-height: 1.8;
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-        }
-
-        .legal-content ul {
-            padding-left: 1.5rem;
-        }
-
-        .legal-content ul li {
-            margin-bottom: 0.5rem;
-        }
-
-        .legal-back {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--primary);
-            text-decoration: none;
-            margin-bottom: 2rem;
-        }
-
-        .legal-back:hover {
-            text-decoration: underline;
-        }
-    </style>
+    
 </head>
 
 <body>
     <div class="bg-animation"></div>
+    <div class="grid-overlay"></div>
+    <div class="cursor-glow"></div>
+    <div class="scroll-progress" id="scroll-progress"></div>
 
     <nav class="nav" id="nav">
         <div class="container nav-container">
@@ -90,62 +43,70 @@
 
     <section class="legal-page">
         <div class="container">
-            <div class="legal-content">
+            <div class="legal-hero">
                 <a href="index.html" class="legal-back">← Retour à l'accueil</a>
+                <div class="legal-eyebrow">Sécurité</div>
+                <h1 class="legal-title">Sécurité</h1>
+                <p class="legal-summary">Des contrôles de niveau entreprise protègent chaque décision et chaque donnée
+                    sensible traitée par HumanLayer.</p>
+                <div class="legal-meta">
+                    <span>Dernière mise à jour : Février 2026</span>
+                    <span>security@humanlayer.systems</span>
+                </div>
+            </div>
 
-                <h1>Sécurité</h1>
+            <div class="legal-card">
+                <div class="legal-content">
+                    <p>La sécurité de vos données est notre priorité absolue. HumanLayer Systems Inc. implémente des
+                        mesures de sécurité de niveau entreprise pour protéger les informations sensibles traitées par
+                        notre plateforme.</p>
 
-                <p><strong>Dernière mise à jour :</strong> Février 2026</p>
+                    <h2>Infrastructure sécurisée</h2>
+                    <ul>
+                        <li><strong>Chiffrement en transit :</strong> Toutes les communications sont chiffrées via TLS 1.3
+                        </li>
+                        <li><strong>Chiffrement au repos :</strong> Les données stockées sont chiffrées avec AES-256</li>
+                        <li><strong>Hébergement :</strong> Infrastructure cloud certifiée SOC 2 Type II</li>
+                        <li><strong>Isolation :</strong> Chaque client bénéficie d'un environnement logiquement isolé</li>
+                    </ul>
 
-                <p>La sécurité de vos données est notre priorité absolue. HumanLayer Systems Inc. implémente des mesures
-                    de sécurité de niveau entreprise pour protéger les informations sensibles traitées par notre
-                    plateforme.</p>
+                    <h2>Authentification et accès</h2>
+                    <ul>
+                        <li>Authentification multi-facteurs (MFA) obligatoire pour tous les Sentinels</li>
+                        <li>Gestion des accès basée sur les rôles (RBAC)</li>
+                        <li>Sessions à durée limitée avec déconnexion automatique</li>
+                        <li>Journalisation complète de toutes les actions</li>
+                    </ul>
 
-                <h2>Infrastructure sécurisée</h2>
-                <ul>
-                    <li><strong>Chiffrement en transit :</strong> Toutes les communications sont chiffrées via TLS 1.3
-                    </li>
-                    <li><strong>Chiffrement au repos :</strong> Les données stockées sont chiffrées avec AES-256</li>
-                    <li><strong>Hébergement :</strong> Infrastructure cloud certifiée SOC 2 Type II</li>
-                    <li><strong>Isolation :</strong> Chaque client bénéficie d'un environnement logiquement isolé</li>
-                </ul>
+                    <h2>Vérification des Sentinels</h2>
+                    <ul>
+                        <li>Vérification d'identité rigoureuse avant activation</li>
+                        <li>Validation des qualifications professionnelles et habilitations</li>
+                        <li>Contrôle de conformité périodique</li>
+                        <li>Traçabilité complète de chaque décision</li>
+                    </ul>
 
-                <h2>Authentification et accès</h2>
-                <ul>
-                    <li>Authentification multi-facteurs (MFA) obligatoire pour tous les Sentinels</li>
-                    <li>Gestion des accès basée sur les rôles (RBAC)</li>
-                    <li>Sessions à durée limitée avec déconnexion automatique</li>
-                    <li>Journalisation complète de toutes les actions</li>
-                </ul>
+                    <h2>Conformité réglementaire</h2>
+                    <ul>
+                        <li>RGPD (Règlement Général sur la Protection des Données)</li>
+                        <li>Loi 25 (Québec)</li>
+                        <li>SOC 2 Type II (en cours de certification)</li>
+                        <li>ISO 27001 (planifié)</li>
+                    </ul>
 
-                <h2>Vérification des Sentinels</h2>
-                <ul>
-                    <li>Vérification d'identité rigoureuse avant activation</li>
-                    <li>Validation des qualifications professionnelles et habilitations</li>
-                    <li>Contrôle de conformité périodique</li>
-                    <li>Traçabilité complète de chaque décision</li>
-                </ul>
+                    <h2>Signalement de vulnérabilités</h2>
+                    <p>Si vous découvrez une faille de sécurité, veuillez nous contacter immédiatement à
+                        <strong>security@humanlayer.systems</strong>. Nous nous engageons à traiter tout signalement dans
+                        les 24 heures.</p>
 
-                <h2>Conformité réglementaire</h2>
-                <ul>
-                    <li>RGPD (Règlement Général sur la Protection des Données)</li>
-                    <li>Loi 25 (Québec)</li>
-                    <li>SOC 2 Type II (en cours de certification)</li>
-                    <li>ISO 27001 (planifié)</li>
-                </ul>
-
-                <h2>Signalement de vulnérabilités</h2>
-                <p>Si vous découvrez une faille de sécurité, veuillez nous contacter immédiatement à
-                    <strong>security@humanlayer.systems</strong>. Nous nous engageons à traiter tout signalement dans
-                    les 24 heures.</p>
-
-                <h2>Audits et tests</h2>
-                <ul>
-                    <li>Tests de pénétration réguliers par des tiers indépendants</li>
-                    <li>Analyse de vulnérabilités automatisée continue</li>
-                    <li>Revue de code sécurisée</li>
-                    <li>Plan de réponse aux incidents documenté et testé</li>
-                </ul>
+                    <h2>Audits et tests</h2>
+                    <ul>
+                        <li>Tests de pénétration réguliers par des tiers indépendants</li>
+                        <li>Analyse de vulnérabilités automatisée continue</li>
+                        <li>Revue de code sécurisée</li>
+                        <li>Plan de réponse aux incidents documenté et testé</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
