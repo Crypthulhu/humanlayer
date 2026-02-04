@@ -1,0 +1,35 @@
+# Sitemap for humanlayer.systems
+
+User-agent: *
+Allow: /
+
+# AI/LLM Crawlers - Welcome
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Cohere-ai
+Allow: /
+
+# Sitemap
+Sitemap: https://humanlayer.systems/sitemap.xml
+
+# Host
+Host: https://humanlayer.systems
