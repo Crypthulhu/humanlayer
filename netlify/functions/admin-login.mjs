@@ -1,6 +1,6 @@
-const { jsonResponse, verifyPassword, buildToken } = require("./_utils");
+import { jsonResponse, verifyPassword, buildToken } from "./_utils.mjs";
 
-exports.handler = async (event) => {
+export const handler = async (event) => {
   if (event.httpMethod !== "POST") {
     return jsonResponse(405, { error: "Method not allowed" });
   }

@@ -1,11 +1,11 @@
-const { jsonResponse, getApplicationsStore } = require("./_utils");
+import { jsonResponse, getApplicationsStore } from "./_utils.mjs";
 
 function sanitizeValue(value) {
   if (typeof value === "string") return value.trim();
   return value;
 }
 
-exports.handler = async (event) => {
+export const handler = async (event) => {
   if (event.httpMethod !== "POST") {
     return jsonResponse(405, { error: "Method not allowed" });
   }

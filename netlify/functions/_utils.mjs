@@ -1,5 +1,5 @@
-const crypto = require("crypto");
-const { getStore } = require("@netlify/blobs");
+import crypto from "crypto";
+import { getStore } from "@netlify/blobs";
 
 const TOKEN_TTL_SECONDS = 60 * 60 * 8; // 8 hours
 
@@ -79,7 +79,7 @@ function getApplicationsStore() {
   return getStore("applications");
 }
 
-module.exports = {
+export {
   jsonResponse,
   verifyPassword,
   requireAuth,

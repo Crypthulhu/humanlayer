@@ -1,6 +1,6 @@
-const { jsonResponse, requireAuth, getApplicationsStore } = require("./_utils");
+import { jsonResponse, requireAuth, getApplicationsStore } from "./_utils.mjs";
 
-exports.handler = async (event) => {
+export const handler = async (event) => {
   if (event.httpMethod !== "GET") {
     return jsonResponse(405, { error: "Method not allowed" });
   }
