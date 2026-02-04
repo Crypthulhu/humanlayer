@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HumanLayer Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        body {
+            background: radial-gradient(circle at 20% 20%, rgba(192, 57, 43, 0.08), transparent 55%),
+                linear-gradient(180deg, #f9f6f2 0%, #f5efe9 100%);
+            font-family: var(--font-body);
+        }
+
+        .admin-shell {
+            max-width: 1080px;
+            margin: 120px auto 80px;
+            padding: 0 24px;
+        }
+
+        .admin-card {
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        .admin-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .admin-header h1 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .admin-status {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .admin-form {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .admin-form input {
+            flex: 1;
+            min-width: 240px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            font-size: 1rem;
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .admin-actions button {
+            border: none;
+            border-radius: 999px;
+            padding: 12px 20px;
+            font-weight: 600;
+            background: var(--gradient-primary);
+            color: white;
+            cursor: pointer;
+        }
+
+        .admin-actions button.secondary {
+            background: rgba(0, 0, 0, 0.08);
+            color: var(--text-primary);
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 24px;
+            font-size: 0.95rem;
+        }
+
+        .admin-table th,
+        .admin-table td {
+            text-align: left;
+            padding: 12px 10px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            vertical-align: top;
+        }
+
+        .admin-table th {
+            font-size: 0.85rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .empty-state {
+            padding: 20px;
+            background: rgba(192, 57, 43, 0.05);
+            border-radius: 16px;
+            color: var(--text-secondary);
+            margin-top: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="admin-shell">
+        <div class="admin-card">
+            <div class="admin-header">
+                <div>
+                    <h1>Admin — Applications</h1>
+                    <div class="admin-status" id="status">Not connected</div>
+                </div>
+                <div class="admin-actions">
+                    <button class="secondary" id="refreshBtn" type="button" style="display:none;">Refresh</button>
+                    <button class="secondary" id="logoutBtn" type="button" style="display:none;">Logout</button>
+                </div>
+            </div>
+
+            <form class="admin-form" id="loginForm">
+                <input type="password" id="password" placeholder="Admin password" required>
+                <button type="submit">Login</button>
+            </form>
+
+            <div id="results"></div>
+        </div>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const passwordInput = document.getElementById('password');
+        const statusEl = document.getElementById('status');
+        const resultsEl = document.getElementById('results');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        const TOKEN_KEY = 'hl_admin_token';
+
+        function setStatus(text) {
+            statusEl.textContent = text;
+        }
+
+        function setAuthenticated(isAuth) {
+            refreshBtn.style.display = isAuth ? 'inline-block' : 'none';
+            logoutBtn.style.display = isAuth ? 'inline-block' : 'none';
+            loginForm.style.display = isAuth ? 'none' : 'flex';
+        }
+
+        async function fetchEntries() {
+            const token = localStorage.getItem(TOKEN_KEY);
+            if (!token) return;
+            setStatus('Loading applications...');
+            const res = await fetch('/.netlify/functions/admin-list', {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            if (!res.ok) {
+                setStatus('Authentication failed. Please login again.');
+                setAuthenticated(false);
+                localStorage.removeItem(TOKEN_KEY);
+                return;
+            }
+            const data = await res.json();
+            renderEntries(data.entries || []);
+            setStatus(`Loaded ${data.entries?.length || 0} applications`);
+        }
+
+        function renderEntries(entries) {
+            if (!entries.length) {
+                resultsEl.innerHTML = '<div class="empty-state">No applications yet.</div>';
+                return;
+            }
+            const rows = entries.map(entry => `
+                <tr>
+                    <td>${entry.submittedAt || ''}</td>
+                    <td>${entry.firstName || ''} ${entry.lastName || ''}</td>
+                    <td>${entry.email || ''}</td>
+                    <td>${entry.domain || entry.expertise || ''}</td>
+                </tr>
+            `).join('');
+
+            resultsEl.innerHTML = `
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Domain</th>
+                        </tr>
+                    </thead>
+                    <tbody>${rows}</tbody>
+                </table>
+            `;
+        }
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            setStatus('Authenticating...');
+            const res = await fetch('/.netlify/functions/admin-login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ password: passwordInput.value })
+            });
+            if (!res.ok) {
+                setStatus('Invalid password.');
+                return;
+            }
+            const data = await res.json();
+            localStorage.setItem(TOKEN_KEY, data.token);
+            setAuthenticated(true);
+            await fetchEntries();
+        });
+
+        refreshBtn.addEventListener('click', fetchEntries);
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem(TOKEN_KEY);
+            setAuthenticated(false);
+            resultsEl.innerHTML = '';
+            setStatus('Logged out');
+        });
+
+        if (localStorage.getItem(TOKEN_KEY)) {
+            setAuthenticated(true);
+            fetchEntries();
+        }
+    </script>
+</body>
+
+</html>
