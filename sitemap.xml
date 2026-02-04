@@ -224,13 +224,35 @@
     <lastmod>2026-02-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/terms.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/terms-en.html"/>
   </url>
   
+  <url>
+    <loc>https://humanlayer.systems/terms-en.html</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/terms.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/terms-en.html"/>
+  </url>
+
   <url>
     <loc>https://humanlayer.systems/contact.html</loc>
     <lastmod>2026-02-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/contact-en.html"/>
+  </url>
+
+  <url>
+    <loc>https://humanlayer.systems/contact-en.html</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/contact-en.html"/>
   </url>
 
 </urlset>

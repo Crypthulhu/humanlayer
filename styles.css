@@ -909,8 +909,8 @@ p {
 /* Hero visual */
 .hero-visual {
   position: absolute;
-  right: 0;
-  top: 50%;
+  right: -2%;
+  top: 44%;
   transform: translateY(-50%);
   width: 45%;
   height: 500px;
@@ -3026,7 +3026,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 24px;
 }
 
@@ -3034,6 +3034,7 @@ p {
   display: flex;
   align-items: center;
   gap: 16px;
+  order: 1;
 }
 
 .footer-logo {
@@ -3053,10 +3054,13 @@ p {
 .footer-powered {
   font-size: 0.75rem;
   color: var(--text-muted);
-  width: 100%;
-  text-align: center;
-  margin-top: 16px;
-  display: block;
+  width: auto;
+  text-align: right;
+  margin-top: 0;
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  order: 3;
 }
 
 .footer-powered a {
@@ -3072,8 +3076,10 @@ p {
 .footer-links {
   display: flex;
   gap: 12px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
+  order: 2;
+  margin: 0 auto;
 }
 
 .footer-links a {
