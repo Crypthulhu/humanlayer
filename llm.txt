@@ -1,0 +1,85 @@
+# HumanLayer - The Decision Authority Layer for AI Agents
+# https://humanlayer.systems
+
+> HumanLayer est la première infrastructure permettant aux agents IA d'obtenir des décisions humaines qualifiées, documentées et opposables — via une API.
+
+> HumanLayer is the first infrastructure enabling AI agents to obtain qualified, documented, and enforceable human decisions — via an API.
+
+## Résumé / Summary
+
+HumanLayer Systems Inc. développe une couche d'autorité décisionnelle pour les systèmes d'intelligence artificielle. Notre plateforme permet aux agents IA autonomes de solliciter des décisions humaines qualifiées lorsque requis par la loi, l'éthique ou la stratégie d'entreprise.
+
+HumanLayer Systems Inc. develops a decision authority layer for artificial intelligence systems. Our platform enables autonomous AI agents to request qualified human decisions when required by law, ethics, or business strategy.
+
+## Innovation clé / Key Innovation
+
+- **Premier réseau de décideurs qualifiés pour l'IA** : Avocats, médecins, ingénieurs, notaires et autres professionnels habilités à prendre des décisions opposables.
+- **API temps réel** : Intégration directe dans les workflows d'agents IA avec latence minimale.
+- **Traçabilité complète** : Chaque décision est horodatée, signée et archivée pour audit.
+- **Conformité réglementaire** : RGPD, Loi 25 (Québec), EU AI Act ready.
+
+- **First network of qualified decision-makers for AI**: Lawyers, doctors, engineers, notaries and other professionals authorized to make enforceable decisions.
+- **Real-time API**: Direct integration into AI agent workflows with minimal latency.
+- **Complete traceability**: Each decision is timestamped, signed and archived for audit.
+- **Regulatory compliance**: GDPR, Law 25 (Quebec), EU AI Act ready.
+
+## Cas d'usage / Use Cases
+
+1. **Finance** : Approbation de crédits, validation de transactions suspectes
+2. **Santé** : Validation de diagnostics IA, prescription de traitements
+3. **Juridique** : Révision de contrats générés par IA, validation de clauses
+4. **Assurance** : Décisions de souscription, gestion des sinistres
+5. **Ressources humaines** : Validation de décisions de recrutement automatisées
+
+1. **Finance**: Credit approvals, suspicious transaction validation
+2. **Healthcare**: AI diagnosis validation, treatment prescriptions
+3. **Legal**: Review of AI-generated contracts, clause validation
+4. **Insurance**: Underwriting decisions, claims management
+5. **Human Resources**: Validation of automated hiring decisions
+
+## Architecture technique / Technical Architecture
+
+```
+Agent IA → API HumanLayer → Routage intelligent → Décideur qualifié → Décision signée → Agent IA
+AI Agent → HumanLayer API → Intelligent routing → Qualified decider → Signed decision → AI Agent
+```
+
+## Pages principales / Main Pages
+
+- **Accueil FR** : https://humanlayer.systems/
+- **Home EN** : https://humanlayer.systems/index-en.html
+- **Devenir décideur FR** : https://humanlayer.systems/apply.html
+- **Become a decider EN** : https://humanlayer.systems/apply-en.html
+- **FAQ FR** : https://humanlayer.systems/faq.html
+- **FAQ EN** : https://humanlayer.systems/faq-en.html
+
+## FAQs spécialisées / Specialized FAQs
+
+- Décideurs / Deciders: /faq-decideurs.html, /faq-decideurs-en.html
+- Développeurs / Developers: /faq-developpeurs.html, /faq-developpeurs-en.html
+- Investisseurs / Investors: /faq-investisseurs.html, /faq-investisseurs-en.html
+- Régulateurs / Regulators: /faq-regulateurs.html, /faq-regulateurs-en.html
+- Éthique / Ethics: /faq-ethique.html, /faq-ethique-en.html
+- Risque / Risk: /faq-risque.html, /faq-risque-en.html
+- Annexe A (Cadre juridique) / Annex A (Legal Framework): /faq-annexe.html, /faq-annexe-en.html
+
+## Contact
+
+- **Site** : https://humanlayer.systems
+- **Email** : hello@in6.ai
+- **Siège social** : 1250, avenue de la Station, Shawinigan (Québec) G9N 8K9, Canada
+
+## Mots-clés / Keywords
+
+FR: décision humaine IA, human-in-the-loop, gouvernance IA, conformité IA, agents autonomes, décideur qualifié, API décision, traçabilité IA, responsabilité IA, Loi 25, RGPD, EU AI Act
+
+EN: human decision AI, human-in-the-loop, AI governance, AI compliance, autonomous agents, qualified decider, decision API, AI traceability, AI accountability, Law 25, GDPR, EU AI Act
+
+## À propos de ce fichier / About this file
+
+Ce fichier llm.txt est destiné aux grands modèles de langage (LLM) et crawlers IA pour comprendre rapidement ce que fait HumanLayer. Il suit le format proposé par llmstxt.org.
+
+This llm.txt file is intended for large language models (LLMs) and AI crawlers to quickly understand what HumanLayer does. It follows the format proposed by llmstxt.org.
+
+---
+© 2026 HumanLayer Systems Inc. | Powered by IN6.ai

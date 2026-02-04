@@ -2,192 +2,232 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
-  <!-- Homepage -->
+  <!-- Homepage FR -->
   <url>
     <loc>https://humanlayer.systems/</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/index.html"/>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/index-en.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://humanlayer.systems/"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
   </url>
   
+  <!-- Homepage EN -->
   <url>
     <loc>https://humanlayer.systems/index-en.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/index.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/index-en.html"/>
     <lastmod>2026-02-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/index-en.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://humanlayer.systems/"/>
   </url>
-
-  <!-- Apply Page -->
+  
+  <!-- Apply FR -->
   <url>
     <loc>https://humanlayer.systems/apply.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/apply.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/apply-en.html"/>
     <lastmod>2026-02-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/apply.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/apply-en.html"/>
   </url>
   
+  <!-- Apply EN -->
   <url>
     <loc>https://humanlayer.systems/apply-en.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/apply.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/apply-en.html"/>
     <lastmod>2026-02-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/apply.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/apply-en.html"/>
   </url>
-
-  <!-- FAQ Main -->
+  
+  <!-- FAQ Main FR -->
   <url>
     <loc>https://humanlayer.systems/faq.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/faq.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/faq-en.html"/>
     <lastmod>2026-02-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/faq-en.html"/>
   </url>
   
+  <!-- FAQ Main EN -->
   <url>
     <loc>https://humanlayer.systems/faq-en.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/faq.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/faq-en.html"/>
     <lastmod>2026-02-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/faq-en.html"/>
   </url>
-
-  <!-- FAQ Décideurs -->
+  
+  <!-- FAQ Décideurs FR -->
   <url>
     <loc>https://humanlayer.systems/faq-decideurs.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/faq-decideurs.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/faq-decideurs-en.html"/>
     <lastmod>2026-02-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/faq-decideurs.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/faq-decideurs-en.html"/>
   </url>
   
+  <!-- FAQ Décideurs EN -->
   <url>
     <loc>https://humanlayer.systems/faq-decideurs-en.html</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/faq-decideurs.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/faq-decideurs-en.html"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
-
-  <!-- FAQ Développeurs -->
+  
+  <!-- FAQ Développeurs FR -->
   <url>
     <loc>https://humanlayer.systems/faq-developpeurs.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/faq-developpeurs.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/faq-developpeurs-en.html"/>
     <lastmod>2026-02-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/faq-developpeurs.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/faq-developpeurs-en.html"/>
   </url>
   
+  <!-- FAQ Développeurs EN -->
   <url>
     <loc>https://humanlayer.systems/faq-developpeurs-en.html</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/faq-developpeurs.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/faq-developpeurs-en.html"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
-
-  <!-- FAQ Investisseurs -->
+  
+  <!-- FAQ Investisseurs FR -->
   <url>
     <loc>https://humanlayer.systems/faq-investisseurs.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/faq-investisseurs.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/faq-investisseurs-en.html"/>
     <lastmod>2026-02-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/faq-investisseurs.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/faq-investisseurs-en.html"/>
   </url>
   
+  <!-- FAQ Investisseurs EN -->
   <url>
     <loc>https://humanlayer.systems/faq-investisseurs-en.html</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/faq-investisseurs.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/faq-investisseurs-en.html"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- FAQ Risque -->
-  <url>
-    <loc>https://humanlayer.systems/faq-risque.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/faq-risque.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/faq-risque-en.html"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   
-  <url>
-    <loc>https://humanlayer.systems/faq-risque-en.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/faq-risque.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/faq-risque-en.html"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- FAQ Éthique -->
-  <url>
-    <loc>https://humanlayer.systems/faq-ethique.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/faq-ethique.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/faq-ethique-en.html"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://humanlayer.systems/faq-ethique-en.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/faq-ethique.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/faq-ethique-en.html"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- FAQ Régulateurs -->
+  <!-- FAQ Régulateurs FR -->
   <url>
     <loc>https://humanlayer.systems/faq-regulateurs.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/faq-regulateurs.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/faq-regulateurs-en.html"/>
     <lastmod>2026-02-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/faq-regulateurs.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/faq-regulateurs-en.html"/>
   </url>
   
+  <!-- FAQ Régulateurs EN -->
   <url>
     <loc>https://humanlayer.systems/faq-regulateurs-en.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/faq-regulateurs.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/faq-regulateurs-en.html"/>
     <lastmod>2026-02-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/faq-regulateurs.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/faq-regulateurs-en.html"/>
   </url>
-
-  <!-- Annexe A -->
+  
+  <!-- FAQ Éthique FR -->
+  <url>
+    <loc>https://humanlayer.systems/faq-ethique.html</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/faq-ethique.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/faq-ethique-en.html"/>
+  </url>
+  
+  <!-- FAQ Éthique EN -->
+  <url>
+    <loc>https://humanlayer.systems/faq-ethique-en.html</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/faq-ethique.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/faq-ethique-en.html"/>
+  </url>
+  
+  <!-- FAQ Risque FR -->
+  <url>
+    <loc>https://humanlayer.systems/faq-risque.html</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/faq-risque.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/faq-risque-en.html"/>
+  </url>
+  
+  <!-- FAQ Risque EN -->
+  <url>
+    <loc>https://humanlayer.systems/faq-risque-en.html</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/faq-risque.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/faq-risque-en.html"/>
+  </url>
+  
+  <!-- FAQ Annexe A FR -->
   <url>
     <loc>https://humanlayer.systems/faq-annexe.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/faq-annexe.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/faq-annexe-en.html"/>
     <lastmod>2026-02-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/faq-annexe.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/faq-annexe-en.html"/>
+  </url>
+  
+  <!-- FAQ Annexe A EN -->
+  <url>
+    <loc>https://humanlayer.systems/faq-annexe-en.html</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/faq-annexe.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/faq-annexe-en.html"/>
+  </url>
+  
+  <!-- Legal Pages -->
+  <url>
+    <loc>https://humanlayer.systems/security.html</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://humanlayer.systems/faq-annexe-en.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://humanlayer.systems/faq-annexe.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://humanlayer.systems/faq-annexe-en.html"/>
+    <loc>https://humanlayer.systems/privacy.html</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://humanlayer.systems/terms.html</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://humanlayer.systems/contact.html</loc>
     <lastmod>2026-02-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

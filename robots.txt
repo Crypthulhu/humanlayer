@@ -1,35 +1,87 @@
-# Sitemap for humanlayer.systems
+# HumanLayer - robots.txt
+# https://humanlayer.systems
 
 User-agent: *
 Allow: /
+Disallow: /.git/
+Disallow: /.netlify/
 
-# AI/LLM Crawlers - Welcome
+# Sitemap
+Sitemap: https://humanlayer.systems/sitemap.xml
+
+# LLM.txt for AI crawlers
+# See: https://llmstxt.org/
+# File: https://humanlayer.systems/llm.txt
+
+# Welcome AI Crawlers - We encourage indexing
+# HumanLayer is the decision authority layer for AI agents
+
+# Google AI / Bard / Gemini
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+# OpenAI / ChatGPT
 User-agent: GPTBot
 Allow: /
 
 User-agent: ChatGPT-User
 Allow: /
 
-User-agent: Google-Extended
-Allow: /
-
-User-agent: Anthropic-AI
-Allow: /
-
+# Anthropic / Claude
 User-agent: ClaudeBot
 Allow: /
 
 User-agent: Claude-Web
 Allow: /
 
+User-agent: Anthropic-AI
+Allow: /
+
+# Perplexity
 User-agent: PerplexityBot
 Allow: /
 
-User-agent: Cohere-ai
+# Cohere
+User-agent: Cohere-AI
 Allow: /
 
-# Sitemap
-Sitemap: https://humanlayer.systems/sitemap.xml
+User-agent: cohere-ai
+Allow: /
 
-# Host
-Host: https://humanlayer.systems
+# Meta AI
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+# Microsoft / Bing / Copilot
+User-agent: Bingbot
+Allow: /
+
+User-agent: MicrosoftBot
+Allow: /
+
+# Apple
+User-agent: Applebot
+Allow: /
+
+# Common crawlers
+User-agent: CCBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+# Search engines
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Yandex
+Allow: /
+
+User-agent: Baidu
+Allow: /
