@@ -3053,7 +3053,10 @@ p {
 .footer-powered {
   font-size: 0.75rem;
   color: var(--text-muted);
-  margin-left: 16px;
+  width: 100%;
+  text-align: center;
+  margin-top: 16px;
+  display: block;
 }
 
 .footer-powered a {
