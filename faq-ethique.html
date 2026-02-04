@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Éthique & Lignes Rouges — HumanLayer</title>
+    <meta name="description"
+        content="Questions fréquentes sur l'éthique et les lignes rouges - Ce que HumanLayer refuse explicitement de faire.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="icons.css">
+</head>
+
+<body>
+    <!-- SVG Icons Sprite -->
+    <?xml version="1.0" encoding="UTF-8"?>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <!-- Brain - Central AI icon -->
+        <symbol id="icon-brain" viewBox="0 0 24 24">
+            <path
+                d="M12 2C9.5 2 7.5 3.5 7 5.5C5.5 5.5 4 7 4 9c0 1.5 1 3 2.5 3.5C6 14 7 16 9 17v3c0 .5.5 1 1 1h4c.5 0 1-.5 1-1v-3c2-1 3-3 2.5-4.5C19 12 20 10.5 20 9c0-2-1.5-3.5-3-3.5C16.5 3.5 14.5 2 12 2z"
+                fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M9 10c0-1 1-2 3-2s3 1 3 2M9 14h6" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" />
+            <circle cx="9" cy="10" r="1" fill="currentColor" />
+            <circle cx="15" cy="10" r="1" fill="currentColor" />
+        </symbol>
+        <!-- Arrow Right -->
+        <symbol id="icon-arrow" viewBox="0 0 24 24">
+            <path d="M4 12h16M14 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </symbol>
+        <!-- X/Cross (Block) -->
+        <symbol id="icon-x" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M15 9l-6 6M9 9l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </symbol>
+        <!-- Shield/Protection -->
+        <symbol id="icon-shield" viewBox="0 0 24 24">
+            <path d="M12 2L4 6v6c0 5.5 3.5 10 8 11 4.5-1 8-5.5 8-11V6l-8-4z" fill="none" stroke="currentColor"
+                stroke-width="1.5" />
+            <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </symbol>
+        <!-- User/Person -->
+        <symbol id="icon-user" viewBox="0 0 24 24">
+            <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M4 20c0-4 4-6 8-6s8 2 8 6" fill="none" stroke="currentColor" stroke-width="1.5" />
+        </symbol>
+        <!-- Ban/Forbidden -->
+        <symbol id="icon-ban" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M4.93 4.93l14.14 14.14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </symbol>
+        <!-- Lock/Security -->
+        <symbol id="icon-lock" viewBox="0 0 24 24">
+            <rect x="5" y="11" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M8 11V7a4 4 0 018 0v4" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="12" cy="16" r="1.5" fill="currentColor" />
+        </symbol>
+        <!-- Scale/Ethics -->
+        <symbol id="icon-scale" viewBox="0 0 24 24">
+            <path d="M12 3v18M3 8l9-3 9 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" fill="none" />
+            <path d="M3 8l3 8h0a3 3 0 006 0h0l-3-8M15 8l3 8h0a3 3 0 006 0h0l-3-8" stroke="currentColor"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+        </symbol>
+        <!-- Hand/Stop -->
+        <symbol id="icon-hand" viewBox="0 0 24 24">
+            <path d="M8 13V5a2 2 0 114 0v6M12 11V3a2 2 0 114 0v8M16 11V5a2 2 0 114 0v10a8 8 0 01-16 0v-4a2 2 0 114 0v1"
+                fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </symbol>
+        <!-- Heart/Ethics -->
+        <symbol id="icon-heart" viewBox="0 0 24 24">
+            <path
+                d="M12 21C12 21 3 13.5 3 8.5C3 5.42 5.42 3 8.5 3c1.74 0 3.41.81 4.5 2.09C14.09 3.81 15.76 3 17.5 3 20.58 3 23 5.42 23 8.5c0 5-9 12.5-9 12.5z"
+                fill="none" stroke="currentColor" stroke-width="1.5" />
+        </symbol>
+        <!-- Target/Bullseye -->
+        <symbol id="icon-target" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="12" cy="12" r="2" fill="currentColor" />
+            <path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </symbol>
+    </svg>
+
+    <!-- Background Animation -->
+    <div class="bg-animation"></div>
+    <div class="grid-overlay"></div>
+    <div class="cursor-glow"></div>
+    <div class="scroll-progress" id="scroll-progress"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="logo.png" alt="HumanLayer" class="nav-logo-img">
+            </a>
+            <button class="nav-toggle" aria-expanded="false" aria-label="Ouvrir le menu" aria-controls="nav-links">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+        <div class="nav-drawer-header">
+          <div class="nav-drawer-title">AGENT ROUTING</div>
+          <div class="nav-drawer-status"><span class="status-dot"></span>Connecté à HumanLayer</div>
+        </div>
+        <div class="nav-signal" aria-hidden="true"></div>
+        <div class="nav-scanline" aria-hidden="true"></div>
+<a href="index.html#problem">Problème</a>
+                <a href="index.html#solution">Solution</a>
+                <a href="index.html#usecases">Cas d'usage</a>
+                <a href="index.html#api">API</a>
+                <a href="apply.html">Devenir décideur</a>
+                <a href="faq.html">FAQ</a>
+                <a href="index.html#pricing">Tarifs</a>
+                <div class="nav-lang"><a href="faq-ethique.html" class="active">FR</a><span>·</span><a href="faq-ethique-en.html">EN</a></div>
+                <a href="#" class="btn btn-primary">Demander une démo</a>
+            </div>
+        </div>
+        <div class="nav-backdrop" aria-hidden="true"></div>
+    </nav>
+
+    <!-- FAQ Page Header -->
+    <section class="faq-hero">
+        <div class="container">
+            <div class="faq-hero-content reveal">
+                <span class="label">FAQ Éthique</span>
+                <h1>Éthique & Lignes Rouges</h1>
+                <p>Ce que HumanLayer refuse explicitement de faire</p>
+            </div>
+            <!-- FAQ Tabs -->
+            <div class="faq-tabs reveal-stagger">
+                <a href="faq.html" class="faq-tab">Général</a>
+                <a href="faq-investisseurs.html" class="faq-tab">Investisseurs</a>
+                <a href="faq-developpeurs.html" class="faq-tab">Développeurs</a>
+                <a href="faq-decideurs.html" class="faq-tab">Décideurs</a>
+                <a href="faq-risque.html" class="faq-tab">Risque</a>
+                <a href="faq-ethique.html" class="faq-tab active">Éthique</a>
+                <a href="faq-regulateurs.html" class="faq-tab">Régulateurs</a>
+                <a href="faq-annexe.html" class="faq-tab">Annexe</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Content -->
+    <section class="faq faq-page">
+        <div class="container">
+
+            <!-- Décisions illégales -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-ban" />
+                    </svg>
+                    Décisions illégales
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>HumanLayer peut-il être utilisé pour automatiser des décisions illégales ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Non. Jamais.</strong></p>
+                        <p>HumanLayer refuse :</p>
+                        <ul>
+                            <li>toute demande visant à contourner la loi</li>
+                            <li>toute validation destinée à "couvrir" une décision déjà prise illégalement</li>
+                            <li>toute tentative de transfert artificiel de responsabilité</li>
+                        </ul>
+                        <p class="faq-highlight">👉 La traçabilité rend ces usages détectables et bloquables.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Catégories exclues -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-x" />
+                    </svg>
+                    Catégories exclues
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Quelles catégories de décisions sont exclues par design ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>HumanLayer refuse notamment :</p>
+                        <ul>
+                            <li>décisions violant les droits fondamentaux</li>
+                            <li>décisions impliquant coercition, chantage ou manipulation</li>
+                            <li>décisions pénales ou quasi-pénales hors cadre légal explicite</li>
+                            <li>décisions visant à discriminer sur des critères interdits</li>
+                        </ul>
+                        <p>Ces exclusions sont :</p>
+                        <ul>
+                            <li>intégrées contractuellement</li>
+                            <li>contrôlées techniquement</li>
+                            <li>auditables</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Consentement humain -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-user" />
+                    </svg>
+                    Consentement humain
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>HumanLayer permet-il de "forcer" un humain à valider ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Non.</strong></p>
+                        <ul>
+                            <li>Aucun décideur ne peut être contraint à approuver</li>
+                            <li>Le refus est toujours possible</li>
+                            <li>Le refus n'entraîne aucune pénalité injustifiée</li>
+                        </ul>
+                        <p class="faq-highlight">👉 L'autorité humaine n'est jamais instrumentalisée.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blanchiment de décision -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-lock" />
+                    </svg>
+                    Intégrité décisionnelle
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Peut-on utiliser HumanLayer pour "blanchir" une décision d'IA ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Non.</strong></p>
+                        <p>HumanLayer empêche :</p>
+                        <ul>
+                            <li>la validation post-hoc automatique</li>
+                            <li>la signature sans lecture</li>
+                            <li>l'approbation sans justification</li>
+                        </ul>
+                        <p>Toute décision exige :</p>
+                        <ul>
+                            <li>une interaction humaine explicite</li>
+                            <li>une justification structurée</li>
+                            <li>une acceptation consciente de responsabilité</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Automatisation abusive -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-hand" />
+                    </svg>
+                    Automatisation responsable
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>HumanLayer favorise-t-il l'automatisation abusive ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Non</strong> — il la freine volontairement.</p>
+                        <p>HumanLayer est conçu pour :</p>
+                        <ul>
+                            <li>forcer l'IA à reconnaître ses limites</li>
+                            <li>introduire un ralentissement volontaire là où le risque l'exige</li>
+                            <li>empêcher les "dark patterns" décisionnels</li>
+                        </ul>
+                        <p class="faq-highlight">👉 HumanLayer est un contre-pouvoir, pas un accélérateur aveugle.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Droit de retrait -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-scale" />
+                    </svg>
+                    Droit de retrait
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Existe-t-il un droit de retrait éthique ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Oui.</strong></p>
+                        <p>HumanLayer se réserve le droit de :</p>
+                        <ul>
+                            <li>refuser certains usages</li>
+                            <li>suspendre des comptes</li>
+                            <li>mettre fin à une relation contractuelle</li>
+                        </ul>
+                        <p>Lorsque :</p>
+                        <ul>
+                            <li>l'usage est contraire à l'éthique</li>
+                            <li>la loi est contournée</li>
+                            <li>la responsabilité humaine est vidée de son sens</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Closing statement -->
+            <div class="faq-closing reveal">
+                <div class="glass-card">
+                    <p class="faq-closing-text">
+                        <svg class="hl-icon hl-lg">
+                            <use href="#icon-heart" />
+                        </svg>
+                        <em>En une phrase :</em><br>
+                        <strong>HumanLayer existe pour empêcher l'automatisation irresponsable, pas pour la rendre
+                            acceptable.</strong>
+                    </p>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="faq-cta reveal">
+                <p>Des questions sur notre éthique ?</p>
+                <a href="#" class="btn btn-primary">
+                    <svg class="hl-icon">
+                        <use href="#icon-scale" />
+                    </svg>
+                    Contacter l'équipe
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="footer-logo">© HumanLayer Systems Inc.</span>
+                    
+                </div>
+                <div class="footer-links">
+                    <a href="#">Sécurité</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Conditions</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>

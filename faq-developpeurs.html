@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Développeurs — HumanLayer</title>
+    <meta name="description"
+        content="Questions fréquentes pour développeurs sur HumanLayer - Decision Authority, API-native.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="icons.css">
+</head>
+
+<body>
+    <!-- SVG Icons Sprite -->
+    <?xml version="1.0" encoding="UTF-8"?>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <!-- Brain - Central AI icon -->
+        <symbol id="icon-brain" viewBox="0 0 24 24">
+            <path
+                d="M12 2C9.5 2 7.5 3.5 7 5.5C5.5 5.5 4 7 4 9c0 1.5 1 3 2.5 3.5C6 14 7 16 9 17v3c0 .5.5 1 1 1h4c.5 0 1-.5 1-1v-3c2-1 3-3 2.5-4.5C19 12 20 10.5 20 9c0-2-1.5-3.5-3-3.5C16.5 3.5 14.5 2 12 2z"
+                fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M9 10c0-1 1-2 3-2s3 1 3 2M9 14h6" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" />
+            <circle cx="9" cy="10" r="1" fill="currentColor" />
+            <circle cx="15" cy="10" r="1" fill="currentColor" />
+        </symbol>
+        <!-- Arrow Right -->
+        <symbol id="icon-arrow" viewBox="0 0 24 24">
+            <path d="M4 12h16M14 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </symbol>
+        <!-- Code -->
+        <symbol id="icon-code" viewBox="0 0 24 24">
+            <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" fill="none" />
+        </symbol>
+        <!-- Terminal -->
+        <symbol id="icon-terminal" viewBox="0 0 24 24">
+            <rect x="2" y="4" width="20" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M6 9l3 3-3 3M12 15h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </symbol>
+        <!-- API/Cloud -->
+        <symbol id="icon-api" viewBox="0 0 24 24">
+            <path d="M6 20a4 4 0 01-2-7.5A5.5 5.5 0 0118 10a4.5 4.5 0 01.5 9H6z" fill="none" stroke="currentColor"
+                stroke-width="1.5" />
+            <path d="M9 12h6M9 15h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </symbol>
+        <!-- Sync/Refresh -->
+        <symbol id="icon-sync" viewBox="0 0 24 24">
+            <path d="M21 2v6h-6M3 22v-6h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" fill="none" />
+            <path d="M21 12A9 9 0 003.78 7M3 12a9 9 0 0017.22 5" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" fill="none" />
+        </symbol>
+        <!-- Document/File -->
+        <symbol id="icon-document" viewBox="0 0 24 24">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" fill="none" stroke="currentColor"
+                stroke-width="1.5" />
+            <path d="M14 2v6h6M9 13h6M9 17h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </symbol>
+        <!-- User/Person -->
+        <symbol id="icon-user" viewBox="0 0 24 24">
+            <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M4 20c0-4 4-6 8-6s8 2 8 6" fill="none" stroke="currentColor" stroke-width="1.5" />
+        </symbol>
+        <!-- Clock/Timer -->
+        <symbol id="icon-clock" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </symbol>
+        <!-- Checkmark/Validation -->
+        <symbol id="icon-check" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M8 12l2.5 2.5L16 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </symbol>
+        <!-- Shield/Security -->
+        <symbol id="icon-shield" viewBox="0 0 24 24">
+            <path d="M12 2L4 6v6c0 5.5 3.5 10 8 11 4.5-1 8-5.5 8-11V6l-8-4z" fill="none" stroke="currentColor"
+                stroke-width="1.5" />
+            <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </symbol>
+        <!-- Audit/History -->
+        <symbol id="icon-audit" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M12 6v6l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            <circle cx="12" cy="12" r="2" fill="currentColor" />
+        </symbol>
+        <!-- Compare/Diff -->
+        <symbol id="icon-compare" viewBox="0 0 24 24">
+            <rect x="3" y="3" width="8" height="18" rx="1" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <rect x="13" y="3" width="8" height="18" rx="1" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M6 8h2M6 12h2M6 16h2M16 8h2M16 12h2" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" />
+        </symbol>
+        <!-- Lightning/Fast -->
+        <symbol id="icon-bolt" viewBox="0 0 24 24">
+            <path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linejoin="round" />
+        </symbol>
+        <!-- Building/Enterprise -->
+        <symbol id="icon-building" viewBox="0 0 24 24">
+            <rect x="4" y="4" width="16" height="18" rx="1" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M8 8h2M8 12h2M8 16h2M14 8h2M14 12h2M14 16h2" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" />
+            <path d="M10 22v-4h4v4" stroke="currentColor" stroke-width="1.5" />
+        </symbol>
+        <!-- Target/Bullseye -->
+        <symbol id="icon-target" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="12" cy="12" r="2" fill="currentColor" />
+            <path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </symbol>
+    </svg>
+
+    <!-- Background Animation -->
+    <div class="bg-animation"></div>
+    <div class="grid-overlay"></div>
+    <div class="cursor-glow"></div>
+    <div class="scroll-progress" id="scroll-progress"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="logo.png" alt="HumanLayer" class="nav-logo-img">
+            </a>
+            <button class="nav-toggle" aria-expanded="false" aria-label="Ouvrir le menu" aria-controls="nav-links">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+        <div class="nav-drawer-header">
+          <div class="nav-drawer-title">AGENT ROUTING</div>
+          <div class="nav-drawer-status"><span class="status-dot"></span>Connecté à HumanLayer</div>
+        </div>
+        <div class="nav-signal" aria-hidden="true"></div>
+        <div class="nav-scanline" aria-hidden="true"></div>
+<a href="index.html#problem">Problème</a>
+                <a href="index.html#solution">Solution</a>
+                <a href="index.html#usecases">Cas d'usage</a>
+                <a href="index.html#api">API</a>
+                <a href="apply.html">Devenir décideur</a>
+                <a href="faq.html">FAQ</a>
+                <a href="index.html#pricing">Tarifs</a>
+                <div class="nav-lang"><a href="faq-developpeurs.html" class="active">FR</a><span>·</span><a href="faq-developpeurs-en.html">EN</a></div>
+                <a href="#" class="btn btn-primary">Demander une démo</a>
+            </div>
+        </div>
+        <div class="nav-backdrop" aria-hidden="true"></div>
+    </nav>
+
+    <!-- FAQ Page Header -->
+    <section class="faq-hero">
+        <div class="container">
+            <div class="faq-hero-content reveal">
+                <span class="label">FAQ Développeurs</span>
+                <h1>Questions pour développeurs</h1>
+                <p>Decision Authority, API-native</p>
+            </div>
+            <!-- FAQ Tabs -->
+            <div class="faq-tabs reveal-stagger">
+                <a href="faq.html" class="faq-tab">Général</a>
+                <a href="faq-investisseurs.html" class="faq-tab">Investisseurs</a>
+                <a href="faq-developpeurs.html" class="faq-tab active">Développeurs</a>
+                <a href="faq-decideurs.html" class="faq-tab">Décideurs</a>
+                <a href="faq-risque.html" class="faq-tab">Risque</a>
+                <a href="faq-ethique.html" class="faq-tab">Éthique</a>
+                <a href="faq-regulateurs.html" class="faq-tab">Régulateurs</a>
+                <a href="faq-annexe.html" class="faq-tab">Annexe</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Content -->
+    <section class="faq faq-page">
+        <div class="container">
+
+            <!-- Comprendre HumanLayer -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-code" />
+                    </svg>
+                    Comprendre HumanLayer
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Qu'est-ce que HumanLayer, techniquement ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>HumanLayer est une <strong>API d'orchestration de décisions humaines</strong>.</p>
+                        <p>Elle permet à un système (agent IA, backend, workflow engine) de :</p>
+                        <ul>
+                            <li>soumettre un dossier de décision</li>
+                            <li>attendre une validation humaine qualifiée</li>
+                            <li>recevoir une réponse structurée</li>
+                            <li>avec un audit trail complet</li>
+                        </ul>
+                        <p class="faq-highlight">👉 Pour un développeur, HumanLayer est un service externe appelable,
+                            comme Stripe, Twilio ou Auth0 — mais pour la décision humaine.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Intégration -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-terminal" />
+                    </svg>
+                    Intégration
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Quand dois-je appeler HumanLayer dans mon code ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Quand ton système arrive à un point où :</p>
+                        <ul>
+                            <li>une décision engage une responsabilité humaine</li>
+                            <li>une règle n'est plus suffisante</li>
+                            <li>une signature ou une validation est requise</li>
+                            <li>ou quand tu veux une preuve formelle de validation</li>
+                        </ul>
+                        <p><strong>Règle simple :</strong></p>
+                        <p class="faq-highlight">Si tu hésites à automatiser → appelle HumanLayer.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Est-ce compatible avec des agents IA autonomes ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Oui, nativement.</strong></p>
+                        <p>HumanLayer est conçu pour :</p>
+                        <ul>
+                            <li>être appelé comme un tool</li>
+                            <li>fonctionner dans des boucles agentiques</li>
+                            <li>être utilisé par des LLMs sous contrôle</li>
+                        </ul>
+                        <p>Exemple mental :</p>
+                        <pre class="faq-code">if confidence < threshold or risk == "high":
+    decision = humanlayer.request(...)</pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comportement API -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-api" />
+                    </svg>
+                    Comportement API
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Est-ce synchrone ou asynchrone ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Les deux.</strong></p>
+                        <p><strong>Asynchrone (recommandé)</strong><br>Tu crées une demande de décision, tu continues
+                            ton workflow, tu écoutes les webhooks.</p>
+                        <p><strong>Synchrone (bloquant)</strong><br>Possible pour des décisions rapides avec SLA court.
+                        </p>
+                        <p>Dans tous les cas, les délais sont explicitement déclarés et contractuels.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>À quoi ressemble une décision côté API ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Une décision est un <strong>objet structuré</strong>, avec :</p>
+                        <ul>
+                            <li>un type (<code>compliance_check</code>, <code>expert_judgment</code>,
+                                <code>authorized_decision</code>)
+                            </li>
+                            <li>un niveau (1, 2 ou 3)</li>
+                            <li>un contexte fourni par l'IA</li>
+                            <li>un statut (<code>pending</code>, <code>approved</code>, <code>rejected</code>,
+                                <code>escalated</code>, <code>timeout</code>)
+                            </li>
+                            <li>une justification humaine</li>
+                            <li>des métadonnées d'audit</li>
+                        </ul>
+                        <p class="faq-highlight">👉 Ce n'est pas un texte libre. C'est un artefact exploitable par un
+                            système.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Le décideur humain -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-user" />
+                    </svg>
+                    Le décideur humain
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Que voit le décideur humain ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Uniquement :</p>
+                        <ul>
+                            <li>le contexte strictement nécessaire</li>
+                            <li>les éléments préparés par l'IA</li>
+                            <li>les champs requis pour décider</li>
+                        </ul>
+                        <p>Pas d'accès global au système, pas de données inutiles.</p>
+                        <p class="faq-highlight">👉 Minimisation by design.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Puis-je utiliser uniquement des décideurs internes ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Oui.</strong></p>
+                        <p>HumanLayer peut fonctionner avec :</p>
+                        <ul>
+                            <li>des décideurs internes</li>
+                            <li>des décideurs externes</li>
+                            <li>ou un mix des deux</li>
+                        </ul>
+                        <p>Dans tous les cas, HumanLayer reste :</p>
+                        <ul>
+                            <li>la couche d'orchestration</li>
+                            <li>la source de vérité</li>
+                            <li>la preuve d'audit</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gestion des cas limites -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-clock" />
+                    </svg>
+                    Gestion des cas limites
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Et si personne ne répond ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>HumanLayer gère :</p>
+                        <ul>
+                            <li>timeouts</li>
+                            <li>escalades automatiques</li>
+                            <li>refus par défaut</li>
+                            <li>fallback configurables</li>
+                        </ul>
+                        <p>Le comportement est <strong>déterministe et configurable</strong>.</p>
+                        <p class="faq-highlight">Ton code ne reste jamais bloqué indéfiniment.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Peut-on forcer une décision "oui / non" ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Oui.</strong></p>
+                        <p>Tu peux définir :</p>
+                        <ul>
+                            <li>décisions binaires</li>
+                            <li>décisions conditionnelles</li>
+                            <li>décisions avec champs obligatoires</li>
+                            <li>décisions avec seuils</li>
+                        </ul>
+                        <p class="faq-highlight">HumanLayer ne laisse pas de décisions ambiguës.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Peut-on demander un second avis ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Oui.</strong></p>
+                        <p>Nativement :</p>
+                        <ul>
+                            <li>escalade automatique</li>
+                            <li>second décideur</li>
+                            <li>validation multi-signature</li>
+                            <li>quorum (selon configuration enterprise)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Responsabilité -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-check" />
+                    </svg>
+                    Responsabilité
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>HumanLayer décide-t-il à ma place ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Non. Jamais.</strong></p>
+                        <p>HumanLayer :</p>
+                        <ul>
+                            <li>ne génère pas de décision</li>
+                            <li>ne modifie pas la réponse humaine</li>
+                            <li>ne "corrige" pas le décideur</li>
+                        </ul>
+                        <p class="faq-highlight">Il orchestre, structure et trace.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sécurité -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-shield" />
+                    </svg>
+                    Sécurité
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Quid de la sécurité ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <ul>
+                            <li>Authentification par API key / OAuth</li>
+                            <li>Scopes par type de décision</li>
+                            <li>Isolation par organisation</li>
+                            <li>Journaux d'accès</li>
+                            <li>Chiffrement en transit et au repos</li>
+                        </ul>
+                        <p class="faq-highlight">Les décideurs humains n'ont accès qu'aux dossiers qui leur sont
+                            assignés.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Audit & Traçabilité -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-audit" />
+                    </svg>
+                    Audit & traçabilité
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Que se passe-t-il en cas d'audit ou d'incident ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Tu peux extraire :</p>
+                        <ul>
+                            <li>l'historique complet des décisions</li>
+                            <li>les justifications</li>
+                            <li>les horodatages</li>
+                            <li>les identités décisionnaires</li>
+                        </ul>
+                        <p class="faq-highlight">👉 Pas besoin de reconstituer à partir de logs applicatifs.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Différences clés -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-compare" />
+                    </svg>
+                    Différences clés
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>En quoi est-ce différent d'un simple "approval workflow" ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Un workflow classique :</p>
+                        <ul>
+                            <li>ne vérifie pas les qualifications</li>
+                            <li>n'engage pas la responsabilité</li>
+                            <li>ne fournit pas de preuve opposable</li>
+                            <li>n'est pas pensé pour l'IA</li>
+                        </ul>
+                        <p class="faq-highlight">HumanLayer traite la décision comme un <strong>acte engageant</strong>,
+                            pas un clic.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-bolt" />
+                    </svg>
+                    Performance
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Est-ce que ça va ralentir mon système ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Oui — là où c'est volontaire.</strong></p>
+                        <p>HumanLayer est appelé :</p>
+                        <ul>
+                            <li>uniquement sur des points critiques</li>
+                            <li>quand ralentir est préférable à prendre un risque</li>
+                        </ul>
+                        <p class="faq-highlight">Partout ailleurs, ton système reste entièrement automatisé.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pourquoi HumanLayer -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-building" />
+                    </svg>
+                    Pourquoi HumanLayer ?
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Pourquoi ne pas faire ça "en interne" ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Parce que tu devrais construire :</p>
+                        <ul>
+                            <li>un système d'assignation</li>
+                            <li>une gouvernance humaine</li>
+                            <li>une traçabilité audit-grade</li>
+                            <li>des SLA décisionnels</li>
+                            <li>une intégration agent-native</li>
+                        </ul>
+                        <p class="faq-highlight">👉 HumanLayer te fait gagner des mois, voire des années.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Closing statement -->
+            <div class="faq-closing reveal">
+                <div class="glass-card">
+                    <p class="faq-closing-text">
+                        <svg class="hl-icon hl-lg">
+                            <use href="#icon-code" />
+                        </svg>
+                        <em>En une phrase, pour un développeur sceptique :</em><br>
+                        <strong>HumanLayer est ce que tu appelles quand ton code sait quoi faire, mais n'a pas le droit
+                            de le faire.</strong>
+                    </p>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="faq-cta reveal">
+                <p>Prêt à intégrer ?</p>
+                <a href="#" class="btn btn-primary">
+                    <svg class="hl-icon">
+                        <use href="#icon-terminal" />
+                    </svg>
+                    Voir la documentation API
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="footer-logo">© HumanLayer Systems Inc.</span>
+                    
+                </div>
+                <div class="footer-links">
+                    <a href="#">Sécurité</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Conditions</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>

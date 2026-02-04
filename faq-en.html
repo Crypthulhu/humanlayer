@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ — HumanLayer</title>
+    <meta name="description"
+        content="Frequently asked questions about HumanLayer — the decision authority layer for AI agents.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="icons.css">
+</head>
+
+<body>
+    <!-- SVG Icons Sprite -->
+    <?xml version="1.0" encoding="UTF-8"?>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <!-- Brain - Central AI icon -->
+        <symbol id="icon-brain" viewBox="0 0 24 24">
+            <path
+                d="M12 2C9.5 2 7.5 3.5 7 5.5C5.5 5.5 4 7 4 9c0 1.5 1 3 2.5 3.5C6 14 7 16 9 17v3c0 .5.5 1 1 1h4c.5 0 1-.5 1-1v-3c2-1 3-3 2.5-4.5C19 12 20 10.5 20 9c0-2-1.5-3.5-3-3.5C16.5 3.5 14.5 2 12 2z"
+                fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M9 10c0-1 1-2 3-2s3 1 3 2M9 14h6" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" />
+            <circle cx="9" cy="10" r="1" fill="currentColor" />
+            <circle cx="15" cy="10" r="1" fill="currentColor" />
+        </symbol>
+        <!-- Arrow Right -->
+        <symbol id="icon-arrow" viewBox="0 0 24 24">
+            <path d="M4 12h16M14 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </symbol>
+        <!-- Briefcase/Business -->
+        <symbol id="icon-briefcase" viewBox="0 0 24 24">
+            <rect x="2" y="7" width="20" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2M12 12v3M2 12h20" fill="none" stroke="currentColor"
+                stroke-width="1.5" />
+        </symbol>
+        <!-- User/Person -->
+        <symbol id="icon-user" viewBox="0 0 24 24">
+            <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M4 20c0-4 4-6 8-6s8 2 8 6" fill="none" stroke="currentColor" stroke-width="1.5" />
+        </symbol>
+        <!-- Clipboard/Checklist -->
+        <symbol id="icon-clipboard" viewBox="0 0 24 24">
+            <path d="M8 4H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2" fill="none"
+                stroke="currentColor" stroke-width="1.5" />
+            <rect x="8" y="2" width="8" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M8 12h8M8 16h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </symbol>
+        <!-- Lightning/Bolt -->
+        <symbol id="icon-bolt" viewBox="0 0 24 24">
+            <path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linejoin="round" />
+        </symbol>
+        <!-- Money/Currency -->
+        <symbol id="icon-money" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M12 6v12M8 10h6a2 2 0 010 4H8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </symbol>
+        <!-- Sparkle/Magic -->
+        <symbol id="icon-sparkle" viewBox="0 0 24 24">
+            <path d="M12 2l2 6 6 2-6 2-2 6-2-6-6-2 6-2 2-6z" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linejoin="round" />
+            <circle cx="19" cy="5" r="1.5" fill="currentColor" />
+            <circle cx="5" cy="19" r="1" fill="currentColor" />
+        </symbol>
+        <!-- Target/Bullseye -->
+        <symbol id="icon-target" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="12" cy="12" r="2" fill="currentColor" />
+            <path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </symbol>
+    </svg>
+
+    <!-- Background Animation -->
+    <div class="bg-animation"></div>
+    <div class="grid-overlay"></div>
+    <div class="cursor-glow"></div>
+    <div class="scroll-progress" id="scroll-progress"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="container nav-container">
+            <a href="index-en.html" class="nav-logo">
+                <img src="logo.png" alt="HumanLayer" class="nav-logo-img">
+            </a>
+            <button class="nav-toggle" aria-expanded="false" aria-label="Open menu" aria-controls="nav-links">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+        <div class="nav-drawer-header">
+          <div class="nav-drawer-title">AGENT ROUTING</div>
+          <div class="nav-drawer-status"><span class="status-dot"></span>Connected to HumanLayer</div>
+        </div>
+        <div class="nav-signal" aria-hidden="true"></div>
+        <div class="nav-scanline" aria-hidden="true"></div>
+<a href="index-en.html#problem">Problem</a>
+                <a href="index-en.html#solution">Solution</a>
+                <a href="index-en.html#usecases">Use cases</a>
+                <a href="index-en.html#api">API</a>
+                <a href="apply-en.html">Become a decision maker</a>
+                <a href="faq-en.html" class="active">FAQ</a>
+                <a href="index-en.html#pricing">Pricing</a>
+                <div class="nav-lang"><a href="faq.html">FR</a><span>·</span><a href="faq-en.html" class="active">EN</a></div>
+                <a href="#" class="btn btn-primary">Request a demo</a>
+            </div>
+        </div>
+        <div class="nav-backdrop" aria-hidden="true"></div>
+    </nav>
+
+    <!-- FAQ Page Header -->
+    <section class="faq-hero">
+        <div class="container">
+            <div class="faq-hero-content reveal">
+                <span class="label">FAQ</span>
+                <h1>Frequently Asked Questions</h1>
+                <p>Everything you need to know about HumanLayer</p>
+            </div>
+            <!-- FAQ Tabs -->
+            <div class="faq-tabs reveal-stagger">
+                <a href="faq-en.html" class="faq-tab active">General</a>
+                <a href="faq-investisseurs-en.html" class="faq-tab">Investors</a>
+                <a href="faq-developpeurs-en.html" class="faq-tab">Developers</a>
+                <a href="faq-decideurs-en.html" class="faq-tab">Decision makers</a>
+                <a href="faq-risque-en.html" class="faq-tab">Risk</a>
+                <a href="faq-ethique-en.html" class="faq-tab">Ethics</a>
+                <a href="faq-regulateurs-en.html" class="faq-tab">Regulators</a>
+                <a href="faq-annexe-en.html" class="faq-tab">Appendix</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Content -->
+    <section class="faq faq-page">
+        <div class="container">
+
+            <!-- FAQ Category: General -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-brain" />
+                    </svg>
+                    General
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What is HumanLayer?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>HumanLayer is a <strong>decision authority layer for AI agents</strong>.</p>
+                        <p>It enables an AI agent to obtain, via API, a qualified, documented, and legally enforceable human decision when automation alone is not sufficient.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Does HumanLayer make decisions instead of humans?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>No. Never.</strong> HumanLayer is not the decision maker.</p>
+                        <p>All decisions are made by:</p>
+                        <ul>
+                            <li>an identified human</li>
+                            <li>qualified and authorized</li>
+                            <li>acting within a defined framework</li>
+                            <li>with a complete trace of context and reasoning</li>
+                        </ul>
+                        <p>HumanLayer orchestrates, logs, and guarantees the process — <strong>not the content of the decision</strong>.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Why is this necessary? Our AI agents already work.</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Your AI agents work… <strong>until a moment requires human accountability</strong>.</p>
+                        <p>In most organizations, that moment causes:</p>
+                        <ul>
+                            <li>manual interruptions</li>
+                            <li>out-of-system approvals</li>
+                            <li>unpredictable delays</li>
+                            <li>insufficient traceability</li>
+                        </ul>
+                        <p>HumanLayer allows you to <strong>cross that threshold without breaking compliance</strong>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Category: Customers & usage -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-briefcase" />
+                    </svg>
+                    Customers & usage
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Who is HumanLayer's customer?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>The <strong>organizations deploying AI agents</strong>: banks, insurers, hospitals, industrial groups, large enterprises.</p>
+                        <p>AI agents are technical users of the API, not contractual customers.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Why use HumanLayer if we already have internal experts?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Because the problem isn't expertise, but:</p>
+                        <ul>
+                            <li>availability</li>
+                            <li>prioritization</li>
+                            <li>la traceability</li>
+                            <li>the SLA</li>
+                            <li>integration with AI</li>
+                        </ul>
+                        <p>HumanLayer:</p>
+                        <ul>
+                            <li>mobilizes decision makers at the critical moment</li>
+                            <li>under a guaranteed timeline</li>
+                            <li>with a structured format</li>
+                            <li>and audit-ready evidence</li>
+                        </ul>
+                        <p>You continue to use your internal experts. HumanLayer acts as a <strong>backstop, extension, and resilience layer</strong>.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>When is HumanLayer most useful?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Typically:</p>
+                        <ul>
+                            <li>outside business hours</li>
+                            <li>during load spikes</li>
+                            <li>for rare expertise</li>
+                            <li>when an independent second opinion is required</li>
+                            <li>when traceability is critical (audit, dispute, regulator)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Category: Decision makers & accountability -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-user" />
+                    </svg>
+                    Decision makers & accountability
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Who are the decision makers on HumanLayer?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Qualified professionals</strong>:</p>
+                        <ul>
+                            <li>lawyers</li>
+                            <li>credit analysts</li>
+                            <li>physicians</li>
+                            <li>compliance officers</li>
+                            <li>domain experts</li>
+                        </ul>
+                        <p>Their identities, qualifications, and authorizations are <strong>verified and logged</strong>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Who is responsible for the decision?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Responsibility belongs:</p>
+                        <ul>
+                            <li>to the <strong>human decision maker</strong> who renders the decision</li>
+                            <li>within the applicable contractual and regulatory framework</li>
+                        </ul>
+                        <p>HumanLayer provides traceability, context, and evidence — but <strong>never assumes the decision</strong>.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can we limit what decision makers can approve?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Yes.</strong> Each organization defines:</p>
+                        <ul>
+                            <li>the types of authorized decisions</li>
+                            <li>validation levels</li>
+                            <li>escalation rules</li>
+                            <li>auto-rejection cases</li>
+                        </ul>
+                        <p>HumanLayer enforces these policies <strong>by design</strong>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Category: Compliance & audit -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-clipboard" />
+                    </svg>
+                    Compliance & audit
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Is HumanLayer compatible with regulatory requirements?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>HumanLayer is designed for:</p>
+                        <ul>
+                            <li>auditability</li>
+                            <li>traceability</li>
+                            <li>human accountability</li>
+                            <li>separation of duties</li>
+                        </ul>
+                        <p>It facilitates compliance with regulatory requirements, internal audits, and external controls.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What do you see during an audit?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>A <strong>clear artifact</strong>:</p>
+                        <ul>
+                            <li>which AI agent submitted the request</li>
+                            <li>what context was provided</li>
+                            <li>who decided</li>
+                            <li>when</li>
+                            <li>on what basis</li>
+                            <li>with what justification</li>
+                        </ul>
+                        <p class="faq-highlight">👉 No fuzzy emails. No lost Slack.<br>👉 A usable chain of evidence.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Does HumanLayer store sensitive data?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>HumanLayer applies a <strong>data minimization</strong> approach:</p>
+                        <ul>
+                            <li>only the elements necessary for the decision</li>
+                            <li>restricted access</li>
+                            <li>strict compartmentalization</li>
+                        </ul>
+                        <p>Exact modalities depend on the deployment (standard / enterprise).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Category: Technology & API -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-bolt" />
+                    </svg>
+                    Technology & API
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How does HumanLayer integrate?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>As an <strong>infrastructure API</strong>:</p>
+                        <ul>
+                            <li>synchronous or asynchronous calls</li>
+                            <li>webhooks</li>
+                            <li>SDKs (Python, TypeScript)</li>
+                            <li>integration with agent frameworks</li>
+                        </ul>
+                        <p>For an AI agent, HumanLayer is a <strong>callable tool</strong>.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What happens if no decision maker responds in time?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>HumanLayer handles:</p>
+                        <ul>
+                            <li>timeouts</li>
+                            <li>escalations</li>
+                            <li>fallbacks</li>
+                            <li>default rejections</li>
+                        </ul>
+                        <p>Behavior is <strong>configurable by the organization</strong>.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can we use only our internal decision makers?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Yes.</strong> HumanLayer can work:</p>
+                        <ul>
+                            <li>with internal decision makers</li>
+                            <li>with external decision makers</li>
+                            <li>or a mix of both</li>
+                        </ul>
+                        <p>HumanLayer remains the <strong>orchestration and evidence layer</strong>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Category: Business & pricing -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-money" />
+                    </svg>
+                    Business & pricing
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How is HumanLayer billed?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Per decision, not per hour.</strong></p>
+                        <p>Examples:</p>
+                        <ul>
+                            <li>compliance validation</li>
+                            <li>expert judgment</li>
+                            <li>authorized authority</li>
+                        </ul>
+                        <p>Pricing reflects value, risk covered, and level of responsibility.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Why is this model cost-effective?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Because a human decision:</p>
+                        <ul>
+                            <li>avoids major risks</li>
+                            <li>unblocks entire workflows</li>
+                            <li>replaces costly friction</li>
+                        </ul>
+                        <p>It's a <strong>spend directly correlated to the value created</strong>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Category: Vision & ethics -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-sparkle" />
+                    </svg>
+                    Vision & ethics
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Does HumanLayer encourage excessive delegation to AI?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>No.</strong> HumanLayer does the opposite: it forces AI to recognize its limits.</p>
+                        <p>HumanLayer defines:</p>
+                        <ul>
+                            <li>when AI can act on its own</li>
+                            <li>and when it must stop</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What is the long-term goal?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Make HumanLayer the <strong>standard layer of human accountability for autonomous systems</strong>.</p>
+                        <p>Over time:</p>
+                        <ul>
+                            <li>AI agents will know when to request validation</li>
+                            <li>organizations will be able to automate without losing control</li>
+                            <li>accountability will remain human, orchestrated by software</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Closing statement -->
+            <div class="faq-closing reveal">
+                <div class="glass-card">
+                    <p class="faq-closing-text">
+                        <svg class="hl-icon hl-lg">
+                            <use href="#icon-brain" />
+                        </svg>
+                        <em>HumanLayer does not automate the decision.<br>
+                            <strong>It automates human accountability around AI.</strong></em>
+                    </p>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="faq-cta reveal">
+                <p>A question not covered here?</p>
+                <a href="#" class="btn btn-primary">
+                    <svg class="hl-icon">
+                        <use href="#icon-target" />
+                    </svg>
+                    Request a demo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="footer-logo">© HumanLayer Systems Inc.</span>
+                    
+                </div>
+                <div class="footer-links">
+                    <a href="#">Security</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>

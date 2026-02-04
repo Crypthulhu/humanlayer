@@ -1,0 +1,189 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <!-- Brain - Central AI icon -->
+  <symbol id="icon-brain" viewBox="0 0 24 24">
+    <path d="M12 2C9.5 2 7.5 3.5 7 5.5C5.5 5.5 4 7 4 9c0 1.5 1 3 2.5 3.5C6 14 7 16 9 17v3c0 .5.5 1 1 1h4c.5 0 1-.5 1-1v-3c2-1 3-3 2.5-4.5C19 12 20 10.5 20 9c0-2-1.5-3.5-3-3.5C16.5 3.5 14.5 2 12 2z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M9 10c0-1 1-2 3-2s3 1 3 2M9 14h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    <circle cx="9" cy="10" r="1" fill="currentColor"/>
+    <circle cx="15" cy="10" r="1" fill="currentColor"/>
+  </symbol>
+
+  <!-- Target/Bullseye -->
+  <symbol id="icon-target" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <circle cx="12" cy="12" r="2" fill="currentColor"/>
+    <path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </symbol>
+
+  <!-- Document/Book -->
+  <symbol id="icon-docs" viewBox="0 0 24 24">
+    <path d="M4 4c0-1.1.9-2 2-2h8l6 6v12c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V4z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M14 2v6h6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M8 12h8M8 16h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </symbol>
+
+  <!-- Timer/Clock -->
+  <symbol id="icon-timer" viewBox="0 0 24 24">
+    <circle cx="12" cy="13" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M12 9v4l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M9 2h6M12 2v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </symbol>
+
+  <!-- Clipboard/Checklist -->
+  <symbol id="icon-clipboard" viewBox="0 0 24 24">
+    <path d="M8 4H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <rect x="8" y="2" width="8" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M8 12h8M8 16h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </symbol>
+
+  <!-- Search/Magnify -->
+  <symbol id="icon-search" viewBox="0 0 24 24">
+    <circle cx="10" cy="10" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M15 15l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="10" cy="10" r="3" fill="none" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+  </symbol>
+
+  <!-- Lightning/Bolt -->
+  <symbol id="icon-bolt" viewBox="0 0 24 24">
+    <path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+  </symbol>
+
+  <!-- Robot/AI -->
+  <symbol id="icon-robot" viewBox="0 0 24 24">
+    <rect x="4" y="8" width="16" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <circle cx="9" cy="13" r="2" fill="currentColor"/>
+    <circle cx="15" cy="13" r="2" fill="currentColor"/>
+    <path d="M10 17h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M12 8V5M12 5a2 2 0 100-4 2 2 0 000 4z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M4 12H2M22 12h-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </symbol>
+
+  <!-- User/Person -->
+  <symbol id="icon-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M4 20c0-4 4-6 8-6s8 2 8 6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+
+  <!-- Checkmark/Verify -->
+  <symbol id="icon-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M8 12l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+
+  <!-- Handshake/Partnership -->
+  <symbol id="icon-handshake" viewBox="0 0 24 24">
+    <path d="M8 13l4-4 4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M4 10l4-4h4l4 4M20 10l-4-4h-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M2 14l4 4h3l3-3M22 14l-4 4h-3l-3-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+
+  <!-- No/Block/Prohibited -->
+  <symbol id="icon-block" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M5 19L19 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+
+  <!-- Sparkle/Magic -->
+  <symbol id="icon-sparkle" viewBox="0 0 24 24">
+    <path d="M12 2l2 6 6 2-6 2-2 6-2-6-6-2 6-2 2-6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+    <circle cx="19" cy="5" r="1.5" fill="currentColor"/>
+    <circle cx="5" cy="19" r="1" fill="currentColor"/>
+  </symbol>
+
+  <!-- Lock/Secure -->
+  <symbol id="icon-lock" viewBox="0 0 24 24">
+    <rect x="5" y="11" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M8 11V7a4 4 0 018 0v4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <circle cx="12" cy="16" r="1.5" fill="currentColor"/>
+  </symbol>
+
+  <!-- Secure/Key Lock -->
+  <symbol id="icon-secure" viewBox="0 0 24 24">
+    <path d="M12 2L4 6v6c0 5.5 3.5 10 8 11 4.5-1 8-5.5 8-11V6l-8-4z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+
+  <!-- Bank/Finance -->
+  <symbol id="icon-bank" viewBox="0 0 24 24">
+    <path d="M3 21h18M4 17h16M12 3l9 6H3l9-6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M6 11v6M10 11v6M14 11v6M18 11v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </symbol>
+
+  <!-- Scale/Justice -->
+  <symbol id="icon-scale" viewBox="0 0 24 24">
+    <path d="M12 3v18M5 7l7-4 7 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M3 11l2-4 2 4a2 2 0 01-4 0zM17 11l2-4 2 4a2 2 0 01-4 0z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M8 21h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </symbol>
+
+  <!-- Medical/Health -->
+  <symbol id="icon-medical" viewBox="0 0 24 24">
+    <path d="M4.5 10.5a2.5 2.5 0 015 0v3h3v-3a2.5 2.5 0 015 0v3h2a1 1 0 010 2h-2v3a2.5 2.5 0 01-5 0v-3h-3v3a2.5 2.5 0 01-5 0v-3h-2a1 1 0 010-2h2v-3z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M9 9h6M12 6v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+
+  <!-- Shield/Protection -->
+  <symbol id="icon-shield" viewBox="0 0 24 24">
+    <path d="M12 2L4 6v5c0 5.5 3.5 10 8 11 4.5-1 8-5.5 8-11V6l-8-4z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+
+  <!-- Briefcase/Business -->
+  <symbol id="icon-briefcase" viewBox="0 0 24 24">
+    <rect x="2" y="7" width="20" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2M12 12v3M2 12h20" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+
+  <!-- Chart/Analytics -->
+  <symbol id="icon-chart" viewBox="0 0 24 24">
+    <path d="M4 20h16M8 16V10M12 16V4M16 16V8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="8" cy="10" r="1.5" fill="currentColor"/>
+    <circle cx="12" cy="4" r="1.5" fill="currentColor"/>
+    <circle cx="16" cy="8" r="1.5" fill="currentColor"/>
+  </symbol>
+
+  <!-- Write/Edit/Pen -->
+  <symbol id="icon-pen" viewBox="0 0 24 24">
+    <path d="M16 3l5 5L8 21H3v-5L16 3z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M14 5l5 5M3 21l3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </symbol>
+
+  <!-- Arrow Right -->
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24">
+    <path d="M4 12h16M14 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+
+  <!-- Money/Currency -->
+  <symbol id="icon-money" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M12 6v12M8 10h6a2 2 0 010 4H8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+
+  <!-- Fingerprint/Identity -->
+  <symbol id="icon-fingerprint" viewBox="0 0 24 24">
+    <path d="M12 10v4M8 12c0-2.2 1.8-4 4-4s4 1.8 4 4v2c0 3-1.5 5-4 5s-4-2-4-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M4 14c0-4.4 3.6-8 8-8s8 3.6 8 8v1" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M12 2c5.5 0 10 4.5 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </symbol>
+
+  <!-- Lab/Science -->
+  <symbol id="icon-lab" viewBox="0 0 24 24">
+    <path d="M9 3v6l-5 10a1 1 0 001 1h14a1 1 0 001-1l-5-10V3" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M8 3h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    <circle cx="10" cy="15" r="1" fill="currentColor"/>
+    <circle cx="14" cy="17" r="1.5" fill="currentColor"/>
+  </symbol>
+
+  <!-- Pill/Medicine -->
+  <symbol id="icon-pill" viewBox="0 0 24 24">
+    <path d="M8.5 14.5L4 19a2.83 2.83 0 004 4l4.5-4.5M15.5 9.5L20 5a2.83 2.83 0 00-4-4l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M8.5 14.5l7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </symbol>
+
+  <!-- Key/Access -->
+  <symbol id="icon-key" viewBox="0 0 24 24">
+    <circle cx="8" cy="8" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M12 12l9 9M18 18l3 3M18 21l3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </symbol>
+</svg>

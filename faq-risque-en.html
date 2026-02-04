@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk & Accountability FAQ — HumanLayer</title>
+    <meta name="description"
+        content="Frequently asked questions about risk and accountability — what happens when things don't go as planned.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="icons.css">
+</head>
+
+<body>
+    <!-- SVG Icons Sprite -->
+    <?xml version="1.0" encoding="UTF-8"?>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <!-- Brain - Central AI icon -->
+        <symbol id="icon-brain" viewBox="0 0 24 24">
+            <path
+                d="M12 2C9.5 2 7.5 3.5 7 5.5C5.5 5.5 4 7 4 9c0 1.5 1 3 2.5 3.5C6 14 7 16 9 17v3c0 .5.5 1 1 1h4c.5 0 1-.5 1-1v-3c2-1 3-3 2.5-4.5C19 12 20 10.5 20 9c0-2-1.5-3.5-3-3.5C16.5 3.5 14.5 2 12 2z"
+                fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M9 10c0-1 1-2 3-2s3 1 3 2M9 14h6" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" />
+            <circle cx="9" cy="10" r="1" fill="currentColor" />
+            <circle cx="15" cy="10" r="1" fill="currentColor" />
+        </symbol>
+        <!-- Arrow Right -->
+        <symbol id="icon-arrow" viewBox="0 0 24 24">
+            <path d="M4 12h16M14 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </symbol>
+        <!-- Warning/Alert -->
+        <symbol id="icon-warning" viewBox="0 0 24 24">
+            <path d="M12 2L2 20h20L12 2z" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linejoin="round" />
+            <path d="M12 9v4M12 16v1" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </symbol>
+        <!-- Shield/Protection -->
+        <symbol id="icon-shield" viewBox="0 0 24 24">
+            <path d="M12 2L4 6v6c0 5.5 3.5 10 8 11 4.5-1 8-5.5 8-11V6l-8-4z" fill="none" stroke="currentColor"
+                stroke-width="1.5" />
+            <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </symbol>
+        <!-- User/Person -->
+        <symbol id="icon-user" viewBox="0 0 24 24">
+            <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M4 20c0-4 4-6 8-6s8 2 8 6" fill="none" stroke="currentColor" stroke-width="1.5" />
+        </symbol>
+        <!-- Document/File -->
+        <symbol id="icon-document" viewBox="0 0 24 24">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" fill="none" stroke="currentColor"
+                stroke-width="1.5" />
+            <path d="M14 2v6h6M9 13h6M9 17h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </symbol>
+        <!-- Scale/Balance -->
+        <symbol id="icon-scale" viewBox="0 0 24 24">
+            <path d="M12 3v18M3 8l9-3 9 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" fill="none" />
+            <path d="M3 8l3 8h0a3 3 0 006 0h0l-3-8M15 8l3 8h0a3 3 0 006 0h0l-3-8" stroke="currentColor"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+        </symbol>
+        <!-- Lock/Security -->
+        <symbol id="icon-lock" viewBox="0 0 24 24">
+            <rect x="5" y="11" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M8 11V7a4 4 0 018 0v4" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="12" cy="16" r="1.5" fill="currentColor" />
+        </symbol>
+        <!-- X/Cross (Block) -->
+        <symbol id="icon-x" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M15 9l-6 6M9 9l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </symbol>
+        <!-- Eye/Visibility -->
+        <symbol id="icon-eye" viewBox="0 0 24 24">
+            <path d="M2 12s4-8 10-8 10 8 10 8-4 8-10 8-10-8-10-8z" fill="none" stroke="currentColor"
+                stroke-width="1.5" />
+            <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.5" />
+        </symbol>
+        <!-- Checkmark/Audit -->
+        <symbol id="icon-check" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M8 12l2.5 2.5L16 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </symbol>
+        <!-- Handshake/Insurance -->
+        <symbol id="icon-handshake" viewBox="0 0 24 24">
+            <path d="M12 8l-4 4 2 2 4-4M12 8l4 4-2 2-4-4" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round" fill="none" />
+            <path d="M4 12l4-4M20 12l-4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M2 10h4M18 10h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M8 18l4 2 4-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" fill="none" />
+        </symbol>
+        <!-- Stop/Block -->
+        <symbol id="icon-stop" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M8 12h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </symbol>
+        <!-- Target/Bullseye -->
+        <symbol id="icon-target" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="12" cy="12" r="2" fill="currentColor" />
+            <path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </symbol>
+    </svg>
+
+    <!-- Background Animation -->
+    <div class="bg-animation"></div>
+    <div class="grid-overlay"></div>
+    <div class="cursor-glow"></div>
+    <div class="scroll-progress" id="scroll-progress"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="container nav-container">
+            <a href="index-en.html" class="nav-logo">
+                <img src="logo.png" alt="HumanLayer" class="nav-logo-img">
+            </a>
+            <button class="nav-toggle" aria-expanded="false" aria-label="Open menu" aria-controls="nav-links">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+        <div class="nav-drawer-header">
+          <div class="nav-drawer-title">AGENT ROUTING</div>
+          <div class="nav-drawer-status"><span class="status-dot"></span>Connected to HumanLayer</div>
+        </div>
+        <div class="nav-signal" aria-hidden="true"></div>
+        <div class="nav-scanline" aria-hidden="true"></div>
+<a href="index-en.html#problem">Problem</a>
+                <a href="index-en.html#solution">Solution</a>
+                <a href="index-en.html#usecases">Use cases</a>
+                <a href="index-en.html#api">API</a>
+                <a href="apply-en.html">Become a decision maker</a>
+                <a href="faq-en.html">FAQ</a>
+                <a href="index-en.html#pricing">Pricing</a>
+                <div class="nav-lang"><a href="faq-risque.html">FR</a><span>·</span><a href="faq-risque-en.html" class="active">EN</a></div>
+                <a href="#" class="btn btn-primary">Request a demo</a>
+            </div>
+        </div>
+        <div class="nav-backdrop" aria-hidden="true"></div>
+    </nav>
+
+    <!-- FAQ Page Header -->
+    <section class="faq-hero">
+        <div class="container">
+            <div class="faq-hero-content reveal">
+                <span class="label">Risk & Accountability FAQ</span>
+                <h1>Risk & Accountability</h1>
+                <p>What happens when things don't go as planned</p>
+            </div>
+            <!-- FAQ Tabs -->
+            <div class="faq-tabs reveal-stagger">
+                <a href="faq-en.html" class="faq-tab">General</a>
+                <a href="faq-investisseurs-en.html" class="faq-tab">Investors</a>
+                <a href="faq-developpeurs-en.html" class="faq-tab">Developers</a>
+                <a href="faq-decideurs-en.html" class="faq-tab">Decision makers</a>
+                <a href="faq-risque-en.html" class="faq-tab active">Risk</a>
+                <a href="faq-ethique-en.html" class="faq-tab">Ethics</a>
+                <a href="faq-regulateurs-en.html" class="faq-tab">Regulators</a>
+                <a href="faq-annexe-en.html" class="faq-tab">Appendix</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Content -->
+    <section class="faq faq-page">
+        <div class="container">
+
+            <!-- Decision error -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-warning" />
+                    </svg>
+                    Decision error
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What happens if a human decision is wrong?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>As with any professional decision:</p>
+                        <ul>
+                            <li>responsibility lies with the <strong>identified human</strong> who made the decision</li>
+                            <li>within their qualifications, authorizations, and legal obligations</li>
+                        </ul>
+                        <p>HumanLayer:</p>
+                        <ul>
+                            <li>never decides</li>
+                            <li>never modifies the decision</li>
+                            <li>never hides the decision maker's identity</li>
+                        </ul>
+                        <p class="faq-highlight">👉 HumanLayer provides the evidence, not the decision.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Abus -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-shield" />
+                    </svg>
+                    Abuse protection
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What happens if a decision maker abuses their position?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>HumanLayer implements several safeguards:</p>
+                        <ul>
+                            <li>strict scope of authorized decisions</li>
+                            <li>full logging of all actions</li>
+                            <li>anomaly detection (atypical decision patterns)</li>
+                            <li>possibility of immediate suspension</li>
+                        </ul>
+                        <p>Client organizations can:</p>
+                        <ul>
+                            <li>exclude a decision maker</li>
+                            <li>require a second opinion</li>
+                            <li>trigger a targeted audit</li>
+                        </ul>
+                        <p class="faq-highlight">👉 Abuse is more visible, not less.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI context -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-document" />
+                    </svg>
+                    AI context
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What if the AI provides incomplete or incorrect context?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>HumanLayer:</p>
+                        <ul>
+                            <li>logs exactly the context provided by the AI</li>
+                            <li>timestamps the information</li>
+                            <li>keeps versions</li>
+                        </ul>
+                        <p>The human decision maker:</p>
+                        <ul>
+                            <li>decides based on that context</li>
+                            <li>can refuse or request more information</li>
+                        </ul>
+                        <p class="faq-highlight">👉 In case of incident, it's always possible to determine:</p>
+                        <ul>
+                            <li>what the AI provided</li>
+                            <li>what the human saw</li>
+                            <li>what the decision was based on</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Illegal use -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-x" />
+                    </svg>
+                    Prohibited uses
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can HumanLayer be used to circumvent rules or laws?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>No.</strong></p>
+                        <p>HumanLayer explicitly rejects:</p>
+                        <ul>
+                            <li>illegal decisions</li>
+                            <li>uses intended to circumvent regulations</li>
+                            <li>requests outside the defined scope</li>
+                        </ul>
+                        <p>Automatic rejection rules can be configured.<br>
+                            Certain categories of decisions are excluded by design.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Responsibility allocation -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-scale" />
+                    </svg>
+                    Responsibility allocation
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Who is responsible in case of a dispute?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <ul>
+                            <li><strong>The decision</strong>: the human decision maker</li>
+                            <li><strong>The usage framework</strong>: the client organization</li>
+                            <li><strong>Orchestration and traceability</strong>: HumanLayer</li>
+                        </ul>
+                        <p class="faq-highlight">This clear separation is essential and contractual.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Does HumanLayer bear direct legal liability?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>HumanLayer is not a decision-making actor.</strong></p>
+                        <p>Its liability is limited to:</p>
+                        <ul>
+                            <li>proper service execution</li>
+                            <li>traceability</li>
+                            <li>availability per SLA</li>
+                        </ul>
+                        <p class="faq-highlight">👉 It is an infrastructure provider, not a decision maker.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Insurance and protection -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-handshake" />
+                    </svg>
+                    Insurance and protection
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Is there insurance or a protection framework?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Depending on the decision level:</p>
+                        <ul>
+                            <li>decision makers operate within their usual professional framework</li>
+                            <li>some decisions may require specific insurance</li>
+                            <li>additional coverage can be offered as an enterprise option</li>
+                        </ul>
+                        <p class="faq-highlight">The exact terms are contractual and transparent.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real-time blocking -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-stop" />
+                    </svg>
+                    Real-time blocking
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can a dangerous decision be blocked in real time?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Yes.</strong></p>
+                        <p>Organizations can define:</p>
+                        <ul>
+                            <li>risk thresholds</li>
+                            <li>automatic rejection rules</li>
+                            <li>mandatory escalations</li>
+                            <li>multi-signature validations</li>
+                        </ul>
+                        <p class="faq-highlight">👉 A decision cannot slip through unnoticed.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Closing statement -->
+            <div class="faq-closing reveal">
+                <div class="glass-card">
+                    <p class="faq-closing-text">
+                        <svg class="hl-icon hl-lg">
+                            <use href="#icon-eye" />
+                        </svg>
+                        <em>In summary:</em><br>
+                        <strong>HumanLayer doesn't eliminate risk.<br>
+                            It makes it visible, traceable, and attributable.</strong>
+                    </p>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="faq-cta reveal">
+                <p>Questions about security?</p>
+                <a href="#" class="btn btn-primary">
+                    <svg class="hl-icon">
+                        <use href="#icon-shield" />
+                    </svg>
+                    Contact the team
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="footer-logo">© HumanLayer Systems Inc.</span>
+                    
+                </div>
+                <div class="footer-links">
+                    <a href="#">Security</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>

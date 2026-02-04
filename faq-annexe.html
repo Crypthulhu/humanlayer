@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annexe A — Cadre de Responsabilité HumanLayer</title>
+    <meta name="description"
+        content="Annexe A — Cadre de responsabilité, de gouvernance et d'usage des services HumanLayer.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="icons.css">
+    <style>
+        /* Legal Document Styles */
+        .legal-document {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+        }
+
+        .legal-title {
+            text-align: center;
+            margin-bottom: 48px;
+            padding-bottom: 32px;
+            border-bottom: 2px solid rgba(192, 57, 43, 0.2);
+        }
+
+        .legal-title h1 {
+            font-size: 1.75rem;
+            line-height: 1.4;
+            margin-bottom: 0;
+        }
+
+        .legal-section {
+            margin-bottom: 40px;
+        }
+
+        .legal-section h2 {
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(192, 57, 43, 0.15);
+        }
+
+        .legal-section h3 {
+            font-size: 1rem;
+            color: var(--text-primary);
+            margin: 20px 0 12px;
+        }
+
+        .legal-section p {
+            margin-bottom: 12px;
+            line-height: 1.7;
+            text-align: justify;
+        }
+
+        .legal-section ul {
+            margin: 12px 0 16px 24px;
+            list-style: none;
+        }
+
+        .legal-section ul li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .legal-section ul li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .legal-highlight {
+            background: linear-gradient(135deg, rgba(192, 57, 43, 0.08), rgba(201, 162, 107, 0.08));
+            border-left: 4px solid var(--primary);
+            padding: 20px 24px;
+            margin: 24px 0;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
+
+        .legal-highlight p {
+            margin: 0;
+            font-style: italic;
+        }
+
+        .legal-synthesis {
+            background: var(--gradient-ink);
+            padding: 32px;
+            border-radius: var(--radius-lg);
+            margin-top: 48px;
+            text-align: center;
+        }
+
+        .legal-synthesis h3 {
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .legal-synthesis p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        .legal-synthesis strong {
+            color: var(--primary);
+        }
+
+        .definition-term {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .definition-desc {
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background Animation -->
+    <div class="bg-animation"></div>
+    <div class="grid-overlay"></div>
+    <div class="cursor-glow"></div>
+    <div class="scroll-progress" id="scroll-progress"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="logo.png" alt="HumanLayer" class="nav-logo-img">
+            </a>
+            <div class="nav-links">
+                <a href="index.html#problem">Problème</a>
+                <a href="index.html#solution">Solution</a>
+                <a href="index.html#usecases">Cas d'usage</a>
+                <a href="index.html#api">API</a>
+                <a href="apply.html">Devenir décideur</a>
+                <a href="faq.html">FAQ</a>
+                <a href="index.html#pricing">Tarifs</a>
+                <div class="nav-lang"><a href="faq-annexe.html" class="active">FR</a><span>·</span><a href="faq-annexe-en.html">EN</a></div>
+                <a href="#" class="btn btn-primary">Demander une démo</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- FAQ Page Header -->
+    <section class="faq-hero">
+        <div class="container">
+            <div class="faq-hero-content reveal">
+                <span class="label">Document Contractuel</span>
+                <h1>Annexe A</h1>
+                <p>Cadre de responsabilité, de gouvernance et d'usage</p>
+            </div>
+            <!-- FAQ Tabs -->
+            <div class="faq-tabs reveal-stagger">
+                <a href="faq.html" class="faq-tab">Général</a>
+                <a href="faq-investisseurs.html" class="faq-tab">Investisseurs</a>
+                <a href="faq-developpeurs.html" class="faq-tab">Développeurs</a>
+                <a href="faq-decideurs.html" class="faq-tab">Décideurs</a>
+                <a href="faq-risque.html" class="faq-tab">Risque</a>
+                <a href="faq-ethique.html" class="faq-tab">Éthique</a>
+                <a href="faq-regulateurs.html" class="faq-tab">Régulateurs</a>
+                <a href="faq-annexe.html" class="faq-tab active">Annexe</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Legal Document Content -->
+    <section class="faq faq-page">
+        <div class="container">
+            <div class="legal-document reveal">
+
+                <div class="legal-title">
+                    <h1>ANNEXE A — CADRE DE RESPONSABILITÉ, DE GOUVERNANCE ET D'USAGE DES SERVICES HUMANLAYER</h1>
+                </div>
+
+                <!-- Section 1 -->
+                <div class="legal-section">
+                    <h2>1. Objet de l'Annexe</h2>
+                    <p>La présente annexe (ci-après l'« Annexe ») définit le cadre contractuel applicable à
+                        l'utilisation des services fournis par HumanLayer, incluant notamment :</p>
+                    <ul>
+                        <li>la répartition des rôles et responsabilités entre les parties,</li>
+                        <li>les règles de gouvernance et de contrôle applicables aux Décisions rendues via HumanLayer,
+                        </li>
+                        <li>les limitations et exclusions de responsabilité,</li>
+                        <li>les principes éthiques et restrictions d'usage,</li>
+                        <li>les obligations de traçabilité et d'auditabilité,</li>
+                        <li>l'articulation avec les cadres réglementaires et juridictionnels applicables.</li>
+                    </ul>
+                    <div class="legal-highlight">
+                        <p>La présente Annexe fait partie intégrante du contrat liant HumanLayer et l'Organisation
+                            Cliente et prévaut sur toute documentation commerciale, marketing ou pédagogique en cas de
+                            contradiction.</p>
+                    </div>
+                </div>
+
+                <!-- Section 2 -->
+                <div class="legal-section">
+                    <h2>2. Définitions</h2>
+                    <p>Aux fins de la présente Annexe, les termes suivants ont la signification ci-après :</p>
+                    <ul>
+                        <li><span class="definition-term">HumanLayer :</span> <span class="definition-desc">la société
+                                fournissant une infrastructure technique d'orchestration de décisions humaines.</span>
+                        </li>
+                        <li><span class="definition-term">Organisation Cliente :</span> <span
+                                class="definition-desc">toute entité contractante utilisant les services
+                                HumanLayer.</span></li>
+                        <li><span class="definition-term">Agent IA :</span> <span class="definition-desc">tout système
+                                automatisé ou semi-automatisé initiant une demande de Décision via HumanLayer.</span>
+                        </li>
+                        <li><span class="definition-term">Décideur :</span> <span class="definition-desc">toute personne
+                                physique identifiée, qualifiée et habilitée à rendre une Décision humaine via
+                                HumanLayer.</span></li>
+                        <li><span class="definition-term">Décision :</span> <span class="definition-desc">tout acte de
+                                validation, refus, approbation, jugement ou autorisation rendu par un Décideur via
+                                HumanLayer.</span></li>
+                        <li><span class="definition-term">SLA Décisionnel :</span> <span class="definition-desc">délai
+                                contractuel indicatif applicable au traitement d'une demande de Décision.</span></li>
+                        <li><span class="definition-term">Contexte de Décision :</span> <span
+                                class="definition-desc">ensemble des informations transmises au Décideur pour rendre une
+                                Décision.</span></li>
+                    </ul>
+                </div>
+
+                <!-- Section 3 -->
+                <div class="legal-section">
+                    <h2>3. Rôle et périmètre de HumanLayer</h2>
+
+                    <h3>3.1 Rôle exclusif d'orchestration technique</h3>
+                    <p>HumanLayer agit exclusivement en qualité de prestataire technique d'orchestration de décisions
+                        humaines.</p>
+                    <p>À ce titre, HumanLayer :</p>
+                    <ul>
+                        <li>ne prend aucune Décision au fond,</li>
+                        <li>n'exerce aucune autorité décisionnelle,</li>
+                        <li>ne modifie ni n'altère le contenu d'une Décision,</li>
+                        <li>ne formule aucune recommandation finale.</li>
+                    </ul>
+
+                    <h3>3.2 Absence de jugement autonome et d'influence</h3>
+                    <p>HumanLayer :</p>
+                    <ul>
+                        <li>n'analyse ni n'évalue le Contexte de Décision,</li>
+                        <li>n'interprète pas les informations transmises,</li>
+                        <li>n'exerce aucune influence directe ou indirecte sur le raisonnement, l'appréciation ou le
+                            choix du Décideur.</li>
+                    </ul>
+                    <div class="legal-highlight">
+                        <p>Toute Décision est rendue exclusivement par un Décideur humain, sur la base de son propre
+                            jugement.</p>
+                    </div>
+
+                    <h3>3.3 Clause anti-requalification</h3>
+                    <p>Aucune stipulation de la présente Annexe ne saurait être interprétée comme conférant à HumanLayer
+                        un rôle de décideur, de co-décideur, de mandataire, de représentant ou d'auxiliaire décisionnel
+                        de l'Organisation Cliente ou du Décideur.</p>
+                </div>
+
+                <!-- Section 4 -->
+                <div class="legal-section">
+                    <h2>4. Responsabilités</h2>
+
+                    <h3>4.1 Responsabilité du Décideur</h3>
+                    <p>Chaque Décision rendue via HumanLayer est prise par un Décideur :</p>
+                    <ul>
+                        <li>identifié,</li>
+                        <li>qualifié,</li>
+                        <li>habilité selon les règles professionnelles et réglementaires applicables,</li>
+                    </ul>
+                    <p>qui en assume l'entière responsabilité professionnelle, civile, pénale et réglementaire, dans les
+                        limites prévues par la loi.</p>
+
+                    <h3>4.2 Responsabilité de l'Organisation Cliente</h3>
+                    <p>L'Organisation Cliente demeure seule responsable :</p>
+                    <ul>
+                        <li>de la définition de ses politiques décisionnelles,</li>
+                        <li>de l'usage et de l'exécution des Décisions rendues,</li>
+                        <li>de l'intégration des Décisions dans ses processus internes,</li>
+                        <li>du respect des lois et réglementations applicables à ses activités,</li>
+                        <li>de la supervision des Agents IA qu'elle déploie.</li>
+                    </ul>
+
+                    <h3>4.3 Responsabilité de HumanLayer</h3>
+                    <p>La responsabilité de HumanLayer est strictement limitée :</p>
+                    <ul>
+                        <li>à la fourniture du service d'orchestration technique,</li>
+                        <li>au respect des engagements de disponibilité et de sécurité contractuellement définis,</li>
+                        <li>à la traçabilité fidèle des Décisions rendues.</li>
+                    </ul>
+                    <p>HumanLayer n'assume aucune responsabilité quant :</p>
+                    <ul>
+                        <li>au contenu,</li>
+                        <li>à l'opportunité,</li>
+                        <li>à la légalité,</li>
+                        <li>ou aux conséquences des Décisions rendues.</li>
+                    </ul>
+                </div>
+
+                <!-- Section 5 -->
+                <div class="legal-section">
+                    <h2>5. Gouvernance et contrôle</h2>
+
+                    <h3>5.1 Politiques décisionnelles</h3>
+                    <p>HumanLayer met à disposition des moyens techniques permettant à l'Organisation Cliente
+                        d'appliquer ses propres politiques décisionnelles.</p>
+                    <p>HumanLayer ne définit, n'interprète ni n'évalue ces politiques.</p>
+
+                    <h3>5.2 Vérification des Décideurs</h3>
+                    <p>Les mécanismes de vérification mis en œuvre par HumanLayer visent exclusivement à contrôler
+                        l'existence déclarative de qualifications ou habilitations communiquées par les Décideurs.</p>
+                    <p>Ces vérifications ne constituent en aucun cas :</p>
+                    <ul>
+                        <li>une certification,</li>
+                        <li>une garantie,</li>
+                        <li>ou une validation de compétence.</li>
+                    </ul>
+
+                    <h3>5.3 Désactivation et contrôle</h3>
+                    <p>L'Organisation Cliente peut à tout moment :</p>
+                    <ul>
+                        <li>restreindre certaines catégories de Décisions,</li>
+                        <li>suspendre les appels API,</li>
+                        <li>désactiver totalement les services HumanLayer.</li>
+                    </ul>
+                </div>
+
+                <!-- Section 6 -->
+                <div class="legal-section">
+                    <h2>6. Gestion des risques et incidents</h2>
+
+                    <h3>6.1 Erreur de Décision</h3>
+                    <p>Une erreur de Décision n'engage pas la responsabilité de HumanLayer dès lors que la Décision a
+                        été rendue par un Décideur identifié sur la base d'un Contexte de Décision traçable.</p>
+
+                    <h3>6.2 Contexte erroné ou incomplet</h3>
+                    <p>HumanLayer conserve une trace fidèle du Contexte de Décision tel que transmis par l'Agent IA.</p>
+                    <p>Il appartient au Décideur d'accepter, refuser ou solliciter des compléments d'information.</p>
+
+                    <h3>6.3 SLA Décisionnels</h3>
+                    <p>Les SLA Décisionnels constituent des obligations de moyens et non de résultat.</p>
+                    <div class="legal-highlight">
+                        <p>En aucun cas un retard, une indisponibilité ou un dépassement de SLA ne saurait engager la
+                            responsabilité de HumanLayer quant aux conséquences d'une Décision ou d'une absence de
+                            Décision.</p>
+                    </div>
+                </div>
+
+                <!-- Section 7 -->
+                <div class="legal-section">
+                    <h2>7. Éthique et exclusions d'usage</h2>
+
+                    <h3>7.1 Usages interdits</h3>
+                    <p>L'utilisation de HumanLayer est strictement interdite pour toute Décision visant notamment à :
+                    </p>
+                    <ul>
+                        <li>contourner une loi ou réglementation applicable,</li>
+                        <li>violer des droits fondamentaux,</li>
+                        <li>dissimuler ou transférer artificiellement une responsabilité humaine,</li>
+                        <li>valider a posteriori une décision déjà exécutée,</li>
+                        <li>exercer une coercition ou manipulation sur un Décideur.</li>
+                    </ul>
+
+                    <h3>7.2 Droit de refus éthique</h3>
+                    <p>HumanLayer se réserve le droit de refuser, suspendre ou résilier tout usage non conforme aux
+                        principes énoncés dans la présente Annexe.</p>
+                </div>
+
+                <!-- Section 8 -->
+                <div class="legal-section">
+                    <h2>8. Traçabilité et audit</h2>
+                    <p>HumanLayer assure la journalisation des éléments suivants :</p>
+                    <ul>
+                        <li>identité du Décideur,</li>
+                        <li>Contexte de Décision transmis,</li>
+                        <li>Décision rendue,</li>
+                        <li>justification fournie,</li>
+                        <li>horodatage.</li>
+                    </ul>
+                    <p>Ces éléments peuvent être mis à disposition de l'Organisation Cliente à des fins d'audit, dans
+                        les conditions contractuelles applicables.</p>
+                </div>
+
+                <!-- Section 9 -->
+                <div class="legal-section">
+                    <h2>9. Cadre réglementaire et juridictions</h2>
+
+                    <h3>9.1 Supervision humaine</h3>
+                    <p>HumanLayer est conçu pour permettre une supervision humaine effective conformément aux
+                        réglementations applicables en matière de systèmes automatisés et d'IA.</p>
+
+                    <h3>9.2 Juridictions</h3>
+                    <p>Chaque Décision est rendue par un Décideur déclarant être habilité à intervenir dans la
+                        juridiction applicable, sous la responsabilité exclusive du Décideur et de l'Organisation
+                        Cliente.</p>
+                </div>
+
+                <!-- Section 10 -->
+                <div class="legal-section">
+                    <h2>10. Indemnisation croisée</h2>
+
+                    <h3>10.1 Indemnisation par l'Organisation Cliente</h3>
+                    <p>L'Organisation Cliente s'engage à indemniser et garantir HumanLayer contre toute réclamation,
+                        action ou condamnation résultant :</p>
+                    <ul>
+                        <li>de l'usage des Décisions rendues,</li>
+                        <li>d'un manquement de l'Organisation Cliente à ses obligations légales,</li>
+                        <li>de l'utilisation des services en violation de la présente Annexe.</li>
+                    </ul>
+
+                    <h3>10.2 Indemnisation par HumanLayer</h3>
+                    <p>HumanLayer s'engage à indemniser l'Organisation Cliente contre toute condamnation définitive
+                        résultant exclusivement :</p>
+                    <ul>
+                        <li>d'un manquement avéré de HumanLayer à ses obligations contractuelles,</li>
+                        <li>imputable directement à la fourniture du service d'orchestration.</li>
+                    </ul>
+                </div>
+
+                <!-- Section 11 -->
+                <div class="legal-section">
+                    <h2>11. Non-délégation de responsabilité</h2>
+                    <div class="legal-highlight">
+                        <p>Aucune disposition de la présente Annexe ne saurait être interprétée comme une délégation, un
+                            transfert ou une substitution de responsabilité de l'Organisation Cliente ou du Décideur au
+                            profit de HumanLayer.</p>
+                    </div>
+                    <p><strong>La responsabilité humaine demeure pleine, entière et non transférable.</strong></p>
+                </div>
+
+                <!-- Section 12 -->
+                <div class="legal-section">
+                    <h2>12. Dispositions finales</h2>
+                    <p>La présente Annexe est opposable aux parties et s'applique à toute utilisation des services
+                        HumanLayer.</p>
+                </div>
+
+                <!-- Synthesis -->
+                <div class="legal-synthesis">
+                    <h3>Clause de synthèse</h3>
+                    <p><strong>HumanLayer ne remplace pas la responsabilité humaine.</strong><br>
+                        Il en fournit l'infrastructure, la traçabilité et la gouvernance.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="footer-logo">© HumanLayer Systems Inc.</span>
+                    
+                </div>
+                <div class="footer-links">
+                    <a href="#">Sécurité</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Conditions</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>

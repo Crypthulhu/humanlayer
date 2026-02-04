@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HumanLayer — The decision authority layer for AI agents</title>
+  <meta name="description"
+    content="HumanLayer lets an AI agent obtain a qualified, documented, enforceable human decision — via an API.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="icons.css">
+</head>
+
+<body>
+  <!-- SVG Icons Sprite -->
+  <?xml version="1.0" encoding="UTF-8"?>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <!-- Brain - Central AI icon -->
+    <symbol id="icon-brain" viewBox="0 0 24 24">
+      <path
+        d="M12 2C9.5 2 7.5 3.5 7 5.5C5.5 5.5 4 7 4 9c0 1.5 1 3 2.5 3.5C6 14 7 16 9 17v3c0 .5.5 1 1 1h4c.5 0 1-.5 1-1v-3c2-1 3-3 2.5-4.5C19 12 20 10.5 20 9c0-2-1.5-3.5-3-3.5C16.5 3.5 14.5 2 12 2z"
+        fill="none" stroke="currentColor" stroke-width="1.5" />
+      <path d="M9 10c0-1 1-2 3-2s3 1 3 2M9 14h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+      <circle cx="9" cy="10" r="1" fill="currentColor" />
+      <circle cx="15" cy="10" r="1" fill="currentColor" />
+    </symbol>
+    <!-- Target/Bullseye -->
+    <symbol id="icon-target" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+      <circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="1.5" />
+      <circle cx="12" cy="12" r="2" fill="currentColor" />
+      <path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+    </symbol>
+    <!-- Document/Book -->
+    <symbol id="icon-docs" viewBox="0 0 24 24">
+      <path d="M4 4c0-1.1.9-2 2-2h8l6 6v12c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V4z" fill="none" stroke="currentColor"
+        stroke-width="1.5" />
+      <path d="M14 2v6h6" fill="none" stroke="currentColor" stroke-width="1.5" />
+      <path d="M8 12h8M8 16h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+    </symbol>
+    <!-- Timer/Clock -->
+    <symbol id="icon-timer" viewBox="0 0 24 24">
+      <circle cx="12" cy="13" r="9" fill="none" stroke="currentColor" stroke-width="1.5" />
+      <path d="M12 9v4l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M9 2h6M12 2v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+    </symbol>
+    <!-- Clipboard/Checklist -->
+    <symbol id="icon-clipboard" viewBox="0 0 24 24">
+      <path d="M8 4H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2" fill="none" stroke="currentColor"
+        stroke-width="1.5" />
+      <rect x="8" y="2" width="8" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="1.5" />
+      <path d="M8 12h8M8 16h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+    </symbol>
+    <!-- Search/Magnify -->
+    <symbol id="icon-search" viewBox="0 0 24 24">
+      <circle cx="10" cy="10" r="7" fill="none" stroke="currentColor" stroke-width="1.5" />
+      <path d="M15 15l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <circle cx="10" cy="10" r="3" fill="none" stroke="currentColor" stroke-width="1" opacity="0.5" />
+    </symbol>
+    <!-- Lightning/Bolt -->
+    <symbol id="icon-bolt" viewBox="0 0 24 24">
+      <path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" fill="none" stroke="currentColor" stroke-width="1.5"
+        stroke-linejoin="round" />
+    </symbol>
+    <!-- Robot/AI -->
+    <symbol id="icon-robot" viewBox="0 0 24 24">
+      <rect x="4" y="8" width="16" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" />
+      <circle cx="9" cy="13" r="2" fill="currentColor" />
+      <circle cx="15" cy="13" r="2" fill="currentColor" />
+      <path d="M10 17h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+      <path d="M12 8V5M12 5a2 2 0 100-4 2 2 0 000 4z" fill="none" stroke="currentColor" stroke-width="1.5" />
+      <path d="M4 12H2M22 12h-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+    </symbol>
+    <!-- User/Person -->
+    <symbol id="icon-user" viewBox="0 0 24 24">
+      <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.5" />
+      <path d="M4 20c0-4 4-6 8-6s8 2 8 6" fill="none" stroke="currentColor" stroke-width="1.5" />
+    </symbol>
+    <!-- Checkmark/Verify -->
+    <symbol id="icon-check" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+      <path d="M8 12l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+    <!-- Checkmark simple -->
+    <symbol id="icon-checkmark" viewBox="0 0 24 24">
+      <path d="M5 12l5 5L20 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+        stroke-linejoin="round" />
+    </symbol>
+    <!-- Handshake/Partnership -->
+    <symbol id="icon-handshake" viewBox="0 0 24 24">
+      <path d="M8 13l4-4 4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+        stroke-linejoin="round" />
+      <path d="M4 10l4-4h4l4 4M20 10l-4-4h-4" fill="none" stroke="currentColor" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M2 14l4 4h3l3-3M22 14l-4 4h-3l-3-3" fill="none" stroke="currentColor" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+    <!-- No/Block/Prohibited -->
+    <symbol id="icon-block" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+      <path d="M5 19L19 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    </symbol>
+    <!-- Sparkle/Magic -->
+    <symbol id="icon-sparkle" viewBox="0 0 24 24">
+      <path d="M12 2l2 6 6 2-6 2-2 6-2-6-6-2 6-2 2-6z" fill="none" stroke="currentColor" stroke-width="1.5"
+        stroke-linejoin="round" />
+      <circle cx="19" cy="5" r="1.5" fill="currentColor" />
+      <circle cx="5" cy="19" r="1" fill="currentColor" />
+    </symbol>
+    <!-- Lock/Secure -->
+    <symbol id="icon-lock" viewBox="0 0 24 24">
+      <rect x="5" y="11" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" />
+      <path d="M8 11V7a4 4 0 018 0v4" fill="none" stroke="currentColor" stroke-width="1.5" />
+      <circle cx="12" cy="16" r="1.5" fill="currentColor" />
+    </symbol>
+    <!-- Shield/Secure -->
+    <symbol id="icon-secure" viewBox="0 0 24 24">
+      <path d="M12 2L4 6v5c0 5.5 3.5 10 8 11 4.5-1 8-5.5 8-11V6l-8-4z" fill="none" stroke="currentColor"
+        stroke-width="1.5" />
+      <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+    <!-- Bank/Finance -->
+    <symbol id="icon-bank" viewBox="0 0 24 24">
+      <path d="M3 21h18M4 17h16M12 3l9 6H3l9-6z" fill="none" stroke="currentColor" stroke-width="1.5"
+        stroke-linejoin="round" />
+      <path d="M6 11v6M10 11v6M14 11v6M18 11v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+    </symbol>
+    <!-- Scale/Justice -->
+    <symbol id="icon-scale" viewBox="0 0 24 24">
+      <path d="M12 3v18M5 7l7-4 7 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+        stroke-linejoin="round" />
+      <path d="M3 11l2-4 2 4a2 2 0 01-4 0zM17 11l2-4 2 4a2 2 0 01-4 0z" fill="none" stroke="currentColor"
+        stroke-width="1.5" />
+      <path d="M8 21h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+    </symbol>
+    <!-- Medical/Health -->
+    <symbol id="icon-medical" viewBox="0 0 24 24">
+      <rect x="4" y="4" width="16" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" />
+      <path d="M9 12h6M12 9v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    </symbol>
+    <!-- Shield Alt -->
+    <symbol id="icon-shield" viewBox="0 0 24 24">
+      <path d="M12 2L4 6v5c0 5.5 3.5 10 8 11 4.5-1 8-5.5 8-11V6l-8-4z" fill="none" stroke="currentColor"
+        stroke-width="1.5" />
+      <path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    </symbol>
+    <!-- Briefcase/Business -->
+    <symbol id="icon-briefcase" viewBox="0 0 24 24">
+      <rect x="2" y="7" width="20" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" />
+      <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2M12 12v3M2 12h20" fill="none" stroke="currentColor"
+        stroke-width="1.5" />
+    </symbol>
+    <!-- Chart/Analytics -->
+    <symbol id="icon-chart" viewBox="0 0 24 24">
+      <path d="M4 20h16M8 16V10M12 16V4M16 16V8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <circle cx="8" cy="10" r="1.5" fill="currentColor" />
+      <circle cx="12" cy="4" r="1.5" fill="currentColor" />
+      <circle cx="16" cy="8" r="1.5" fill="currentColor" />
+    </symbol>
+    <!-- Write/Edit/Pen -->
+    <symbol id="icon-pen" viewBox="0 0 24 24">
+      <path d="M16 3l5 5L8 21H3v-5L16 3z" fill="none" stroke="currentColor" stroke-width="1.5"
+        stroke-linejoin="round" />
+      <path d="M14 5l5 5M3 21l3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+    </symbol>
+    <!-- Arrow Right -->
+    <symbol id="icon-arrow" viewBox="0 0 24 24">
+      <path d="M4 12h16M14 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round" />
+    </symbol>
+    <!-- Money/Currency -->
+    <symbol id="icon-money" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+      <path d="M12 6v12M8 10h6a2 2 0 010 4H8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+        stroke-linejoin="round" />
+    </symbol>
+    <!-- Fingerprint/Identity -->
+    <symbol id="icon-fingerprint" viewBox="0 0 24 24">
+      <path d="M12 10v4M8 12c0-2.2 1.8-4 4-4s4 1.8 4 4v2c0 3-1.5 5-4 5s-4-2-4-5" fill="none" stroke="currentColor"
+        stroke-width="1.5" stroke-linecap="round" />
+      <path d="M4 14c0-4.4 3.6-8 8-8s8 3.6 8 8v1" fill="none" stroke="currentColor" stroke-width="1.5"
+        stroke-linecap="round" />
+      <path d="M12 2c5.5 0 10 4.5 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+    </symbol>
+    <!-- Key/Access -->
+    <symbol id="icon-key" viewBox="0 0 24 24">
+      <circle cx="8" cy="8" r="5" fill="none" stroke="currentColor" stroke-width="1.5" />
+      <path d="M12 12l9 9M18 18l3 3M18 21l3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+    </symbol>
+  </svg>
+
+  <!-- Background Animation -->
+  <div class="bg-animation"></div>
+  <div class="grid-overlay"></div>
+  <div class="cursor-glow"></div>
+  <div class="scroll-progress" id="scroll-progress"></div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="container nav-container">
+      <a href="#" class="nav-logo">
+        <img src="logo.png" alt="HumanLayer" class="nav-logo-img">
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-label="Open menu" aria-controls="nav-links">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-links" id="nav-links">
+        <div class="nav-drawer-header">
+          <div class="nav-drawer-title">AGENT ROUTING</div>
+          <div class="nav-drawer-status"><span class="status-dot"></span>Connected to HumanLayer</div>
+        </div>
+        <div class="nav-signal" aria-hidden="true"></div>
+        <div class="nav-scanline" aria-hidden="true"></div>
+        <a href="#problem">Problem</a>
+        <a href="#solution">Solution</a>
+        <a href="#usecases">Use cases</a>
+        <a href="#api">API</a>
+        <a href="apply-en.html">Become a decision maker</a>
+        <a href="faq-en.html">FAQ</a>
+        <a href="#pricing">Pricing</a>
+                <div class="nav-lang"><a href="index.html">FR</a><span>·</span><a href="index-en.html" class="active">EN</a></div>
+        <a href="#" class="btn btn-primary">Request a demo</a>
+      </div>
+    </div>
+    <div class="nav-backdrop" aria-hidden="true"></div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero theme-ink" id="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          <span>Decision infrastructure for the AI era</span>
+        </div>
+
+        <h1>The <span class="highlight gradient-text-animated">decision authority</span> layer for AI agents</h1>
+
+        <p class="hero-subtitle">AI agents can analyze and prepare.</p>
+
+        <ul class="hero-points">
+          <li>They can't sign, attest, or assume legal responsibility.</li>
+          <li class="nowrap-desktop">HumanLayer enables an AI agent to obtain a qualified, documented, enforceable human decision — via an API.</li>
+        </ul>
+
+        <div class="hero-ctas">
+          <a href="#" class="btn btn-primary">
+            <svg class="hl-icon">
+              <use href="#icon-target" />
+            </svg> Request a demo
+          </a>
+          <a href="#api" class="btn btn-secondary">
+            <svg class="hl-icon">
+              <use href="#icon-docs" />
+            </svg> Read the API docs
+          </a>
+        </div>
+
+        <div class="hero-metrics">
+          <div class="metric">
+            <span class="metric-value">1.3B</span>
+            <span class="metric-label">AI agents in use (proj. 2028)</span>
+          </div>
+          <div class="metric">
+            <span class="metric-value">$307B</span>
+            <span class="metric-label">AI software revenue (USD, 2027)</span>
+          </div>
+          <div class="metric">
+            <span class="metric-value">$143B</span>
+            <span class="metric-label">GenAI spending (USD, 2027)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Visual -->
+      <div class="hero-visual">
+        <div class="orbit-container">
+          <div class="orbit-center">
+            <img src="logo-icon.png" alt="HumanLayer" class="orbit-logo">
+          </div>
+          <div class="orbit-ring">
+            <div class="orbit-dot" style="top: 0; left: 50%; transform: translate(-50%, -50%);"></div>
+          </div>
+          <div class="orbit-ring">
+            <div class="orbit-dot" style="top: 50%; right: 0; transform: translate(50%, -50%);"></div>
+          </div>
+          <div class="orbit-ring">
+            <div class="orbit-dot" style="bottom: 0; left: 50%; transform: translate(-50%, 50%);"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1-Minute Summary -->
+  <section class="summary-60s">
+    <div class="container">
+      <div class="summary-content reveal">
+        <div class="summary-header">
+          <span class="summary-badge"><svg class="hl-icon">
+              <use href="#icon-timer" />
+            </svg> HumanLayer in 60 seconds</span>
+        </div>
+        <div class="summary-steps">
+          <div class="summary-step">
+            <span class="step-num">1</span>
+            <p>AI agents <strong>prepare</strong> decisions</p>
+          </div>
+          <div class="summary-arrow">→</div>
+          <div class="summary-step">
+            <span class="step-num">2</span>
+            <p>Authorized humans <strong>validate them</strong></p>
+          </div>
+          <div class="summary-arrow">→</div>
+          <div class="summary-step">
+            <span class="step-num">3</span>
+            <p>HumanLayer <strong>orchestrates and logs</strong> and guarantees the deadline</p>
+          </div>
+        </div>
+        <div class="summary-result">
+          <svg class="hl-icon">
+            <use href="#icon-arrow" />
+          </svg> <strong>Result</strong>: autonomy without loss of accountability.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Promise Section -->
+  <section class="promise" id="promise">
+    <div class="container">
+      <p class="promise-intro reveal">
+        When AI reaches the <strong>regulatory, legal, or ethical boundary</strong>, HumanLayer takes over.
+      </p>
+
+      <div class="promise-grid reveal-stagger">
+        <div class="glass-card promise-card">
+          <div class="icon"><svg class="hl-icon">
+              <use href="#icon-checkmark" />
+            </svg></div>
+          <h4>Verified decision makers</h4>
+          <p>Qualifications and authorizations verified</p>
+        </div>
+
+        <div class="glass-card promise-card">
+          <div class="icon"><svg class="hl-icon">
+              <use href="#icon-clipboard" />
+            </svg></div>
+          <h4>Structured decisions</h4>
+          <p>Standard format, required fields</p>
+        </div>
+
+        <div class="glass-card promise-card">
+          <div class="icon"><svg class="hl-icon">
+              <use href="#icon-search" />
+            </svg></div>
+          <h4>Full audit trail</h4>
+          <p>AI context, decision, timestamp, identity</p>
+        </div>
+
+        <div class="glass-card promise-card">
+          <div class="icon"><svg class="hl-icon">
+              <use href="#icon-bolt" />
+            </svg></div>
+          <h4>Response SLA</h4>
+          <p>Minutes, not days</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section - Social Proof -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid reveal-stagger">
+        <div class="stat-item glass-card">
+          <div class="stat-number" data-count="1.3" data-precision="1" data-suffix="B">0B</div>
+          <div class="stat-label">AI agents in use (proj. 2028)</div>
+        </div>
+        <div class="stat-item glass-card">
+          <div class="stat-number" data-count="307" data-prefix="$" data-suffix="B">0B</div>
+          <div class="stat-label">AI software revenue (proj. 2027)</div>
+        </div>
+        <div class="stat-item glass-card">
+          <div class="stat-number" data-count="143" data-prefix="$" data-suffix="B">0B</div>
+          <div class="stat-label">GenAI spending (proj. 2027)</div>
+        </div>
+        <div class="stat-item glass-card">
+          <div class="stat-number" data-count="423" data-prefix="$" data-suffix="B">0B</div>
+          <div class="stat-label">Total AI spending (proj. 2027)</div>
+        </div>
+      </div>
+      <p class="stats-note">Projections 2027–2028. Amounts in USD. Sources: IDC (AI software revenue, GenAI/AI spending); Microsoft citing IDC (AI agents).</p>
+    </div>
+  </section>
+
+  <!-- Wave Separator -->
+  <div class="wave-separator"></div>
+
+  <!-- Problem Section -->
+  <section class="problem" id="problem">
+    <div class="container">
+      <div class="problem-content">
+        <div class="problem-text reveal">
+          <h2>AI agents fail at the same point: <span class="highlight">the accountability moment</span></h2>
+
+          <p class="problem-intro">Today, AI can automate 80–95% of a workflow… But as soon as you need to:</p>
+
+          <ul class="problem-list">
+            <li>validate compliance</li>
+            <li>rule on a gray area</li>
+            <li>approve a spend</li>
+            <li>sign an act</li>
+            <li>issue an enforceable decision</li>
+          </ul>
+
+          <div class="problem-conclusion">
+            <p><strong>…everything goes back "out of system," manually, without SLA or traceability.</strong></p>
+            <p style="margin-top: 12px;">The brake on enterprise adoption isn't execution. <br><strong>It's the lack of authority.</strong></p>
+          </div>
+        </div>
+
+        <div class="problem-visual reveal">
+          <div class="broken-flow">
+            <div class="flow-step success">
+              <div class="number">1</div>
+              <span>Data collection</span>
+            </div>
+            <div class="flow-connector"></div>
+            <div class="flow-step success">
+              <div class="number">2</div>
+              <span>AI analysis</span>
+            </div>
+            <div class="flow-connector"></div>
+            <div class="flow-step success">
+              <div class="number">3</div>
+              <span>Case preparation</span>
+            </div>
+            <div class="flow-connector broken"></div>
+            <div class="flow-step blocked">
+              <div class="number">?</div>
+              <span>Decision & Accountability</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solution Section -->
+  <section class="solution" id="solution">
+    <div class="container">
+      <div class="section-title reveal">
+        <span class="label">The solution</span>
+        <h2>HumanLayer: real-time human decisions, API-native</h2>
+        <p>HumanLayer orchestrates human decisioning exactly where it’s indispensable</p>
+      </div>
+
+      <div class="solution-flow reveal-stagger">
+        <div class="solution-step">
+          <div class="step-icon">
+            <svg class="hl-icon hl-lg">
+              <use href="#icon-robot" />
+            </svg>
+            <span class="step-number">1</span>
+          </div>
+          <div class="step-connector"></div>
+          <h4>The AI agent submits</h4>
+          <p>A complete case with context and supporting documents</p>
+        </div>
+
+        <div class="solution-step">
+          <div class="step-icon">
+            <svg class="hl-icon hl-lg">
+              <use href="#icon-arrow" />
+            </svg>
+            <span class="step-number">2</span>
+          </div>
+          <div class="step-connector"></div>
+          <h4>HumanLayer routes</h4>
+          <p>To a qualified decision maker based on required criteria</p>
+        </div>
+
+        <div class="solution-step">
+          <div class="step-icon">
+            <svg class="hl-icon hl-lg">
+              <use href="#icon-user" />
+            </svg>
+            <span class="step-number">3</span>
+          </div>
+          <div class="step-connector"></div>
+          <h4>The decision maker decides</h4>
+          <p>Structured decision with comments and justification</p>
+        </div>
+
+        <div class="solution-step">
+          <div class="step-icon">
+            <svg class="hl-icon hl-lg">
+              <use href="#icon-check" />
+            </svg>
+            <span class="step-number">4</span>
+          </div>
+          <h4>Back to the agent</h4>
+          <p>Decision logged, auditable, ready to execute</p>
+        </div>
+      </div>
+
+      <div class="solution-result reveal">
+        <p><svg class="hl-icon">
+            <use href="#icon-target" />
+          </svg> <strong>Result</strong>: AI can complete the workflow end-to-end without breaking compliance.</p>
+      </div>
+
+      <!-- Design partner signal -->
+      <div class="design-partner reveal">
+        <svg class="hl-icon">
+          <use href="#icon-handshake" />
+        </svg> Designed with <strong>Legal</strong>, <strong>Risk</strong>, and <strong>Compliance</strong> teams.
+      </div>
+    </div>
+  </section>
+
+  <!-- Responsibility Block -->
+  <section class="responsibility theme-ink">
+    <div class="container">
+      <div class="responsibility-content reveal">
+        <div class="responsibility-header">
+          <span class="label">Who decides?</span>
+          <h2>HumanLayer does not automate the decision</h2>
+          <p>It <strong>orchestrates the intervention</strong> of an identified, qualified, responsible human decision maker.</p>
+        </div>
+        <div class="responsibility-grid">
+          <div class="responsibility-pill">
+            <svg class="hl-icon pill-icon">
+              <use href="#icon-user" />
+            </svg>
+            <span>Assigned to a real person</span>
+          </div>
+          <div class="responsibility-pill">
+            <svg class="hl-icon pill-icon">
+              <use href="#icon-timer" />
+            </svg>
+            <span>Timestamped</span>
+          </div>
+          <div class="responsibility-pill">
+            <svg class="hl-icon pill-icon">
+              <use href="#icon-pen" />
+            </svg>
+            <span>Justified</span>
+          </div>
+          <div class="responsibility-pill">
+            <svg class="hl-icon pill-icon">
+              <use href="#icon-search" />
+            </svg>
+            <span>Audited</span>
+          </div>
+        </div>
+
+        <!-- Anti-pattern warning -->
+        <div class="anti-pattern">
+          <svg class="hl-icon hl-lg anti-pattern-icon">
+            <use href="#icon-block" />
+          </svg>
+          <div class="anti-pattern-text">
+            <strong>What HumanLayer prevents</strong>
+            <p>Automating decisions without an identified human accountable for them.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Validation Levels Section -->
+  <section class="levels" id="levels">
+    <div class="container">
+      <div class="section-title reveal">
+        <span class="label">Architecture</span>
+        <h2>The 3 validation levels</h2>
+        <p>Each level maps to a type of responsibility and expertise</p>
+      </div>
+
+      <div class="levels-grid reveal-stagger">
+        <div class="glass-card level-card level-1">
+          <div class="level-header">
+            <div class="level-number">1</div>
+            <h3>Compliance validation</h3>
+          </div>
+          <p>Structured checks of rules and policies.</p>
+          <div class="level-examples">
+            <h5>Examples</h5>
+            <ul>
+              <li>KYC/AML</li>
+              <li>GDPR</li>
+              <li>Spend approval</li>
+              <li>Internal policy compliance</li>
+            </ul>
+          </div>
+          <div class="level-value"><svg class="hl-icon">
+              <use href="#icon-sparkle" />
+            </svg> Value: speed + accountability + audit</div>
+        </div>
+
+        <div class="glass-card level-card level-2">
+          <div class="level-header">
+            <div class="level-number">2</div>
+            <h3>Contextual judgment</h3>
+          </div>
+          <p>When rules aren't enough, an expert decides.</p>
+          <div class="level-examples">
+            <h5>Examples</h5>
+            <ul>
+              <li>Is a contract clause acceptable?</li>
+              <li>Process exception?</li>
+              <li>An anomaly requiring escalation?</li>
+            </ul>
+          </div>
+          <div class="level-value"><svg class="hl-icon">
+              <use href="#icon-brain" />
+            </svg> Value: you buy judgment, not time</div>
+        </div>
+
+        <div class="glass-card level-card level-3">
+          <div class="level-header">
+            <div class="level-number">3</div>
+            <h3>Decision authority</h3>
+          </div>
+          <p>Final act reserved for an authorized person.</p>
+          <div class="level-examples">
+            <h5>Examples</h5>
+            <ul>
+              <li>Qualified signature</li>
+              <li>Credit decision</li>
+              <li>Medical validation</li>
+              <li>Regulatory approval</li>
+            </ul>
+          </div>
+          <div class="level-value"><svg class="hl-icon">
+              <use href="#icon-key" />
+            </svg> Value: assumed accountability + strong barrier to entry</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases Section -->
+  <section class="usecases" id="usecases">
+    <div class="container">
+      <div class="section-title reveal">
+        <span class="label">Applications</span>
+        <h2>Use cases</h2>
+        <p>HumanLayer integrates into every sector where accountability matters</p>
+      </div>
+
+      <div class="usecases-grid reveal-stagger">
+        <div class="glass-card usecase-card">
+          <div class="usecase-icon"><svg class="hl-icon hl-xl">
+              <use href="#icon-bank" />
+            </svg></div>
+          <div class="usecase-content">
+            <h4>Credit & Risk</h4>
+            <p class="usecase-scenario">"AI analyzed 200 credit files. For this customer, the score is in a gray zone (480). Approve the $50,000 loan?"</p>
+            <p>The AI prepares the complete file with history and recommendation; a certified analyst decides under a 2-hour SLA.</p>
+            <span class="usecase-tag">Enforceable decision + audit trail</span>
+          </div>
+        </div>
+
+        <div class="glass-card usecase-card">
+          <div class="usecase-icon"><svg class="hl-icon hl-xl">
+              <use href="#icon-scale" />
+            </svg></div>
+          <div class="usecase-content">
+            <h4>Legal & M&A</h4>
+            <p class="usecase-scenario">"Out of 500 contracts analyzed, 12 include a change-of-control clause. Is clause §4.2.b acceptable?"</p>
+            <p>The AI flags critical points; a qualified lawyer validates each risky clause with comments.
+            </p>
+            <span class="usecase-tag">Qualified legal opinion</span>
+          </div>
+        </div>
+
+        <div class="glass-card usecase-card">
+          <div class="usecase-icon"><svg class="hl-icon hl-xl">
+              <use href="#icon-medical" />
+            </svg></div>
+          <div class="usecase-content">
+            <h4>Health & Diagnostics</h4>
+            <p class="usecase-scenario">"The algorithm detects an anomaly on patient #4521's MRI. Tumor probability: 78%. Confirm the diagnosis?"</p>
+            <p>The AI pre-analyzes imaging; an authorized radiologist validates/adjusts the diagnosis within 30 minutes.</p>
+            <span class="usecase-tag">Assumed medical accountability</span>
+          </div>
+        </div>
+
+        <div class="glass-card usecase-card">
+          <div class="usecase-icon"><svg class="hl-icon hl-xl">
+              <use href="#icon-clipboard" />
+            </svg></div>
+          <div class="usecase-content">
+            <h4>HR & Hiring</h4>
+            <p class="usecase-scenario">"3 candidates shortlisted by AI. Candidate B has a 2-year gap on their resume. Process exception?"</p>
+            <p>The AI pre-screens and prepares files; an HR director validates sensitive decisions with justification.</p>
+            <span class="usecase-tag">Documented non-discrimination</span>
+          </div>
+        </div>
+
+        <div class="glass-card usecase-card">
+          <div class="usecase-icon"><svg class="hl-icon hl-xl">
+              <use href="#icon-secure" />
+            </svg></div>
+          <div class="usecase-content">
+            <h4>Industrial Compliance</h4>
+            <p class="usecase-scenario">"Batch #7823 shows a 0.3% deviation from spec. Below the critical threshold but above tolerance. Release the batch?"</p>
+            <p>The AI detects deviations; an authorized quality manager decides on release.</p>
+            <span class="usecase-tag">FDA/ISO traceability</span>
+          </div>
+        </div>
+
+        <div class="glass-card usecase-card">
+          <div class="usecase-icon"><svg class="hl-icon hl-xl">
+              <use href="#icon-shield" />
+            </svg></div>
+          <div class="usecase-content">
+            <h4>Insurance & Claims</h4>
+            <p class="usecase-scenario">"Auto claim: photos analyzed, statements cross-checked. Timing inconsistency detected. Fraud?"</p>
+            <p>The AI flags suspicious cases; a mandated expert decides on compensation.</p>
+            <span class="usecase-tag">Documented, contestable decision</span>
+          </div>
+        </div>
+
+        <div class="glass-card usecase-card">
+          <div class="usecase-icon"><svg class="hl-icon hl-xl">
+              <use href="#icon-briefcase" />
+            </svg></div>
+          <div class="usecase-content">
+            <h4>Spend & Procurement</h4>
+            <p class="usecase-scenario">"SaaS purchase request: $45,000/year. Budget not planned. 3 quotes obtained. Budget exception?"</p>
+            <p>The AI validates compliance; a CFO approves exceptions according to policy.</p>
+            <span class="usecase-tag">Internal control + speed</span>
+          </div>
+        </div>
+
+        <div class="glass-card usecase-card">
+          <div class="usecase-icon"><svg class="hl-icon hl-xl">
+              <use href="#icon-lock" />
+            </svg></div>
+          <div class="usecase-content">
+            <h4>Cybersecurity & Access</h4>
+            <p class="usecase-scenario">"Admin access request to prod server. Justification: "urgent debug". User: junior dev, 10:30pm. Approve?"</p>
+            <p>The AI evaluates risk and context; a CISO validates sensitive access in real time.</p>
+            <span class="usecase-tag">Zero-trust + audit complet</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why HumanLayer Section -->
+  <section class="why" id="why">
+    <div class="container">
+      <div class="section-title reveal">
+        <span class="label">Differentiation</span>
+        <h2>Why HumanLayer</h2>
+      </div>
+
+      <p class="why-intro reveal">
+        This is not a task marketplace. <br>
+        <strong>HumanLayer is an accountability infrastructure.</strong>
+      </p>
+
+      <div class="why-grid reveal-stagger">
+        <div class="glass-card why-card">
+          <div class="why-icon"><svg class="hl-icon hl-lg">
+              <use href="#icon-shield" />
+            </svg></div>
+          <div class="why-content">
+            <h4>Verified Authority Network</h4>
+            <p>Qualified decision makers, traceable accreditations</p>
+          </div>
+        </div>
+
+        <div class="glass-card why-card">
+          <div class="why-icon"><svg class="hl-icon hl-lg">
+              <use href="#icon-bolt" />
+            </svg></div>
+          <div class="why-content">
+            <h4>Decision-as-an-API</h4>
+            <p>Endpoints, formats, agent integrations</p>
+          </div>
+        </div>
+
+        <div class="glass-card why-card">
+          <div class="why-icon"><svg class="hl-icon hl-lg">
+              <use href="#icon-chart" />
+            </svg></div>
+          <div class="why-content">
+            <h4>Audit by Design</h4>
+            <p>Evidence, logs, context, versioning</p>
+          </div>
+        </div>
+
+        <div class="glass-card why-card">
+          <div class="why-icon"><svg class="hl-icon hl-lg">
+              <use href="#icon-timer" />
+            </svg></div>
+          <div class="why-content">
+            <h4>Guaranteed SLAs</h4>
+            <p>Guaranteed timelines, escalations, fallback</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Section -->
+  <section class="trust" id="trust">
+    <div class="container">
+      <div class="section-title reveal">
+        <span class="label">Security</span>
+        <h2>Trust & compliance</h2>
+        <p>Built for Legal, Risk, and Compliance teams</p>
+      </div>
+
+      <div class="trust-grid reveal-stagger">
+        <div class="trust-item">
+          <div class="icon"><svg class="hl-icon">
+              <use href="#icon-fingerprint" />
+            </svg></div>
+          <h4>Verified identity</h4>
+          <p>Qualifications and authorizations verified</p>
+        </div>
+
+        <div class="trust-item">
+          <div class="icon"><svg class="hl-icon">
+              <use href="#icon-clipboard" />
+            </svg></div>
+          <h4>Audit log</h4>
+          <p>Exportable, full chain of evidence</p>
+        </div>
+
+        <div class="trust-item">
+          <div class="icon"><svg class="hl-icon">
+              <use href="#icon-shield" />
+            </svg></div>
+          <h4>Advanced policies</h4>
+          <p>Red flags, refus automatique, escalades</p>
+        </div>
+
+        <div class="trust-item">
+          <div class="icon"><svg class="hl-icon">
+              <use href="#icon-lock" />
+            </svg></div>
+          <h4>Enhanced security</h4>
+          <p>Access control, segmentation</p>
+        </div>
+
+        <div class="trust-item">
+          <div class="icon"><svg class="hl-icon">
+              <use href="#icon-chart" />
+            </svg></div>
+          <h4>Data minimization</h4>
+          <p>Collection limited to what is strictly necessary</p>
+        </div>
+
+        <div class="trust-item">
+          <div class="icon"><svg class="hl-icon">
+              <use href="#icon-check" />
+            </svg></div>
+          <h4>Certifications</h4>
+          <p>SOC2, ISO, RGPD ready</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- API Section -->
+  <section class="api" id="api">
+    <div class="container">
+      <div class="section-title reveal">
+        <span class="label">Developers</span>
+        <h2>HumanLayer Systems API</h2>
+        <p>HumanLayer integrates like Stripe or Twilio — but for decisions</p>
+      </div>
+
+      <div class="api-content">
+        <div class="reveal">
+          <div class="api-endpoints">
+            <div class="endpoint">
+              <span class="method post">POST</span>
+              <span class="endpoint-path">/decisions</span>
+              <span class="endpoint-desc">Submit a case</span>
+            </div>
+            <div class="endpoint">
+              <span class="method get">GET</span>
+              <span class="endpoint-path">/decisions/{id}</span>
+              <span class="endpoint-desc">Status & SLA</span>
+            </div>
+            <div class="endpoint">
+              <span class="method post">POST</span>
+              <span class="endpoint-path">/escalations</span>
+              <span class="endpoint-desc">Escalation / second opinion</span>
+            </div>
+            <div class="endpoint">
+              <span class="method post">POST</span>
+              <span class="endpoint-path">/proofs</span>
+              <span class="endpoint-desc">Evidence & attestations</span>
+            </div>
+          </div>
+
+          <h4 style="margin-bottom: 12px;">Webhooks</h4>
+          <div class="api-features">
+            <span class="api-feature">decision.completed</span>
+            <span class="api-feature">decision.rejected</span>
+            <span class="api-feature">sla.breached</span>
+          </div>
+
+          <h4 style="margin-top: 24px; margin-bottom: 12px;">SDKs & Connectors</h4>
+          <div class="api-features">
+            <span class="api-feature">Python</span>
+            <span class="api-feature">TypeScript</span>
+            <span class="api-feature">MCP Tools</span>
+            <span class="api-feature">Agent Frameworks</span>
+          </div>
+
+          <a href="#" class="btn btn-primary" style="margin-top: 32px;">View the API docs →</a>
+        </div>
+
+        <div class="code-block reveal">
+          <div class="code-header">
+            <span class="code-dot"></span>
+            <span class="code-dot"></span>
+            <span class="code-dot"></span>
+            <span class="code-title">example.py</span>
+          </div>
+          <div class="code-content">
+            <span class="comment"># Submit a decision via HumanLayer</span>
+            <span class="keyword">import</span> humanlayer
+
+            client = humanlayer.<span class="method">Client</span>(api_key=<span class="string">"hl_..."</span>)
+
+            <span class="comment"># Create a decision request</span>
+            decision = client.decisions.<span class="method">create</span>(
+            <span class="property">type</span>=<span class="string">"compliance_check"</span>,
+            <span class="property">level</span>=<span class="string">"conformity"</span>,
+            <span class="property">context</span>={
+            <span class="string">"document_id"</span>: <span class="string">"doc_abc123"</span>,
+            <span class="string">"ai_analysis"</span>: analysis_result,
+            <span class="string">"urgency"</span>: <span class="string">"standard"</span>
+            },
+            <span class="property">sla_minutes</span>=<span class="string">30</span>
+            )
+
+            <span class="comment"># Wait for the decision</span>
+            result = decision.<span class="method">wait_for_completion</span>()
+
+            <span class="keyword">if</span> result.approved:
+            <span class="comment"># Continue the workflow</span>
+            process_approval(result.decision)
+          </div>
+        </div>
+
+        <!-- Second code example: rejection/escalation -->
+        <div class="code-block reveal">
+          <div class="code-header">
+            <span class="code-dot"></span>
+            <span class="code-dot"></span>
+            <span class="code-dot"></span>
+            <span class="code-title">handle_edge_cases.py</span>
+          </div>
+          <div class="code-content">
+            <span class="comment"># Handle rejections and escalations</span>
+            result = decision.<span class="method">wait_for_completion</span>()
+
+            <span class="keyword">if</span> result.status == <span class="string">"rejected"</span>:
+            <span class="comment"># Decision rejected by the decision maker</span>
+            log_rejection(
+            <span class="property">reason</span>=result.rejection_reason,
+            <span class="property">decided_by</span>=result.decider_id,
+            <span class="property">timestamp</span>=result.decided_at
+            )
+            notify_requester(result)
+
+            <span class="keyword">elif</span> result.status == <span class="string">"sla_breached"</span>:
+            <span class="comment"># SLA breached → automatic escalation</span>
+            escalation = client.escalations.<span class="method">create</span>(
+            <span class="property">decision_id</span>=decision.id,
+            <span class="property">reason</span>=<span class="string">"sla_timeout"</span>,
+            <span class="property">escalate_to</span>=<span class="string">"senior_reviewer"</span>
+            )
+            result = escalation.<span class="method">wait_for_completion</span>()
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Become a Decision Maker CTA -->
+  <section class="apply-cta" id="apply">
+    <div class="container">
+      <div class="apply-cta-content reveal">
+        <div class="apply-cta-text">
+          <span class="label">Join the network</span>
+          <h2>Are you an expert? Become a HumanLayer decision maker</h2>
+          <p>Lawyer, physician, analyst, CISO... Monetize your decision authority by validating AI agents' requests. Full flexibility, paid per decision.</p>
+        </div>
+        <div class="apply-cta-action">
+          <a href="apply-en.html" class="btn btn-primary btn-large">
+            <svg class="hl-icon">
+              <use href="#icon-user" />
+            </svg> Apply as a decision maker
+          </a>
+          <p class="apply-cta-note">Application reviewed within 48 hours</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Pricing Section -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="section-title reveal">
+        <span class="label">Pricing</span>
+        <h2>Decision-based pricing</h2>
+        <p>Not hourly — pay for value, not time</p>
+      </div>
+
+      <div class="pricing-grid reveal-stagger">
+        <div class="glass-card pricing-card">
+          <div class="pricing-header">
+            <h3>Compliance</h3>
+            <p>Validation of rules and policies</p>
+          </div>
+          <div class="pricing-price">
+            <span class="currency">$</span>
+            <span class="amount">15</span>
+            <span class="unit">/ decision</span>
+          </div>
+          <ul class="pricing-features">
+            <li>Structured verification</li>
+            <li>30-minute SLA</li>
+            <li>Full audit trail</li>
+            <li>Verified decision makers</li>
+          </ul>
+          <a href="#" class="btn btn-secondary">Get started</a>
+        </div>
+
+        <div class="glass-card pricing-card featured">
+          <div class="pricing-header">
+            <h3>Expert judgment</h3>
+            <p>When rules are not enough</p>
+          </div>
+          <div class="pricing-price">
+            <span class="currency">$</span>
+            <span class="amount">80</span>
+            <span class="unit">/ decision</span>
+          </div>
+          <ul class="pricing-features">
+            <li>Sector expertise</li>
+            <li>2-hour SLA</li>
+            <li>Detailed comments</li>
+            <li>Second opinion available</li>
+          </ul>
+          <a href="#" class="btn btn-primary">Get started</a>
+        </div>
+
+        <div class="glass-card pricing-card">
+          <div class="pricing-header">
+            <h3>Authorized authority</h3>
+            <p>Final act by a qualified person</p>
+          </div>
+          <div class="pricing-price">
+            <span class="currency">$</span>
+            <span class="amount">200</span>
+            <span class="unit">/ decision</span>
+          </div>
+          <ul class="pricing-features">
+            <li>Qualified signature</li>
+            <li>Custom SLA</li>
+            <li>Assumed accountability</li>
+            <li>Complete certification</li>
+          </ul>
+          <a href="#" class="btn btn-secondary">Get started</a>
+        </div>
+      </div>
+
+      <div class="pricing-enterprise reveal">
+        <p><strong>Enterprise options</strong>: premium SLAs, dedicated pools, governance, integrations, reporting.</p>
+        <a href="#" class="btn btn-primary">Get pricing →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA Section -->
+  <section class="final-cta theme-ink" id="cta">
+    <div class="container">
+      <div class="final-cta-content reveal">
+        <h2>Deploy AI agents… without losing control</h2>
+        <p>HumanLayer makes autonomy auditable, accountable, and enforceable.</p>
+
+        <!-- Vision statement -->
+        <p class="vision-statement">
+          <em>As AI advances, HumanLayer defines <strong>when not to automate</strong>.</em>
+        </p>
+
+        <div class="cta-buttons">
+          <a href="#" class="btn btn-primary">Request a demo</a>
+          <a href="#" class="btn btn-secondary">Talk to a compliance expert</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <span class="footer-logo">© HumanLayer Systems Inc.</span>
+        </div>
+        <div class="footer-links">
+          <a href="#">Security</a>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+
+</html>

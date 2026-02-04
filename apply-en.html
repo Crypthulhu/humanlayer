@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Become a decision maker — HumanLayer</title>
+    <meta name="description"
+        content="Join the HumanLayer network. Commit your professional authority as a qualified decision maker for AI agents.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="icons.css">
+    <style>
+        /* Apply Page Specific Styles */
+        .apply-meaning-section {
+            padding: 90px 0;
+            background: linear-gradient(180deg, rgba(201, 162, 107, 0.08), transparent 60%);
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .meaning-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .meaning-content h3 {
+            font-size: 1.75rem;
+            margin-bottom: 24px;
+        }
+
+        .meaning-intro {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.8;
+        }
+
+        .meaning-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .meaning-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px 16px;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            background: var(--bg-glass);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: var(--radius-md);
+            transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+        }
+
+        .meaning-list li:hover {
+            transform: translateY(-4px);
+            border-color: rgba(192, 57, 43, 0.2);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+        }
+
+        .meaning-list li::before {
+            content: "•";
+            color: var(--primary);
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        /* Responsibility Section */
+        .responsibility-section {
+            padding: 90px 0;
+            background: var(--gradient-ink);
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .responsibility-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .responsibility-intro {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            line-height: 1.8;
+        }
+
+        .responsibility-grid {
+            display: grid;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .responsibility-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(192, 57, 43, 0.12);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.08);
+            transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+        }
+
+        .responsibility-item:hover {
+            transform: translateY(-4px);
+            border-color: rgba(192, 57, 43, 0.25);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .responsibility-item::before {
+            content: "✓";
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .responsibility-footer {
+            text-align: center;
+            padding-top: 24px;
+            border-top: 1px solid rgba(192, 57, 43, 0.15);
+        }
+
+        .responsibility-footer p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .responsibility-footer strong {
+            color: var(--primary);
+        }
+
+        /* What it's not section */
+        .not-section {
+            padding: 70px 0;
+            background: linear-gradient(180deg, rgba(192, 57, 43, 0.04), transparent 80%);
+        }
+
+        .not-content {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .not-list {
+            list-style: none;
+            margin: 32px 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .not-list li {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .not-list li::before {
+            content: "✕";
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .not-footer {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.8;
+        }
+
+        .not-footer strong {
+            color: var(--primary);
+        }
+
+        /* Enhanced revenue section */
+        .revenue-examples {
+            margin-top: 32px;
+        }
+
+        .revenue-example {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: var(--radius-md);
+            margin-bottom: 12px;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+            transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+        }
+
+        .revenue-example:hover {
+            transform: translateY(-4px);
+            border-color: rgba(192, 57, 43, 0.25);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .revenue-example-type {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .revenue-example-amount {
+            font-weight: 700;
+            color: var(--primary);
+            font-family: var(--font-display);
+        }
+
+        .revenue-note {
+            margin-top: 24px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- SVG Icons Sprite -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="icon-money" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M12 6v12M8 10h6a2 2 0 010 4H8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </symbol>
+        <symbol id="icon-timer" viewBox="0 0 24 24">
+            <circle cx="12" cy="13" r="9" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M12 9v4l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            <path d="M9 2h6M12 2v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </symbol>
+        <symbol id="icon-target" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="12" cy="12" r="2" fill="currentColor" />
+            <path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </symbol>
+        <symbol id="icon-shield" viewBox="0 0 24 24">
+            <path d="M12 2l8 4v6c0 5.5-3.5 10-8 11-4.5-1-8-5.5-8-11V6l8-4z" fill="none" stroke="currentColor"
+                stroke-width="1.5" stroke-linejoin="round" />
+            <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </symbol>
+        <symbol id="icon-sparkle" viewBox="0 0 24 24">
+            <path d="M12 2l2 6 6 2-6 2-2 6-2-6-6-2 6-2 2-6z" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linejoin="round" />
+            <circle cx="19" cy="5" r="1.5" fill="currentColor" />
+            <circle cx="5" cy="19" r="1" fill="currentColor" />
+        </symbol>
+        <symbol id="icon-chart" viewBox="0 0 24 24">
+            <path d="M4 20h16M8 16V10M12 16V4M16 16V8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            <circle cx="8" cy="10" r="1.5" fill="currentColor" />
+            <circle cx="12" cy="4" r="1.5" fill="currentColor" />
+            <circle cx="16" cy="8" r="1.5" fill="currentColor" />
+        </symbol>
+        <symbol id="icon-check" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M8 12l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </symbol>
+        <symbol id="icon-arrow" viewBox="0 0 24 24">
+            <path d="M4 12h16M14 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </symbol>
+    </svg>
+
+    <!-- Background Animation -->
+    <div class="bg-animation"></div>
+    <div class="grid-overlay"></div>
+    <div class="cursor-glow"></div>
+    <div class="scroll-progress" id="scroll-progress"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="container nav-container">
+            <a href="index-en.html" class="nav-logo">
+                <img src="logo.png" alt="HumanLayer" class="nav-logo-img">
+            </a>
+            <button class="nav-toggle" aria-expanded="false" aria-label="Open menu" aria-controls="nav-links">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <div class="nav-drawer-header">
+                    <div class="nav-drawer-title">AGENT ROUTING</div>
+                    <div class="nav-drawer-status"><span class="status-dot"></span>Connected to HumanLayer</div>
+                </div>
+                <div class="nav-signal" aria-hidden="true"></div>
+                <div class="nav-scanline" aria-hidden="true"></div>
+                <a href="index-en.html#problem">Problem</a>
+                <a href="index-en.html#solution">Solution</a>
+                <a href="index-en.html#usecases">Use cases</a>
+                <a href="index-en.html#api">API</a>
+                <a href="index-en.html#pricing">Pricing</a>
+                <div class="nav-lang"><a href="apply.html">FR</a><span>·</span><a href="apply-en.html" class="active">EN</a></div>
+                <a href="index-en.html" class="btn btn-primary">Request a demo</a>
+            </div>
+        </div>
+        <div class="nav-backdrop" aria-hidden="true"></div>
+    </nav>
+
+    <!-- Hero Section for Apply Page -->
+    <section class="apply-hero theme-ink">
+        <div class="container">
+            <div class="apply-hero-grid">
+                <div class="apply-hero-content reveal">
+                    <div class="hero-badge">
+                        <span class="dot"></span>
+                        <span>Join the decision maker network</span>
+                    </div>
+
+                    <h1>Your expertise doesn't lack demand.<br><span class="highlight gradient-text-animated">It lacks a system.</span></h1>
+
+                    <p class="hero-subtitle apply-hero-subtitle">
+                        HumanLayer enables qualified experts to deliver<br>
+                        <strong>enforceable human decisions</strong><br>
+                        for AI agents operating at scale.
+                    </p>
+
+                    <p class="apply-hero-lede">
+                        You don't sell your time.<br>
+                        You commit your professional authority —<br>
+                        <em>only when it is truly necessary.</em>
+                    </p>
+
+                    <div class="hero-ctas">
+                        <a href="#apply" class="btn btn-primary">
+                            <svg class="hl-icon">
+                                <use href="#icon-arrow" />
+                            </svg> Apply now
+                        </a>
+                        <a href="#process" class="btn btn-secondary">
+                            <svg class="hl-icon">
+                                <use href="#icon-target" />
+                            </svg> See the process
+                        </a>
+                    </div>
+
+                    <p class="apply-hero-note">Applications are automatically evaluated. Qualified profiles are contacted quickly.</p>
+                </div>
+
+                <div class="apply-hero-panel glass-card reveal">
+                    <span class="label">Target profile</span>
+                    <h3>Decision-making experts</h3>
+                    <ul class="apply-hero-list">
+                        <li>Verifiable qualifications and proven experience</li>
+                        <li>Ability to decide within a clear framework</li>
+                        <li>Flexible availability, cases you choose</li>
+                        <li>Full traceability of your decisions</li>
+                    </ul>
+                    <div class="apply-hero-metrics">
+                        <div class="metric">
+                            <span class="metric-value">Up to $300</span>
+                            <span class="metric-label">Per decision</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">Fast</span>
+                            <span class="metric-label">Auto-evaluation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What it Means Section -->
+    <section class="apply-meaning-section">
+        <div class="container">
+            <div class="meaning-content reveal">
+                <h3>What it means to be a HumanLayer decision maker</h3>
+
+                <p class="meaning-intro">
+                    Being a HumanLayer decision maker is not consulting.<br>
+                    It's not executing tasks.<br>
+                    It's not "helping an AI."
+                </p>
+
+                <p style="font-weight: 600; margin-bottom: 16px;">It is:</p>
+
+                <ul class="meaning-list">
+                    <li>intervening only when a decision carries human accountability</li>
+                    <li>signing, approving, or rejecting based on AI-prepared context</li>
+                    <li>leaving an auditable trace of your professional judgment</li>
+                    <li>being paid for the decision — not for time spent</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Revenue Section -->
+    <section class="apply-benefits-section">
+        <div class="container">
+            <div class="section-title reveal">
+                <span class="label">Earnings</span>
+                <h2>How much can you earn?</h2>
+                <p>Compensation is indexed to the level of responsibility involved, the rarity of your qualification, and the regulatory framework of the decision.</p>
+            </div>
+
+            <div class="benefits-grid revenue-grid reveal-stagger">
+                <div class="glass-card revenue-card">
+                    <h4 style="margin-bottom: 24px;">Indicative examples</h4>
+
+                    <div class="revenue-examples">
+                        <div class="revenue-example">
+                            <span class="revenue-example-type">Compliance validation</span>
+                            <span class="revenue-example-amount">$15–$30</span>
+                        </div>
+                        <div class="revenue-example">
+                            <span class="revenue-example-type">Contextual expert judgment</span>
+                            <span class="revenue-example-amount">$60–$120</span>
+                        </div>
+                        <div class="revenue-example">
+                            <span class="revenue-example-type">Authorized decision / qualified signature</span>
+                            <span class="revenue-example-amount">$150–$300</span>
+                        </div>
+                    </div>
+
+                    <p class="revenue-note">
+                        Some decisions take less than 5 minutes.<br>
+                        <strong>All carry your authority.</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Responsibility Section -->
+    <section class="responsibility-section">
+        <div class="container">
+            <div class="section-title reveal">
+                <span class="label">Protection</span>
+                <h2>Accountability, framework, and protection</h2>
+            </div>
+
+            <div class="responsibility-content reveal">
+                <p class="responsibility-intro">
+                    You never decide blindly.<br>
+                    You never decide outside your scope.<br>
+                    You never decide without traceability.
+                </p>
+
+                <p style="font-weight: 600; margin-bottom: 16px;">Each decision:</p>
+
+                <div class="responsibility-grid">
+                    <div class="responsibility-item">is strictly limited to your authorization scope</div>
+                    <div class="responsibility-item">relies on documented context</div>
+                    <div class="responsibility-item">leaves a timestamped, auditable trace</div>
+                    <div class="responsibility-item">is embedded in a clear contractual framework</div>
+                </div>
+
+                <div class="responsibility-footer">
+                    <p>HumanLayer does not automate your accountability.<br><strong>It frames and protects it.</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works -->
+    <section class="apply-process" id="process">
+        <div class="container">
+            <div class="section-title reveal">
+                <span class="label">Process</span>
+                <h2>How does it work?</h2>
+            </div>
+
+            <div class="process-steps reveal-stagger">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h4>Qualification</h4>
+                    <p>Automatic evaluation of your profile and authorizations.</p>
+                </div>
+                <div class="process-connector"></div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h4>Decision pool</h4>
+                    <p>Your profile is qualified and positioned according to current needs.</p>
+                </div>
+                <div class="process-connector"></div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h4>Targeted activation</h4>
+                    <p>When your expertise is required, you are contacted for validation.</p>
+                </div>
+                <div class="process-connector"></div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h4>Access & decisions</h4>
+                    <p>You access the platform and act on qualified cases.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What it's NOT Section -->
+    <section class="not-section">
+        <div class="container">
+            <div class="not-content reveal">
+                <div class="section-title">
+                    <span class="label">Clarification</span>
+                    <h2>What HumanLayer is not</h2>
+                </div>
+
+                <ul class="not-list">
+                    <li>A freelancing platform</li>
+                    <li>A gig marketplace</li>
+                    <li>A micro-task tool</li>
+                    <li>A consulting service in disguise</li>
+                </ul>
+
+                <p class="not-footer">
+                    HumanLayer does not buy time.<br>
+                    <strong>It orchestrates human authority.</strong>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Form Section -->
+    <section class="apply" id="apply">
+        <div class="container">
+            <div class="section-title reveal">
+                <span class="label">Application</span>
+                <h2>Join us</h2>
+                <p>Applications are automatically evaluated. Qualified profiles are contacted quickly.</p>
+            </div>
+
+            <div class="apply-form-wrapper reveal">
+                <div class="apply-form-layout">
+                    <div class="apply-form-container glass-card reveal">
+                        <form class="apply-form" id="applyForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First name *</label>
+                                    <input type="text" id="firstName" name="firstName" required placeholder="John">
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last name *</label>
+                                    <input type="text" id="lastName" name="lastName" required placeholder="Doe">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Work email *</label>
+                                <input type="email" id="email" name="email" required
+                                    placeholder="john.doe@company.com">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="tel" id="phone" name="phone" placeholder="+1 415 555 0101">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="expertise">Primary area of expertise *</label>
+                                <select id="expertise" name="expertise" required>
+                                    <option value="">Select your domain</option>
+                                    <option value="legal">Legal</option>
+                                    <option value="finance">Finance / Risk / Credit</option>
+                                    <option value="compliance">Compliance</option>
+                                    <option value="medical">Medical / Healthcare</option>
+                                    <option value="accounting">Accounting / Audit</option>
+                                    <option value="hr">Human Resources</option>
+                                    <option value="insurance">Insurance / Claims</option>
+                                    <option value="quality">Quality / Industry</option>
+                                    <option value="security">Cybersecurity / IT</option>
+                                    <option value="other">Other expertise</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="qualifications">Qualifications & certifications *</label>
+                                <textarea id="qualifications" name="qualifications" rows="4" required
+                                    placeholder="e.g., Attorney at the Paris bar since 2015, specialized in business law. CIPP/E certified (data protection)."></textarea>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="experience">Years of experience *</label>
+                                    <select id="experience" name="experience" required>
+                                        <option value="">Select</option>
+                                        <option value="2-5">2–5 years</option>
+                                        <option value="5-10">5–10 years</option>
+                                        <option value="10-15">10–15 years</option>
+                                        <option value="15+">15+ years</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="capacity">Approximate decision capacity</label>
+                                    <select id="capacity" name="capacity" required>
+                                        <option value="">Select</option>
+                                        <option value="ponctuelle">Occasional interventions</option>
+                                        <option value="limitee">Regular but limited</option>
+                                        <option value="soutenue">Sustained</option>
+                                        <option value="prioritaire">Priority</option>
+                                    </select>
+                                    <p
+                                        style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 8px; font-style: italic;">
+                                        (non-binding, for indicative purposes)</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="linkedin">LinkedIn profile *</label>
+                                <input type="url" id="linkedin" name="linkedin" required
+                                    placeholder="https://linkedin.com/in/...">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="motivation">Why do you want to join HumanLayer?</label>
+                                <textarea id="motivation" name="motivation" rows="3"
+                                    placeholder="Briefly describe your motivation..."></textarea>
+                            </div>
+
+                            <div class="form-group"
+                                style="background: rgba(192, 57, 43, 0.05); padding: 20px; border-radius: var(--radius-md); border: 1px solid rgba(192, 57, 43, 0.15);">
+                                <label
+                                    style="font-weight: 600; color: var(--text-primary); margin-bottom: 12px; display: block;">
+                                    Do you currently hold an active professional authorization that allows you to make binding decisions? *
+                                </label>
+                                <div class="radio-group" style="display: flex; gap: 24px;">
+                                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                        <input type="radio" id="habilitation-oui" name="habilitation" value="oui"
+                                            required>
+                                        <span>Yes</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                        <input type="radio" id="habilitation-non" name="habilitation" value="non"
+                                            required>
+                                        <span>No</span>
+                                    </label>
+                                </div>
+                                <p id="habilitation-warning"
+                                    style="display: none; margin-top: 12px; color: var(--primary); font-size: 0.9rem; font-style: italic;">
+                                    HumanLayer qualifies only professionals with an active authorization. Your application cannot be accepted at this stage.
+                                </p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="jurisdictions">In which jurisdiction(s) are you authorized to operate? *</label>
+                                <input type="text" id="jurisdictions" name="jurisdictions" required
+                                    placeholder="e.g., France, Quebec, European Union, United States...">
+                            </div>
+
+                            <div class="form-group checkbox-group">
+                                <input type="checkbox" id="terms" name="terms" required>
+                                <label for="terms">I agree that my information may be processed to evaluate my application and to be contacted by HumanLayer *</label>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-full">
+                                <svg class="hl-icon">
+                                    <use href="#icon-arrow" />
+                                </svg> Submit my application
+                            </button>
+
+                        </form>
+                    </div>
+                    <div class="apply-form-aside glass-card reveal">
+                        <span class="label">Information</span>
+                        <h3>What you receive</h3>
+                        <ul class="apply-info-list">
+                            <li>AI-prepared cases, contextualized and logged</li>
+                            <li>Paid per decision, based on complexity</li>
+                            <li>Flexible schedule and case selection</li>
+                            <li>Complete history and legal traceability</li>
+                        </ul>
+                        <div class="apply-info-card">
+                            <svg class="hl-icon">
+                                <use href="#icon-check" />
+                            </svg>
+                            <div>
+                                <strong>Fast onboarding</strong>
+                                <p>Validation, platform access, and first cases within a few days.</p>
+                            </div>
+                        </div>
+                        <p class="apply-info-note">Application is free. We contact aligned profiles.</p>
+
+                        <div
+                            style="margin-top: 24px; padding: 20px; background: rgba(192, 57, 43, 0.08); border-radius: var(--radius-md); border-left: 3px solid var(--primary);">
+                            <strong
+                                style="display: block; margin-bottom: 12px; color: var(--text-primary); font-size: 0.95rem;">How are applications reviewed?</strong>
+                            <p style="margin-bottom: 10px; line-height: 1.6; font-size: 0.9rem;">HumanLayer does not hire in bulk. We qualify profiles capable of assuming human accountability.</p>
+                            <p style="margin-bottom: 10px; line-height: 1.6; font-size: 0.9rem;">Applications are automatically evaluated against strict criteria (experience, authorization, jurisdiction, area of expertise).</p>
+                            <p style="margin-bottom: 10px; line-height: 1.6; font-size: 0.9rem;">Profiles matching active or high-value needs are contacted for a focused interview.</p>
+                            <p
+                                style="margin-bottom: 0; line-height: 1.6; font-size: 0.85rem; font-style: italic; color: var(--text-secondary);">
+                                Other applications may be kept in a qualified pool and activated later, without any time commitment.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer theme-ink">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="footer-logo">© HumanLayer Systems Inc.</span>
+                </div>
+                <div class="footer-links">
+                    <a href="index-en.html">Home</a>
+                    <a href="#">Security</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <script>
+        // Habilitation question - show warning if "No" selected
+        document.querySelectorAll('input[name="habilitation"]').forEach(radio => {
+            radio.addEventListener('change', function () {
+                const warning = document.getElementById('habilitation-warning');
+                const submitBtn = document.querySelector('#applyForm button[type="submit"]');
+                if (this.value === 'non') {
+                    warning.style.display = 'block';
+                    submitBtn.disabled = true;
+                    submitBtn.style.opacity = '0.5';
+                    submitBtn.style.cursor = 'not-allowed';
+                } else {
+                    warning.style.display = 'none';
+                    submitBtn.disabled = false;
+                    submitBtn.style.opacity = '1';
+                    submitBtn.style.cursor = 'pointer';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Investisseurs — HumanLayer</title>
+    <meta name="description"
+        content="Questions fréquentes pour investisseurs sur HumanLayer - La couche d'autorité décisionnelle pour l'IA.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="icons.css">
+</head>
+
+<body>
+    <!-- SVG Icons Sprite -->
+    <?xml version="1.0" encoding="UTF-8"?>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <!-- Brain - Central AI icon -->
+        <symbol id="icon-brain" viewBox="0 0 24 24">
+            <path
+                d="M12 2C9.5 2 7.5 3.5 7 5.5C5.5 5.5 4 7 4 9c0 1.5 1 3 2.5 3.5C6 14 7 16 9 17v3c0 .5.5 1 1 1h4c.5 0 1-.5 1-1v-3c2-1 3-3 2.5-4.5C19 12 20 10.5 20 9c0-2-1.5-3.5-3-3.5C16.5 3.5 14.5 2 12 2z"
+                fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M9 10c0-1 1-2 3-2s3 1 3 2M9 14h6" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" />
+            <circle cx="9" cy="10" r="1" fill="currentColor" />
+            <circle cx="15" cy="10" r="1" fill="currentColor" />
+        </symbol>
+        <!-- Arrow Right -->
+        <symbol id="icon-arrow" viewBox="0 0 24 24">
+            <path d="M4 12h16M14 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </symbol>
+        <!-- Chart/Growth -->
+        <symbol id="icon-chart" viewBox="0 0 24 24">
+            <path d="M3 3v18h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                fill="none" />
+            <path d="M7 14l4-4 4 4 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" fill="none" />
+            <circle cx="21" cy="8" r="2" fill="currentColor" />
+        </symbol>
+        <!-- Shield/Protection -->
+        <symbol id="icon-shield" viewBox="0 0 24 24">
+            <path d="M12 2L4 6v6c0 5.5 3.5 10 8 11 4.5-1 8-5.5 8-11V6l-8-4z" fill="none" stroke="currentColor"
+                stroke-width="1.5" />
+            <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </symbol>
+        <!-- Wallet/Money -->
+        <symbol id="icon-wallet" viewBox="0 0 24 24">
+            <rect x="2" y="6" width="20" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M2 10h20" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="16" cy="14" r="2" fill="currentColor" />
+        </symbol>
+        <!-- Building/Enterprise -->
+        <symbol id="icon-building" viewBox="0 0 24 24">
+            <rect x="4" y="4" width="16" height="18" rx="1" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M8 8h2M8 12h2M8 16h2M14 8h2M14 12h2M14 16h2" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" />
+            <path d="M10 22v-4h4v4" stroke="currentColor" stroke-width="1.5" />
+        </symbol>
+        <!-- Lock/Security -->
+        <symbol id="icon-lock" viewBox="0 0 24 24">
+            <rect x="5" y="11" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M8 11V7a4 4 0 018 0v4" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="12" cy="16" r="1.5" fill="currentColor" />
+        </symbol>
+        <!-- Target/Bullseye -->
+        <symbol id="icon-target" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="12" cy="12" r="2" fill="currentColor" />
+            <path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </symbol>
+        <!-- Clock/Time -->
+        <symbol id="icon-clock" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </symbol>
+        <!-- Scale/Balance -->
+        <symbol id="icon-scale" viewBox="0 0 24 24">
+            <path d="M12 3v18M3 8l9-3 9 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" fill="none" />
+            <path d="M3 8l3 8h0a3 3 0 006 0h0l-3-8M15 8l3 8h0a3 3 0 006 0h0l-3-8" stroke="currentColor"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+        </symbol>
+        <!-- Rocket/Launch -->
+        <symbol id="icon-rocket" viewBox="0 0 24 24">
+            <path d="M4 16l4-4c0-4 4-10 12-10-1 8-6 12-10 12l-4 4" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linejoin="round" />
+            <circle cx="14" cy="10" r="2" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M6 14l-2 4 4-2M2 22l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </symbol>
+        <!-- Trophy/Success -->
+        <symbol id="icon-trophy" viewBox="0 0 24 24">
+            <path d="M8 21h8M12 17v4M17 4h3a2 2 0 012 2v2a4 4 0 01-4 4h-1M7 4H4a2 2 0 00-2 2v2a4 4 0 004 4h1"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none" />
+            <path d="M7 4h10v6a5 5 0 01-10 0V4z" fill="none" stroke="currentColor" stroke-width="1.5" />
+        </symbol>
+        <!-- Warning/Alert -->
+        <symbol id="icon-warning" viewBox="0 0 24 24">
+            <path d="M12 2L2 20h20L12 2z" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linejoin="round" />
+            <path d="M12 9v4M12 16v1" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </symbol>
+    </svg>
+
+    <!-- Background Animation -->
+    <div class="bg-animation"></div>
+    <div class="grid-overlay"></div>
+    <div class="cursor-glow"></div>
+    <div class="scroll-progress" id="scroll-progress"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="logo.png" alt="HumanLayer" class="nav-logo-img">
+            </a>
+            <button class="nav-toggle" aria-expanded="false" aria-label="Ouvrir le menu" aria-controls="nav-links">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+        <div class="nav-drawer-header">
+          <div class="nav-drawer-title">AGENT ROUTING</div>
+          <div class="nav-drawer-status"><span class="status-dot"></span>Connecté à HumanLayer</div>
+        </div>
+        <div class="nav-signal" aria-hidden="true"></div>
+        <div class="nav-scanline" aria-hidden="true"></div>
+<a href="index.html#problem">Problème</a>
+                <a href="index.html#solution">Solution</a>
+                <a href="index.html#usecases">Cas d'usage</a>
+                <a href="index.html#api">API</a>
+                <a href="apply.html">Devenir décideur</a>
+                <a href="faq.html">FAQ</a>
+                <a href="index.html#pricing">Tarifs</a>
+                <div class="nav-lang"><a href="faq-investisseurs.html" class="active">FR</a><span>·</span><a href="faq-investisseurs-en.html">EN</a></div>
+                <a href="#" class="btn btn-primary">Demander une démo</a>
+            </div>
+        </div>
+        <div class="nav-backdrop" aria-hidden="true"></div>
+    </nav>
+
+    <!-- FAQ Page Header -->
+    <section class="faq-hero">
+        <div class="container">
+            <div class="faq-hero-content reveal">
+                <span class="label">FAQ Investisseurs</span>
+                <h1>Questions pour investisseurs</h1>
+                <p>La couche d'autorité décisionnelle pour l'IA</p>
+            </div>
+            <!-- FAQ Tabs -->
+            <div class="faq-tabs reveal-stagger">
+                <a href="faq.html" class="faq-tab">Général</a>
+                <a href="faq-investisseurs.html" class="faq-tab active">Investisseurs</a>
+                <a href="faq-developpeurs.html" class="faq-tab">Développeurs</a>
+                <a href="faq-decideurs.html" class="faq-tab">Décideurs</a>
+                <a href="faq-risque.html" class="faq-tab">Risque</a>
+                <a href="faq-ethique.html" class="faq-tab">Éthique</a>
+                <a href="faq-regulateurs.html" class="faq-tab">Régulateurs</a>
+                <a href="faq-annexe.html" class="faq-tab">Annexe</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Content -->
+    <section class="faq faq-page">
+        <div class="container">
+
+            <!-- Le problème fondamental -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-brain" />
+                    </svg>
+                    Le problème fondamental
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Quel problème fondamental HumanLayer résout-il ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Les agents IA savent déjà :</p>
+                        <ul>
+                            <li>analyser</li>
+                            <li>raisonner</li>
+                            <li>préparer des actions complexes</li>
+                        </ul>
+                        <p>Mais ils échouent dès qu'une décision nécessite :</p>
+                        <ul>
+                            <li>une responsabilité légale</li>
+                            <li>une autorité professionnelle</li>
+                            <li>une opposabilité réglementaire</li>
+                        </ul>
+                        <p class="faq-highlight">👉 L'IA manque d'autorité, pas d'intelligence.</p>
+                        <p>HumanLayer résout le dernier verrou de l'autonomie : <strong>obtenir des décisions humaines
+                                qualifiées, traçables et opposables, en temps réel, directement depuis des agents
+                                IA.</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Le marché -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-chart" />
+                    </svg>
+                    Le marché
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Pourquoi est-ce un marché important ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Chaque organisation réglementée fait face à :</p>
+                        <ul>
+                            <li>une explosion du nombre de décisions sensibles</li>
+                            <li>une automatisation IA croissante en amont</li>
+                            <li>une pénurie structurelle de temps expert</li>
+                            <li>une pression réglementaire accrue</li>
+                        </ul>
+                        <p>À mesure que l'IA progresse, <strong>le goulot d'étranglement humain devient le facteur
+                                limitant.</strong></p>
+                        <p>HumanLayer se situe à l'intersection de :</p>
+                        <ul>
+                            <li>IA autonome</li>
+                            <li>compliance & risk</li>
+                            <li>services professionnels</li>
+                        </ul>
+                        <p class="faq-highlight">Ce n'est pas un marché "gig".<br>C'est un marché
+                            d'<strong>infrastructure critique</strong>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clients & acheteurs -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-building" />
+                    </svg>
+                    Clients & acheteurs
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Qui paie HumanLayer ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Les <strong>organisations qui déploient des agents IA</strong> :</p>
+                        <ul>
+                            <li>banques</li>
+                            <li>assurances</li>
+                            <li>santé</li>
+                            <li>industrie</li>
+                            <li>grandes entreprises</li>
+                        </ul>
+                        <p>Les acheteurs typiques :</p>
+                        <ul>
+                            <li>Directeur juridique (GC)</li>
+                            <li>Head of Risk</li>
+                            <li>Responsable compliance</li>
+                            <li>CFO (parfois CISO)</li>
+                        </ul>
+                        <p class="faq-highlight">👉 Les agents IA utilisent l'API.<br>👉 Les organisations paient pour
+                            la responsabilité.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Pourquoi ne pas construire cela en interne ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Les entreprises ont déjà des experts. Elles n'ont pas :</p>
+                        <ul>
+                            <li>de disponibilité à la demande</li>
+                            <li>de SLA décisionnels</li>
+                            <li>d'artefacts de décision standardisés</li>
+                            <li>de traçabilité audit-grade</li>
+                            <li>d'intégration native avec les agents IA</li>
+                        </ul>
+                        <p><strong>HumanLayer transforme une autorité humaine rare en primitive système
+                                appelable.</strong></p>
+                        <p>Construire cela en interne nécessite :</p>
+                        <ul>
+                            <li>gouvernance lourde</li>
+                            <li>équipes dédiées</li>
+                            <li>maintien réglementaire constant</li>
+                        </ul>
+                        <p class="faq-highlight">👉 Externaliser est plus rapide, moins risqué, et plus économique.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Positionnement -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-target" />
+                    </svg>
+                    Positionnement
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Est-ce une marketplace ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Non.</strong></p>
+                        <p>Une marketplace optimise l'offre et la demande de travail.<br>HumanLayer <strong>orchestre
+                                l'autorité et la responsabilité</strong>.</p>
+                        <p>Nous ne vendons pas du temps humain.<br>Nous vendons des <strong>décisions avec
+                                responsabilité attachée</strong>.</p>
+                        <p>Cette distinction est essentielle pour :</p>
+                        <ul>
+                            <li>la crédibilité enterprise</li>
+                            <li>la défense juridique</li>
+                            <li>la création de moat long terme</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modèle économique -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-wallet" />
+                    </svg>
+                    Modèle économique
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Quel est le modèle économique ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Facturation à la décision, pas à l'heure.</strong></p>
+                        <p>Ordres de grandeur :</p>
+                        <ul>
+                            <li>Validation de conformité : ~15  €</li>
+                            <li>Jugement expert : ~80  €</li>
+                            <li>Autorité habilitée / signature : 200  €+</li>
+                        </ul>
+                        <p>Le pricing est corrélé :</p>
+                        <ul>
+                            <li>au risque couvert</li>
+                            <li>au niveau d'autorité</li>
+                            <li>au SLA</li>
+                        </ul>
+                        <p class="faq-highlight">👉 La valeur est immédiatement compréhensible.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Avantages compétitifs -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-shield" />
+                    </svg>
+                    Avantages compétitifs
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Quels sont les moats ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>HumanLayer construit des <strong>moats non techniques</strong> :</p>
+                        <ul>
+                            <li><strong>Réseau d'autorités vérifiées</strong><br>Lent à constituer, difficile à
+                                répliquer.</li>
+                            <li><strong>Moat réglementaire et de confiance</strong><br>Une fois intégré dans les audits,
+                                le switching cost est élevé.</li>
+                            <li><strong>Historique de décisions</strong><br>Les traces décisionnelles deviennent un
+                                actif défendable.</li>
+                            <li><strong>Lock-in workflow</strong><br>Les organisations adaptent leurs process autour de
+                                HumanLayer.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Responsabilité & juridique -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-scale" />
+                    </svg>
+                    Responsabilité & juridique
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Qu'en est-il de la responsabilité légale ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>HumanLayer n'est jamais décisionnaire.</strong></p>
+                        <p>La décision est toujours prise par un humain identifié et habilité.</p>
+                        <p>HumanLayer orchestre, trace et prouve.</p>
+                        <p class="faq-highlight">👉 Cela limite fortement la responsabilité plateforme tout en
+                            maximisant la valeur client.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Est-ce que HumanLayer remplace des professionnels ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Non.</strong> Il augmente leur impact.</p>
+                        <p>L'IA fait 90 % du travail. Les humains interviennent uniquement là où :</p>
+                        <ul>
+                            <li>le jugement est indispensable</li>
+                            <li>la responsabilité est requise</li>
+                        </ul>
+                        <p class="faq-highlight">👉 Résultat : productivité accrue des experts.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timing -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-clock" />
+                    </svg>
+                    Timing
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Pourquoi maintenant ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Trois dynamiques convergent :</p>
+                        <ul>
+                            <li>Les agents IA deviennent réellement autonomes.</li>
+                            <li>Les entreprises sont bloquées par le risque et la compliance.</li>
+                            <li>Les régulateurs exigent plus de traçabilité, pas moins.</li>
+                        </ul>
+                        <p class="faq-highlight">👉 L'autonomie IA progresse plus vite que l'infrastructure de
+                            gouvernance.</p>
+                        <p><strong>HumanLayer comble ce gap.</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vision -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-trophy" />
+                    </svg>
+                    Vision
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>À quoi ressemble le succès ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>HumanLayer devient :</p>
+                        <ul>
+                            <li>la <strong>couche standard de décision humaine</strong> pour l'IA</li>
+                            <li>une brique implicite des stacks IA enterprise</li>
+                            <li>un point d'ancrage reconnu par les régulateurs</li>
+                        </ul>
+                        <p>À terme, tout agent IA sérieux saura :</p>
+                        <p class="faq-highlight">"Cette décision nécessite HumanLayer."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Risques -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-warning" />
+                    </svg>
+                    Risques
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Le principal risque ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>La vitesse d'adoption.</strong></p>
+                        <p>C'est une catégorie nouvelle :</p>
+                        <ul>
+                            <li>cycles enterprise</li>
+                            <li>besoin d'éducation du marché</li>
+                        </ul>
+                        <p>Mais une fois intégré :</p>
+                        <p class="faq-highlight">👉 la rétention est structurellement élevée.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Closing statement -->
+            <div class="faq-closing reveal">
+                <div class="glass-card">
+                    <p class="faq-closing-text">
+                        <svg class="hl-icon hl-lg">
+                            <use href="#icon-rocket" />
+                        </svg>
+                        <em>Résumé en une phrase :</em><br>
+                        <strong>HumanLayer rend l'autonomie IA défendable en rendant l'autorité humaine
+                            programmable.</strong>
+                    </p>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="faq-cta reveal">
+                <p>Intéressé par notre vision ?</p>
+                <a href="#" class="btn btn-primary">
+                    <svg class="hl-icon">
+                        <use href="#icon-target" />
+                    </svg>
+                    Prendre contact
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="footer-logo">© HumanLayer Systems Inc.</span>
+                    
+                </div>
+                <div class="footer-links">
+                    <a href="#">Sécurité</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Conditions</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
