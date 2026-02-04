@@ -18,110 +18,132 @@
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="icons.css">
+
+    <style>
+        .legal-page {
+            padding: 120px 0 80px;
+            min-height: 100vh;
+        }
+
+        .legal-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .legal-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+        }
+
+        .legal-content h2 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            color: var(--primary);
+        }
+
+        .legal-content p,
+        .legal-content li {
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .legal-content ul {
+            padding-left: 1.5rem;
+        }
+
+        .legal-content ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .legal-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            margin-bottom: 2rem;
+        }
+
+        .legal-back:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 
 <body>
     <div class="bg-animation"></div>
-    <div class="grid-overlay"></div>
-    <div class="cursor-glow"></div>
-    <div class="scroll-progress" id="scroll-progress"></div>
 
     <nav class="nav" id="nav">
         <div class="container nav-container">
             <a href="index-en.html" class="nav-logo">
                 <img src="logo.png" alt="HumanLayer" class="nav-logo-img">
             </a>
-            <button class="nav-toggle" aria-expanded="false" aria-label="Open menu" aria-controls="nav-links">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <div class="nav-links" id="nav-links">
-                <div class="nav-drawer-header">
-                    <div class="nav-drawer-title">AGENT ROUTING</div>
-                    <div class="nav-drawer-status"><span class="status-dot"></span>Connected to HumanLayer</div>
-                </div>
-                <div class="nav-signal" aria-hidden="true"></div>
-                <div class="nav-scanline" aria-hidden="true"></div>
-                <a href="index-en.html#problem">Problem</a>
-                <a href="index-en.html#solution">Solution</a>
-                <a href="index-en.html#usecases">Use cases</a>
-                <a href="index-en.html#api">API</a>
-                <a href="index-en.html#pricing">Pricing</a>
+            <div class="nav-links">
+                <a href="index-en.html">Home</a>
                 <a href="apply-en.html">Become a decision maker</a>
                 <a href="faq-en.html">FAQ</a>
-                <div class="nav-lang"><a href="security.html">FR</a><span>·</span><a href="security-en.html"
-                        class="active">EN</a></div>
-                <a href="index-en.html" class="btn btn-primary">Request a demo</a>
+                <div class="nav-lang"><a href="security.html">FR</a><span>·</span><a href="security-en.html" class="active">EN</a></div>
             </div>
         </div>
-        <div class="nav-backdrop" aria-hidden="true"></div>
     </nav>
 
     <section class="legal-page">
         <div class="container">
-            <div class="legal-hero">
+            <div class="legal-content">
                 <a href="index-en.html" class="legal-back">← Back to home</a>
-                <div class="legal-eyebrow">Security</div>
-                <h1 class="legal-title">Security</h1>
-                <p class="legal-summary">Enterprise-grade controls protect every decision and every sensitive dataset
-                    processed by HumanLayer.</p>
-                <div class="legal-meta">
-                    <span>Last updated: February 2026</span>
-                    <span>security@humanlayer.systems</span>
-                </div>
-            </div>
 
-            <div class="legal-card">
-                <div class="legal-content">
-                    <p>Your data security is our highest priority. HumanLayer Systems Inc. implements enterprise-grade
-                        security measures to protect sensitive information processed by our platform.</p>
+                <h1>Security</h1>
 
-                    <h2>Secure infrastructure</h2>
-                    <ul>
-                        <li><strong>Encryption in transit:</strong> All communications are encrypted via TLS 1.3</li>
-                        <li><strong>Encryption at rest:</strong> Stored data is encrypted with AES-256</li>
-                        <li><strong>Hosting:</strong> SOC 2 Type II certified cloud infrastructure</li>
-                        <li><strong>Isolation:</strong> Each client benefits from a logically isolated environment</li>
-                    </ul>
+                <p><strong>Last updated:</strong> February 2026</p>
 
-                    <h2>Authentication and access</h2>
-                    <ul>
-                        <li>Multi-factor authentication (MFA) required for all decision makers</li>
-                        <li>Role-based access control (RBAC)</li>
-                        <li>Time-limited sessions with automatic logout</li>
-                        <li>Full logging of all actions</li>
-                    </ul>
+                <p>Your data security is our highest priority. HumanLayer Systems Inc. implements enterprise-grade
+                    security measures to protect sensitive information processed by our platform.</p>
 
-                    <h2>Decision maker verification</h2>
-                    <ul>
-                        <li>Rigorous identity verification before activation</li>
-                        <li>Validation of professional qualifications and authorizations</li>
-                        <li>Periodic compliance checks</li>
-                        <li>Full traceability of each decision</li>
-                    </ul>
+                <h2>Secure infrastructure</h2>
+                <ul>
+                    <li><strong>Encryption in transit:</strong> All communications are encrypted via TLS 1.3</li>
+                    <li><strong>Encryption at rest:</strong> Stored data is encrypted with AES-256</li>
+                    <li><strong>Hosting:</strong> SOC 2 Type II certified cloud infrastructure</li>
+                    <li><strong>Isolation:</strong> Each client benefits from a logically isolated environment</li>
+                </ul>
 
-                    <h2>Regulatory compliance</h2>
-                    <ul>
-                        <li>GDPR (General Data Protection Regulation)</li>
-                        <li>Law 25 (Quebec)</li>
-                        <li>SOC 2 Type II (certification in progress)</li>
-                        <li>ISO 27001 (planned)</li>
-                    </ul>
+                <h2>Authentication and access</h2>
+                <ul>
+                    <li>Multi-factor authentication (MFA) required for all decision makers</li>
+                    <li>Role-based access control (RBAC)</li>
+                    <li>Time-limited sessions with automatic logout</li>
+                    <li>Full logging of all actions</li>
+                </ul>
 
-                    <h2>Vulnerability reporting</h2>
-                    <p>If you discover a security vulnerability, please contact us immediately at
-                        <strong>security@humanlayer.systems</strong>. We commit to handling any report within 24 hours.
-                    </p>
+                <h2>Decision maker verification</h2>
+                <ul>
+                    <li>Rigorous identity verification before activation</li>
+                    <li>Validation of professional qualifications and authorizations</li>
+                    <li>Periodic compliance checks</li>
+                    <li>Full traceability of each decision</li>
+                </ul>
 
-                    <h2>Audits and testing</h2>
-                    <ul>
-                        <li>Regular penetration tests by independent third parties</li>
-                        <li>Continuous automated vulnerability scanning</li>
-                        <li>Secure code reviews</li>
-                        <li>Documented and tested incident response plan</li>
-                    </ul>
-                </div>
+                <h2>Regulatory compliance</h2>
+                <ul>
+                    <li>GDPR (General Data Protection Regulation)</li>
+                    <li>Law 25 (Quebec)</li>
+                    <li>SOC 2 Type II (certification in progress)</li>
+                    <li>ISO 27001 (planned)</li>
+                </ul>
+
+                <h2>Vulnerability reporting</h2>
+                <p>If you discover a security vulnerability, please contact us immediately at
+                    <strong>security@humanlayer.systems</strong>. We commit to handling any report within 24 hours.</p>
+
+                <h2>Audits and testing</h2>
+                <ul>
+                    <li>Regular penetration tests by independent third parties</li>
+                    <li>Continuous automated vulnerability scanning</li>
+                    <li>Secure code reviews</li>
+                    <li>Documented and tested incident response plan</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -130,9 +152,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <span class="footer-logo">© HumanLayer Systems Inc.</span>
-                </div>
-                <div class="footer-powered">Powered by <a href="https://in6.ai" target="_blank">IN6.ai</a>
+                    <span class="footer-logo">© HumanLayer Systems Inc.</span><span class="footer-powered">Powered by <a href="https://in6.ai" target="_blank">IN6.ai</a></span>
                 </div>
                 <div class="footer-links">
                     <a href="security-en.html">Security</a>

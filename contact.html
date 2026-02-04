@@ -20,89 +20,157 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="icons.css">
 
+    <style>
+        .legal-page {
+            padding: 120px 0 80px;
+            min-height: 100vh;
+        }
+
+        .legal-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .legal-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+        }
+
+        .legal-content h2 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            color: var(--primary);
+        }
+
+        .legal-content p,
+        .legal-content li {
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .legal-content ul {
+            padding-left: 1.5rem;
+        }
+
+        .legal-content ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .legal-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            margin-bottom: 2rem;
+        }
+
+        .legal-back:hover {
+            text-decoration: underline;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 2rem;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            border-color: var(--primary);
+            background: rgba(192, 57, 43, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .contact-card h3 {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-card p {
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .contact-card a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-icon {
+            width: 24px;
+            height: 24px;
+            color: var(--primary);
+        }
+    </style>
 </head>
 
 <body>
     <div class="bg-animation"></div>
-    <div class="grid-overlay"></div>
-    <div class="cursor-glow"></div>
-    <div class="scroll-progress" id="scroll-progress"></div>
 
     <nav class="nav" id="nav">
         <div class="container nav-container">
             <a href="index.html" class="nav-logo">
                 <img src="logo.png" alt="HumanLayer" class="nav-logo-img">
             </a>
-            <button class="nav-toggle" aria-expanded="false" aria-label="Ouvrir le menu" aria-controls="nav-links">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <div class="nav-links" id="nav-links">
-                <div class="nav-drawer-header">
-                    <div class="nav-drawer-title">AGENT ROUTING</div>
-                    <div class="nav-drawer-status"><span class="status-dot"></span>Connecté à HumanLayer</div>
-                </div>
-                <div class="nav-signal" aria-hidden="true"></div>
-                <div class="nav-scanline" aria-hidden="true"></div>
-                <a href="index.html#problem">Problème</a>
-                <a href="index.html#solution">Solution</a>
-                <a href="index.html#usecases">Cas d'usage</a>
-                <a href="index.html#api">API</a>
-                <a href="index.html#pricing">Tarifs</a>
-                <a href="apply.html">Devenir intercesseur</a>
+            <div class="nav-links">
+                <a href="index.html">Accueil</a>
+                <a href="apply.html">Devenir décideur</a>
                 <a href="faq.html">FAQ</a>
-                <div class="nav-lang"><a href="contact.html" class="active">FR</a><span>·</span><a
-                        href="contact-en.html">EN</a></div>
-                <a href="index.html" class="btn btn-primary">Demander une démo</a>
             </div>
         </div>
-        <div class="nav-backdrop" aria-hidden="true"></div>
     </nav>
 
     <section class="legal-page">
         <div class="container">
-            <div class="legal-hero">
+            <div class="legal-content">
                 <a href="index.html" class="legal-back">← Retour à l'accueil</a>
-                <div class="legal-eyebrow">Contact</div>
-                <h1 class="legal-title">Contactez-nous</h1>
-                <p class="legal-summary">Nous sommes là pour répondre à vos questions, vous guider et accélérer votre
-                    déploiement.</p>
-                <div class="legal-meta">
-                    <span>Réponse sous 24-48h ouvrables</span>
-                    <span>hello@in6.ai</span>
-                </div>
-            </div>
 
-            <div class="legal-card">
-                <div class="legal-content">
-                    <div class="contact-grid">
-                        <div class="contact-card">
-                            <h3>
-                                <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="1.5">
-                                    <rect x="2" y="4" width="20" height="16" rx="3" />
-                                    <path d="M2 7l10 6 10-6" />
-                                </svg>
-                                Écrivez-nous
-                            </h3>
-                            <p>Pour toute question sur HumanLayer et nos services.</p>
-                            <a href="mailto:hello@in6.ai">hello@in6.ai</a>
-                        </div>
-                        <div class="contact-card">
-                            <h3>Siège social</h3>
-                            <p>
-                                <strong>HumanLayer Systems Inc.</strong><br>
-                                1250, avenue de la Station<br>
-                                Shawinigan (Québec) G9N 8K9
-                            </p>
-                        </div>
-                        <div class="contact-card">
-                            <h3>Horaires de support</h3>
-                            <p>Notre équipe répond généralement sous 24-48 heures ouvrables.</p>
-                        </div>
-                    </div>
+                <h1>Contactez-nous</h1>
+
+                <p>Nous sommes là pour répondre à vos questions.</p>
+
+                <div class="contact-card" style="max-width: 400px; margin: 2rem 0;">
+                    <h3>
+                        <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <rect x="2" y="4" width="20" height="16" rx="3" />
+                            <path d="M2 7l10 6 10-6" />
+                        </svg>
+                        Écrivez-nous
+                    </h3>
+                    <p>Pour toute question sur HumanLayer et nos services.</p>
+                    <a href="mailto:hello@in6.ai">hello@in6.ai</a>
                 </div>
+
+                <h2>Siège social</h2>
+                <p>
+                    <strong>HumanLayer Systems Inc.</strong><br>
+                    1250, avenue de la Station<br>
+                    Shawinigan (Québec) G9N 8K9
+                </p>
+
+                <h2>Horaires de support</h2>
+                <p>Notre équipe répond généralement sous 24-48 heures ouvrables.</p>
             </div>
         </div>
     </section>
@@ -111,9 +179,8 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <span class="footer-logo">© HumanLayer Systems Inc.</span>
-                </div>
-                <div class="footer-powered">Powered by <a href="https://in6.ai" target="_blank">IN6.ai</a>
+                    <span class="footer-logo">© HumanLayer Systems Inc.</span></div><div class="footer-powered">Powered by <a
+                            href="https://in6.ai" target="_blank">IN6.ai</a>
                 </div>
                 <div class="footer-links">
                     <a href="security.html">Sécurité</a>
