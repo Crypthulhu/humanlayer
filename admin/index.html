@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HumanLayer Admin</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    body { padding-top: 120px; }
+    .admin-wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px 80px; }
+    .admin-card { background: rgba(255,255,255,0.95); border: 1px solid rgba(0,0,0,0.08); border-radius: 20px; padding: 24px; box-shadow: 0 18px 40px rgba(0,0,0,0.12); }
+    .admin-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+    .admin-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .admin-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    .admin-table th, .admin-table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid rgba(0,0,0,0.08); vertical-align: top; }
+    .admin-table th { font-weight: 600; color: var(--text-secondary); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .admin-table tbody tr:hover { background: rgba(192, 57, 43, 0.05); }
+    .admin-empty { padding: 40px; text-align: center; color: var(--text-secondary); }
+    .admin-login { max-width: 420px; margin: 0 auto; }
+    .admin-login input { width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.12); margin-bottom: 12px; }
+    .admin-meta { color: var(--text-secondary); font-size: 0.85rem; }
+    .badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 999px; background: rgba(192, 57, 43, 0.1); color: var(--primary); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+  <div class="admin-wrap">
+    <div class="admin-card" id="login-card">
+      <h2>Admin Login</h2>
+      <p class="admin-meta">Enter the admin password to access submissions.</p>
+      <div class="admin-login">
+        <input type="password" id="admin-password" placeholder="Admin password" />
+        <button class="btn btn-primary" id="login-btn">Sign in</button>
+        <p id="login-error" class="admin-meta" style="color: var(--primary); display:none;">Invalid password.</p>
+      </div>
+    </div>
+
+    <div class="admin-card" id="admin-card" style="display:none;">
+      <div class="admin-header">
+        <div>
+          <span class="badge">Submissions</span>
+          <h2 style="margin: 12px 0 4px;">Applications</h2>
+          <p class="admin-meta" id="submission-count">0 submissions</p>
+        </div>
+        <div class="admin-actions">
+          <button class="btn btn-secondary" id="refresh-btn">Refresh</button>
+          <button class="btn btn-primary" id="export-btn">Export CSV</button>
+          <button class="btn" id="logout-btn">Logout</button>
+        </div>
+      </div>
+      <div id="admin-content"></div>
+    </div>
+  </div>
+
+  <script>
+    const loginCard = document.getElementById('login-card');
+    const adminCard = document.getElementById('admin-card');
+    const loginBtn = document.getElementById('login-btn');
+    const logoutBtn = document.getElementById('logout-btn');
+    const refreshBtn = document.getElementById('refresh-btn');
+    const exportBtn = document.getElementById('export-btn');
+    const loginError = document.getElementById('login-error');
+    const adminContent = document.getElementById('admin-content');
+    const submissionCount = document.getElementById('submission-count');
+
+    const TOKEN_KEY = 'hl_admin_token';
+
+    function setToken(token) {
+      localStorage.setItem(TOKEN_KEY, token);
+    }
+
+    function getToken() {
+      return localStorage.getItem(TOKEN_KEY);
+    }
+
+    function clearToken() {
+      localStorage.removeItem(TOKEN_KEY);
+    }
+
+    async function login() {
+      loginError.style.display = 'none';
+      const password = document.getElementById('admin-password').value;
+      if (!password) return;
+
+      const res = await fetch('/.netlify/functions/admin-login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      });
+
+      if (!res.ok) {
+        loginError.style.display = 'block';
+        return;
+      }
+
+      const data = await res.json();
+      setToken(data.token);
+      document.getElementById('admin-password').value = '';
+      showAdmin();
+    }
+
+    async function fetchSubmissions() {
+      const token = getToken();
+      const res = await fetch('/.netlify/functions/admin-list', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (res.status === 401) {
+        clearToken();
+        showLogin();
+        return [];
+      }
+
+      const data = await res.json();
+      return data.submissions || [];
+    }
+
+    function renderTable(submissions) {
+      submissionCount.textContent = `${submissions.length} submission${submissions.length === 1 ? '' : 's'}`;
+      if (!submissions.length) {
+        adminContent.innerHTML = '<div class="admin-empty">No submissions yet.</div>';
+        return;
+      }
+
+      const columns = [
+        'submitted_at',
+        'firstName',
+        'lastName',
+        'email',
+        'phone',
+        'expertise',
+        'experience',
+        'capacity',
+        'linkedin',
+        'jurisdictions',
+      ];
+
+      const table = document.createElement('table');
+      table.className = 'admin-table';
+      const thead = document.createElement('thead');
+      const headerRow = document.createElement('tr');
+      columns.forEach(col => {
+        const th = document.createElement('th');
+        th.textContent = col.replace(/([A-Z])/g, ' $1');
+        headerRow.appendChild(th);
+      });
+      thead.appendChild(headerRow);
+      table.appendChild(thead);
+
+      const tbody = document.createElement('tbody');
+      submissions.forEach(sub => {
+        const row = document.createElement('tr');
+        columns.forEach(col => {
+          const td = document.createElement('td');
+          td.textContent = sub[col] || '';
+          row.appendChild(td);
+        });
+        tbody.appendChild(row);
+      });
+      table.appendChild(tbody);
+      adminContent.innerHTML = '';
+      adminContent.appendChild(table);
+    }
+
+    function downloadCSV(submissions) {
+      if (!submissions.length) return;
+      const columns = Object.keys(submissions[0]);
+      const rows = [columns.join(',')];
+      submissions.forEach(sub => {
+        const row = columns.map(col => {
+          const value = (sub[col] ?? '').toString().replace(/"/g, '""');
+          return `"${value}"`;
+        });
+        rows.push(row.join(','));
+      });
+      const blob = new Blob([rows.join('\n')], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `humanlayer-submissions-${new Date().toISOString().slice(0, 10)}.csv`;
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+
+    async function showAdmin() {
+      loginCard.style.display = 'none';
+      adminCard.style.display = 'block';
+      const submissions = await fetchSubmissions();
+      renderTable(submissions);
+
+      refreshBtn.onclick = async () => {
+        const fresh = await fetchSubmissions();
+        renderTable(fresh);
+      };
+
+      exportBtn.onclick = async () => {
+        const fresh = await fetchSubmissions();
+        downloadCSV(fresh);
+      };
+    }
+
+    function showLogin() {
+      adminCard.style.display = 'none';
+      loginCard.style.display = 'block';
+    }
+
+    loginBtn.addEventListener('click', login);
+    logoutBtn.addEventListener('click', () => {
+      clearToken();
+      showLogin();
+    });
+
+    document.getElementById('admin-password').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') login();
+    });
+
+    if (getToken()) {
+      showAdmin();
+    }
+  </script>
+</body>
+</html>

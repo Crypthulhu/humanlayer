@@ -598,38 +598,81 @@ function initApplyForm() {
 
     const submitBtn = form.querySelector('button[type="submit"]');
     const originalText = submitBtn.innerHTML;
+    const pageLang = document.documentElement.lang || 'fr';
 
     submitBtn.disabled = true;
-    submitBtn.innerHTML = '<svg class="hl-icon spin"><use href="#icon-timer"/></svg> Envoi en cours...';
+    submitBtn.innerHTML = pageLang === 'en'
+      ? '<svg class="hl-icon spin"><use href="#icon-timer"/></svg> Sending...'
+      : '<svg class="hl-icon spin"><use href="#icon-timer"/></svg> Envoi en cours...';
 
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      const res = await fetch('/.netlify/functions/submit-application', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
 
-    submitBtn.innerHTML = '<svg class="hl-icon"><use href="#icon-check"/></svg> Candidature envoyée !';
-    submitBtn.style.background = 'linear-gradient(135deg, #10B981 0%, #059669 100%)';
+      if (!res.ok) {
+        throw new Error('Submission failed');
+      }
 
-    const successMessage = document.createElement('div');
-    successMessage.className = 'form-success';
-    successMessage.innerHTML = `
-      <div class="success-box">
-        <svg class="hl-icon hl-2xl"><use href="#icon-check"/></svg>
-        <h4>Merci pour votre candidature !</h4>
-        <p>Nous reviendrons vers vous sous 48h si votre profil correspond à nos besoins.</p>
-      </div>
-    `;
-    form.appendChild(successMessage);
+      submitBtn.innerHTML = pageLang === 'en'
+        ? '<svg class="hl-icon"><use href="#icon-check"/></svg> Application sent!'
+        : '<svg class="hl-icon"><use href="#icon-check"/></svg> Candidature envoyée !';
+      submitBtn.style.background = 'linear-gradient(135deg, #10B981 0%, #059669 100%)';
 
-    console.log('Application submitted:', data);
+      const successMessage = document.createElement('div');
+      successMessage.className = 'form-success';
+      successMessage.innerHTML = pageLang === 'en'
+        ? `
+          <div class="success-box">
+            <svg class="hl-icon hl-2xl"><use href="#icon-check"/></svg>
+            <h4>Thanks for your application!</h4>
+            <p>We'll get back to you within 48 hours if your profile matches our needs.</p>
+          </div>
+        `
+        : `
+          <div class="success-box">
+            <svg class="hl-icon hl-2xl"><use href="#icon-check"/></svg>
+            <h4>Merci pour votre candidature !</h4>
+            <p>Nous reviendrons vers vous sous 48h si votre profil correspond à nos besoins.</p>
+          </div>
+        `;
+      form.appendChild(successMessage);
 
-    setTimeout(() => {
-      form.reset();
+      setTimeout(() => {
+        form.reset();
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+        submitBtn.style.background = '';
+        successMessage.remove();
+      }, 5000);
+    } catch (err) {
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalText;
       submitBtn.style.background = '';
-      successMessage.remove();
-    }, 5000);
+
+      const errorMessage = document.createElement('div');
+      errorMessage.className = 'form-success';
+      errorMessage.innerHTML = pageLang === 'en'
+        ? `
+          <div class="success-box" style="border-color: rgba(192,57,43,0.3); background: rgba(192,57,43,0.08);">
+            <h4>Submission failed</h4>
+            <p>Please try again in a moment.</p>
+          </div>
+        `
+        : `
+          <div class="success-box" style="border-color: rgba(192,57,43,0.3); background: rgba(192,57,43,0.08);">
+            <h4>Envoi impossible</h4>
+            <p>Réessayez dans un instant.</p>
+          </div>
+        `;
+      form.appendChild(errorMessage);
+      setTimeout(() => errorMessage.remove(), 4000);
+    }
   });
 }
 

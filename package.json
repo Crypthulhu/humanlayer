@@ -1,0 +1,7 @@
+{
+  "name": "humanlayer-site",
+  "private": true,
+  "dependencies": {
+    "@netlify/blobs": "^9.0.0"
+  }
+}
