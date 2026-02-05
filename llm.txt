@@ -1,3 +1,4 @@
+à
 # HumanLayer - The Decision Authority Layer for AI Agents
 # https://humanlayer.systems
 
@@ -66,7 +67,7 @@ AI Agent → HumanLayer API → Intelligent routing → Qualified decider → Si
 ## Contact
 
 - **Site** : https://humanlayer.systems
-- **Email** : hello@in6.ai
+- **Email** : humanlayer@in6.ai
 - **Siège social** : 1250, avenue de la Station, Shawinigan (Québec) G9N 8K9, Canada
 
 ## Mots-clés / Keywords
