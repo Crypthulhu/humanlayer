@@ -193,10 +193,10 @@
     </symbol>
     <!-- Verified/Shield -->
     <symbol id="icon-verified" viewBox="0 0 24 24">
-      <path d="M12 2l8 4v6c0 5.5-3.5 10-8 11-4.5-1-8-5.5-8-11V6l8-4z" fill="none"
-        stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
-      <path d="M8.5 12.5l2.5 2.5 4.5-5" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M12 2l8 4v6c0 5.5-3.5 10-8 11-4.5-1-8-5.5-8-11V6l8-4z" fill="none" stroke="currentColor"
+        stroke-width="1.6" stroke-linejoin="round" />
+      <path d="M8.5 12.5l2.5 2.5 4.5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round" />
     </symbol>
     <!-- Handshake/Partnership -->
     <symbol id="icon-handshake" viewBox="0 0 24 24">
@@ -352,7 +352,8 @@
         <h1>La couche d'<span class="highlight gradient-text-animated">autorité décisionnelle</span> pour agents IA</h1>
 
         <p class="hero-subtitle">Les agents IA savent analyser et préparer.</p>
-        <p class="hero-subtitle">Arbitrium — le seuil où l'automatisation s'arrête et où l'autorité humaine prend le relais.</p>
+        <p class="hero-subtitle">Arbitrium — le seuil où l'automatisation s'arrête et où l'autorité humaine prend le
+          relais.</p>
 
         <ul class="hero-points">
           <li>Ils ne peuvent pas signer, attester, ni engager une responsabilité.</li>
@@ -575,6 +576,62 @@
         <p>HumanLayer orchestre la décision humaine exactement là où elle est indispensable</p>
       </div>
 
+      <!-- Architecture Flow Diagram -->
+      <div class="architecture-diagram reveal">
+        <div class="arch-label"><span>Flux architectural</span></div>
+        <div class="arch-flow">
+          <div class="arch-node">
+            <div class="arch-node-circle node-ai">
+              <svg class="hl-icon">
+                <use href="#icon-robot" />
+              </svg>
+            </div>
+            <div class="arch-node-label">Agent IA</div>
+            <div class="arch-node-sublabel">Prépare le dossier</div>
+          </div>
+          <div class="arch-connector"></div>
+          <div class="arch-node">
+            <div class="arch-node-circle node-api">
+              <svg class="hl-icon">
+                <use href="#icon-bolt" />
+              </svg>
+            </div>
+            <div class="arch-node-label">API HumanLayer</div>
+            <div class="arch-node-sublabel">Route la demande</div>
+          </div>
+          <div class="arch-connector"></div>
+          <div class="arch-node">
+            <div class="arch-node-circle node-arbitrium">
+              <svg class="hl-icon">
+                <use href="#icon-target" />
+              </svg>
+            </div>
+            <div class="arch-node-label">Seuil Arbitrium</div>
+            <div class="arch-node-sublabel">Évalue le niveau</div>
+          </div>
+          <div class="arch-connector"></div>
+          <div class="arch-node">
+            <div class="arch-node-circle node-sentinel">
+              <svg class="hl-icon">
+                <use href="#icon-user" />
+              </svg>
+            </div>
+            <div class="arch-node-label">Sentinel</div>
+            <div class="arch-node-sublabel">Décide et justifie</div>
+          </div>
+          <div class="arch-connector"></div>
+          <div class="arch-node">
+            <div class="arch-node-circle node-decision">
+              <svg class="hl-icon">
+                <use href="#icon-check" />
+              </svg>
+            </div>
+            <div class="arch-node-label">Décision</div>
+            <div class="arch-node-sublabel">Loggée et opposable</div>
+          </div>
+        </div>
+      </div>
+
       <div class="solution-flow reveal-stagger">
         <div class="solution-step">
           <div class="step-icon">
@@ -636,6 +693,13 @@
         </div>
       </div>
 
+      <!-- Arbitrium Gauge -->
+      <div class="arbitrium-gauge reveal">
+        <img src="arbitrium-fr.png"
+          alt="Jauge Arbitrium — Seuil entre exécution IA automatique et autorité humaine requise" loading="lazy"
+          style="width:100%;max-width:700px;display:block;margin:0 auto;border-radius:var(--radius-lg);">
+      </div>
+
       <div class="solution-result reveal">
         <p><svg class="hl-icon">
             <use href="#icon-target" />
@@ -688,6 +752,47 @@
           </div>
         </div>
 
+        <!-- Responsibility Constellation -->
+        <div class="responsibility-constellation reveal">
+          <!-- Connection lines -->
+          <div class="constellation-line cl-top"></div>
+          <div class="constellation-line cl-right"></div>
+          <div class="constellation-line cl-bottom"></div>
+          <div class="constellation-line cl-left"></div>
+          <!-- Center node -->
+          <div class="constellation-center">
+            <svg class="hl-icon">
+              <use href="#icon-verified" />
+            </svg>
+            <span>Sentinel</span>
+          </div>
+          <!-- Satellite nodes -->
+          <div class="constellation-node cn-top">
+            <svg class="hl-icon">
+              <use href="#icon-user" />
+            </svg>
+            <span>Attribuée</span>
+          </div>
+          <div class="constellation-node cn-right">
+            <svg class="hl-icon">
+              <use href="#icon-timer" />
+            </svg>
+            <span>Horodatée</span>
+          </div>
+          <div class="constellation-node cn-bottom">
+            <svg class="hl-icon">
+              <use href="#icon-pen" />
+            </svg>
+            <span>Justifiée</span>
+          </div>
+          <div class="constellation-node cn-left">
+            <svg class="hl-icon">
+              <use href="#icon-search" />
+            </svg>
+            <span>Auditée</span>
+          </div>
+        </div>
+
         <!-- Anti-pattern warning -->
         <div class="anti-pattern">
           <svg class="hl-icon hl-lg anti-pattern-icon">
@@ -713,6 +818,18 @@
 
       <div class="levels-grid reveal-stagger">
         <div class="glass-card level-card level-1">
+          <div class="level-illustration">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="15" y="10" width="70" height="80" rx="8" stroke="currentColor" stroke-width="2.5" />
+              <path d="M35 38L45 48L65 28" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path d="M35 55h30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.5" />
+              <path d="M35 67h20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.3" />
+              <circle cx="75" cy="20" r="12" fill="currentColor" opacity="0.15" />
+              <path d="M70 20l4 4 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </div>
           <div class="level-header">
             <div class="level-number">1</div>
             <h3>Validation de conformité</h3>
@@ -733,6 +850,20 @@
         </div>
 
         <div class="glass-card level-card level-2">
+          <div class="level-illustration">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="35" r="22" stroke="currentColor" stroke-width="2.5" />
+              <path d="M42 30c0-3 3-6 8-6s8 3 8 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              <circle cx="42" cy="32" r="2.5" fill="currentColor" />
+              <circle cx="58" cy="32" r="2.5" fill="currentColor" />
+              <path d="M44 40h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              <path d="M50 57v18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+              <path d="M34 67l16-10 16 10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path d="M28 78l6-11 6 11a5 5 0 01-12 0z" stroke="currentColor" stroke-width="2" />
+              <path d="M60 78l6-11 6 11a5 5 0 01-12 0z" stroke="currentColor" stroke-width="2" />
+            </svg>
+          </div>
           <div class="level-header">
             <div class="level-number">2</div>
             <h3>Jugement contextuel</h3>
@@ -752,6 +883,21 @@
         </div>
 
         <div class="glass-card level-card level-3">
+          <div class="level-illustration">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="38" r="24" stroke="currentColor" stroke-width="2.5" />
+              <path d="M50 14l3 7 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1 3-7z" fill="currentColor" opacity="0.2"
+                stroke="currentColor" stroke-width="1.5" />
+              <path d="M38 62c0-6.6 5.4-12 12-12s12 5.4 12 12" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" />
+              <rect x="30" y="70" width="40" height="20" rx="3" stroke="currentColor" stroke-width="2.5" />
+              <path d="M40 80h20" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5" />
+              <path d="M40 85h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.3" />
+              <circle cx="62" cy="78" r="5" fill="currentColor" opacity="0.15" />
+              <path d="M60 78l2 2 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </div>
           <div class="level-header">
             <div class="level-number">3</div>
             <h3>Autorité décisionnelle</h3>
