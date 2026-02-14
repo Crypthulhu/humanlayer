@@ -726,10 +726,10 @@ p {
 }
 
 .hero-content {
-  max-width: 800px;
+  max-width: 780px;
   position: relative;
   z-index: 2;
-  padding-right: 72px;
+  padding-right: 110px;
 }
 
 .hero-badge {
@@ -912,10 +912,10 @@ p {
 /* Hero visual */
 .hero-visual {
   position: absolute;
-  right: -10%;
-  top: 38%;
+  right: -16%;
+  top: 39%;
   transform: translateY(-50%);
-  width: 42%;
+  width: 40%;
   height: 500px;
   display: flex;
   align-items: center;
@@ -924,6 +924,15 @@ p {
   filter: drop-shadow(0 24px 60px rgba(192, 57, 43, 0.2));
   animation: heroFloat 8s ease-in-out infinite;
   pointer-events: none;
+}
+
+html[lang="en"] .hero-content {
+  max-width: 740px;
+  padding-right: 140px;
+}
+
+html[lang="en"] .hero-visual {
+  right: -18%;
 }
 
 @keyframes heroFloat {
