@@ -727,6 +727,9 @@ p {
 
 .hero-content {
   max-width: 800px;
+  position: relative;
+  z-index: 2;
+  padding-right: 72px;
 }
 
 .hero-badge {
@@ -909,17 +912,18 @@ p {
 /* Hero visual */
 .hero-visual {
   position: absolute;
-  right: -2%;
-  top: 44%;
+  right: -10%;
+  top: 38%;
   transform: translateY(-50%);
-  width: 45%;
+  width: 42%;
   height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1;
+  z-index: 0;
   filter: drop-shadow(0 24px 60px rgba(192, 57, 43, 0.2));
   animation: heroFloat 8s ease-in-out infinite;
+  pointer-events: none;
 }
 
 @keyframes heroFloat {
@@ -1587,37 +1591,103 @@ p {
   align-items: flex-start;
   gap: 0;
   margin-top: 60px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  position: relative;
+  padding: 0 40px;
+}
+
+/* Single continuous timeline line behind circles */
+.solution-flow::before {
+  content: '';
+  position: absolute;
+  top: 44px;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(201, 162, 107, 0.25) 10%,
+      rgba(201, 162, 107, 0.4) 50%,
+      rgba(201, 162, 107, 0.25) 90%,
+      transparent 100%);
+  z-index: 0;
 }
 
 .solution-step {
   flex: 1;
-  min-width: 200px;
-  max-width: 280px;
+  min-width: 180px;
+  max-width: 220px;
   text-align: center;
   position: relative;
-  padding: 0 16px;
+  padding: 0 12px;
+}
+
+/* Animated dot between steps */
+.solution-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 40px;
+  right: -6px;
+  width: 10px;
+  height: 10px;
+  background: var(--accent);
+  border-radius: 50%;
+  z-index: 3;
+  box-shadow: 0 0 12px rgba(201, 162, 107, 0.5);
+  animation: timelinePulse 2.5s ease-in-out infinite;
+}
+
+.solution-step:nth-child(2):not(:last-child)::after {
+  animation-delay: 0.5s;
+}
+
+.solution-step:nth-child(3):not(:last-child)::after {
+  animation-delay: 1s;
+}
+
+.solution-step:nth-child(4):not(:last-child)::after {
+  animation-delay: 1.5s;
+}
+
+@keyframes timelinePulse {
+
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
 }
 
 .step-icon {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 24px;
+  width: 88px;
+  height: 88px;
+  margin: 0 auto 20px;
   background: var(--gradient-primary);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 2rem;
-  box-shadow: 0 4px 30px var(--primary-glow);
+  box-shadow: 0 8px 32px rgba(192, 57, 43, 0.25), 0 0 0 4px rgba(255, 255, 255, 0.8);
   position: relative;
   z-index: 2;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.solution-step:hover .step-icon {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 12px 40px rgba(192, 57, 43, 0.35), 0 0 0 4px rgba(255, 255, 255, 0.9);
 }
 
 .step-number {
   position: absolute;
-  top: -8px;
-  right: -8px;
+  top: -6px;
+  right: -6px;
   width: 28px;
   height: 28px;
   background: var(--accent);
@@ -1625,36 +1695,27 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  color: var(--secondary);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(201, 162, 107, 0.4);
+  z-index: 3;
 }
 
 .solution-step h4 {
-  margin-bottom: 12px;
+  margin-bottom: 8px;
+  font-size: 1.05rem;
+  color: var(--text-primary);
 }
 
 .solution-step p {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
 }
 
+/* Hide the old step-connector divs (kept in HTML for compatibility) */
 .step-connector {
-  position: absolute;
-  top: 40px;
-  right: -50%;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
-  z-index: 0;
-}
-
-.solution-step h4,
-.solution-step p {
-  position: relative;
-  z-index: 2;
-}
-
-.solution-step:last-child .step-connector {
   display: none;
 }
 
@@ -3197,12 +3258,13 @@ p {
 }
 
 .footer-logo {
-  font-size: 1.25rem;
-  font-weight: 800;
+  font-size: 0.85rem;
+  font-weight: 700;
   background: var(--gradient-primary);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  white-space: nowrap;
 }
 
 .footer-tagline {
@@ -3234,7 +3296,7 @@ p {
 
 .footer-links {
   display: flex;
-  gap: 12px;
+  gap: 8px;
   flex-wrap: nowrap;
   align-items: center;
   order: 2;
@@ -3244,14 +3306,15 @@ p {
 .footer-links a {
   color: var(--text-secondary);
   text-decoration: none;
-  font-size: 0.875rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
-  padding: 8px 14px;
+  padding: 5px 10px;
   border-radius: 999px;
   border: 1px solid rgba(0, 0, 0, 0.12);
   background: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
 }
 
@@ -3269,6 +3332,10 @@ p {
 @media (max-width: 1024px) {
   .hero-visual {
     display: none;
+  }
+
+  .hero-content {
+    padding-right: 0;
   }
 
   .problem-content,
@@ -3631,13 +3698,19 @@ p {
   .solution-flow {
     flex-direction: column;
     align-items: center;
+    padding: 0;
+  }
+
+  .solution-flow::before {
+    display: none;
   }
 
   .solution-step {
     max-width: 100%;
+    min-width: unset;
   }
 
-  .step-connector {
+  .solution-step:not(:last-child)::after {
     display: none;
   }
 
@@ -4299,7 +4372,7 @@ p {
 
 .hero-content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 /* Gradient Text Animation */
@@ -4374,21 +4447,13 @@ p {
   margin-top: 8px;
 }
 
-/* Enhanced Solution Step Connector */
+/* Enhanced Solution Step Connector — deprecated, using timeline ::before instead */
 .step-connector {
-  position: relative;
-  overflow: hidden;
+  display: none;
 }
 
 .step-connector::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
-  animation: connectorFlow 2s linear infinite;
+  display: none;
 }
 
 @keyframes connectorFlow {
