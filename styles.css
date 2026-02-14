@@ -935,6 +935,10 @@ html[lang="en"] .hero-visual {
   right: -18%;
 }
 
+html[lang="fr"] .hero-visual {
+  right: -22%;
+}
+
 @keyframes heroFloat {
 
   0%,
