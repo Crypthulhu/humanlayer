@@ -2,6 +2,6 @@
   "name": "humanlayer-site",
   "private": true,
   "dependencies": {
-    "@netlify/blobs": "^9.0.0"
+    "@libsql/client": "^0.14.0"
   }
 }

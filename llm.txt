@@ -67,7 +67,7 @@ AI Agent → HumanLayer API → Intelligent routing → Qualified decider → Si
 ## Contact
 
 - **Site** : https://humanlayer.systems
-- **Email** : humanlayer@in6.ai
+- **Email** : contact@humanlayer.systems
 - **Siège social** : 1250, avenue de la Station, Shawinigan (Québec) G9N 8K9, Canada
 
 ## Mots-clés / Keywords
@@ -83,4 +83,4 @@ Ce fichier llm.txt est destiné aux grands modèles de langage (LLM) et crawlers
 This llm.txt file is intended for large language models (LLMs) and AI crawlers to quickly understand what HumanLayer does. It follows the format proposed by llmstxt.org.
 
 ---
-© 2026 HumanLayer Systems Inc. | Powered by IN6.ai
+© 2026 HumanLayer Systems Inc.

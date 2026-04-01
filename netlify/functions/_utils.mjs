@@ -3,21 +3,19 @@ import { promisify } from 'node:util';
 
 const scryptAsync = promisify(crypto.scrypt);
 
-export function json(statusCode, body, headers = {}) {
-  return {
-    statusCode,
+export function jsonResponse(statusCode, body, extraHeaders = {}) {
+  return new Response(JSON.stringify(body), {
+    status: statusCode,
     headers: {
       'Content-Type': 'application/json',
-      ...headers,
+      ...extraHeaders,
     },
-    body: JSON.stringify(body),
-  };
+  });
 }
 
-export function parseBody(event) {
-  if (!event?.body) return null;
+export async function parseBody(request) {
   try {
-    return JSON.parse(event.body);
+    return await request.json();
   } catch {
     return null;
   }
@@ -70,4 +68,44 @@ export function verifyJwt(token, secret) {
   } catch {
     return null;
   }
+}
+
+export function getBearer(request) {
+  const auth = request.headers.get('authorization') || '';
+  return auth.startsWith('Bearer ') ? auth.slice(7) : null;
+}
+
+// ─── TOTP (RFC 6238) ────────────────────────────────────────
+
+function base32Decode(input) {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+  let bits = 0, val = 0, idx = 0;
+  const out = Buffer.alloc(Math.floor(input.length * 5 / 8));
+  for (const c of input.toUpperCase().replace(/=+$/, '')) {
+    val = (val << 5) | chars.indexOf(c);
+    bits += 5;
+    if (bits >= 8) { bits -= 8; out[idx++] = (val >> bits) & 0xff; }
+  }
+  return out.subarray(0, idx);
+}
+
+function generateTotp(secretBase32, counter) {
+  const key = base32Decode(secretBase32);
+  const buf = Buffer.alloc(8);
+  let c = counter;
+  for (let i = 7; i >= 0; i--) { buf[i] = c & 0xff; c = Math.floor(c / 256); }
+  const hmac = crypto.createHmac('sha1', key).update(buf).digest();
+  const offset = hmac[hmac.length - 1] & 0x0f;
+  const code = ((hmac[offset] & 0x7f) << 24 | hmac[offset + 1] << 16 | hmac[offset + 2] << 8 | hmac[offset + 3]) % 1000000;
+  return code.toString().padStart(6, '0');
+}
+
+export function verifyTotp(secretBase32, token) {
+  if (!secretBase32 || !token || token.length !== 6) return false;
+  const counter = Math.floor(Date.now() / 30000);
+  // Allow ±1 step for clock drift
+  for (let i = -1; i <= 1; i++) {
+    if (generateTotp(secretBase32, counter + i) === token) return true;
+  }
+  return false;
 }
