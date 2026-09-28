@@ -1,141 +1,157 @@
+// Décisions des Sentinels : file d'attente et verdicts signés (Ed25519), enregistrés de
+// façon atomique ; l'escalade confie la demande à un autre Sentinel (second avis).
 import crypto from 'node:crypto';
-import { initSchema, getDb } from './db.mjs';
-import { jsonResponse, parseBody, verifyJwt, getBearer } from './_utils.mjs';
+import { db, nowIso, LATEST_DECISION_JOIN } from '../lib/db.mjs';
+import { handler, allowMethods, readJson, clientIp, json, HttpError, text } from '../lib/http.mjs';
+import { requireSentinel } from '../lib/auth.mjs';
+import { signDecision, sentinelRef, sha256hex } from '../lib/security.mjs';
+import { findSentinel, previousDeciders, sweep, slaFor, expiryAfter, MAX_ESCALATIONS } from '../lib/routing.mjs';
+import { deliverWebhook } from '../lib/webhooks.mjs';
+import { audit } from '../lib/audit.mjs';
 
-function authorizeSentinel(request) {
-    const token = getBearer(request);
-    const secret = process.env.SENTINEL_JWT_SECRET || process.env.ADMIN_JWT_SECRET;
-    if (!token || !secret) return null;
-    const payload = verifyJwt(token, secret);
-    if (!payload || payload.role !== 'sentinel') return null;
-    return payload;
-}
+const VERDICTS = ['approved', 'rejected', 'escalated'];
+const EVENTS = { approved: 'decision.completed', rejected: 'decision.rejected', escalated: 'decision.escalated' };
 
-export default async function (request) {
-    const auth = authorizeSentinel(request);
-    if (!auth) {
-        return jsonResponse(401, { error: 'Unauthorized' });
+export default handler(async (request, context) => {
+  allowMethods(request, 'GET', 'POST');
+  const conn = await db();
+  const { sentinel } = await requireSentinel(conn, request);
+  const ip = clientIp(request, context);
+
+  if (request.method === 'GET') {
+    await sweep(conn, { limit: 25 });
+    // Demandes en cours assignées au Sentinel, plus celles qu'il a déjà tranchées.
+    const res = await conn.execute({
+      sql: `SELECT r.id, r.agent_id, r.agent_name, r.request_type, r.domain, r.jurisdiction, r.summary, r.context_json,
+              r.priority, r.status, r.created_at, r.assigned_at, r.decided_at, r.expires_at, r.sla_breached_at,
+              r.escalation_count, (r.second_opinion_of IS NOT NULL) AS second_opinion,
+              d.verdict, d.reasoning, d.signed_at AS decision_signed_at, d.signature
+            FROM ai_requests r
+            ${LATEST_DECISION_JOIN}
+            WHERE r.assigned_to = ?
+               OR r.id IN (SELECT request_id FROM decisions WHERE sentinel_id = ?)
+            ORDER BY r.created_at DESC LIMIT 100`,
+      args: [sentinel.id, sentinel.id],
+    });
+    // Une demande escaladée par ce Sentinel apparaît dans son historique, pas dans sa file.
+    const requests = res.rows.map((r) => (r.status !== 'decided' && r.verdict === 'escalated' ? { ...r, status: 'escalated' } : r));
+    return json(200, { requests });
+  }
+
+  const body = await readJson(request, 32 * 1024);
+  const requestId = text(body.request_id, 64);
+  const verdict = body.verdict;
+  const reasoning = text(body.reasoning, 5000);
+  if (!requestId || !VERDICTS.includes(verdict)) {
+    throw new HttpError(400, { fr: 'request_id et verdict (approved, rejected, escalated) requis', en: 'request_id and verdict (approved, rejected, escalated) required' }, { code: 'missing_fields' });
+  }
+  if (!reasoning || reasoning.length < 10) {
+    throw new HttpError(400, { fr: 'La justification est obligatoire (10 caractères minimum)', en: 'A justification is required (at least 10 characters)' }, { code: 'reasoning_required' });
+  }
+
+  const decisionId = crypto.randomUUID();
+  const signedAt = nowIso();
+  const signed = signDecision({
+    v: 1,
+    decision_id: decisionId,
+    request_id: requestId,
+    verdict,
+    reasoning_sha256: sha256hex(reasoning),
+    sentinel_ref: sentinelRef(sentinel.id),
+    signed_at: signedAt,
+  });
+
+  let row;
+  let nextSentinel = null;
+  const tx = await conn.transaction('write');
+  try {
+    const found = await tx.execute({
+      sql: "SELECT * FROM ai_requests WHERE id = ? AND assigned_to = ? AND status IN ('assigned', 'sla_breached')",
+      args: [requestId, sentinel.id],
+    });
+    if (!found.rows.length) {
+      const exists = await tx.execute({ sql: 'SELECT status, assigned_to FROM ai_requests WHERE id = ?', args: [requestId] });
+      await tx.rollback();
+      if (exists.rows.length && exists.rows[0].status === 'decided') {
+        throw new HttpError(409, { fr: 'Cette demande a déjà été tranchée', en: 'This request has already been decided' }, { code: 'already_decided' });
+      }
+      throw new HttpError(404, { fr: 'Demande introuvable ou non assignée à ce Sentinel', en: 'Request not found or not assigned to this Sentinel' }, { code: 'not_found' });
     }
+    row = found.rows[0];
 
-    // sentinel_id is ALWAYS derived from the authenticated token — never from user input
-    const sentinelId = auth.sentinel_id;
-    if (!sentinelId) {
-        return jsonResponse(403, { error: 'Invalid token: missing sentinel_id' });
+    await tx.execute({
+      sql: `INSERT INTO decisions (id, request_id, sentinel_id, verdict, reasoning, signed_at, ip_address, signature, signed_payload, key_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      args: [decisionId, requestId, sentinel.id, verdict, reasoning, signedAt, ip, signed.signature, signed.canonical, signed.keyId],
+    });
+
+    if (verdict === 'escalated') {
+      const exclude = [sentinel.id, ...(await previousDeciders(tx, requestId))];
+      nextSentinel = Number(row.escalation_count || 0) < MAX_ESCALATIONS
+        ? await findSentinel(tx, { domain: row.domain, jurisdiction: row.jurisdiction, exclude })
+        : null;
+      await tx.execute({
+        sql: `UPDATE ai_requests SET assigned_to = ?, assigned_at = ?, status = ?, expires_at = ?,
+                escalation_count = COALESCE(escalation_count, 0) + 1
+              WHERE id = ?`,
+        args: [nextSentinel, nextSentinel ? signedAt : null, nextSentinel ? 'assigned' : 'pending', expiryAfter(slaFor(row.request_type)), requestId],
+      });
+    } else {
+      await tx.execute({ sql: "UPDATE ai_requests SET status = 'decided', decided_at = ? WHERE id = ?", args: [signedAt, requestId] });
     }
-
-    await initSchema();
-    const db = getDb();
-    const url = new URL(request.url);
-    const params = Object.fromEntries(url.searchParams);
-
-    // ──────────────────────────────────────────────
-    // GET — list assigned requests for this sentinel
-    // ──────────────────────────────────────────────
-    if (request.method === 'GET') {
-        try {
-            const result = await db.execute({
-                sql: `SELECT r.*, d.verdict, d.reasoning
-              FROM ai_requests r
-              LEFT JOIN decisions d ON d.request_id = r.id
-              WHERE r.assigned_to = ?
-              ORDER BY r.created_at DESC LIMIT 100`,
-                args: [sentinelId]
-            });
-
-            return jsonResponse(200, { requests: result.rows });
-        } catch (err) {
-            console.error('ai-decision GET error:', err);
-            return jsonResponse(500, { error: 'Read failed' });
-        }
+    await tx.commit();
+  } catch (err) {
+    if (err instanceof HttpError) throw err;
+    try {
+      await tx.rollback();
+    } catch {
+      /* déjà annulée */
     }
-
-    // ──────────────────────────────────────────────
-    // POST — submit a decision (verdict)
-    // ──────────────────────────────────────────────
-    if (request.method === 'POST') {
-        const data = await parseBody(request);
-        if (!data) return jsonResponse(400, { error: 'Invalid JSON' });
-
-        const { request_id, verdict, reasoning } = data;
-
-        if (!request_id || !verdict) {
-            return jsonResponse(400, { error: 'Missing required fields: request_id, verdict' });
-        }
-
-        const validVerdicts = ['approved', 'rejected', 'escalated'];
-        if (!validVerdicts.includes(verdict)) {
-            return jsonResponse(400, { error: `Invalid verdict. Must be: ${validVerdicts.join(', ')}` });
-        }
-
-        try {
-            const reqCheck = await db.execute({
-                sql: 'SELECT * FROM ai_requests WHERE id = ? AND assigned_to = ?',
-                args: [request_id, sentinelId]
-            });
-
-            if (!reqCheck.rows.length) {
-                return jsonResponse(404, { error: 'Request not found or not assigned to this sentinel' });
-            }
-
-            if (reqCheck.rows[0].status === 'decided') {
-                return jsonResponse(409, { error: 'This request has already been decided' });
-            }
-
-            const now = new Date().toISOString();
-            const decisionId = crypto.randomUUID();
-            const ip = request.headers.get('x-forwarded-for') || request.headers.get('client-ip') || '';
-
-            await db.execute({
-                sql: `INSERT INTO decisions (id, request_id, sentinel_id, verdict, reasoning, signed_at, ip_address)
-              VALUES (?, ?, ?, ?, ?, ?, ?)`,
-                args: [decisionId, request_id, sentinelId, verdict, reasoning || null, now, ip]
-            });
-
-            await db.execute({
-                sql: `UPDATE ai_requests SET status = 'decided', decided_at = ? WHERE id = ?`,
-                args: [now, request_id]
-            });
-
-            // ── Webhook callback (fire-and-forget) ──
-            const callbackUrl = reqCheck.rows[0].callback_url;
-            if (callbackUrl) {
-                try {
-                    const sentinelInfo = await db.execute({
-                        sql: 'SELECT first_name, last_name FROM applications WHERE id = ?',
-                        args: [sentinelId]
-                    });
-                    const sName = sentinelInfo.rows.length
-                        ? `${sentinelInfo.rows[0].first_name} ${sentinelInfo.rows[0].last_name}`
-                        : null;
-
-                    fetch(callbackUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            event: 'decision.rendered',
-                            request_id,
-                            verdict,
-                            reasoning: reasoning || null,
-                            signed_at: now,
-                            sentinel_name: sName
-                        })
-                    }).catch(e => console.error('Webhook callback failed:', e));
-                } catch (e) {
-                    console.error('Webhook prep error:', e);
-                }
-            }
-
-            return jsonResponse(200, {
-                ok: true,
-                decision_id: decisionId,
-                verdict,
-                signed_at: now
-            });
-        } catch (err) {
-            console.error('ai-decision POST error:', err);
-            return jsonResponse(500, { error: 'Decision recording failed' });
-        }
+    // Décision concurrente : l'index unique refuse la seconde.
+    if (/UNIQUE/i.test(String(err && err.message))) {
+      throw new HttpError(409, { fr: 'Cette demande a déjà été tranchée', en: 'This request has already been decided' }, { code: 'already_decided' });
     }
+    throw err;
+  }
 
-    return jsonResponse(405, { error: 'Method not allowed' });
-}
+  await audit(conn, {
+    actor_type: 'sentinel',
+    actor_id: sentinel.id,
+    action: `decision.${verdict}`,
+    target_type: 'request',
+    target_id: requestId,
+    ip,
+    details: { decision_id: decisionId, next: nextSentinel ? sentinelRef(nextSentinel) : null },
+  });
+
+  if (row.callback_url) {
+    await deliverWebhook(conn, {
+      url: row.callback_url,
+      keyId: row.api_key_id,
+      requestId,
+      event: EVENTS[verdict],
+      data: {
+        request_id: requestId,
+        decision_id: decisionId,
+        status: verdict === 'escalated' ? (nextSentinel ? 'assigned' : 'pending') : 'decided',
+        verdict,
+        reasoning,
+        sentinel_ref: sentinelRef(sentinel.id),
+        signed_at: signedAt,
+        signature: signed.signature,
+        signed_payload: signed.canonical,
+        key_id: signed.keyId,
+      },
+    });
+  }
+
+  return json(200, {
+    ok: true,
+    decision_id: decisionId,
+    verdict,
+    signed_at: signedAt,
+    signature: signed.signature,
+    key_id: signed.keyId,
+    escalated_to: nextSentinel ? sentinelRef(nextSentinel) : null,
+  });
+});

@@ -1,95 +1,61 @@
-import { initSchema, getDb } from './db.mjs';
-import { jsonResponse, parseBody, verifyJwt, verifyTotp } from './_utils.mjs';
-import crypto from 'node:crypto';
+// Enrôlement TOTP des Sentinels. Le secret est généré et conservé côté serveur (chiffré) ;
+// la MFA ne peut pas être désactivée par le Sentinel, seulement renouvelée.
+import { db, nowIso } from '../lib/db.mjs';
+import { handler, allowMethods, readJson, clientIp, json, HttpError } from '../lib/http.mjs';
+import { requireSentinel, issueToken, SESSION_TTL } from '../lib/auth.mjs';
+import { newTotpSecret, totpUri, verifyTotp, encryptSecret, decryptSecret } from '../lib/security.mjs';
+import { enforce, LIMITS } from '../lib/ratelimit.mjs';
+import { audit } from '../lib/audit.mjs';
 
-// ─── Base32 encode for TOTP secrets ───
-function base32Encode(buffer) {
-    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
-    let bits = 0, value = 0, output = '';
-    for (const byte of buffer) {
-        value = (value << 8) | byte;
-        bits += 8;
-        while (bits >= 5) {
-            bits -= 5;
-            output += alphabet[(value >>> bits) & 0x1f];
-        }
-    }
-    if (bits > 0) output += alphabet[(value << (5 - bits)) & 0x1f];
-    return output;
-}
+export default handler(async (request, context) => {
+  allowMethods(request, 'GET', 'POST', 'DELETE');
+  const conn = await db();
+  const { token, sentinel } = await requireSentinel(conn, request, { allowEnrollment: true });
+  const ip = clientIp(request, context);
+  const enrolled = Boolean(sentinel.totp_secret);
 
-export default async function (request) {
-    const secret = process.env.SENTINEL_JWT_SECRET || process.env.ADMIN_JWT_SECRET;
-    if (!secret) return jsonResponse(500, { error: 'Server not configured' });
+  if (request.method === 'DELETE') {
+    throw new HttpError(
+      403,
+      { fr: 'La double authentification est obligatoire pour les Sentinels. Pour changer d’appareil, générez un nouveau code.', en: 'Two-factor authentication is mandatory for Sentinels. To change device, generate a new code.' },
+      { code: 'mfa_mandatory' }
+    );
+  }
 
-    // Authenticate sentinel
-    const authHeader = request.headers.get?.('authorization') || request.headers['authorization'];
-    const token = authHeader?.replace('Bearer ', '');
-    if (!token) return jsonResponse(401, { error: 'Missing token' });
+  if (request.method === 'GET') {
+    const rotate = new URL(request.url).searchParams.get('rotate') === '1';
+    // Statut seul : Sentinel déjà enrôlé qui ne demande pas de renouvellement.
+    if (enrolled && !rotate) return json(200, { enrolled: true, mandatory: true });
+    // Renouveler un appareil exige une session complète (MFA déjà vérifiée).
+    if (enrolled && token.scope !== 'full') throw new HttpError(403, { fr: 'Session complète requise', en: 'Full session required' }, { code: 'mfa_required' });
+    const secret = newTotpSecret();
+    await conn.execute({ sql: 'UPDATE applications SET totp_pending_secret = ? WHERE id = ?', args: [encryptSecret(secret), sentinel.id] });
+    return json(200, { enrolled, mandatory: true, secret, uri: totpUri(secret, sentinel.email) });
+  }
 
-    const payload = verifyJwt(token, secret);
-    if (!payload || payload.role !== 'sentinel') {
-        return jsonResponse(401, { error: 'Unauthorized' });
-    }
-
-    await initSchema();
-    const db = getDb();
-
-    // ─── GET: Generate a new TOTP secret ───
-    if (request.method === 'GET') {
-        // Check if already enrolled
-        const existing = await db.execute({
-            sql: 'SELECT totp_secret FROM applications WHERE id = ?',
-            args: [payload.sentinel_id]
-        });
-        const row = existing.rows[0];
-        const enrolled = !!(row && row.totp_secret);
-
-        // Generate a fresh secret
-        const secretBytes = crypto.randomBytes(20);
-        const totpSecret = base32Encode(secretBytes);
-
-        // Build otpauth URI for QR code
-        const issuer = 'HumanLayer';
-        const label = encodeURIComponent(`${issuer}:${payload.email}`);
-        const uri = `otpauth://totp/${label}?secret=${totpSecret}&issuer=${issuer}&digits=6&period=30`;
-
-        return jsonResponse(200, { secret: totpSecret, uri, enrolled });
-    }
-
-    // ─── POST: Verify code and save secret ───
-    if (request.method === 'POST') {
-        const body = await parseBody(request);
-        if (!body?.secret || !body?.code) {
-            return jsonResponse(400, { error: 'Missing secret or code' });
-        }
-
-        if (body.code.length !== 6) {
-            return jsonResponse(400, { error: 'Code must be 6 digits' });
-        }
-
-        // Verify the code matches the provided secret
-        if (!verifyTotp(body.secret, body.code)) {
-            return jsonResponse(401, { error: 'Code 2FA invalide — réessayez' });
-        }
-
-        // Save the TOTP secret to the sentinel's profile
-        await db.execute({
-            sql: 'UPDATE applications SET totp_secret = ? WHERE id = ?',
-            args: [body.secret, payload.sentinel_id]
-        });
-
-        return jsonResponse(200, { success: true, message: '2FA activé avec succès' });
-    }
-
-    // ─── DELETE: Remove TOTP (disable 2FA) ───
-    if (request.method === 'DELETE') {
-        await db.execute({
-            sql: 'UPDATE applications SET totp_secret = NULL WHERE id = ?',
-            args: [payload.sentinel_id]
-        });
-        return jsonResponse(200, { success: true, message: '2FA désactivé' });
-    }
-
-    return jsonResponse(405, { error: 'Method not allowed' });
-}
+  // POST : confirme le secret en attente avec un code valide.
+  await enforce(conn, `totp:sentinel:${sentinel.id}`, LIMITS.totpAttemptsPerSentinel.limit, LIMITS.totpAttemptsPerSentinel.window);
+  const body = await readJson(request, 2 * 1024);
+  const code = String(body.code || '').trim();
+  if (!sentinel.totp_pending_secret) {
+    throw new HttpError(400, { fr: 'Aucun enrôlement en cours : générez d’abord un code', en: 'No enrollment in progress: generate a code first' }, { code: 'no_pending_enrollment' });
+  }
+  const { value: pending } = decryptSecret(sentinel.totp_pending_secret);
+  const step = verifyTotp(pending, code);
+  if (step === null) {
+    await audit(conn, { actor_type: 'sentinel', actor_id: sentinel.id, action: 'mfa.enrollment_failed', ip });
+    throw new HttpError(401, { fr: 'Code 2FA invalide : réessayez', en: 'Invalid 2FA code: try again' }, { code: 'invalid_mfa' });
+  }
+  await conn.execute({
+    sql: 'UPDATE applications SET totp_secret = ?, totp_pending_secret = NULL, totp_last_step = ?, mfa_enrolled_at = ? WHERE id = ?',
+    args: [encryptSecret(pending), step, nowIso(), sentinel.id],
+  });
+  await audit(conn, { actor_type: 'sentinel', actor_id: sentinel.id, action: enrolled ? 'mfa.rotated' : 'mfa.enrolled', ip });
+  return json(200, {
+    success: true,
+    message: 'Double authentification activée',
+    token: issueToken('sentinel', sentinel.id),
+    expires_in: SESSION_TTL,
+    sentinel: { id: sentinel.id, firstName: sentinel.first_name, lastName: sentinel.last_name, email: sentinel.email, expertise: sentinel.expertise },
+  });
+});

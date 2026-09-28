@@ -1,164 +1,131 @@
-import crypto from 'node:crypto';
-import { promisify } from 'node:util';
-import { initSchema, getDb } from './db.mjs';
-import { jsonResponse, verifyJwt, getBearer } from './_utils.mjs';
+// Administration des candidatures et des Sentinels : colonnes explicites (jamais de secret),
+// activation avec mot de passe robuste, suspension, réinitialisation MFA, journalisation.
+import { db, nowIso } from '../lib/db.mjs';
+import { handler, allowMethods, readJson, clientIp, json, HttpError, text } from '../lib/http.mjs';
+import { requireAdmin } from '../lib/auth.mjs';
+import { hashPassword, PASSWORD_MIN_LENGTH } from '../lib/security.mjs';
+import { audit } from '../lib/audit.mjs';
 
-const scryptAsync = promisify(crypto.scrypt);
+const COLUMNS = `id, first_name, last_name, email, phone, expertise, qualifications, experience, capacity,
+  linkedin, motivation, habilitation, jurisdictions, status, score, notes, submitted_at, reviewed_at,
+  activated_at, mfa_enrolled_at, (totp_secret IS NOT NULL) AS mfa_enrolled`;
 
-function authorize(request) {
-  const token = getBearer(request);
-  const secret = process.env.ADMIN_JWT_SECRET;
-  if (!token || !secret) return false;
-  const payload = verifyJwt(token, secret);
-  if (!payload || payload.role !== 'admin') return false;
-  return payload;
-}
+const STATUSES = ['pending', 'qualified', 'activated', 'suspended', 'rejected'];
 
-export default async function (request) {
-  if (!authorize(request)) {
-    return jsonResponse(401, { error: 'Unauthorized' });
-  }
+export default handler(async (request, context) => {
+  allowMethods(request, 'GET', 'PATCH', 'DELETE');
+  requireAdmin(request);
+  const conn = await db();
+  const ip = clientIp(request, context);
+  const params = new URL(request.url).searchParams;
 
-  await initSchema();
-  const db = getDb();
-  const url = new URL(request.url);
-  const params = Object.fromEntries(url.searchParams);
-
-  // ──────────────────────────────────────────────
-  // GET — list or detail
-  // ──────────────────────────────────────────────
   if (request.method === 'GET') {
-    try {
-      // Single application detail
-      if (params.id) {
-        const result = await db.execute({
-          sql: 'SELECT * FROM applications WHERE id = ?',
-          args: [params.id]
-        });
-        if (!result.rows.length) return jsonResponse(404, { error: 'Not found' });
-        return jsonResponse(200, { application: result.rows[0] });
-      }
-
-      // List with optional filters
-      let where = [];
-      let args = [];
-
-      if (params.status) {
-        where.push('status = ?');
-        args.push(params.status);
-      }
-      if (params.expertise) {
-        where.push('expertise = ?');
-        args.push(params.expertise);
-      }
-
-      const whereClause = where.length ? `WHERE ${where.join(' AND ')}` : '';
-      const result = await db.execute({
-        sql: `SELECT * FROM applications ${whereClause} ORDER BY submitted_at DESC LIMIT 500`,
-        args
-      });
-
-      // Stats
-      const stats = await db.execute(
-        `SELECT 
-          COUNT(*) as total,
-          SUM(CASE WHEN status = 'pending' THEN 1 ELSE 0 END) as pending,
-          SUM(CASE WHEN status = 'qualified' THEN 1 ELSE 0 END) as qualified,
-          SUM(CASE WHEN status = 'activated' THEN 1 ELSE 0 END) as activated,
-          SUM(CASE WHEN status = 'rejected' THEN 1 ELSE 0 END) as rejected
-        FROM applications`
-      );
-
-      return jsonResponse(200, {
-        entries: result.rows,
-        stats: stats.rows[0] || {}
-      });
-    } catch (err) {
-      console.error('admin-list GET error:', err);
-      return jsonResponse(500, { error: 'Read failed' });
+    if (params.get('id')) {
+      const res = await conn.execute({ sql: `SELECT ${COLUMNS} FROM applications WHERE id = ?`, args: [params.get('id')] });
+      if (!res.rows.length) throw new HttpError(404, { fr: 'Introuvable', en: 'Not found' }, { code: 'not_found' });
+      return json(200, { application: res.rows[0] });
     }
+    const where = [];
+    const args = [];
+    if (params.get('status')) {
+      where.push('status = ?');
+      args.push(params.get('status'));
+    }
+    if (params.get('expertise')) {
+      where.push('expertise = ?');
+      args.push(params.get('expertise'));
+    }
+    const res = await conn.execute({
+      sql: `SELECT ${COLUMNS} FROM applications ${where.length ? `WHERE ${where.join(' AND ')}` : ''} ORDER BY submitted_at DESC LIMIT 500`,
+      args,
+    });
+    const stats = await conn.execute(`SELECT COUNT(*) AS total,
+        SUM(CASE WHEN status = 'pending' THEN 1 ELSE 0 END) AS pending,
+        SUM(CASE WHEN status = 'qualified' THEN 1 ELSE 0 END) AS qualified,
+        SUM(CASE WHEN status = 'activated' THEN 1 ELSE 0 END) AS activated,
+        SUM(CASE WHEN status = 'suspended' THEN 1 ELSE 0 END) AS suspended,
+        SUM(CASE WHEN status = 'rejected' THEN 1 ELSE 0 END) AS rejected
+      FROM applications`);
+    return json(200, { entries: res.rows, stats: stats.rows[0] || {} });
   }
 
-  // ──────────────────────────────────────────────
-  // PATCH — update status or notes
-  // ──────────────────────────────────────────────
+  const body = await readJson(request, 16 * 1024);
+  const id = text(body.id, 64);
+  if (!id) throw new HttpError(400, { fr: 'id manquant', en: 'Missing id' }, { code: 'missing_fields' });
+
   if (request.method === 'PATCH') {
-    const body = await request.json().catch(() => ({}));
-    const { id, status, notes, password } = body;
+    const sets = [];
+    const args = [];
+    const changes = {};
+    const now = nowIso();
 
-    if (!id) return jsonResponse(400, { error: 'Missing id' });
-
-    const validStatuses = ['pending', 'qualified', 'activated', 'rejected'];
-    if (status && !validStatuses.includes(status)) {
-      return jsonResponse(400, { error: `Invalid status. Must be: ${validStatuses.join(', ')}` });
-    }
-
-    // Require password when activating
-    if (status === 'activated' && !password) {
-      return jsonResponse(400, { error: 'Password required when activating a sentinel' });
-    }
-
-    try {
-      const sets = [];
-      const args = [];
-      const now = new Date().toISOString();
-
-      if (status) {
-        sets.push('status = ?');
-        args.push(status);
-        sets.push('reviewed_at = ?');
-        args.push(now);
-        if (status === 'activated') {
-          sets.push('activated_at = ?');
-          args.push(now);
-
-          // Hash the password for sentinel login
-          const salt = crypto.randomBytes(32);
-          const hash = await scryptAsync(password, salt, 64);
-          sets.push('password_salt = ?');
-          args.push(salt.toString('hex'));
-          sets.push('password_hash = ?');
-          args.push(hash.toString('hex'));
+    if (body.status !== undefined) {
+      if (!STATUSES.includes(body.status)) {
+        throw new HttpError(400, { fr: `Statut invalide (${STATUSES.join(', ')})`, en: `Invalid status (${STATUSES.join(', ')})` }, { code: 'invalid_status' });
+      }
+      sets.push('status = ?', 'reviewed_at = ?');
+      args.push(body.status, now);
+      changes.status = body.status;
+      if (body.status === 'activated') {
+        const current = await conn.execute({ sql: 'SELECT password_hash, habilitation FROM applications WHERE id = ?', args: [id] });
+        if (!current.rows.length) throw new HttpError(404, { fr: 'Introuvable', en: 'Not found' }, { code: 'not_found' });
+        // Seuls les professionnels disposant d'une habilitation active sont activés (voir la page Devenir Sentinel).
+        if (current.rows[0].habilitation !== 'oui') {
+          throw new HttpError(
+            409,
+            { fr: 'Activation impossible : le candidat n’a pas déclaré d’habilitation professionnelle active', en: 'Cannot activate: the applicant did not declare an active professional authorization' },
+            { code: 'habilitation_required' }
+          );
         }
+        const hasPassword = Boolean(current.rows[0].password_hash);
+        if (body.password || !hasPassword) {
+          if (typeof body.password !== 'string' || body.password.length < PASSWORD_MIN_LENGTH) {
+            throw new HttpError(
+              400,
+              { fr: `Mot de passe requis : ${PASSWORD_MIN_LENGTH} caractères minimum`, en: `Password required: at least ${PASSWORD_MIN_LENGTH} characters` },
+              { code: 'weak_password' }
+            );
+          }
+          const { salt, hash } = await hashPassword(body.password);
+          sets.push('password_salt = ?', 'password_hash = ?');
+          args.push(salt, hash);
+          changes.password = 'set';
+        }
+        sets.push('activated_at = COALESCE(activated_at, ?)');
+        args.push(now);
       }
-      if (notes !== undefined) {
-        sets.push('notes = ?');
-        args.push(notes);
-      }
-
-      if (!sets.length) return jsonResponse(400, { error: 'Nothing to update' });
-
-      args.push(id);
-      await db.execute({
-        sql: `UPDATE applications SET ${sets.join(', ')} WHERE id = ?`,
-        args
-      });
-
-      return jsonResponse(200, { ok: true });
-    } catch (err) {
-      console.error('admin-list PATCH error:', err);
-      return jsonResponse(500, { error: 'Update failed' });
     }
+    if (body.notes !== undefined) {
+      sets.push('notes = ?');
+      args.push(text(body.notes, 4000));
+      changes.notes = true;
+    }
+    // La MFA est obligatoire : l'administration peut seulement la réinitialiser (nouvel enrôlement exigé).
+    if (body.reset_mfa === true) {
+      sets.push('totp_secret = NULL', 'totp_pending_secret = NULL', 'totp_last_step = NULL', 'mfa_enrolled_at = NULL');
+      changes.mfa = 'reset';
+    }
+    if (!sets.length) throw new HttpError(400, { fr: 'Rien à mettre à jour', en: 'Nothing to update' }, { code: 'nothing_to_update' });
+
+    args.push(id);
+    const res = await conn.execute({ sql: `UPDATE applications SET ${sets.join(', ')} WHERE id = ?`, args });
+    if (!res.rowsAffected) throw new HttpError(404, { fr: 'Introuvable', en: 'Not found' }, { code: 'not_found' });
+    await audit(conn, { actor_type: 'admin', actor_id: 'admin', action: 'application.updated', target_type: 'application', target_id: id, ip, details: changes });
+    return json(200, { ok: true });
   }
 
-  // ──────────────────────────────────────────────
-  // DELETE — remove application
-  // ──────────────────────────────────────────────
-  if (request.method === 'DELETE') {
-    const body = await request.json().catch(() => ({}));
-    if (!body.id) return jsonResponse(400, { error: 'Missing id' });
-
-    try {
-      await db.execute({
-        sql: 'DELETE FROM applications WHERE id = ?',
-        args: [body.id]
-      });
-      return jsonResponse(200, { ok: true });
-    } catch (err) {
-      console.error('admin-list DELETE error:', err);
-      return jsonResponse(500, { error: 'Delete failed' });
-    }
+  // DELETE : impossible si le Sentinel a déjà rendu des décisions (piste d'audit à conserver).
+  const decisions = await conn.execute({ sql: 'SELECT COUNT(*) AS n FROM decisions WHERE sentinel_id = ?', args: [id] });
+  if (Number(decisions.rows[0].n) > 0) {
+    throw new HttpError(
+      409,
+      { fr: 'Ce Sentinel a rendu des décisions : suspendez-le plutôt que de le supprimer.', en: 'This Sentinel has decisions on record: suspend instead of deleting.' },
+      { code: 'has_decisions' }
+    );
   }
-
-  return jsonResponse(405, { error: 'Method not allowed' });
-}
+  await conn.execute({ sql: "UPDATE ai_requests SET assigned_to = NULL, status = 'pending' WHERE assigned_to = ? AND status IN ('assigned', 'sla_breached')", args: [id] });
+  const res = await conn.execute({ sql: 'DELETE FROM applications WHERE id = ?', args: [id] });
+  if (!res.rowsAffected) throw new HttpError(404, { fr: 'Introuvable', en: 'Not found' }, { code: 'not_found' });
+  await audit(conn, { actor_type: 'admin', actor_id: 'admin', action: 'application.deleted', target_type: 'application', target_id: id, ip });
+  return json(200, { ok: true });
+});

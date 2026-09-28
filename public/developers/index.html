@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HumanLayer — Documentation API Développeurs</title>
+    <meta name="description"
+        content="Documentation technique de l'API HumanLayer. Intégrez des décisions humaines qualifiées dans vos agents IA via une API REST simple.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://humanlayer.systems/developers/">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <style>
+        :root {
+            --font-display: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --font-body: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --font-mono: 'Geist Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+            --primary: #3fe0ee;
+            --primary-light: rgba(63, 224, 238, 0.08);
+            --primary-glow: rgba(63, 224, 238, 0.15);
+            --accent: #ffb547;
+            --success: #10B981;
+            --danger: #EF4444;
+            --warning: #F59E0B;
+            --info: #3B82F6;
+            --bg: #05070d;
+            --bg-card: rgba(255, 255, 255, 0.04);
+            --bg-code: #0a0f1b;
+            --text-primary: #e8e6e3;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border: rgba(255, 255, 255, 0.08);
+            --radius-sm: 10px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-pill: 999px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        ::selection {
+            background: var(--primary);
+            color: #04121a;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* ─── Layout ─── */
+        .docs-layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            min-height: 100vh;
+        }
+
+        @media (max-width: 900px) {
+            .docs-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .docs-sidebar {
+                display: none;
+            }
+        }
+
+        /* ─── Sidebar ─── */
+        .docs-sidebar {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            border-right: 1px solid var(--border);
+            padding: 28px 24px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .sidebar-logo {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            text-decoration: none;
+        }
+
+        .sidebar-logo span {
+            color: var(--primary);
+        }
+
+        .sidebar-subtitle {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+        }
+
+        .sidebar-section {
+            margin-bottom: 24px;
+        }
+
+        .sidebar-section-title {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .sidebar-link {
+            display: block;
+            padding: 6px 12px;
+            border-radius: 6px;
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: all 0.15s;
+            text-decoration: none;
+        }
+
+        .sidebar-link:hover {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .sidebar-link.active {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .sidebar-badge {
+            display: inline-block;
+            padding: 1px 6px;
+            border-radius: var(--radius-pill);
+            font-size: 0.65rem;
+            font-weight: 700;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+
+        .badge-get {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+        }
+
+        .badge-post {
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+        }
+
+        /* ─── Main Content ─── */
+        .docs-main {
+            padding: 40px 48px 100px;
+            max-width: 860px;
+        }
+
+        @media (max-width: 900px) {
+            .docs-main {
+                padding: 24px 16px 60px;
+            }
+        }
+
+        .docs-header {
+            margin-bottom: 48px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .docs-header h1 {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .docs-header h1 span {
+            color: var(--primary);
+        }
+
+        .docs-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* ─── Sections ─── */
+        .doc-section {
+            margin-bottom: 56px;
+        }
+
+        .doc-section h2 {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .doc-section h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-top: 32px;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .doc-section p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        /* ─── Endpoint Cards ─── */
+        .endpoint-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 28px;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .endpoint-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+        }
+
+        .endpoint-card.method-post::before {
+            background: linear-gradient(90deg, var(--info), #818cf8);
+        }
+
+        .endpoint-card.method-get::before {
+            background: linear-gradient(90deg, var(--success), #6ee7b7);
+        }
+
+        .endpoint-method {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .method-post .endpoint-method {
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+        }
+
+        .method-get .endpoint-method {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+        }
+
+        .endpoint-path {
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            margin-left: 10px;
+        }
+
+        .endpoint-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-top: 12px;
+            margin-bottom: 16px;
+        }
+
+        /* ─── Tables ─── */
+        .param-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.88rem;
+        }
+
+        .param-table th {
+            text-align: left;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .param-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            vertical-align: top;
+        }
+
+        .param-name {
+            font-family: var(--font-mono);
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 0.85rem;
+        }
+
+        .param-type {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .param-required {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.72rem;
+        }
+
+        .param-optional {
+            color: var(--text-muted);
+            font-size: 0.72rem;
+        }
+
+        /* ─── Code Blocks ─── */
+        .code-block {
+            background: var(--bg-code);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            margin: 16px 0;
+        }
+
+        .code-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .code-lang {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .code-copy {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .code-copy:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .code-body {
+            margin: 0;
+            padding: 16px 20px;
+            overflow-x: auto;
+            white-space: pre;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        .code-body .hl-key {
+            color: #818cf8;
+        }
+
+        .code-body .hl-str {
+            color: #34d399;
+        }
+
+        .code-body .hl-num {
+            color: #fbbf24;
+        }
+
+        .code-body .hl-comment {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .code-body .hl-fn {
+            color: #60a5fa;
+        }
+
+        .code-body .hl-kw {
+            color: #c084fc;
+        }
+
+        /* ─── Flow diagram ─── */
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 32px 0;
+            padding: 28px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+        }
+
+        .flow-node {
+            text-align: center;
+            padding: 16px;
+        }
+
+        .flow-node-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            font-size: 1.3rem;
+        }
+
+        .flow-node-icon.icon-agent {
+            background: rgba(59, 130, 246, 0.15);
+            border: 2px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .flow-node-icon.icon-api {
+            background: var(--primary-light);
+            border: 2px solid rgba(63, 224, 238, 0.3);
+        }
+
+        .flow-node-icon.icon-sentinel {
+            background: rgba(255, 181, 71, 0.15);
+            border: 2px solid rgba(255, 181, 71, 0.3);
+        }
+
+        .flow-node-icon.icon-decision {
+            background: rgba(16, 185, 129, 0.15);
+            border: 2px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .flow-node-label {
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .flow-node-sub {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .flow-arrow {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            padding: 0 8px;
+        }
+
+        /* ─── Status badges ─── */
+        .status-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+        }
+
+        .status-assigned {
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+        }
+
+        .status-decided {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+        }
+
+        /* ─── Alert boxes ─── */
+        .alert {
+            padding: 16px 20px;
+            border-radius: var(--radius-sm);
+            margin: 20px 0;
+            font-size: 0.9rem;
+            border-left: 4px solid;
+        }
+
+        .alert-info {
+            background: rgba(59, 130, 246, 0.08);
+            border-color: var(--info);
+            color: #93c5fd;
+        }
+
+        .alert-warning {
+            background: rgba(245, 158, 11, 0.08);
+            border-color: var(--warning);
+            color: #fcd34d;
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.08);
+            border-color: var(--success);
+            color: #6ee7b7;
+        }
+
+        .alert strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* ─── Version badge ─── */
+        .version-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: var(--radius-pill);
+            background: var(--primary-light);
+            color: var(--primary);
+            font-size: 0.78rem;
+            font-weight: 700;
+            font-family: var(--font-mono);
+            margin-left: 12px;
+        }
+
+        /* ─── Tabs for code examples ─── */
+        .code-tabs {
+            display: flex;
+            gap: 0;
+            margin-bottom: -1px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .code-tab {
+            padding: 8px 16px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            background: transparent;
+            border: 1px solid transparent;
+            border-bottom: none;
+            border-radius: 8px 8px 0 0;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .code-tab.active {
+            background: var(--bg-code);
+            color: var(--text-primary);
+            border-color: var(--border);
+        }
+
+        .code-tab:hover:not(.active) {
+            color: var(--text-secondary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* ─── Language toggle ─── */
+        .lang-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            float: right;
+            margin-top: 4px;
+        }
+
+        .lang-toggle a {
+            padding: 3px 8px;
+            border-radius: 4px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.15s;
+        }
+
+        .lang-toggle a:hover {
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .lang-toggle a.active {
+            background: var(--primary-light);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* ─── Footer ─── */
+        .docs-footer {
+            padding: 32px 48px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        .docs-credit {
+            margin-top: 8px;
+            font-size: 0.72rem;
+            opacity: 0.75;
+        }
+
+        .docs-credit a {
+            color: inherit;
+        }
+
+        /* ─── Inline code ─── */
+        code {
+            font-family: var(--font-mono);
+            font-size: 0.85em;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: var(--accent);
+        }
+
+        ul,
+        ol {
+            margin: 12px 0;
+            padding-left: 24px;
+            color: var(--text-secondary);
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="docs-layout">
+        <!-- Sidebar -->
+        <nav class="docs-sidebar">
+            <a href="../" class="sidebar-logo">Human<span>Layer</span></a>
+            <div class="sidebar-subtitle">Documentation API v1</div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Démarrage</div>
+                <a href="#overview" class="sidebar-link active">Vue d’ensemble</a>
+                <a href="#auth" class="sidebar-link">Authentification</a>
+                <a href="#levels" class="sidebar-link">Niveaux, SLA et tarifs</a>
+                <a href="#flow" class="sidebar-link">Cycle d’une demande</a>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Endpoints</div>
+                <a href="#submit" class="sidebar-link"><span class="sidebar-badge badge-post">POST</span> Soumettre une demande</a>
+                <a href="#status" class="sidebar-link"><span class="sidebar-badge badge-get">GET</span> Suivre une demande</a>
+                <a href="#list" class="sidebar-link"><span class="sidebar-badge badge-get">GET</span> Historique d’un agent</a>
+                <a href="#second-opinion" class="sidebar-link"><span class="sidebar-badge badge-post">POST</span> Second avis</a>
+                <a href="#key" class="sidebar-link"><span class="sidebar-badge badge-get">GET</span> Clé de vérification</a>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Intégration</div>
+                <a href="#webhook" class="sidebar-link">Webhooks signés</a>
+                <a href="#verify" class="sidebar-link">Vérifier une décision</a>
+                <a href="#statuses" class="sidebar-link">Statuts</a>
+                <a href="#errors" class="sidebar-link">Erreurs et limites</a>
+                <a href="#examples" class="sidebar-link">Exemple complet</a>
+            </div>
+        </nav>
+
+        <!-- Main -->
+        <main class="docs-main">
+            <a href="../" class="back-link">← Retour à humanlayer.systems</a>
+
+            <div class="lang-toggle">
+                <a href="index.html" class="active">FR</a>
+                <span>|</span>
+                <a href="index-en.html">EN</a>
+            </div>
+
+            <div class="docs-header" id="overview">
+                <h1>API <span>HumanLayer</span> <span class="version-badge">v1</span></h1>
+                <p>Intégrez des décisions humaines qualifiées dans vos agents IA via une API REST. Votre agent automatise par défaut ; quand une demande franchit le seuil Arbitrium, il la soumet à HumanLayer, qui la route vers un Sentinel habilité et renvoie une décision justifiée, horodatée et <strong>signée</strong>.</p>
+                <p><strong>URL de base :</strong> <code>https://humanlayer.systems/api/v1</code></p>
+            </div>
+
+            <!-- ═══ Auth ═══ -->
+            <section class="doc-section" id="auth">
+                <h2>Authentification</h2>
+                <p>Chaque requête inclut votre clé d’API dans l’en-tête <code>x-api-key</code>.</p>
+                <div class="code-block">
+                    <div class="code-header"><span class="code-lang">En-tête</span></div>
+<pre class="code-body">x-api-key: hl_live_…</pre>
+                </div>
+                <ul>
+                    <li>Créez et révoquez vos clés dans l’<a href="/client/">espace client</a> (jusqu’à 5 clés actives).</li>
+                    <li>La clé complète n’est affichée qu’une fois : HumanLayer n’en conserve que l’empreinte SHA-256.</li>
+                    <li>Chaque clé reçoit un secret de signature des webhooks (<code>whsec_…</code>), lui aussi affiché à la création.</li>
+                </ul>
+                <div class="alert alert-info">
+                    <strong>💡 Langue des messages d’erreur</strong>
+                    Ajoutez <code>X-HL-Lang: en</code> pour recevoir les messages en anglais. Le champ <code>code</code> est toujours stable.
+                </div>
+            </section>
+
+            <!-- ═══ Niveaux ═══ -->
+            <section class="doc-section" id="levels">
+                <h2>Niveaux, SLA et tarifs</h2>
+                <p>Le champ <code>request_type</code> fixe le niveau de décision, donc le SLA et le prix. Votre forfait détermine les niveaux accessibles et le quota quotidien.</p>
+                <table class="param-table">
+                    <thead><tr><th>request_type</th><th>Niveau</th><th>SLA</th><th>Prix</th></tr></thead>
+                    <tbody>
+                        <tr><td><span class="param-name">compliance</span> (alias <code>conformité</code>)</td><td>1 · Conformité</td><td>30 min</td><td>20 € / décision</td></tr>
+                        <tr><td><span class="param-name">judgment</span> (alias <code>jugement</code>)</td><td>2 · Jugement contextuel</td><td>2 h</td><td>100 € / décision</td></tr>
+                        <tr><td><span class="param-name">signature</span></td><td>3 · Autorité décisionnelle</td><td>4 h, ou sur mesure dès 30 min (Enterprise)</td><td>250 € / décision</td></tr>
+                    </tbody>
+                </table>
+                <table class="param-table">
+                    <thead><tr><th>Forfait</th><th>Niveaux accessibles</th><th>Quota</th></tr></thead>
+                    <tbody>
+                        <tr><td>Conformité</td><td>1</td><td>100 demandes / jour</td></tr>
+                        <tr><td>Jugement expert</td><td>1, 2</td><td>50 demandes / jour</td></tr>
+                        <tr><td>Autorité habilitée</td><td>1, 2, 3</td><td>20 demandes / jour</td></tr>
+                        <tr><td>Enterprise</td><td>1, 2, 3</td><td>Sur contrat (SLA premium, pools dédiés)</td></tr>
+                    </tbody>
+                </table>
+                <p>Le délai court dès la soumission. Vous pouvez demander un délai plus long avec <code>sla_minutes</code>, jamais plus court que l’engagement du niveau (7 jours au plus).</p>
+            </section>
+
+            <!-- ═══ Flow ═══ -->
+            <section class="doc-section" id="flow">
+                <h2>Cycle d’une demande</h2>
+                <div class="flow-diagram">
+                    <div class="flow-node"><div class="flow-node-icon icon-agent">🤖</div><div class="flow-node-label">Agent IA</div><div class="flow-node-sub">Soumet le dossier</div></div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node"><div class="flow-node-icon icon-api">⚡</div><div class="flow-node-label">Routage</div><div class="flow-node-sub">Sentinel qualifié</div></div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node"><div class="flow-node-icon icon-sentinel">👤</div><div class="flow-node-label">Sentinel</div><div class="flow-node-sub">Tranche et justifie</div></div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node"><div class="flow-node-icon icon-decision">✓</div><div class="flow-node-label">Décision signée</div><div class="flow-node-sub">Webhook + API</div></div>
+                </div>
+                <ol>
+                    <li>L’agent <strong>soumet</strong> la demande : <code>POST /api/v1/decisions</code>.</li>
+                    <li>HumanLayer la <strong>route</strong> vers un Sentinel actif du bon domaine (et de la bonne juridiction), dont la double authentification est configurée, en privilégiant le moins chargé.</li>
+                    <li>Le Sentinel <strong>tranche</strong> (<code>approved</code> ou <code>rejected</code>, justification obligatoire) ou <strong>escalade</strong> pour un second avis : la demande passe alors à un autre Sentinel.</li>
+                    <li>La décision est <strong>signée</strong> (Ed25519) et vous est livrée par webhook ; elle reste consultable via <code>GET /api/v1/decisions?id=…</code>.</li>
+                    <li>Si le SLA est dépassé, vous recevez <code>sla.breached</code> et la demande est réassignée automatiquement (trois escalades au plus). Le contrôle tourne toutes les 5 minutes.</li>
+                    <li>Une fois la demande tranchée, vous pouvez demander un <a href="#second-opinion">second avis</a> : un autre Sentinel reprend le dossier sans connaître le premier verdict.</li>
+                </ol>
+            </section>
+
+            <!-- ═══ POST ═══ -->
+            <section class="doc-section" id="submit">
+                <h2>Soumettre une demande</h2>
+                <div class="endpoint-card method-post">
+                    <div><span class="endpoint-method">POST</span> <span class="endpoint-path">/api/v1/decisions</span></div>
+                    <p class="endpoint-desc">Crée une demande de décision et l’assigne à un Sentinel qualifié dès qu’il est disponible.</p>
+                    <h3>Corps de la requête (JSON, 64 Ko max.)</h3>
+                    <table class="param-table">
+                        <thead><tr><th>Paramètre</th><th>Type</th><th>Requis</th><th>Description</th></tr></thead>
+                        <tbody>
+                            <tr><td><span class="param-name">agent_id</span></td><td><span class="param-type">string</span></td><td><span class="param-required">requis</span></td><td>Identifiant de votre agent (120 caractères max.)</td></tr>
+                            <tr><td><span class="param-name">agent_name</span></td><td><span class="param-type">string</span></td><td><span class="param-optional">optionnel</span></td><td>Nom lisible de l’agent</td></tr>
+                            <tr><td><span class="param-name">request_type</span></td><td><span class="param-type">string</span></td><td><span class="param-required">requis</span></td><td><code>compliance</code> | <code>judgment</code> | <code>signature</code> (voir les niveaux)</td></tr>
+                            <tr><td><span class="param-name">domain</span></td><td><span class="param-type">string</span></td><td><span class="param-required">requis</span></td><td><code>legal</code>, <code>finance</code>, <code>compliance</code>, <code>medical</code>, <code>accounting</code>, <code>hr</code>, <code>insurance</code>, <code>quality</code>, <code>security</code>, <code>other</code></td></tr>
+                            <tr><td><span class="param-name">jurisdiction</span></td><td><span class="param-type">string</span></td><td><span class="param-optional">optionnel</span></td><td>Juridiction exigée (ex. « Québec », « France »)</td></tr>
+                            <tr><td><span class="param-name">summary</span></td><td><span class="param-type">string</span></td><td><span class="param-required">requis</span></td><td>La question posée au Sentinel (5 000 caractères max.)</td></tr>
+                            <tr><td><span class="param-name">context_json</span></td><td><span class="param-type">object</span></td><td><span class="param-optional">optionnel</span></td><td>Dossier structuré préparé par l’IA (50 Ko max.)</td></tr>
+                            <tr><td><span class="param-name">priority</span></td><td><span class="param-type">string</span></td><td><span class="param-optional">optionnel</span></td><td><code>low</code> | <code>normal</code> (défaut) | <code>high</code> | <code>urgent</code></td></tr>
+                            <tr><td><span class="param-name">sla_minutes</span></td><td><span class="param-type">integer</span></td><td><span class="param-optional">optionnel</span></td><td>Délai plus long que l’engagement du niveau (10 080 max.)</td></tr>
+                            <tr><td><span class="param-name">callback_url</span></td><td><span class="param-type">string</span></td><td><span class="param-optional">optionnel</span></td><td>URL de webhook : HTTPS obligatoire, hôte public (les adresses privées et internes sont refusées)</td></tr>
+                        </tbody>
+                    </table>
+                    <h3>Réponse (200)</h3>
+                    <div class="code-block">
+                        <div class="code-header"><span class="code-lang">json</span><button class="code-copy" onclick="copyCode(this)">Copier</button></div>
+<pre class="code-body">{
+  <span class="hl-key">"ok"</span>: <span class="hl-num">true</span>,
+  <span class="hl-key">"request_id"</span>: <span class="hl-str">"8b1f2c4e-…"</span>,
+  <span class="hl-key">"status"</span>: <span class="hl-str">"assigned"</span>,
+  <span class="hl-key">"level"</span>: <span class="hl-num">1</span>,
+  <span class="hl-key">"sla_minutes"</span>: <span class="hl-num">30</span>,
+  <span class="hl-key">"expires_at"</span>: <span class="hl-str">"2026-03-12T15:02:07.000Z"</span>,
+  <span class="hl-key">"sentinel_ref"</span>: <span class="hl-str">"S-4F2A9C"</span>
+}</pre>
+                    </div>
+                    <div class="alert alert-warning">
+                        <strong>⚠️ Statut « pending »</strong>
+                        Si aucun Sentinel qualifié n’est disponible, la demande reste <code>pending</code> ; le routage est retenté toutes les 5 minutes. L’identité du Sentinel n’est jamais exposée : <code>sentinel_ref</code> est un pseudonyme stable.
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══ GET id ═══ -->
+            <section class="doc-section" id="status">
+                <h2>Suivre une demande</h2>
+                <div class="endpoint-card method-get">
+                    <div><span class="endpoint-method">GET</span> <span class="endpoint-path">/api/v1/decisions?id={request_id}</span></div>
+                    <p class="endpoint-desc">Renvoie l’état de la demande, son SLA et, une fois tranchée, la décision signée. Préférez les webhooks au sondage ; si vous sondez, espacez les appels d’au moins 15 secondes.</p>
+                    <h3>Réponse (200) : demande tranchée</h3>
+                    <div class="code-block">
+                        <div class="code-header"><span class="code-lang">json</span></div>
+<pre class="code-body">{
+  <span class="hl-key">"request"</span>: {
+    <span class="hl-key">"id"</span>: <span class="hl-str">"8b1f2c4e-…"</span>,
+    <span class="hl-key">"status"</span>: <span class="hl-str">"decided"</span>,
+    <span class="hl-key">"level"</span>: <span class="hl-num">1</span>,
+    <span class="hl-key">"priority"</span>: <span class="hl-str">"normal"</span>,
+    <span class="hl-key">"sentinel_ref"</span>: <span class="hl-str">"S-4F2A9C"</span>,
+    <span class="hl-key">"expires_at"</span>: <span class="hl-str">"2026-03-12T15:02:07.000Z"</span>,
+    <span class="hl-key">"escalation_count"</span>: <span class="hl-num">0</span>,
+    <span class="hl-key">"verdict"</span>: <span class="hl-str">"approved"</span>,
+    <span class="hl-key">"reasoning"</span>: <span class="hl-str">"Conforme à la politique interne du client."</span>,
+    <span class="hl-key">"decision"</span>: {
+      <span class="hl-key">"id"</span>: <span class="hl-str">"d41c…"</span>,
+      <span class="hl-key">"verdict"</span>: <span class="hl-str">"approved"</span>,
+      <span class="hl-key">"signed_at"</span>: <span class="hl-str">"2026-03-12T14:48:31.000Z"</span>,
+      <span class="hl-key">"signature"</span>: <span class="hl-str">"base64…"</span>,
+      <span class="hl-key">"signed_payload"</span>: <span class="hl-str">"{\"decision_id\":…}"</span>,
+      <span class="hl-key">"key_id"</span>: <span class="hl-str">"3f9a…"</span>
+    }
+  }
+}</pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══ GET agent ═══ -->
+            <section class="doc-section" id="list">
+                <h2>Historique d’un agent</h2>
+                <div class="endpoint-card method-get">
+                    <div><span class="endpoint-method">GET</span> <span class="endpoint-path">/api/v1/decisions?agent_id={agent_id}</span></div>
+                    <p class="endpoint-desc">Les 100 dernières demandes de cet agent créées avec la même clé, du plus récent au plus ancien, au même format que ci-dessus.</p>
+                </div>
+            </section>
+
+            <!-- ═══ POST second avis ═══ -->
+            <section class="doc-section" id="second-opinion">
+                <h2>Demander un second avis</h2>
+                <div class="endpoint-card method-post">
+                    <div><span class="endpoint-method">POST</span> <span class="endpoint-path">/api/v1/decisions</span></div>
+                    <p class="endpoint-desc">Confie une demande déjà tranchée à un autre Sentinel, qui n’a jamais traité le dossier et ne voit pas le premier verdict. Le dossier (niveau, domaine, juridiction, question, contexte) est repris tel quel. Le second avis est facturé comme une nouvelle décision du même niveau et compte dans votre quota quotidien.</p>
+                    <h3>Corps de la requête</h3>
+                    <table class="param-table">
+                        <thead><tr><th>Paramètre</th><th>Type</th><th>Requis</th><th>Description</th></tr></thead>
+                        <tbody>
+                            <tr><td><span class="param-name">second_opinion_of</span></td><td><span class="param-type">string</span></td><td><span class="param-required">requis</span></td><td><code>request_id</code> de la demande tranchée, créée avec la même clé</td></tr>
+                            <tr><td><span class="param-name">priority</span></td><td><span class="param-type">string</span></td><td><span class="param-optional">optionnel</span></td><td>Par défaut, celle de la demande d’origine</td></tr>
+                            <tr><td><span class="param-name">callback_url</span></td><td><span class="param-type">string</span></td><td><span class="param-optional">optionnel</span></td><td>Par défaut, celle de la demande d’origine</td></tr>
+                            <tr><td><span class="param-name">sla_minutes</span></td><td><span class="param-type">integer</span></td><td><span class="param-optional">optionnel</span></td><td>Comme pour une demande classique</td></tr>
+                        </tbody>
+                    </table>
+                    <h3>Réponse (200)</h3>
+                    <div class="code-block">
+                        <div class="code-header"><span class="code-lang">json</span></div>
+<pre class="code-body">{
+  <span class="hl-key">"ok"</span>: <span class="hl-num">true</span>,
+  <span class="hl-key">"request_id"</span>: <span class="hl-str">"c7d05e91-…"</span>,
+  <span class="hl-key">"status"</span>: <span class="hl-str">"assigned"</span>,
+  <span class="hl-key">"level"</span>: <span class="hl-num">2</span>,
+  <span class="hl-key">"sla_minutes"</span>: <span class="hl-num">120</span>,
+  <span class="hl-key">"sentinel_ref"</span>: <span class="hl-str">"S-9B31D0"</span>,
+  <span class="hl-key">"second_opinion_of"</span>: <span class="hl-str">"8b1f2c4e-…"</span>
+}</pre>
+                    </div>
+                    <div class="alert alert-info">
+                        <strong>Un seul second avis par demande</strong>
+                        Il n’est possible que sur une demande tranchée (sinon <code>409 not_decided</code>) et une seule fois (<code>409 second_opinion_exists</code>). La demande d’origine expose ensuite <code>second_opinion_id</code>, le second avis <code>second_opinion_of</code>. Chaque verdict est signé séparément ; s’ils divergent, la suite vous appartient.
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══ GET key ═══ -->
+            <section class="doc-section" id="key">
+                <h2>Clé de vérification</h2>
+                <div class="endpoint-card method-get">
+                    <div><span class="endpoint-method">GET</span> <span class="endpoint-path">/api/v1/decision-key</span></div>
+                    <p class="endpoint-desc">Clé publique Ed25519 (PEM) et identifiant <code>key_id</code>, pour vérifier les décisions sans faire confiance au transport. Aucune authentification requise.</p>
+                </div>
+            </section>
+
+            <!-- ═══ Webhooks ═══ -->
+            <section class="doc-section" id="webhook">
+                <h2>Webhooks signés</h2>
+                <p>Si vous fournissez <code>callback_url</code>, HumanLayer y envoie un <code>POST</code> JSON à chaque événement :</p>
+                <table class="param-table">
+                    <thead><tr><th>Événement</th><th>Quand</th></tr></thead>
+                    <tbody>
+                        <tr><td><span class="param-name">decision.completed</span></td><td>Le Sentinel a approuvé</td></tr>
+                        <tr><td><span class="param-name">decision.rejected</span></td><td>Le Sentinel a refusé</td></tr>
+                        <tr><td><span class="param-name">decision.escalated</span></td><td>Second avis demandé : la demande passe à un autre Sentinel</td></tr>
+                        <tr><td><span class="param-name">sla.breached</span></td><td>Le délai est dépassé ; réassignation automatique</td></tr>
+                    </tbody>
+                </table>
+                <p>En-têtes : <code>X-HumanLayer-Event</code>, <code>X-HumanLayer-Delivery</code> et <code>X-HumanLayer-Signature: t=&lt;horodatage&gt;,v1=&lt;hmac&gt;</code>, où <code>v1</code> est le HMAC-SHA256 hexadécimal de <code>t + "." + corps brut</code> avec le secret <code>whsec_…</code> de votre clé. Chaque événement est livré une fois (délai de 5 s) ; en cas d’échec, l’état reste consultable par l’API (<code>webhook_status</code>).</p>
+                <div class="code-block">
+                    <div class="code-header"><span class="code-lang">python</span><button class="code-copy" onclick="copyCode(this)">Copier</button></div>
+<pre class="code-body"><span class="hl-kw">import</span> hmac, hashlib, time
+
+<span class="hl-kw">def</span> <span class="hl-fn">verify_webhook</span>(headers, raw_body: bytes, secret: str) -&gt; bool:
+    parts = dict(p.split(<span class="hl-str">"="</span>, <span class="hl-num">1</span>) <span class="hl-kw">for</span> p <span class="hl-kw">in</span> headers[<span class="hl-str">"X-HumanLayer-Signature"</span>].split(<span class="hl-str">","</span>))
+    <span class="hl-kw">if</span> abs(time.time() - int(parts[<span class="hl-str">"t"</span>])) &gt; <span class="hl-num">300</span>:
+        <span class="hl-kw">return</span> <span class="hl-num">False</span>  <span class="hl-comment"># trop ancien : rejeu possible</span>
+    signed = parts[<span class="hl-str">"t"</span>].encode() + <span class="hl-str">b"."</span> + raw_body
+    expected = hmac.new(secret.encode(), signed, hashlib.sha256).hexdigest()
+    <span class="hl-kw">return</span> hmac.compare_digest(expected, parts[<span class="hl-str">"v1"</span>])</pre>
+                </div>
+            </section>
+
+            <!-- ═══ Verify ═══ -->
+            <section class="doc-section" id="verify">
+                <h2>Vérifier une décision</h2>
+                <p>Chaque décision est signée en Ed25519 sur le champ <code>signed_payload</code> (JSON canonique : identifiants, verdict, empreinte SHA-256 de la justification, pseudonyme du Sentinel, horodatage, <code>key_id</code>). Toute modification ultérieure invalide la signature.</p>
+                <div class="code-block">
+                    <div class="code-header"><span class="code-lang">javascript (Node.js)</span><button class="code-copy" onclick="copyCode(this)">Copier</button></div>
+<pre class="code-body"><span class="hl-kw">import</span> crypto <span class="hl-kw">from</span> <span class="hl-str">'node:crypto'</span>;
+
+<span class="hl-kw">const</span> key = <span class="hl-kw">await</span> (<span class="hl-kw">await</span> <span class="hl-fn">fetch</span>(<span class="hl-str">'https://humanlayer.systems/api/v1/decision-key'</span>)).<span class="hl-fn">json</span>();
+<span class="hl-kw">const</span> ok = crypto.<span class="hl-fn">verify</span>(
+  <span class="hl-kw">null</span>,
+  Buffer.<span class="hl-fn">from</span>(decision.signed_payload),
+  key.public_key_pem,
+  Buffer.<span class="hl-fn">from</span>(decision.signature, <span class="hl-str">'base64'</span>)
+);
+<span class="hl-comment">// Vérifiez aussi que sha256(reasoning) === JSON.parse(signed_payload).reasoning_sha256</span></pre>
+                </div>
+            </section>
+
+            <!-- ═══ Statuses ═══ -->
+            <section class="doc-section" id="statuses">
+                <h2>Statuts</h2>
+                <table class="param-table">
+                    <thead><tr><th>status</th><th>Signification</th></tr></thead>
+                    <tbody>
+                        <tr><td><span class="param-name">pending</span></td><td>En attente d’un Sentinel disponible</td></tr>
+                        <tr><td><span class="param-name">assigned</span></td><td>Assignée à un Sentinel, dans les délais</td></tr>
+                        <tr><td><span class="param-name">sla_breached</span></td><td>Délai dépassé et aucun autre Sentinel disponible pour l’instant</td></tr>
+                        <tr><td><span class="param-name">decided</span></td><td>Tranchée : <code>verdict</code> vaut <code>approved</code> ou <code>rejected</code></td></tr>
+                    </tbody>
+                </table>
+                <p>Une escalade (<code>escalated</code>) n’est pas un statut final : la demande repasse à <code>assigned</code> auprès d’un autre Sentinel, et <code>escalation_count</code> augmente.</p>
+            </section>
+
+            <!-- ═══ Errors ═══ -->
+            <section class="doc-section" id="errors">
+                <h2>Erreurs et limites</h2>
+                <p>Les erreurs renvoient <code>{ "error": "message", "code": "…" }</code>.</p>
+                <table class="param-table">
+                    <thead><tr><th>HTTP</th><th>code</th><th>Cause</th></tr></thead>
+                    <tbody>
+                        <tr><td>400</td><td><code>missing_fields</code>, <code>invalid_request_type</code>, <code>invalid_domain</code>, <code>invalid_priority</code>, <code>invalid_callback_url</code>, <code>context_too_large</code>, <code>invalid_second_opinion</code></td><td>Requête invalide</td></tr>
+                        <tr><td>401</td><td><code>missing_api_key</code>, <code>invalid_api_key</code></td><td>Clé absente ou inconnue</td></tr>
+                        <tr><td>403</td><td><code>api_key_inactive</code>, <code>api_key_expired</code>, <code>plan_restriction</code></td><td>Clé suspendue, révoquée, expirée, ou niveau hors forfait</td></tr>
+                        <tr><td>404</td><td><code>not_found</code></td><td>Demande inexistante ou créée avec une autre clé</td></tr>
+                        <tr><td>409</td><td><code>not_decided</code>, <code>second_opinion_exists</code></td><td>Second avis sur une demande pas encore tranchée, ou déjà demandé</td></tr>
+                        <tr><td>413</td><td><code>payload_too_large</code></td><td>Corps supérieur à 64 Ko</td></tr>
+                        <tr><td>429</td><td><code>rate_limited</code>, <code>daily_limit_reached</code></td><td>Plus de 60 demandes par minute et par clé, ou quota du forfait atteint. Respectez l’en-tête <code>Retry-After</code>.</td></tr>
+                        <tr><td>500</td><td><code>server_error</code></td><td>Erreur interne : réessayez avec un délai croissant</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- ═══ Example ═══ -->
+            <section class="doc-section" id="examples">
+                <h2>Exemple complet</h2>
+                <div class="code-block">
+                    <div class="code-header"><span class="code-lang">python</span><button class="code-copy" onclick="copyCode(this)">Copier</button></div>
+<pre class="code-body"><span class="hl-kw">import</span> time, requests
+
+API = <span class="hl-str">"https://humanlayer.systems/api/v1/decisions"</span>
+HEADERS = {<span class="hl-str">"x-api-key"</span>: <span class="hl-str">"hl_live_…"</span>}
+
+<span class="hl-comment"># 1. Seuil Arbitrium franchi : on soumet le dossier</span>
+created = requests.<span class="hl-fn">post</span>(API, headers=HEADERS, json={
+    <span class="hl-str">"agent_id"</span>: <span class="hl-str">"agent-credit"</span>,
+    <span class="hl-str">"request_type"</span>: <span class="hl-str">"compliance"</span>,
+    <span class="hl-str">"domain"</span>: <span class="hl-str">"finance"</span>,
+    <span class="hl-str">"summary"</span>: <span class="hl-str">"KYC : correspondance partielle sur une liste de sanctions. Valider ?"</span>,
+    <span class="hl-str">"context_json"</span>: {<span class="hl-str">"customer_id"</span>: <span class="hl-str">"c_4521"</span>, <span class="hl-str">"match_score"</span>: <span class="hl-num">0.71</span>},
+    <span class="hl-str">"callback_url"</span>: <span class="hl-str">"https://votre-app.example/webhooks/humanlayer"</span>,
+}).<span class="hl-fn">json</span>()
+
+<span class="hl-comment"># 2. Sans webhook : sondage espacé jusqu'à la décision</span>
+<span class="hl-kw">while</span> <span class="hl-num">True</span>:
+    req = requests.<span class="hl-fn">get</span>(API, headers=HEADERS, params={<span class="hl-str">"id"</span>: created[<span class="hl-str">"request_id"</span>]}).<span class="hl-fn">json</span>()[<span class="hl-str">"request"</span>]
+    <span class="hl-kw">if</span> req[<span class="hl-str">"status"</span>] == <span class="hl-str">"decided"</span>:
+        <span class="hl-kw">break</span>
+    time.<span class="hl-fn">sleep</span>(<span class="hl-num">15</span>)
+
+<span class="hl-comment"># 3. L'agent reprend son workflow, décision signée à l'appui</span>
+<span class="hl-kw">if</span> req[<span class="hl-str">"verdict"</span>] == <span class="hl-str">"approved"</span>:
+    <span class="hl-fn">continue_workflow</span>(req[<span class="hl-str">"decision"</span>])</pre>
+                </div>
+                <div class="code-block">
+                    <div class="code-header"><span class="code-lang">cURL</span><button class="code-copy" onclick="copyCode(this)">Copier</button></div>
+<pre class="code-body">curl -X POST https://humanlayer.systems/api/v1/decisions \
+  -H <span class="hl-str">"x-api-key: hl_live_…"</span> \
+  -H <span class="hl-str">"content-type: application/json"</span> \
+  -d <span class="hl-str">'{"agent_id":"agent-legal","request_type":"judgment","domain":"legal","summary":"La clause §4.2.b est-elle acceptable ?"}'</span></pre>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="docs-footer">
+        © 2026 HumanLayer Systems Inc. — <a href="../">humanlayer.systems</a> — <a
+            href="mailto:humanlayer@probalink.com">Contact</a>
+        <div class="docs-credit">Propulsé par <a href="https://in6.ai" target="_blank" rel="noopener">in6.ai</a></div>
+    </footer>
+
+    <script>
+        // Copy code to clipboard
+        function copyCode(btn) {
+            const block = btn.closest('.code-block');
+            const code = block.querySelector('.code-body').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                btn.textContent = '✓ Copié !';
+                setTimeout(() => btn.textContent = 'Copier', 2000);
+            });
+        }
+
+        // Active sidebar link on scroll
+        const sections = document.querySelectorAll('.doc-section');
+        const links = document.querySelectorAll('.sidebar-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(s => {
+                if (window.scrollY >= s.offsetTop - 100) {
+                    current = s.id;
+                }
+            });
+            links.forEach(l => {
+                l.classList.remove('active');
+                if (l.getAttribute('href') === `#${current}`) {
+                    l.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

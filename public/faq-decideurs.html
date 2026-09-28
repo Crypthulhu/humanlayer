@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Sentinels — HumanLayer</title>
+    <meta name="description"
+        content="Questions fréquentes pour Sentinels sur HumanLayer - Monétiser son autorité décisionnelle, pas son temps.">
+<!-- layout:head -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"
+    rel="stylesheet">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="logo-mark.png">
+  <link rel="stylesheet" href="styles.css">
+  <meta name="theme-color" content="#04060b">
+  <script>
+    document.documentElement.classList.add('js');
+    setTimeout(function () { if (!window.__hlReady) document.documentElement.classList.remove('js'); }, 2500);
+  </script>
+<!-- /layout:head -->
+</head>
+
+<body>
+    <!-- SVG Icons Sprite -->
+    
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <!-- Brain - Central AI icon -->
+        <symbol id="icon-brain" viewBox="0 0 24 24">
+            <path
+                d="M12 2C9.5 2 7.5 3.5 7 5.5C5.5 5.5 4 7 4 9c0 1.5 1 3 2.5 3.5C6 14 7 16 9 17v3c0 .5.5 1 1 1h4c.5 0 1-.5 1-1v-3c2-1 3-3 2.5-4.5C19 12 20 10.5 20 9c0-2-1.5-3.5-3-3.5C16.5 3.5 14.5 2 12 2z"
+                fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M9 10c0-1 1-2 3-2s3 1 3 2M9 14h6" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" />
+            <circle cx="9" cy="10" r="1" fill="currentColor" />
+            <circle cx="15" cy="10" r="1" fill="currentColor" />
+        </symbol>
+        <!-- Arrow Right -->
+        <symbol id="icon-arrow" viewBox="0 0 24 24">
+            <path d="M4 12h16M14 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </symbol>
+        <!-- User/Person -->
+        <symbol id="icon-user" viewBox="0 0 24 24">
+            <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M4 20c0-4 4-6 8-6s8 2 8 6" fill="none" stroke="currentColor" stroke-width="1.5" />
+        </symbol>
+        <!-- Briefcase -->
+        <symbol id="icon-briefcase" viewBox="0 0 24 24">
+            <rect x="2" y="7" width="20" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2M12 12v3M2 12h20" fill="none" stroke="currentColor"
+                stroke-width="1.5" />
+        </symbol>
+        <!-- Layers/Levels -->
+        <symbol id="icon-layers" viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5z" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linejoin="round" />
+            <path d="M2 12l10 5 10-5M2 17l10 5 10-5" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linejoin="round" />
+        </symbol>
+        <!-- Wallet/Money -->
+        <symbol id="icon-wallet" viewBox="0 0 24 24">
+            <rect x="2" y="6" width="20" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M2 10h20" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="16" cy="14" r="2" fill="currentColor" />
+        </symbol>
+        <!-- Handshake/Partnership -->
+        <symbol id="icon-handshake" viewBox="0 0 24 24">
+            <path d="M12 8l-4 4 2 2 4-4M12 8l4 4-2 2-4-4" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round" fill="none" />
+            <path d="M4 12l4-4M20 12l-4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M2 10h4M18 10h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M8 18l4 2 4-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" fill="none" />
+        </symbol>
+        <!-- Calendar/Schedule -->
+        <symbol id="icon-calendar" viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            <circle cx="8" cy="15" r="1" fill="currentColor" />
+            <circle cx="12" cy="15" r="1" fill="currentColor" />
+            <circle cx="16" cy="15" r="1" fill="currentColor" />
+        </symbol>
+        <!-- Shield/Protection -->
+        <symbol id="icon-shield" viewBox="0 0 24 24">
+            <path d="M12 2L4 6v6c0 5.5 3.5 10 8 11 4.5-1 8-5.5 8-11V6l-8-4z" fill="none" stroke="currentColor"
+                stroke-width="1.5" />
+            <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </symbol>
+        <!-- Document/Audit -->
+        <symbol id="icon-document" viewBox="0 0 24 24">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" fill="none" stroke="currentColor"
+                stroke-width="1.5" />
+            <path d="M14 2v6h6M9 13h6M9 17h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </symbol>
+        <!-- X/Cross -->
+        <symbol id="icon-x" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M15 9l-6 6M9 9l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </symbol>
+        <!-- Star/Rating -->
+        <symbol id="icon-star" viewBox="0 0 24 24">
+            <path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1 3-6z" fill="none" stroke="currentColor"
+                stroke-width="1.5" stroke-linejoin="round" />
+        </symbol>
+        <!-- Checkmark/Verification -->
+        <symbol id="icon-check" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M8 12l2.5 2.5L16 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </symbol>
+        <!-- Eye/Visibility -->
+        <symbol id="icon-eye" viewBox="0 0 24 24">
+            <path d="M2 12s4-8 10-8 10 8 10 8-4 8-10 8-10-8-10-8z" fill="none" stroke="currentColor"
+                stroke-width="1.5" />
+            <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.5" />
+        </symbol>
+        <!-- Sparkle/Value -->
+        <symbol id="icon-sparkle" viewBox="0 0 24 24">
+            <path d="M12 2l2 6 6 2-6 2-2 6-2-6-6-2 6-2 2-6z" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linejoin="round" />
+            <circle cx="19" cy="5" r="1.5" fill="currentColor" />
+            <circle cx="5" cy="19" r="1" fill="currentColor" />
+        </symbol>
+        <!-- Target/Bullseye -->
+        <symbol id="icon-target" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="12" cy="12" r="2" fill="currentColor" />
+            <path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </symbol>
+    </svg>
+    
+<!-- layout:header -->
+  <a class="skip-link" href="#main">Aller au contenu</a>
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <header class="site-header" id="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand" aria-label="HumanLayer, accueil">
+        <img src="logo-mark.png" width="30" height="30" alt="">
+        <span class="brand-name">Human<span>Layer</span></span>
+      </a>
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a href="index.html#problem">Problème</a>
+        <a href="index.html#arbitrium">Arbitrium</a>
+        <a href="index.html#solution">Solution</a>
+        <a href="index.html#usecases">Cas d’usage</a>
+        <a href="index.html#api">API</a>
+        <a href="index.html#pricing">Tarifs</a>
+        <a href="apply.html">Devenir Sentinel</a>
+        <a href="faq.html" aria-current="page">FAQ</a>
+      </nav>
+      <div class="nav-actions">
+        <div class="lang-switch" aria-label="Langue">
+          <a href="faq-decideurs.html" lang="fr" aria-current="true">FR</a>
+          <a href="faq-decideurs-en.html" lang="en" hreflang="en">EN</a>
+        </div>
+        <a href="/client/" class="nav-login">Espace client</a>
+        <a href="/client/inscription.html" class="btn btn-primary btn-sm" data-magnetic>Commencer</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu"
+          aria-label="Ouvrir le menu"><span></span><span></span></button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobile-menu" hidden>
+      <nav aria-label="Navigation mobile">
+        <a href="index.html#problem" style="--i:0">Problème <small>01</small></a>
+        <a href="index.html#arbitrium" style="--i:1">Arbitrium <small>02</small></a>
+        <a href="index.html#solution" style="--i:2">Solution <small>03</small></a>
+        <a href="index.html#usecases" style="--i:3">Cas d’usage <small>05</small></a>
+        <a href="index.html#api" style="--i:4">API <small>06</small></a>
+        <a href="index.html#pricing" style="--i:5">Tarifs <small>08</small></a>
+        <a href="apply.html" style="--i:6">Devenir Sentinel <small>→</small></a>
+        <a href="faq.html" style="--i:7">FAQ <small>→</small></a>
+        <a href="/client/" style="--i:8">Espace client <small>→</small></a>
+      </nav>
+      <div class="mobile-menu-foot">
+        <div class="lang-switch" aria-label="Langue">
+          <a href="faq-decideurs.html" lang="fr" aria-current="true">FR</a>
+          <a href="faq-decideurs-en.html" lang="en" hreflang="en">EN</a>
+        </div>
+        <a href="/client/inscription.html" class="btn btn-primary btn-lg">Commencer maintenant</a>
+      </div>
+    </div>
+  </header>
+<!-- /layout:header -->
+
+  <main id="main">
+
+    <!-- FAQ Page Header -->
+    <section class="faq-hero">
+        <div class="container">
+            <div class="faq-hero-content reveal">
+                <span class="label">FAQ Sentinels</span>
+                <h1>Questions pour Sentinels</h1>
+                <p>Monétiser son autorité décisionnelle, pas son temps</p>
+            </div>
+            <!-- FAQ Tabs -->
+            <div class="faq-tabs reveal-stagger">
+                <a href="faq.html" class="faq-tab">Général</a>
+                <a href="faq-investisseurs.html" class="faq-tab">Investisseurs</a>
+                <a href="faq-developpeurs.html" class="faq-tab">Développeurs</a>
+                <a href="faq-decideurs.html" class="faq-tab active">Sentinels</a>
+                <a href="faq-risque.html" class="faq-tab">Risque</a>
+                <a href="faq-ethique.html" class="faq-tab">Éthique</a>
+                <a href="faq-regulateurs.html" class="faq-tab">Régulateurs</a>
+                <a href="faq-annexe.html" class="faq-tab">Annexe</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Content -->
+    <section class="faq faq-page">
+        <div class="container">
+
+            <!-- Comprendre HumanLayer -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-brain" />
+                    </svg>
+                    Comprendre HumanLayer
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Qu’est-ce que HumanLayer, du point de vue d’un Sentinel ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>HumanLayer est une plateforme qui permet à des <strong>professionnels qualifiés</strong>
+                            (juristes, médecins, analystes, experts sectoriels, responsables conformité, etc.) de rendre
+                            des décisions humaines formelles à la demande, lorsque des systèmes IA atteignent leurs
+                            limites.</p>
+                        <p>Vous n’exécutez pas des tâches.</p>
+                        <p class="faq-highlight">👉 Vous exercez votre autorité décisionnelle, dans un cadre structuré,
+                            traçable et rémunéré.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Votre rôle -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-user" />
+                    </svg>
+                    Votre rôle
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Quel est mon rôle exactement ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Votre rôle est de :</p>
+                        <ul>
+                            <li>examiner un dossier préparé par une IA</li>
+                            <li>rendre une décision selon votre expertise et vos habilitations</li>
+                            <li>documenter votre raisonnement de façon structurée</li>
+                        </ul>
+                        <p>Vous êtes :</p>
+                        <ul>
+                            <li>identifié</li>
+                            <li>qualifié</li>
+                            <li>responsable de la décision que vous prenez</li>
+                        </ul>
+                        <p class="faq-highlight">HumanLayer ne modifie jamais votre décision.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Est-ce que je décide pour une IA ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Non.</strong></p>
+                        <p>Vous décidez :</p>
+                        <ul>
+                            <li>pour une organisation cliente</li>
+                            <li>dans un cadre contractuel clair</li>
+                            <li>avec des règles définies à l’avance</li>
+                        </ul>
+                        <p>L’IA prépare le dossier.</p>
+                        <p class="faq-highlight">👉 Vous prenez la décision.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Types de décisions -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-layers" />
+                    </svg>
+                    Types de décisions
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Quel type de décisions vais-je prendre ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Cela dépend de votre profil, mais typiquement :</p>
+                        <p><strong>Niveau 1 — Validation de conformité</strong></p>
+                        <ul>
+                            <li>vérification de règles</li>
+                            <li>conformité réglementaire</li>
+                            <li>approbation selon politiques définies</li>
+                        </ul>
+                        <p><strong>Niveau 2 — Jugement expert</strong></p>
+                        <ul>
+                            <li>arbitrage de situations ambiguës</li>
+                            <li>décisions contextualisées</li>
+                            <li>exceptions justifiées</li>
+                        </ul>
+                        <p><strong>Niveau 3 — Autorité habilitée</strong></p>
+                        <ul>
+                            <li>signatures qualifiées</li>
+                            <li>décisions réglementées</li>
+                            <li>actes engageants légalement</li>
+                        </ul>
+                        <p class="faq-highlight">Vous ne serez jamais sollicité au-delà de vos habilitations.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rémunération -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-wallet" />
+                    </svg>
+                    Rémunération
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Comment suis-je rémunéré ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>💰 Partage de revenus, par décision</strong></p>
+                        <p>Vous êtes rémunéré par décision validée, pas à l’heure.</p>
+                        <p>Exemple indicatif :</p>
+                        <ul>
+                            <li>décision de conformité : 10 à 12 €</li>
+                            <li>jugement expert : 50 à 60 €</li>
+                            <li>autorité habilitée : 125 à 150 €</li>
+                        </ul>
+                        <p>Le montant dépend :</p>
+                        <ul>
+                            <li>du niveau de responsabilité</li>
+                            <li>de la complexité</li>
+                            <li>du SLA</li>
+                        </ul>
+                        <p class="faq-highlight">👉 Vous êtes payé pour votre responsabilité, pas pour votre
+                            disponibilité passive.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Comment fonctionne le partage de revenus ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>L’organisation cliente paie HumanLayer pour la décision.</p>
+                        <p>HumanLayer reverse au Sentinel jusqu’à 60 % du prix de la décision ; le reste finance la vérification des habilitations, l’orchestration des SLA, la traçabilité et la plateforme.</p>
+                        <p>Le pourcentage dépend :</p>
+                        <ul>
+                            <li>du niveau de décision</li>
+                            <li>de votre qualification</li>
+                            <li>du SLA accepté</li>
+                        </ul>
+                        <p class="faq-highlight">Le modèle est transparent et contractuel.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Compatibilité -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-calendar" />
+                    </svg>
+                    Compatibilité
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Est-ce compatible avec mon activité principale ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Oui, dans la majorité des cas.</strong></p>
+                        <p>HumanLayer est conçu pour :</p>
+                        <ul>
+                            <li>des interventions ponctuelles</li>
+                            <li>ciblées</li>
+                            <li>à forte valeur</li>
+                        </ul>
+                        <p>Vous choisissez :</p>
+                        <ul>
+                            <li>vos plages de disponibilité</li>
+                            <li>les types de décisions acceptées</li>
+                            <li>les SLA que vous êtes prêt à assurer</li>
+                        </ul>
+                        <p class="faq-highlight">👉 Aucune exclusivité imposée.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Responsabilité -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-shield" />
+                    </svg>
+                    Responsabilité
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Suis-je responsable légalement de mes décisions ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Oui</strong> — comme dans votre activité professionnelle habituelle.</p>
+                        <p>La différence :</p>
+                        <ul>
+                            <li>le cadre est clair</li>
+                            <li>le contexte est documenté</li>
+                            <li>la trace est complète</li>
+                        </ul>
+                        <p>HumanLayer protège autant qu’il expose :</p>
+                        <ul>
+                            <li>pas de décision informelle</li>
+                            <li>pas de flou sur "qui a validé quoi"</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Que se passe-t-il en cas de litige ou d’audit ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>HumanLayer fournit :</p>
+                        <ul>
+                            <li>le dossier tel que vous l’avez vu</li>
+                            <li>votre décision</li>
+                            <li>votre justification</li>
+                            <li>l’horodatage</li>
+                            <li>votre identité et habilitation</li>
+                        </ul>
+                        <p class="faq-highlight">👉 Vous ne dépendez pas de mails ou de souvenirs flous.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Autonomie -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-check" />
+                    </svg>
+                    Autonomie
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Puis-je refuser une décision ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Oui, à tout moment.</strong></p>
+                        <p>Vous pouvez :</p>
+                        <ul>
+                            <li>refuser un dossier</li>
+                            <li>demander une escalade</li>
+                            <li>décliner hors périmètre</li>
+                        </ul>
+                        <p class="faq-highlight">Aucune pénalité pour refus justifié.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Évaluation -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-star" />
+                    </svg>
+                    Évaluation
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Suis-je noté ou évalué ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Oui, mais pas comme dans une marketplace.</strong></p>
+                        <p>Les critères portent sur :</p>
+                        <ul>
+                            <li>respect des SLA</li>
+                            <li>clarté de la justification</li>
+                            <li>cohérence décisionnelle</li>
+                        </ul>
+                        <p class="faq-highlight">👉 Jamais sur le sens de la décision.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sélection -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-document" />
+                    </svg>
+                    Sélection
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Comment suis-je sélectionné ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Processus en plusieurs étapes :</p>
+                        <ul>
+                            <li>Vérification d’identité</li>
+                            <li>Vérification des qualifications</li>
+                            <li>Entretien (selon niveau)</li>
+                            <li>Définition des périmètres et SLA</li>
+                        </ul>
+                        <p>L’objectif est :</p>
+                        <ul>
+                            <li>protéger votre autorité</li>
+                            <li>protéger les organisations clientes</li>
+                            <li>garantir la crédibilité du réseau</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Est-ce anonyme ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Non.</strong></p>
+                        <p>La valeur de HumanLayer repose sur :</p>
+                        <ul>
+                            <li>l’identification claire</li>
+                            <li>la responsabilité assumée</li>
+                        </ul>
+                        <p class="faq-highlight">Votre identité est visible aux parties concernées, dans le respect du
+                            cadre contractuel.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Avantages -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-sparkle" />
+                    </svg>
+                    Avantages
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Pourquoi passer par HumanLayer plutôt que du conseil classique ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Parce que :</p>
+                        <ul>
+                            <li>vous n’avez pas à prospecter</li>
+                            <li>les dossiers sont préparés</li>
+                            <li>la demande est qualifiée</li>
+                            <li>la rémunération est claire</li>
+                            <li>la trace est protégée</li>
+                        </ul>
+                        <p class="faq-highlight">👉 Vous intervenez là où votre décision a le plus d’impact.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ce que HumanLayer n'est pas -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-x" />
+                    </svg>
+                    Ce que HumanLayer n’est pas
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Ce que HumanLayer n’est pas</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <ul>
+                            <li>❌ du micro-travail</li>
+                            <li>❌ une marketplace low-cost</li>
+                            <li>❌ un remplacement de professionnels</li>
+                        </ul>
+                        <p class="faq-highlight">👉 C’est une infrastructure de responsabilité humaine.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Closing statement -->
+            <div class="faq-closing reveal">
+                <div class="glass-card">
+                    <p class="faq-closing-text">
+                        <svg class="hl-icon hl-lg">
+                            <use href="#icon-sparkle" />
+                        </svg>
+                        <em>En une phrase, pourquoi devenir Sentinel HumanLayer ?</em><br>
+                        <strong>Parce que votre autorité a de la valeur, et que HumanLayer est la première
+                            infrastructure qui permet de l’exercer à l’échelle de l’IA.</strong>
+                    </p>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="faq-cta reveal">
+                <p>Prêt à valoriser votre expertise ?</p>
+                <a href="apply.html" class="btn btn-primary">
+                    <svg class="hl-icon">
+                        <use href="#icon-user" />
+                    </svg>
+                    Devenir Sentinel
+                </a>
+            </div>
+        </div>
+    </section>
+  </main>
+
+<!-- layout:footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="brand" aria-label="HumanLayer, accueil">
+            <img src="logo-mark.png" width="30" height="30" alt="">
+            <span class="brand-name">Human<span>Layer</span></span>
+          </a>
+          <p>La couche d’autorité décisionnelle pour agents IA.</p>
+          <address>
+            HumanLayer Systems Inc.<br>
+            1250, avenue de la Station, Shawinigan (Québec) G9N&nbsp;8K9<br>
+            <a href="mailto:humanlayer@probalink.com">humanlayer@probalink.com</a>
+          </address>
+        </div>
+        <nav class="footer-cols" aria-label="Pied de page">
+          <div class="footer-col">
+            <h2>Produit</h2>
+            <ul>
+              <li><a href="index.html#arbitrium">Arbitrium</a></li>
+              <li><a href="index.html#solution">Solution</a></li>
+              <li><a href="index.html#usecases">Cas d’usage</a></li>
+              <li><a href="index.html#pricing">Tarifs</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h2>Développeurs</h2>
+            <ul>
+              <li><a href="developers/">Documentation API</a></li>
+              <li><a href="faq-developpeurs.html">FAQ développeurs</a></li>
+              <li><a href="/client/">Espace client</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h2>Réseau</h2>
+            <ul>
+              <li><a href="apply.html">Devenir Sentinel</a></li>
+              <li><a href="/sentinel/">Portail Sentinel</a></li>
+              <li><a href="faq-decideurs.html">FAQ Sentinels</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h2>Entreprise</h2>
+            <ul>
+              <li><a href="faq.html">FAQ</a></li>
+              <li><a href="security.html">Sécurité</a></li>
+              <li><a href="privacy.html">Confidentialité</a></li>
+              <li><a href="terms.html">Conditions</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div class="footer-wordmark" aria-hidden="true">HumanLayer</div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <span>© 2026 HumanLayer Systems Inc. Tous droits réservés.</span>
+        <span>Conçu au Québec · <a href="faq-decideurs-en.html" lang="en" hreflang="en">English version</a></span>
+        <span class="footer-credit">Propulsé par <a href="https://in6.ai" target="_blank" rel="noopener">in6.ai</a></span>
+      </div>
+    </div>
+  </footer>
+<!-- /layout:footer -->
+    <script src="script.js" defer></script>
+
+</body>
+
+</html>

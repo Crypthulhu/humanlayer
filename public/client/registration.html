@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HumanLayer — Choose a plan</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <style>
+        :root {
+            --font-display: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --font-body: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --primary: #3fe0ee;
+            --primary-glow: rgba(63, 224, 238, 0.15);
+            --accent: #ffb547;
+            --accent-glow: rgba(255, 181, 71, 0.15);
+            --success: #10B981;
+            --bg-dark: #05070d;
+            --bg-card: rgba(255, 255, 255, 0.04);
+            --bg-card-hover: rgba(255, 255, 255, 0.08);
+            --text-primary: #f0f0f5;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border: rgba(255, 255, 255, 0.06);
+            --border-hover: rgba(255, 255, 255, 0.12);
+            --radius: 20px;
+            --shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Background */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 60% 50% at 20% 20%, rgba(63, 224, 238, 0.06), transparent),
+                radial-gradient(ellipse 50% 40% at 80% 70%, rgba(255, 181, 71, 0.05), transparent);
+            pointer-events: none;
+        }
+
+        .shell {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+            position: relative;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .header a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin-bottom: 20px;
+            transition: color 0.2s;
+        }
+
+        .header a:hover {
+            color: var(--text-primary);
+        }
+
+        .header h1 {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .header h1 span {
+            color: var(--primary);
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Step indicator */
+        .steps {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 40px;
+        }
+
+        .step-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border);
+            transition: all 0.3s;
+        }
+
+        .step-dot.active {
+            background: var(--primary);
+            width: 32px;
+            border-radius: 4px;
+        }
+
+        /* Pricing cards */
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .plans-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto 40px;
+            }
+        }
+
+        .plan-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plan-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius);
+            opacity: 0;
+            transition: opacity 0.35s;
+        }
+
+        .plan-card:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-card-hover);
+            transform: translateY(-4px);
+        }
+
+        .plan-card.selected {
+            border-color: var(--primary);
+            background: var(--primary-glow);
+        }
+
+        .plan-card.selected::before {
+            opacity: 1;
+            background: radial-gradient(ellipse at center, rgba(63, 224, 238, 0.08), transparent 70%);
+        }
+
+        .plan-card.featured {
+            border-color: var(--accent);
+        }
+
+        .plan-card.featured.selected {
+            border-color: var(--accent);
+            background: var(--accent-glow);
+        }
+
+        .plan-tag {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            background: rgba(255, 181, 71, 0.1);
+            padding: 3px 10px;
+            border-radius: 999px;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .plan-name {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .plan-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .plan-price {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+            margin-bottom: 20px;
+        }
+
+        .plan-price .currency {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .plan-price .amount {
+            font-size: 2.4rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .plan-price .unit {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .plan-features {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .plan-features li {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .plan-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .check-icon {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            font-size: 0.75rem;
+        }
+
+        .plan-card.selected .check-icon {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        /* Registration form */
+        .form-panel {
+            display: none;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 36px 32px;
+            max-width: 480px;
+            margin: 0 auto;
+            animation: slideUp 0.4s ease;
+        }
+
+        .form-panel.active {
+            display: block;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-panel h2 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            margin-bottom: 4px;
+        }
+
+        .form-panel .form-subtitle {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-error {
+            color: #EF4444;
+            font-size: 0.85rem;
+            margin-top: 8px;
+            display: none;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 12px;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #04121a;
+        }
+
+        .btn-primary:hover {
+            background: #7cf0f8;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(63, 224, 238, 0.3);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            margin-top: 12px;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--border-hover);
+            color: var(--text-primary);
+        }
+
+        /* Success panel */
+        .success-panel {
+            display: none;
+            text-align: center;
+            max-width: 520px;
+            margin: 0 auto;
+            animation: slideUp 0.4s ease;
+        }
+
+        .success-panel.active {
+            display: block;
+        }
+
+        .success-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid var(--success);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 20px;
+        }
+
+        .success-panel h2 {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+        }
+
+        .success-panel p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .key-display {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+
+        .key-display .key-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 6px;
+        }
+
+        .key-display code {
+            font-size: 0.9rem;
+            color: var(--success);
+            word-break: break-all;
+            font-weight: 600;
+        }
+
+        .key-warning {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        /* Login link */
+        .login-link {
+            text-align: center;
+            margin-top: 32px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .login-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="shell">
+        <!-- Header -->
+        <div class="header">
+            <a href="/index-en.html">← Back to humanlayer.systems</a>
+            <h1>Choose your <span>plan</span></h1>
+            <p>Integrate qualified human decisions into your AI agents</p>
+        </div>
+
+        <!-- Steps indicator -->
+        <div class="steps">
+            <div class="step-dot active" id="step1"></div>
+            <div class="step-dot" id="step2"></div>
+            <div class="step-dot" id="step3"></div>
+        </div>
+
+        <!-- Step 1: Plan selection -->
+        <div id="stepPlans">
+            <div class="plans-grid">
+                <!-- Compliance -->
+                <div class="plan-card" data-tier="compliance" onclick="selectPlan('compliance')">
+                    <div class="check-icon">✓</div>
+                    <div class="plan-name">Compliance</div>
+                    <div class="plan-desc">Rule and policy validation</div>
+                    <div class="plan-price">
+                        <span class="currency">€</span>
+                        <span class="amount">20</span>
+                        <span class="unit">/ decision</span>
+                    </div>
+                    <ul class="plan-features">
+                        <li>100 requests / day</li>
+                        <li>Structured verification</li>
+                        <li>30-minute SLA</li>
+                        <li>Full audit trail</li>
+                    </ul>
+                </div>
+
+                <!-- Expert judgment -->
+                <div class="plan-card featured" data-tier="expert" onclick="selectPlan('expert')">
+                    <div class="check-icon">✓</div>
+                    <span class="plan-tag">Popular</span>
+                    <div class="plan-name">Expert Judgment</div>
+                    <div class="plan-desc">When rules are not enough</div>
+                    <div class="plan-price">
+                        <span class="currency">€</span>
+                        <span class="amount">100</span>
+                        <span class="unit">/ decision</span>
+                    </div>
+                    <ul class="plan-features">
+                        <li>50 requests / day</li>
+                        <li>Domain expertise</li>
+                        <li>2-hour SLA</li>
+                        <li>Detailed commentary</li>
+                    </ul>
+                </div>
+
+                <!-- Authorized authority -->
+                <div class="plan-card" data-tier="authority" onclick="selectPlan('authority')">
+                    <div class="check-icon">✓</div>
+                    <div class="plan-name">Authorized Authority</div>
+                    <div class="plan-desc">Final act by a qualified professional</div>
+                    <div class="plan-price">
+                        <span class="currency">€</span>
+                        <span class="amount">250</span>
+                        <span class="unit">/ decision</span>
+                    </div>
+                    <ul class="plan-features">
+                        <li>20 requests / day</li>
+                        <li>Sign-off by an authorized professional</li>
+                        <li>4-hour or custom SLA</li>
+                        <li>Signed, exportable proof</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Registration form -->
+        <div class="form-panel" id="formPanel">
+            <h2>Create your account</h2>
+            <div class="form-subtitle">Plan: <strong id="selectedTierLabel">—</strong></div>
+
+            <form id="registerForm">
+                <div class="form-group">
+                    <label>Company name</label>
+                    <input type="text" id="companyName" placeholder="Your company" required>
+                </div>
+                <div class="form-group">
+                    <label>Work email</label>
+                    <input type="email" id="email" placeholder="you@company.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="At least 12 characters" required minlength="12">
+                </div>
+                <div class="form-group">
+                    <label>Confirm password</label>
+                    <input type="password" id="passwordConfirm" placeholder="Repeat your password" required>
+                </div>
+
+                <div class="form-error" id="formError"></div>
+
+                <button type="submit" class="btn btn-primary" id="submitBtn">Create my account</button>
+                <button type="button" class="btn btn-secondary" onclick="goBack()">← Change plan</button>
+            </form>
+        </div>
+
+        <!-- Step 3: Success -->
+        <div class="success-panel" id="successPanel">
+            <div class="success-icon">✓</div>
+            <h2>Account created successfully!</h2>
+            <p>Your first API key has been generated automatically.</p>
+
+            <div class="key-display">
+                <div class="key-label">Your API key</div>
+                <code id="generatedKey">—</code>
+            </div>
+            <div class="key-display">
+                <div class="key-label">Webhook signing secret</div>
+                <code id="generatedWebhook">—</code>
+            </div>
+            <div class="key-warning">⚠ Copy this key now: only its fingerprint is stored, it will not be displayed again.</div>
+
+            <button class="btn btn-primary" onclick="copyKey()">📋 Copy key</button>
+            <a href="/client/" class="btn btn-secondary">Go to my dashboard →</a>
+        </div>
+
+        <!-- Login link -->
+        <div class="login-link">
+            Already registered? <a href="/client/">Sign in →</a>
+        </div>
+    </div>
+
+    <script>
+        const tierLabels = {
+            compliance: 'Compliance (€20/decision)',
+            expert: 'Expert Judgment (€100/decision)',
+            authority: 'Authorized Authority (€250/decision)'
+        };
+
+        let selectedTier = null;
+
+        function selectPlan(tier) {
+            selectedTier = tier;
+
+            // Update cards
+            document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
+            document.querySelector(`[data-tier="${tier}"]`).classList.add('selected');
+
+            // Show form after short delay
+            setTimeout(() => {
+                document.getElementById('stepPlans').style.display = 'none';
+                document.getElementById('formPanel').classList.add('active');
+                document.getElementById('selectedTierLabel').textContent = tierLabels[tier];
+
+                // Update steps
+                document.getElementById('step1').classList.remove('active');
+                document.getElementById('step2').classList.add('active');
+            }, 300);
+        }
+
+        function goBack() {
+            document.getElementById('formPanel').classList.remove('active');
+            document.getElementById('stepPlans').style.display = 'block';
+            document.getElementById('step2').classList.remove('active');
+            document.getElementById('step1').classList.add('active');
+        }
+
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const errEl = document.getElementById('formError');
+            const btn = document.getElementById('submitBtn');
+            errEl.style.display = 'none';
+
+            const password = document.getElementById('password').value;
+            const confirm = document.getElementById('passwordConfirm').value;
+
+            if (password !== confirm) {
+                errEl.textContent = 'Passwords do not match.';
+                errEl.style.display = 'block';
+                return;
+            }
+            if (password.length < 12) {
+                errEl.textContent = 'Password must be at least 12 characters.';
+                errEl.style.display = 'block';
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = 'Creating account...';
+
+            try {
+                const res = await fetch('/.netlify/functions/client-api?action=register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        company_name: document.getElementById('companyName').value,
+                        email: document.getElementById('email').value,
+                        password,
+                        tier: selectedTier
+                    })
+                });
+
+                const data = await res.json();
+
+                if (!res.ok) {
+                    errEl.textContent = data.error || 'Registration failed';
+                    errEl.style.display = 'block';
+                    btn.disabled = false;
+                    btn.textContent = 'Create my account';
+                    return;
+                }
+
+                // Success!
+                document.getElementById('generatedKey').textContent = data.api_key;
+                document.getElementById('generatedWebhook').textContent = data.webhook_secret || '—';
+                document.getElementById('formPanel').classList.remove('active');
+                document.getElementById('successPanel').classList.add('active');
+                document.querySelector('.login-link').style.display = 'none';
+
+                document.getElementById('step2').classList.remove('active');
+                document.getElementById('step3').classList.add('active');
+
+            } catch {
+                errEl.textContent = 'Network error. Please try again.';
+                errEl.style.display = 'block';
+                btn.disabled = false;
+                btn.textContent = 'Create my account';
+            }
+        });
+
+        function copyKey() {
+            const key = document.getElementById('generatedKey').textContent;
+            navigator.clipboard.writeText(key).then(() => {
+                const btn = event.target;
+                btn.textContent = '✓ Copied!';
+                setTimeout(() => btn.textContent = '📋 Copy key', 2000);
+            });
+        }
+
+        // Auto-select tier from URL hash (e.g. #expert)
+        (() => {
+            const hash = location.hash.replace('#', '');
+            if (['compliance', 'expert', 'authority'].includes(hash)) {
+                selectPlan(hash);
+            }
+        })();
+    </script>
+</body>
+
+</html>

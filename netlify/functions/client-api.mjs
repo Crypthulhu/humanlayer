@@ -1,248 +1,205 @@
+// Espace client : inscription (forfaits publics uniquement), clés d'API hachées,
+// suivi des demandes et export signé du journal des décisions.
 import crypto from 'node:crypto';
-import { initSchema, getDb, generateApiKey, hashPassword } from './db.mjs';
-import { jsonResponse, parseBody, verifyJwt, getBearer } from './_utils.mjs';
+import { db, nowIso, startOfTodayIso, LATEST_DECISION_JOIN } from '../lib/db.mjs';
+import { handler, readJson, clientIp, json, HttpError, text, isEmail } from '../lib/http.mjs';
+import { requireClient } from '../lib/auth.mjs';
+import { hashPassword, newApiKey, webhookSecretFor, PASSWORD_MIN_LENGTH } from '../lib/security.mjs';
+import { PLANS, publicPlans, selfServicePlan } from '../lib/plans.mjs';
+import { enforce, LIMITS } from '../lib/ratelimit.mjs';
+import { audit } from '../lib/audit.mjs';
 
-const TIER_CONFIG = {
-    compliance: { daily_limit: 100, label: 'Conformité', price: '15' },
-    expert: { daily_limit: 50, label: 'Jugement expert', price: '80' },
-    authority: { daily_limit: 20, label: 'Autorité habilitée', price: '200' },
-    enterprise: { daily_limit: 999999, label: 'Enterprise', price: 'custom' }
-};
+const MAX_KEYS = 5;
+const notFound = () => new HttpError(404, { fr: 'Clé introuvable', en: 'Key not found' }, { code: 'not_found' });
 
-// Verify client JWT
-function authorizeClient(request) {
-    const token = getBearer(request);
-    if (!token) return null;
-    const secret = process.env.CLIENT_JWT_SECRET || process.env.ADMIN_JWT_SECRET;
-    if (!secret) return null;
-    const payload = verifyJwt(token, secret);
-    if (!payload || payload.role !== 'client') return null;
-    return payload;
+async function register(request, context) {
+  const conn = await db();
+  const ip = clientIp(request, context);
+  await enforce(conn, `register:ip:${ip}`, LIMITS.registerPerIp.limit, LIMITS.registerPerIp.window);
+  const body = await readJson(request, 8 * 1024);
+  const company = text(body.company_name, 120);
+  const email = text(body.email, 254)?.toLowerCase();
+  if (!company || !isEmail(email) || typeof body.password !== 'string') {
+    throw new HttpError(400, { fr: 'Entreprise, courriel valide et mot de passe requis', en: 'Company, valid email and password required' }, { code: 'missing_fields' });
+  }
+  if (body.password.length < PASSWORD_MIN_LENGTH) {
+    throw new HttpError(
+      400,
+      { fr: `Le mot de passe doit faire au moins ${PASSWORD_MIN_LENGTH} caractères`, en: `Password must be at least ${PASSWORD_MIN_LENGTH} characters` },
+      { code: 'weak_password' }
+    );
+  }
+  // Seuls les forfaits publics sont accessibles en libre-service ; Enterprise passe par l'équipe.
+  const tier = selfServicePlan(body.tier);
+  const clientId = crypto.randomUUID();
+  const keyId = crypto.randomUUID();
+  const key = newApiKey('live');
+  const now = nowIso();
+  const { salt, hash } = await hashPassword(body.password);
+  try {
+    await conn.batch(
+      [
+        {
+          sql: `INSERT INTO clients (id, company_name, email, password_hash, password_salt, tier, status, created_at) VALUES (?, ?, ?, ?, ?, ?, 'active', ?)`,
+          args: [clientId, company, email, hash, salt, tier, now],
+        },
+        {
+          sql: `INSERT INTO api_keys (id, client_name, client_email, api_key, key_prefix, tier, status, daily_limit, total_used, created_at, client_id)
+                VALUES (?, ?, ?, ?, ?, ?, 'active', ?, 0, ?, ?)`,
+          args: [keyId, company, email, key.stored, key.prefix, tier, PLANS[tier].daily_limit, now, clientId],
+        },
+      ],
+      'write'
+    );
+  } catch (err) {
+    if (/UNIQUE/i.test(String(err && err.message))) {
+      throw new HttpError(409, { fr: 'Un compte existe déjà avec ce courriel', en: 'An account already exists for this email' }, { code: 'email_taken' });
+    }
+    throw err;
+  }
+  await audit(conn, { actor_type: 'client', actor_id: clientId, action: 'client.registered', ip, details: { tier } });
+  return json(200, {
+    ok: true,
+    client_id: clientId,
+    api_key: key.raw,
+    key_prefix: key.prefix,
+    webhook_secret: webhookSecretFor(keyId),
+    tier,
+    tier_label: PLANS[tier].label,
+  });
 }
 
-export default async function (request) {
-    await initSchema();
-    const db = getDb();
-    const url = new URL(request.url);
-    const action = url.searchParams.get('action');
+export default handler(async (request, context) => {
+  const action = new URL(request.url).searchParams.get('action');
+  if (request.method === 'POST' && action === 'register') return register(request, context);
 
-    // ──────────────────────────────────────────────
-    // REGISTER — public (no auth required)
-    // ──────────────────────────────────────────────
-    if (request.method === 'POST' && action === 'register') {
-        const data = await parseBody(request);
-        if (!data) return jsonResponse(400, { error: 'Invalid JSON' });
+  const conn = await db();
+  const { client } = await requireClient(conn, request);
+  const ip = clientIp(request, context);
+  const params = new URL(request.url).searchParams;
 
-        const { company_name, email, password, tier } = data;
-        if (!company_name || !email || !password) {
-            return jsonResponse(400, { error: 'Champs requis : company_name, email, password' });
-        }
-        if (password.length < 8) {
-            return jsonResponse(400, { error: 'Le mot de passe doit faire au moins 8 caractères' });
-        }
+  if (request.method === 'GET' && action === 'dashboard') {
+    const [keys, stats] = await Promise.all([
+      conn.execute({ sql: "SELECT COUNT(*) AS n FROM api_keys WHERE client_id = ? AND status = 'active'", args: [client.id] }),
+      conn.execute({
+        sql: `SELECT COUNT(*) AS total,
+                SUM(CASE WHEN r.created_at >= ? THEN 1 ELSE 0 END) AS today,
+                SUM(CASE WHEN r.status IN ('pending', 'assigned', 'sla_breached') THEN 1 ELSE 0 END) AS in_progress,
+                SUM(CASE WHEN r.status = 'decided' THEN 1 ELSE 0 END) AS decided
+              FROM ai_requests r JOIN api_keys k ON r.api_key_id = k.id WHERE k.client_id = ?`,
+        args: [startOfTodayIso(), client.id],
+      }),
+    ]);
+    const s = stats.rows[0] || {};
+    return json(200, {
+      client: { company_name: client.company_name, email: client.email, tier: client.tier, tier_label: PLANS[client.tier]?.label || client.tier, created_at: client.created_at },
+      stats: {
+        active_keys: Number(keys.rows[0]?.n || 0),
+        total_requests: Number(s.total || 0),
+        today_requests: Number(s.today || 0),
+        in_progress: Number(s.in_progress || 0),
+        decided: Number(s.decided || 0),
+      },
+      tiers: publicPlans(),
+    });
+  }
 
-        const selectedTier = tier && TIER_CONFIG[tier] ? tier : 'compliance';
-        const id = crypto.randomUUID();
-        const now = new Date().toISOString();
+  if (request.method === 'GET' && action === 'keys') {
+    const res = await conn.execute({
+      sql: `SELECT k.id, k.key_prefix, k.tier, k.status, k.daily_limit, k.total_used, k.created_at, k.expires_at,
+              (SELECT COUNT(*) FROM ai_requests r WHERE r.api_key_id = k.id AND r.created_at >= ?) AS today_requests
+            FROM api_keys k WHERE k.client_id = ? ORDER BY k.created_at DESC`,
+      args: [startOfTodayIso(), client.id],
+    });
+    return json(200, { keys: res.rows.map((k) => ({ ...k, key_prefix: k.key_prefix || 'hl_live_…' })) });
+  }
 
-        try {
-            const { saltHex, hashHex } = await hashPassword(password);
-
-            await db.execute({
-                sql: `INSERT INTO clients (id, company_name, email, password_hash, password_salt, tier, status, created_at)
-                      VALUES (?, ?, ?, ?, ?, ?, 'active', ?)`,
-                args: [id, company_name, email.toLowerCase().trim(), hashHex, saltHex, selectedTier, now]
-            });
-
-            // Auto-generate a first API key for the client
-            const keyId = crypto.randomUUID();
-            const apiKey = generateApiKey('live');
-            const config = TIER_CONFIG[selectedTier];
-
-            await db.execute({
-                sql: `INSERT INTO api_keys (id, client_name, client_email, api_key, tier, status, daily_limit, total_used, created_at, client_id)
-                      VALUES (?, ?, ?, ?, ?, 'active', ?, 0, ?, ?)`,
-                args: [keyId, company_name, email.toLowerCase().trim(), apiKey, selectedTier, config.daily_limit, now, id]
-            });
-
-            return jsonResponse(200, {
-                ok: true,
-                client_id: id,
-                api_key: apiKey,
-                tier: selectedTier,
-                tier_label: config.label
-            });
-        } catch (err) {
-            console.error('client register error:', err);
-            if (err.message && err.message.includes('UNIQUE')) {
-                return jsonResponse(409, { error: 'Un compte avec cet email existe déjà' });
-            }
-            return jsonResponse(500, { error: 'Échec de l\'inscription' });
-        }
+  if (request.method === 'POST' && action === 'create-key') {
+    const existing = await conn.execute({
+      sql: `SELECT SUM(CASE WHEN status != 'revoked' THEN 1 ELSE 0 END) AS open,
+                   SUM(CASE WHEN status = 'suspended' THEN 1 ELSE 0 END) AS suspended
+            FROM api_keys WHERE client_id = ?`,
+      args: [client.id],
+    });
+    const row = existing.rows[0] || {};
+    // Une suspension décidée par l'administration ne se contourne pas en recréant une clé.
+    if (Number(row.suspended || 0) > 0) {
+      throw new HttpError(403, { fr: 'Une clé est suspendue : contactez le support', en: 'A key is suspended: contact support' }, { code: 'key_suspended' });
     }
-
-    // ── All other actions require client auth ──
-    const auth = authorizeClient(request);
-    if (!auth) {
-        return jsonResponse(401, { error: 'Authentification requise' });
+    if (Number(row.open || 0) >= MAX_KEYS) {
+      throw new HttpError(400, { fr: `Maximum de ${MAX_KEYS} clés actives atteint`, en: `Maximum of ${MAX_KEYS} active keys reached` }, { code: 'too_many_keys' });
     }
-    const clientId = auth.client_id;
+    const plan = PLANS[client.tier] || PLANS.compliance;
+    const keyId = crypto.randomUUID();
+    const key = newApiKey('live');
+    const now = nowIso();
+    await conn.execute({
+      sql: `INSERT INTO api_keys (id, client_name, client_email, api_key, key_prefix, tier, status, daily_limit, total_used, created_at, client_id)
+            VALUES (?, ?, ?, ?, ?, ?, 'active', ?, 0, ?, ?)`,
+      args: [keyId, client.company_name, client.email, key.stored, key.prefix, client.tier, plan.daily_limit, now, client.id],
+    });
+    await audit(conn, { actor_type: 'client', actor_id: client.id, action: 'api_key.created', target_type: 'api_key', target_id: keyId, ip });
+    return json(200, {
+      ok: true,
+      key: { id: keyId, api_key: key.raw, key_prefix: key.prefix, webhook_secret: webhookSecretFor(keyId), tier: client.tier, daily_limit: plan.daily_limit, created_at: now },
+    });
+  }
 
-    // ──────────────────────────────────────────────
-    // DASHBOARD — client stats
-    // ──────────────────────────────────────────────
-    if (request.method === 'GET' && action === 'dashboard') {
-        try {
-            const today = new Date().toISOString().slice(0, 10);
-
-            const [clientRow, keysData, statsData] = await Promise.all([
-                db.execute({ sql: 'SELECT * FROM clients WHERE id = ?', args: [clientId] }),
-                db.execute({ sql: 'SELECT COUNT(*) as cnt FROM api_keys WHERE client_id = ? AND status = ?', args: [clientId, 'active'] }),
-                db.execute({
-                    sql: `SELECT 
-                        COUNT(*) as total,
-                        SUM(CASE WHEN r.created_at >= ? THEN 1 ELSE 0 END) as today,
-                        SUM(CASE WHEN r.status = 'pending' OR r.status = 'assigned' THEN 1 ELSE 0 END) as in_progress,
-                        SUM(CASE WHEN r.status = 'decided' THEN 1 ELSE 0 END) as decided
-                    FROM ai_requests r
-                    JOIN api_keys k ON r.api_key_id = k.id
-                    WHERE k.client_id = ?`,
-                    args: [`${today}T00:00:00.000Z`, clientId]
-                })
-            ]);
-
-            const client = clientRow.rows[0];
-            const stats = statsData.rows[0] || {};
-
-            return jsonResponse(200, {
-                client: {
-                    company_name: client?.company_name,
-                    email: client?.email,
-                    tier: client?.tier,
-                    tier_label: TIER_CONFIG[client?.tier]?.label || client?.tier,
-                    created_at: client?.created_at
-                },
-                stats: {
-                    active_keys: keysData.rows[0]?.cnt || 0,
-                    total_requests: stats.total || 0,
-                    today_requests: stats.today || 0,
-                    in_progress: stats.in_progress || 0,
-                    decided: stats.decided || 0
-                },
-                tiers: TIER_CONFIG
-            });
-        } catch (err) {
-            console.error('client dashboard error:', err);
-            return jsonResponse(500, { error: 'Erreur serveur' });
-        }
+  if (request.method === 'PATCH' && action === 'revoke-key') {
+    const body = await readJson(request, 2 * 1024);
+    const keyId = text(body.key_id, 64);
+    if (!keyId) throw new HttpError(400, { fr: 'key_id requis', en: 'key_id required' }, { code: 'missing_fields' });
+    const res = await conn.execute({ sql: 'SELECT status FROM api_keys WHERE id = ? AND client_id = ?', args: [keyId, client.id] });
+    if (!res.rows.length) throw notFound();
+    if (res.rows[0].status === 'suspended') {
+      throw new HttpError(403, { fr: 'Clé suspendue par l’administration : contactez le support', en: 'Key suspended by administration: contact support' }, { code: 'key_suspended' });
     }
+    await conn.execute({ sql: "UPDATE api_keys SET status = 'revoked' WHERE id = ? AND client_id = ? AND status = 'active'", args: [keyId, client.id] });
+    await audit(conn, { actor_type: 'client', actor_id: client.id, action: 'api_key.revoked', target_type: 'api_key', target_id: keyId, ip });
+    return json(200, { ok: true });
+  }
 
-    // ──────────────────────────────────────────────
-    // KEYS — list client's API keys
-    // ──────────────────────────────────────────────
-    if (request.method === 'GET' && action === 'keys') {
-        try {
-            const today = new Date().toISOString().slice(0, 10);
-            const result = await db.execute({
-                sql: `SELECT k.*,
-                    (SELECT COUNT(*) FROM ai_requests r WHERE r.api_key_id = k.id AND r.created_at >= ?) as today_requests
-                FROM api_keys k
-                WHERE k.client_id = ?
-                ORDER BY k.created_at DESC`,
-                args: [`${today}T00:00:00.000Z`, clientId]
-            });
+  if (request.method === 'GET' && action === 'webhook-secret') {
+    const keyId = text(params.get('key_id'), 64);
+    const res = await conn.execute({ sql: "SELECT id FROM api_keys WHERE id = ? AND client_id = ? AND status != 'revoked'", args: [keyId, client.id] });
+    if (!res.rows.length) throw notFound();
+    await audit(conn, { actor_type: 'client', actor_id: client.id, action: 'webhook_secret.viewed', target_type: 'api_key', target_id: keyId, ip });
+    return json(200, { key_id: keyId, webhook_secret: webhookSecretFor(keyId) });
+  }
 
-            return jsonResponse(200, { keys: result.rows });
-        } catch (err) {
-            console.error('client keys error:', err);
-            return jsonResponse(500, { error: 'Erreur serveur' });
-        }
-    }
+  if (request.method === 'GET' && (action === 'requests' || action === 'export')) {
+    const exporting = action === 'export';
+    const res = await conn.execute({
+      sql: `SELECT r.id, r.agent_id, r.agent_name, r.request_type, r.domain, r.summary, r.priority, r.status,
+              r.created_at, r.assigned_at, r.decided_at, r.expires_at, r.sla_breached_at, r.escalation_count,
+              r.second_opinion_of,
+              d.id AS decision_id, d.verdict, d.reasoning, d.signed_at AS decision_signed_at,
+              d.signature, d.signed_payload, d.key_id
+            FROM ai_requests r
+            ${LATEST_DECISION_JOIN}
+            JOIN api_keys k ON r.api_key_id = k.id
+            WHERE k.client_id = ?
+            ORDER BY r.created_at DESC
+            LIMIT ${exporting ? 5000 : 200}`,
+      args: [client.id],
+    });
+    if (!exporting) return json(200, { requests: res.rows });
+    await audit(conn, { actor_type: 'client', actor_id: client.id, action: 'decisions.exported', ip, details: { count: res.rows.length } });
+    return json(
+      200,
+      {
+        exported_at: nowIso(),
+        company: client.company_name,
+        verification: { algorithm: 'Ed25519', public_key_url: '/api/v1/decision-key', signed_field: 'signed_payload' },
+        requests: res.rows,
+      },
+      { 'Content-Disposition': 'attachment; filename="humanlayer-decisions.json"' }
+    );
+  }
 
-    // ──────────────────────────────────────────────
-    // CREATE KEY — generate a new API key
-    // ──────────────────────────────────────────────
-    if (request.method === 'POST' && action === 'create-key') {
-        try {
-            // Get client info for tier
-            const clientRow = await db.execute({ sql: 'SELECT * FROM clients WHERE id = ?', args: [clientId] });
-            const client = clientRow.rows[0];
-            if (!client) return jsonResponse(404, { error: 'Client non trouvé' });
-
-            // Limit keys per client (max 5)
-            const existing = await db.execute({
-                sql: `SELECT COUNT(*) as cnt FROM api_keys WHERE client_id = ? AND status != 'revoked'`,
-                args: [clientId]
-            });
-            if ((existing.rows[0]?.cnt || 0) >= 5) {
-                return jsonResponse(400, { error: 'Maximum de 5 clés actives atteint' });
-            }
-
-            const keyId = crypto.randomUUID();
-            const apiKey = generateApiKey('live');
-            const config = TIER_CONFIG[client.tier] || TIER_CONFIG.compliance;
-            const now = new Date().toISOString();
-
-            await db.execute({
-                sql: `INSERT INTO api_keys (id, client_name, client_email, api_key, tier, status, daily_limit, total_used, created_at, client_id)
-                      VALUES (?, ?, ?, ?, ?, 'active', ?, 0, ?, ?)`,
-                args: [keyId, client.company_name, client.email, apiKey, client.tier, config.daily_limit, now, clientId]
-            });
-
-            return jsonResponse(200, {
-                ok: true,
-                key: { id: keyId, api_key: apiKey, tier: client.tier, daily_limit: config.daily_limit, created_at: now }
-            });
-        } catch (err) {
-            console.error('client create-key error:', err);
-            return jsonResponse(500, { error: 'Échec de la création de clé' });
-        }
-    }
-
-    // ──────────────────────────────────────────────
-    // REVOKE KEY — soft-delete a key
-    // ──────────────────────────────────────────────
-    if (request.method === 'PATCH' && action === 'revoke-key') {
-        const data = await parseBody(request);
-        if (!data?.key_id) return jsonResponse(400, { error: 'key_id requis' });
-
-        try {
-            const result = await db.execute({
-                sql: `UPDATE api_keys SET status = 'revoked' WHERE id = ? AND client_id = ?`,
-                args: [data.key_id, clientId]
-            });
-            if (result.rowsAffected === 0) return jsonResponse(404, { error: 'Clé non trouvée' });
-            return jsonResponse(200, { ok: true });
-        } catch (err) {
-            console.error('client revoke-key error:', err);
-            return jsonResponse(500, { error: 'Échec de la révocation' });
-        }
-    }
-
-    // ──────────────────────────────────────────────
-    // REQUESTS — list client's AI requests
-    // ──────────────────────────────────────────────
-    if (request.method === 'GET' && action === 'requests') {
-        try {
-            const result = await db.execute({
-                sql: `SELECT r.id, r.agent_id, r.agent_name, r.request_type, r.domain, r.summary,
-                        r.priority, r.status, r.created_at, r.assigned_at, r.decided_at,
-                        d.verdict, d.reasoning, d.signed_at as decision_signed_at
-                FROM ai_requests r
-                LEFT JOIN decisions d ON d.request_id = r.id
-                JOIN api_keys k ON r.api_key_id = k.id
-                WHERE k.client_id = ?
-                ORDER BY r.created_at DESC
-                LIMIT 200`,
-                args: [clientId]
-            });
-
-            return jsonResponse(200, { requests: result.rows });
-        } catch (err) {
-            console.error('client requests error:', err);
-            return jsonResponse(500, { error: 'Erreur serveur' });
-        }
-    }
-
-    return jsonResponse(400, { error: 'Action invalide. Actions: register, dashboard, keys, create-key, revoke-key, requests' });
-}
+  throw new HttpError(
+    400,
+    { fr: 'Action invalide', en: 'Invalid action' },
+    { code: 'invalid_action', actions: ['register', 'dashboard', 'keys', 'create-key', 'revoke-key', 'webhook-secret', 'requests', 'export'] }
+  );
+});

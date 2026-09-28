@@ -1,68 +1,56 @@
-import { initSchema, getDb } from './db.mjs';
-import { jsonResponse, parseBody, signJwt, verifyPassword } from './_utils.mjs';
+// Connexion client : tentatives limitées (IP et compte), session de 12 h, réponse uniforme.
+import { db } from '../lib/db.mjs';
+import { handler, allowMethods, readJson, clientIp, json, HttpError, text } from '../lib/http.mjs';
+import { verifyPassword, hashPassword } from '../lib/security.mjs';
+import { issueToken, SESSION_TTL } from '../lib/auth.mjs';
+import { enforce, peek, consume, reset, tooMany, LIMITS } from '../lib/ratelimit.mjs';
+import { audit } from '../lib/audit.mjs';
 
-export default async function (request) {
-    if (request.method !== 'POST') {
-        return jsonResponse(405, { error: 'Method not allowed' });
-    }
+const invalid = () => new HttpError(401, { fr: 'Identifiants invalides', en: 'Invalid credentials' }, { code: 'invalid_credentials' });
 
-    const body = await parseBody(request);
-    if (!body?.email || !body?.password) {
-        return jsonResponse(400, { error: 'Email et mot de passe requis' });
-    }
+export default handler(async (request, context) => {
+  allowMethods(request, 'POST');
+  const conn = await db();
+  const ip = clientIp(request, context);
+  await enforce(conn, `login:client:ip:${ip}`, LIMITS.loginPerIp.limit, LIMITS.loginPerIp.window);
 
-    await initSchema();
-    const db = getDb();
-    const secret = process.env.CLIENT_JWT_SECRET || process.env.ADMIN_JWT_SECRET;
+  const body = await readJson(request, 4 * 1024);
+  const email = text(body.email, 254)?.toLowerCase();
+  if (!email || typeof body.password !== 'string') {
+    throw new HttpError(400, { fr: 'Courriel et mot de passe requis', en: 'Email and password required' }, { code: 'missing_fields' });
+  }
 
-    if (!secret) {
-        return jsonResponse(500, { error: 'Server not configured' });
-    }
+  const failKey = `login:client:fail:${email}`;
+  const { limit, window } = LIMITS.loginFailuresPerAccount;
+  const failures = await peek(conn, failKey, window);
+  if (failures.count >= limit) throw tooMany(failures.retryAfter);
 
-    try {
-        const result = await db.execute({
-            sql: 'SELECT * FROM clients WHERE email = ?',
-            args: [body.email.toLowerCase().trim()]
-        });
+  const res = await conn.execute({
+    sql: 'SELECT id, company_name, email, tier, status, password_hash, password_salt FROM clients WHERE lower(email) = ?',
+    args: [email],
+  });
+  const client = res.rows[0];
+  const check = client ? await verifyPassword(body.password, client.password_salt, client.password_hash) : { ok: false };
+  // Le statut n'est révélé qu'après un mot de passe correct.
+  if (!check.ok) {
+    await consume(conn, failKey, limit, window);
+    await audit(conn, { actor_type: 'client', actor_id: client ? client.id : null, action: 'client.login.failed', ip });
+    throw invalid();
+  }
+  if (client.status !== 'active') {
+    await audit(conn, { actor_type: 'client', actor_id: client.id, action: 'client.login.blocked', ip, details: { status: client.status } });
+    throw new HttpError(403, { fr: 'Compte suspendu : contactez le support', en: 'Account suspended: contact support' }, { code: 'account_suspended' });
+  }
+  if (check.needsRehash) {
+    const { salt, hash } = await hashPassword(body.password);
+    await conn.execute({ sql: 'UPDATE clients SET password_salt = ?, password_hash = ? WHERE id = ?', args: [salt, hash, client.id] });
+  }
+  await reset(conn, failKey);
+  await audit(conn, { actor_type: 'client', actor_id: client.id, action: 'client.login.success', ip });
 
-        if (!result.rows.length) {
-            return jsonResponse(401, { error: 'Identifiants invalides' });
-        }
-
-        const client = result.rows[0];
-
-        if (client.status !== 'active') {
-            return jsonResponse(403, { error: 'Compte suspendu' });
-        }
-
-        if (!client.password_hash || !client.password_salt) {
-            return jsonResponse(403, { error: 'Compte non configuré — contactez le support' });
-        }
-
-        const ok = await verifyPassword(body.password, client.password_salt, client.password_hash);
-        if (!ok) {
-            return jsonResponse(401, { error: 'Identifiants invalides' });
-        }
-
-        const token = signJwt({
-            role: 'client',
-            client_id: client.id,
-            email: client.email,
-            company: client.company_name,
-            tier: client.tier
-        }, secret, 60 * 60 * 24); // 24h
-
-        return jsonResponse(200, {
-            token,
-            client: {
-                id: client.id,
-                company_name: client.company_name,
-                email: client.email,
-                tier: client.tier
-            }
-        });
-    } catch (err) {
-        console.error('client-login error:', err);
-        return jsonResponse(500, { error: 'Échec de la connexion' });
-    }
-}
+  return json(200, {
+    token: issueToken('client', client.id),
+    expires_in: SESSION_TTL,
+    client: { id: client.id, company_name: client.company_name, email: client.email, tier: client.tier },
+  });
+});

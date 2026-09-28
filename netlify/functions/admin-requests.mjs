@@ -1,45 +1,24 @@
-import { initSchema, getDb } from './db.mjs';
-import { jsonResponse, verifyJwt, getBearer } from './_utils.mjs';
+// Vue administrateur des demandes : une ligne par demande, dernière décision et signature.
+import { db, LATEST_DECISION_JOIN } from '../lib/db.mjs';
+import { handler, allowMethods, json } from '../lib/http.mjs';
+import { requireAdmin } from '../lib/auth.mjs';
+import { sweep } from '../lib/routing.mjs';
 
-function authorize(request) {
-    const token = getBearer(request);
-    const secret = process.env.ADMIN_JWT_SECRET;
-    if (!token || !secret) return false;
-    const payload = verifyJwt(token, secret);
-    if (!payload || payload.role !== 'admin') return false;
-    return payload;
-}
-
-export default async function (request) {
-    if (request.method !== 'GET') {
-        return jsonResponse(405, { error: 'Method not allowed' });
-    }
-
-    if (!authorize(request)) {
-        return jsonResponse(401, { error: 'Unauthorized' });
-    }
-
-    await initSchema();
-    const db = getDb();
-
-    try {
-        const result = await db.execute(
-            `SELECT r.*,
-        a.first_name as sentinel_first_name,
-        a.last_name as sentinel_last_name,
-        d.verdict,
-        d.reasoning,
-        d.signed_at as decision_signed_at
-      FROM ai_requests r
-      LEFT JOIN applications a ON a.id = r.assigned_to
-      LEFT JOIN decisions d ON d.request_id = r.id
-      ORDER BY r.created_at DESC
-      LIMIT 200`
-        );
-
-        return jsonResponse(200, { requests: result.rows });
-    } catch (err) {
-        console.error('admin-requests error:', err);
-        return jsonResponse(500, { error: 'Read failed' });
-    }
-}
+export default handler(async (request) => {
+  allowMethods(request, 'GET');
+  requireAdmin(request);
+  const conn = await db();
+  await sweep(conn, { limit: 25 });
+  const res = await conn.execute(`
+    SELECT r.id, r.agent_id, r.agent_name, r.request_type, r.domain, r.jurisdiction, r.summary, r.priority,
+           r.status, r.created_at, r.assigned_at, r.decided_at, r.expires_at, r.sla_breached_at,
+           r.escalation_count, r.webhook_status, r.api_key_id,
+           a.first_name AS sentinel_first_name, a.last_name AS sentinel_last_name,
+           d.verdict, d.reasoning, d.signed_at AS decision_signed_at, d.signature, d.key_id
+    FROM ai_requests r
+    LEFT JOIN applications a ON a.id = r.assigned_to
+    ${LATEST_DECISION_JOIN}
+    ORDER BY r.created_at DESC
+    LIMIT 200`);
+  return json(200, { requests: res.rows });
+});

@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HumanLayer — La couche d’autorité décisionnelle pour agents IA</title>
+  <meta name="description"
+    content="HumanLayer route les demandes sensibles au seuil Arbitrium vers un Sentinel qualifié et restitue une décision traçable, documentée et exploitable en audit via API.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="author" content="HumanLayer Systems Inc.">
+  <link rel="canonical" href="https://humanlayer.systems/">
+  <meta name="format-detection" content="telephone=no">
+
+  <link rel="alternate" hreflang="fr" href="https://humanlayer.systems/">
+  <link rel="alternate" hreflang="en" href="https://humanlayer.systems/index-en.html">
+  <link rel="alternate" hreflang="x-default" href="https://humanlayer.systems/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://humanlayer.systems/">
+  <meta property="og:title" content="HumanLayer — La couche d’autorité décisionnelle pour agents IA">
+  <meta property="og:description"
+    content="Au seuil Arbitrium, HumanLayer route vers un Sentinel qualifié et renvoie une décision traçable, documentée et exploitable en audit.">
+  <meta property="og:image" content="https://humanlayer.systems/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="fr_CA">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:site_name" content="HumanLayer Systems">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HumanLayer — La couche d’autorité décisionnelle pour agents IA">
+  <meta name="twitter:description"
+    content="Au seuil Arbitrium, HumanLayer route vers un Sentinel qualifié et renvoie une décision traçable via API.">
+  <meta name="twitter:image" content="https://humanlayer.systems/og-image.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "HumanLayer Systems Inc.",
+    "alternateName": "HumanLayer",
+    "url": "https://humanlayer.systems",
+    "logo": "https://humanlayer.systems/logo.png",
+    "image": "https://humanlayer.systems/og-image.png",
+    "description": "Première infrastructure permettant aux agents IA d'obtenir des décisions humaines qualifiées, documentées et opposables via une API.",
+    "foundingDate": "2026",
+    "foundingLocation": {
+      "@type": "Place",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1250, avenue de la Station",
+        "addressLocality": "Shawinigan",
+        "addressRegion": "Québec",
+        "postalCode": "G9N 8K9",
+        "addressCountry": "CA"
+      }
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "email": "humanlayer@probalink.com",
+      "availableLanguage": ["French", "English"]
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "HumanLayer API",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Cloud",
+    "description": "API permettant aux agents IA autonomes d'obtenir des décisions humaines qualifiées, sous SLA de 30 minutes à 4 heures.",
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": "EUR",
+      "lowPrice": "20",
+      "highPrice": "250",
+      "offerCount": "3"
+    },
+    "featureList": [
+      "Décisions humaines qualifiées pour agents IA",
+      "Traçabilité complète et audit",
+      "Conformité RGPD, Loi 25, EU AI Act",
+      "API REST et webhooks signés",
+      "Réseau de Sentinels professionnels"
+    ]
+  }
+  </script>
+<!-- layout:head -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"
+    rel="stylesheet">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="logo-mark.png">
+  <link rel="stylesheet" href="styles.css">
+  <meta name="theme-color" content="#04060b">
+  <script>
+    document.documentElement.classList.add('js');
+    setTimeout(function () { if (!window.__hlReady) document.documentElement.classList.remove('js'); }, 2500);
+  </script>
+<!-- /layout:head -->
+</head>
+
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="icon-robot" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V5"/><circle cx="12" cy="3.5" r="1.5"/><circle cx="9" cy="14" r="1.2" fill="currentColor" stroke="none"/><circle cx="15" cy="14" r="1.2" fill="currentColor" stroke="none"/><path d="M2 13v3M22 13v3"/></symbol>
+    <symbol id="icon-bolt" viewBox="0 0 24 24"><path d="M13 2.5L4.5 14H11l-1 7.5L18.5 10H12l1-7.5z"/></symbol>
+    <symbol id="icon-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="icon-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></symbol>
+    <symbol id="icon-verified" viewBox="0 0 24 24"><path d="M12 2.5l7.5 3.2v5.6c0 4.8-3.2 8.8-7.5 10.2-4.3-1.4-7.5-5.4-7.5-10.2V5.7L12 2.5z"/><path d="M8.7 12.2l2.3 2.3 4.3-4.6"/></symbol>
+    <symbol id="icon-clipboard" viewBox="0 0 24 24"><path d="M9 4H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V6a2 2 0 00-2-2h-2"/><rect x="9" y="2.5" width="6" height="3.5" rx="1"/><path d="M9 12h6M9 16h4"/></symbol>
+    <symbol id="icon-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></symbol>
+    <symbol id="icon-timer" viewBox="0 0 24 24"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 10v3.5l2.5 1.5M9.5 2.5h5"/></symbol>
+    <symbol id="icon-pen" viewBox="0 0 24 24"><path d="M15.5 4.5l4 4L8 20H4v-4L15.5 4.5z"/><path d="M13.5 6.5l4 4"/></symbol>
+    <symbol id="icon-block" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M5.6 18.4L18.4 5.6"/></symbol>
+    <symbol id="icon-sparkle" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z"/><path d="M19 16v4M17 18h4"/></symbol>
+    <symbol id="icon-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 018 0v3M12 14.5v2"/></symbol>
+    <symbol id="icon-shield" viewBox="0 0 24 24"><path d="M12 2.5l7.5 3.2v5.6c0 4.8-3.2 8.8-7.5 10.2-4.3-1.4-7.5-5.4-7.5-10.2V5.7L12 2.5z"/><path d="M12 8v4.5M12 15.8v.2"/></symbol>
+    <symbol id="icon-bank" viewBox="0 0 24 24"><path d="M3 20.5h18M5 17.5h14M12 3l8.5 5h-17L12 3z"/><path d="M6.5 10.5v5M10 10.5v5M14 10.5v5M17.5 10.5v5"/></symbol>
+    <symbol id="icon-scale" viewBox="0 0 24 24"><path d="M12 4v16.5M8 20.5h8M5 7h14M12 4.5L5 7M12 4.5L19 7"/><path d="M5 7l-2.5 6a2.7 2.7 0 005 0L5 7zM19 7l-2.5 6a2.7 2.7 0 005 0L19 7z"/></symbol>
+    <symbol id="icon-medical" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/></symbol>
+    <symbol id="icon-briefcase" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M9 7V5.5A1.5 1.5 0 0110.5 4h3A1.5 1.5 0 0115 5.5V7M3 12.5h18"/></symbol>
+    <symbol id="icon-chart" viewBox="0 0 24 24"><path d="M4 20h16M7 16v-5M12 16V6M17 16V8"/></symbol>
+    <symbol id="icon-fingerprint" viewBox="0 0 24 24"><path d="M8.5 20c.8-1.8 1.2-3.8 1.2-6a2.3 2.3 0 014.6 0c0 1.2-.1 2.4-.3 3.5M12 14c0 2.8-.6 5.2-1.7 7.2M5 17.5c.6-1.2.9-2.4.9-3.5a6.1 6.1 0 0112.2 0c0 .9-.1 1.8-.2 2.6M4.2 9.5a8.5 8.5 0 0115.6 0"/></symbol>
+    <symbol id="icon-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4.5"/><path d="M11.2 11.8L20 3M16.5 6.5L19 9M14.5 8.5l2 2"/></symbol>
+    <symbol id="icon-docs" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8l-5-5z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></symbol>
+    <symbol id="icon-factory" viewBox="0 0 24 24"><path d="M3 21V11l5 3v-3l5 3v-3l5 3V4h3v17H3z"/><path d="M7 17.5h1.5M11 17.5h1.5M15 17.5h1.5"/></symbol>
+    <symbol id="icon-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6M16 4.8a3.5 3.5 0 010 6.4M18 14.2c2.1.7 3.5 2.6 3.5 5.8"/></symbol>
+    <symbol id="icon-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12.5l9 5 9-5M3 16.5l9 5 9-5"/></symbol>
+    <symbol id="icon-route" viewBox="0 0 24 24"><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M8.5 18H15a3.5 3.5 0 000-7H9a3.5 3.5 0 010-7h6.5"/></symbol>
+    <symbol id="icon-code" viewBox="0 0 24 24"><path d="M8.5 7L3.5 12l5 5M15.5 7l5 5-5 5M13.5 4.5l-3 15"/></symbol>
+    <symbol id="icon-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="12" height="12" rx="2.5"/><path d="M15.5 8.5V6a2.5 2.5 0 00-2.5-2.5H6A2.5 2.5 0 003.5 6v7A2.5 2.5 0 006 15.5h2.5"/></symbol>
+    <symbol id="icon-server" viewBox="0 0 24 24"><rect x="3.5" y="4" width="17" height="7" rx="2"/><rect x="3.5" y="13" width="17" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></symbol>
+    <symbol id="icon-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7.5" ry="3"/><path d="M4.5 5.5v13c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-13M4.5 12c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3"/></symbol>
+    <symbol id="icon-webhook" viewBox="0 0 24 24"><circle cx="6" cy="17" r="2.5"/><circle cx="18" cy="17" r="2.5"/><circle cx="12" cy="6" r="2.5"/><path d="M10.8 8.2l-3.6 6.6M13.2 8.2l3.6 6.6M8.5 17h7"/></symbol>
+    <symbol id="icon-receipt" viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3z"/><path d="M9 8h6M9 12h6M9 16h3"/></symbol>
+    <symbol id="icon-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></symbol>
+  </svg>
+
+<!-- layout:header -->
+  <a class="skip-link" href="#main">Aller au contenu</a>
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <header class="site-header" id="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand" aria-label="HumanLayer, accueil">
+        <img src="logo-mark.png" width="30" height="30" alt="">
+        <span class="brand-name">Human<span>Layer</span></span>
+      </a>
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a href="#problem">Problème</a>
+        <a href="#arbitrium">Arbitrium</a>
+        <a href="#solution">Solution</a>
+        <a href="#usecases">Cas d’usage</a>
+        <a href="#api">API</a>
+        <a href="#pricing">Tarifs</a>
+        <a href="apply.html">Devenir Sentinel</a>
+        <a href="faq.html">FAQ</a>
+      </nav>
+      <div class="nav-actions">
+        <div class="lang-switch" aria-label="Langue">
+          <a href="index.html" lang="fr" aria-current="true">FR</a>
+          <a href="index-en.html" lang="en" hreflang="en">EN</a>
+        </div>
+        <a href="/client/" class="nav-login">Espace client</a>
+        <a href="/client/inscription.html" class="btn btn-primary btn-sm" data-magnetic>Commencer</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu"
+          aria-label="Ouvrir le menu"><span></span><span></span></button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobile-menu" hidden>
+      <nav aria-label="Navigation mobile">
+        <a href="#problem" style="--i:0">Problème <small>01</small></a>
+        <a href="#arbitrium" style="--i:1">Arbitrium <small>02</small></a>
+        <a href="#solution" style="--i:2">Solution <small>03</small></a>
+        <a href="#usecases" style="--i:3">Cas d’usage <small>05</small></a>
+        <a href="#api" style="--i:4">API <small>06</small></a>
+        <a href="#pricing" style="--i:5">Tarifs <small>08</small></a>
+        <a href="apply.html" style="--i:6">Devenir Sentinel <small>→</small></a>
+        <a href="faq.html" style="--i:7">FAQ <small>→</small></a>
+        <a href="/client/" style="--i:8">Espace client <small>→</small></a>
+      </nav>
+      <div class="mobile-menu-foot">
+        <div class="lang-switch" aria-label="Langue">
+          <a href="index.html" lang="fr" aria-current="true">FR</a>
+          <a href="index-en.html" lang="en" hreflang="en">EN</a>
+        </div>
+        <a href="/client/inscription.html" class="btn btn-primary btn-lg">Commencer maintenant</a>
+      </div>
+    </div>
+  </header>
+<!-- /layout:header -->
+
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="hero-beam"></div>
+        <div class="hero-floor"></div>
+      </div>
+
+      <div class="container hero-inner">
+        <a class="hero-chip" href="#arbitrium" data-intro style="--d:0ms">
+          <span class="dot pulse"></span>
+          Infrastructure de décision pour l’ère IA
+          <span class="hero-chip-cta">Découvrir Arbitrium <svg class="hl-icon" aria-hidden="true"><use href="#icon-arrow"/></svg></span>
+        </a>
+
+        <h1 id="hero-title" class="display grad-title" data-split>La couche <em class="serif grad-human">d’autorité décisionnelle</em> pour agents&nbsp;IA</h1>
+
+        <p class="lede hero-lede" data-intro style="--d:500ms">
+          <strong>Arbitrium</strong> — le seuil où l’automatisation s’arrête et où l’autorité humaine prend le relais.
+          HumanLayer route les demandes sensibles vers un Sentinel qualifié, puis restitue une décision traçable,
+          documentée et exploitable en audit.
+        </p>
+
+        <div class="hero-ctas" data-intro style="--d:650ms">
+          <a href="/client/inscription.html" class="btn btn-primary btn-lg" data-magnetic>
+            Commencer maintenant
+            <svg class="hl-icon btn-arrow" aria-hidden="true"><use href="#icon-arrow"/></svg>
+          </a>
+          <a href="developers/" class="btn btn-ghost btn-lg">
+            <svg class="hl-icon" aria-hidden="true"><use href="#icon-code"/></svg>
+            Lire la doc API
+          </a>
+        </div>
+        <p class="hero-alt" data-intro style="--d:780ms">Vous êtes un expert habilité&#8239;? <a href="apply.html" class="link-arrow">Devenir Sentinel</a></p>
+      </div>
+
+      <div class="container hero-stage">
+        <div class="engine-wrap" data-intro style="--d:600ms">
+          <div class="engine-tilt" data-tilt>
+          <div class="engine" data-engine role="img"
+            aria-label="Simulation : des demandes d’agents IA circulent vers HumanLayer. La plupart s’exécutent automatiquement ; celles à fort enjeu franchissent le seuil Arbitrium et sont routées vers un Sentinel qui rend une décision tracée.">
+            <div class="engine-bar" aria-hidden="true">
+              <div class="engine-lights"><i></i><i></i><i></i></div>
+              <span class="engine-title">humanlayer · decision-router</span>
+              <div class="engine-stats">
+                <span>demandes <b data-stat="total">0</b></span>
+                <span class="is-amber">arbitrium <b data-stat="rate">0&nbsp;%</b></span>
+              </div>
+              <span class="engine-badge">Simulation</span>
+            </div>
+            <div class="engine-body" aria-hidden="true">
+              <canvas class="engine-canvas"></canvas>
+              <ul class="engine-agents">
+                <li><i></i><span>agent-credit</span></li>
+                <li><i></i><span>agent-legal</span></li>
+                <li><i></i><span>agent-claims</span></li>
+                <li><i></i><span>agent-soc</span></li>
+                <li><i></i><span>agent-procure</span></li>
+              </ul>
+              <div class="engine-gate"><span>ARBITRIUM</span></div>
+              <div class="engine-sink">
+                <span class="k" data-short="Auto">Exécution automatique</span>
+                <strong data-stat="auto">0</strong>
+              </div>
+              <div class="engine-hub">
+                <div class="engine-hub-ring"></div>
+                <div class="engine-hub-core"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></div>
+                <div class="engine-hub-label"><span class="k">Sentinel</span><em data-hub-label>En attente</em></div>
+              </div>
+              <div class="engine-ledger">
+                <span class="engine-ledger-title">Journal des décisions</span>
+                <ol data-ledger></ol>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="engine-legend" data-reveal>
+          <span><i class="dot"></i>L’automatisation continue partout ailleurs, sans rupture de conformité.</span>
+          <span><i class="dot is-amber"></i>Seules les demandes à fort enjeu franchissent le seuil Arbitrium.</span>
+        </div>
+
+        <div class="hero-metrics" data-stagger>
+          <div class="hero-metric">
+            <span class="k">Architecture</span>
+            <strong>3 couches</strong>
+            <p>Orchestration · Decision · Evidence</p>
+          </div>
+          <div class="hero-metric">
+            <span class="k">SLA cible</span>
+            <strong>Dès 30&nbsp;min</strong>
+            <p>Selon le niveau de décision</p>
+          </div>
+          <div class="hero-metric">
+            <span class="k">Trace d’audit</span>
+            <strong>Complète</strong>
+            <p>Verdict, justification et horodatage</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BANDEAU ============ -->
+    <div class="marquee-band" aria-label="Secteurs et cadres réglementaires">
+      <p>Pensé pour les secteurs où la responsabilité compte</p>
+      <div class="marquee">
+        <div class="marquee-track">
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-bank"/></svg>Crédit &amp; Risk</span>
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-scale"/></svg>Legal &amp; M&amp;A</span>
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-medical"/></svg>Santé &amp; Diagnostics</span>
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-users"/></svg>RH &amp; Recrutement</span>
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-factory"/></svg>Conformité industrielle</span>
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-shield"/></svg>Assurance &amp; Sinistres</span>
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-receipt"/></svg>Dépenses &amp; Procurement</span>
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-lock"/></svg>Cybersécurité &amp; Accès</span>
+        </div>
+        <div class="marquee-track" aria-hidden="true">
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-bank"/></svg>Crédit &amp; Risk</span>
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-scale"/></svg>Legal &amp; M&amp;A</span>
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-medical"/></svg>Santé &amp; Diagnostics</span>
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-users"/></svg>RH &amp; Recrutement</span>
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-factory"/></svg>Conformité industrielle</span>
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-shield"/></svg>Assurance &amp; Sinistres</span>
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-receipt"/></svg>Dépenses &amp; Procurement</span>
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-lock"/></svg>Cybersécurité &amp; Accès</span>
+        </div>
+      </div>
+      <div class="marquee is-reverse">
+        <div class="marquee-track">
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-verified"/></svg>RGPD</span>
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-verified"/></svg>Loi 25 (Québec)</span>
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-verified"/></svg>EU AI Act</span>
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-verified"/></svg>KYC / AML</span>
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-verified"/></svg>Traçabilité FDA / ISO</span>
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-verified"/></svg>Zero-trust</span>
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-verified"/></svg>Journal d’audit exportable</span>
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-verified"/></svg>Non-discrimination documentée</span>
+        </div>
+        <div class="marquee-track" aria-hidden="true">
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-verified"/></svg>RGPD</span>
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-verified"/></svg>Loi 25 (Québec)</span>
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-verified"/></svg>EU AI Act</span>
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-verified"/></svg>KYC / AML</span>
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-verified"/></svg>Traçabilité FDA / ISO</span>
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-verified"/></svg>Zero-trust</span>
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-verified"/></svg>Journal d’audit exportable</span>
+          <span class="marquee-item"><svg class="hl-icon"><use href="#icon-verified"/></svg>Non-discrimination documentée</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ 01 PROBLÈME ============ -->
+    <section class="section problem" id="problem" aria-labelledby="problem-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow is-amber" data-reveal><span>01</span>Le problème</p>
+          <h2 class="h2" id="problem-title" data-reveal style="--d:80ms">Les agents IA échouent au même endroit&nbsp;: <em class="serif grad-human">le moment «&#8239;responsabilité&#8239;»</em>.</h2>
+        </div>
+
+        <div class="problem-grid">
+          <div class="problem-copy">
+            <p class="lede" data-reveal>Aujourd’hui, l’IA peut automatiser 80–95&nbsp;% d’un workflow… Mais dès qu’il faut&nbsp;:</p>
+            <ul class="gap-list" data-stagger>
+              <li><span class="n">01</span>valider une conformité</li>
+              <li><span class="n">02</span>trancher une zone grise</li>
+              <li><span class="n">03</span>approuver une dépense</li>
+              <li><span class="n">04</span>signer un acte</li>
+              <li><span class="n">05</span>rendre une décision opposable</li>
+            </ul>
+            <p class="problem-out" data-reveal>…tout repasse «&#8239;hors système&#8239;», manuellement, sans SLA ni traçabilité.</p>
+            <div class="pullquote" data-reveal>
+              <p>Le frein à l’adoption enterprise, ce n’est pas l’exécution. <strong>C’est l’absence d’autorité.</strong></p>
+            </div>
+          </div>
+
+          <div class="problem-visual">
+            <div class="card pipeline" data-inview data-reveal>
+              <div class="pipe-step" style="--i:0">
+                <div class="ico"><svg viewBox="0 0 24 24"><use href="#icon-database"/></svg></div>
+                <div class="t"><b>Collecte de données</b><span>ÉTAPE 1</span></div>
+                <span class="pipe-state" data-wait="En cours…"><span>✓ Automatisé</span></span>
+              </div>
+              <div class="pipe-link"></div>
+              <div class="pipe-step" style="--i:1">
+                <div class="ico"><svg viewBox="0 0 24 24"><use href="#icon-robot"/></svg></div>
+                <div class="t"><b>Analyse IA</b><span>ÉTAPE 2</span></div>
+                <span class="pipe-state" data-wait="En attente"><span>✓ Automatisé</span></span>
+              </div>
+              <div class="pipe-link"></div>
+              <div class="pipe-step" style="--i:2">
+                <div class="ico"><svg viewBox="0 0 24 24"><use href="#icon-clipboard"/></svg></div>
+                <div class="t"><b>Préparation du dossier</b><span>ÉTAPE 3</span></div>
+                <span class="pipe-state" data-wait="En attente"><span>✓ Automatisé</span></span>
+              </div>
+              <div class="pipe-link is-broken"></div>
+              <div class="pipe-step is-blocked" style="--i:3">
+                <div class="ico">?</div>
+                <div class="t"><b>Décision &amp; Responsabilité</b><span>ÉTAPE 4</span></div>
+                <span class="pipe-state">Hors système</span>
+              </div>
+              <div class="pipe-tags">
+                <span class="chip is-amber">Manuel</span>
+                <span class="chip is-amber">Sans SLA</span>
+                <span class="chip is-amber">Sans traçabilité</span>
+              </div>
+            </div>
+
+            <div class="card automation" data-inview data-reveal style="--d:120ms">
+              <div class="automation-head">
+                <span>Part d’un workflow automatisable par l’IA</span>
+                <strong>80–95&nbsp;%</strong>
+              </div>
+              <div class="automation-track" aria-hidden="true">
+                <div class="automation-fill"></div>
+                <div class="automation-gap"></div>
+              </div>
+              <div class="automation-foot">
+                <span>Exécution par l’IA</span>
+                <span class="text-amber">Le moment «&#8239;responsabilité&#8239;»</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="market">
+          <div class="market-head">
+            <h3 data-reveal>L’IA agentique passe à l’échelle</h3>
+            <p class="eyebrow" data-reveal>Le contexte</p>
+          </div>
+          <div class="market-grid" data-stagger>
+            <div class="market-item">
+              <strong><span data-count="1.3" data-decimals="1">1,3</span><small>&nbsp;milliard</small></strong>
+              <span>Agents IA en usage (proj. 2028)</span>
+            </div>
+            <div class="market-item">
+              <strong><span data-count="307">307</span><small>&nbsp;G$</small></strong>
+              <span>Revenus logiciels IA (proj. 2027)</span>
+            </div>
+            <div class="market-item">
+              <strong><span data-count="143">143</span><small>&nbsp;G$</small></strong>
+              <span>Dépenses GenAI (proj. 2027)</span>
+            </div>
+            <div class="market-item">
+              <strong><span data-count="423">423</span><small>&nbsp;G$</small></strong>
+              <span>Dépenses IA totales (proj. 2027)</span>
+            </div>
+          </div>
+          <p class="source-note">Projections 2027–2028. G$ = milliards de dollars américains. Sources&nbsp;: IDC (revenus logiciels IA, dépenses GenAI/IA)&#8239;; Microsoft citant IDC (agents IA).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 02 ARBITRIUM ============ -->
+    <section class="section arbitrium" id="arbitrium" aria-labelledby="arb-title">
+      <div class="container">
+        <div class="section-head is-center">
+          <p class="eyebrow is-amber" data-reveal><span>02</span>Arbitrium</p>
+          <h2 class="h2" id="arb-title" data-reveal style="--d:80ms">Le seuil où l’automatisation <em class="serif grad-human">s’arrête</em>.</h2>
+          <p class="lede" data-reveal style="--d:160ms">Arbitrium n’est pas une personne, mais un seuil du système. Seules les demandes à fort enjeu le franchissent&nbsp;: l’automatisation continue partout ailleurs, sans rupture de conformité. Choisissez un scénario et jouez avec les paramètres.</p>
+        </div>
+
+        <div class="card sim" data-sim data-state="auto" data-reveal="scale">
+          <div class="sim-tabs" role="tablist" aria-label="Scénarios de simulation">
+            <button class="sim-tab" role="tab" aria-selected="true" data-scenario="expense" id="sim-tab-expense" aria-controls="sim-panel"><svg class="hl-icon"><use href="#icon-receipt"/></svg>Note de frais</button>
+            <button class="sim-tab" role="tab" aria-selected="false" tabindex="-1" data-scenario="credit" id="sim-tab-credit" aria-controls="sim-panel"><svg class="hl-icon"><use href="#icon-bank"/></svg>Crédit</button>
+            <button class="sim-tab" role="tab" aria-selected="false" tabindex="-1" data-scenario="legal" id="sim-tab-legal" aria-controls="sim-panel"><svg class="hl-icon"><use href="#icon-scale"/></svg>Juridique</button>
+            <button class="sim-tab" role="tab" aria-selected="false" tabindex="-1" data-scenario="health" id="sim-tab-health" aria-controls="sim-panel"><svg class="hl-icon"><use href="#icon-medical"/></svg>Santé</button>
+            <button class="sim-tab" role="tab" aria-selected="false" tabindex="-1" data-scenario="access" id="sim-tab-access" aria-controls="sim-panel"><svg class="hl-icon"><use href="#icon-lock"/></svg>Accès prod</button>
+          </div>
+
+          <div class="sim-grid" id="sim-panel" role="tabpanel" aria-labelledby="sim-tab-expense">
+            <div class="sim-controls">
+              <div class="sim-case">
+                <span class="k">Demande de l’agent</span>
+                <p data-sim-prompt>«&#8239;Note de frais de 42&nbsp;€ — repas client, conforme à la politique interne. Rembourser&#8239;?&#8239;»</p>
+              </div>
+              <div class="control">
+                <div class="control-head"><label for="sim-impact">Impact financier ou humain</label><output for="sim-impact" data-out="impact">8</output></div>
+                <input class="range" type="range" id="sim-impact" name="impact" min="0" max="100" value="8">
+                <div class="control-scale" aria-hidden="true"><span>Faible</span><span>Critique</span></div>
+              </div>
+              <div class="control">
+                <div class="control-head"><label for="sim-confidence">Confiance du modèle</label><output for="sim-confidence" data-out="confidence">96&nbsp;%</output></div>
+                <input class="range" type="range" id="sim-confidence" name="confidence" min="0" max="100" value="96">
+                <div class="control-scale" aria-hidden="true"><span>Incertain</span><span>Certain</span></div>
+              </div>
+              <div class="control">
+                <div class="control-head"><label for="sim-regulatory">Exposition réglementaire</label><output for="sim-regulatory" data-out="regulatory">20</output></div>
+                <input class="range" type="range" id="sim-regulatory" name="regulatory" min="0" max="100" value="20">
+                <div class="control-scale" aria-hidden="true"><span>Aucune</span><span>Encadrée</span></div>
+              </div>
+              <div class="control">
+                <div class="control-head"><label for="sim-irreversibility">Irréversibilité</label><output for="sim-irreversibility" data-out="irreversibility">10</output></div>
+                <input class="range" type="range" id="sim-irreversibility" name="irreversibility" min="0" max="100" value="10">
+                <div class="control-scale" aria-hidden="true"><span>Réversible</span><span>Définitive</span></div>
+              </div>
+            </div>
+
+            <div class="sim-output">
+              <div class="gauge" aria-hidden="true">
+                <svg viewBox="0 0 320 200">
+                  <defs>
+                    <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0" stop-color="#3fe0ee"/>
+                      <stop offset="0.5" stop-color="#3d7bff"/>
+                      <stop offset="0.62" stop-color="#ffb547"/>
+                      <stop offset="1" stop-color="#ff8f4a"/>
+                    </linearGradient>
+                  </defs>
+                  <g data-ticks></g>
+                  <path class="gauge-bg" d="M30 178 A130 130 0 0 1 290 178"/>
+                  <path class="gauge-val" data-gauge-val d="M30 178 A130 130 0 0 1 290 178" stroke="url(#gaugeGrad)"/>
+                  <line class="gauge-threshold" x1="194.6" y1="71.5" x2="206.4" y2="35.3"/>
+                  <text class="gauge-threshold-label" x="214" y="30">ARBITRIUM</text>
+                  <g class="gauge-needle" data-needle>
+                    <line x1="160" y1="82" x2="160" y2="22"/>
+                    <circle cx="160" cy="48" r="7"/>
+                  </g>
+                  <text class="gauge-score" x="160" y="150" text-anchor="middle" data-score>10</text>
+                  <text class="gauge-caption" x="160" y="198" text-anchor="middle">INDICE DE CRITICITÉ</text>
+                </svg>
+              </div>
+
+              <div class="verdict" aria-live="polite">
+                <div class="verdict-head">
+                  <div class="verdict-icon" aria-hidden="true"><svg viewBox="0 0 24 24" data-verdict-icon><use href="#icon-bolt"/></svg></div>
+                  <div>
+                    <p class="verdict-title" data-verdict-title>Exécution automatique</p>
+                    <p class="verdict-sub" data-verdict-sub>Sous le seuil&nbsp;: l’agent poursuit son workflow. L’action est journalisée.</p>
+                  </div>
+                </div>
+                <dl class="verdict-details">
+                  <div><dt>Niveau</dt><dd data-v="level">—</dd></div>
+                  <div><dt>Sentinel</dt><dd data-v="profile">—</dd></div>
+                  <div><dt>SLA cible</dt><dd data-v="sla">—</dd></div>
+                  <div><dt>Livrable</dt><dd data-v="deliverable">—</dd></div>
+                </dl>
+              </div>
+
+              <pre class="sim-json" aria-label="Décision de l’agent au seuil Arbitrium (illustrative)"><code data-sim-json>{ "arbitrium": false, "action": "auto_execute" }</code></pre>
+            </div>
+          </div>
+        </div>
+        <p class="sim-note">Simulation illustrative. En production, chaque organisation définit ses propres seuils de risque, règles de refus automatique et escalades obligatoires.</p>
+      </div>
+    </section>
+
+    <!-- ============ 03 SOLUTION : 3 COUCHES ============ -->
+    <section class="section layers" id="solution" aria-labelledby="layers-title">
+      <div class="container">
+        <div class="section-head is-split">
+          <p class="eyebrow" data-reveal><span>03</span>La solution</p>
+          <h2 class="h2" id="layers-title" data-reveal>Des décisions humaines à la demande, <em class="serif grad-machine">API-native</em>.</h2>
+          <p class="lede" data-reveal style="--d:120ms">HumanLayer orchestre la décision humaine exactement là où elle est indispensable. Un système en trois couches, du dossier préparé par l’IA à la décision prête pour l’audit.</p>
+        </div>
+
+        <div class="layers-grid">
+          <div class="layers-visual" aria-hidden="true">
+            <div class="stack" data-stack data-active="1">
+              <div class="plate plate-1"></div>
+              <div class="plate plate-2"></div>
+              <div class="stack-person"><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4.5"/><path d="M3 23c0-5.5 4-8.5 9-8.5s9 3 9 8.5z"/></svg></div>
+              <div class="plate plate-3"></div>
+              <span class="stack-label" data-for="1">Orchestration</span>
+              <span class="stack-label" data-for="2">Decision</span>
+              <span class="stack-label" data-for="3">Evidence</span>
+            </div>
+          </div>
+
+          <ol class="layers-steps">
+            <li class="layer-step" data-step="1" data-reveal>
+              <span class="num">COUCHE 01</span>
+              <h3>Orchestration</h3>
+              <p>Détection du seuil Arbitrium et routage qualifié. L’agent IA soumet un dossier complet avec contexte et pièces justificatives&nbsp;; HumanLayer le route vers un Sentinel qualifié selon les critères requis.</p>
+              <ul>
+                <li class="chip is-cyan">Évalue le niveau</li>
+                <li class="chip is-cyan">Route la demande</li>
+                <li class="chip is-cyan">Critères requis</li>
+              </ul>
+            </li>
+            <li class="layer-step" data-step="2" data-reveal>
+              <span class="num">COUCHE 02</span>
+              <h3>Decision</h3>
+              <p>Un Sentinel habilité rend un verdict explicite&nbsp;: décision structurée, avec commentaires et justification. HumanLayer n’automatise pas la décision, il orchestre l’intervention d’un humain responsable.</p>
+              <ul>
+                <li class="chip is-amber">Verdict explicite</li>
+                <li class="chip is-amber">Justification</li>
+                <li class="chip is-amber">Second avis</li>
+              </ul>
+            </li>
+            <li class="layer-step" data-step="3" data-reveal>
+              <span class="num">COUCHE 03</span>
+              <h3>Evidence</h3>
+              <p>Décision horodatée, justifiée et prête pour l’audit. Retour à l’agent&nbsp;: la décision est loggée, auditable et prête à être exécutée.</p>
+              <ul>
+                <li class="chip">Horodatage</li>
+                <li class="chip">Journal exportable</li>
+                <li class="chip">Opposable</li>
+              </ul>
+            </li>
+          </ol>
+        </div>
+
+        <div class="layers-result" data-reveal>
+          <p><strong>Résultat&nbsp;:</strong> l’autorité humaine est activée uniquement au bon seuil.</p>
+        </div>
+
+        <div class="card journey" data-reveal="scale">
+          <div class="journey-head">
+            <h3>Flux architectural</h3>
+            <p class="eyebrow">Du dossier IA à la décision opposable</p>
+          </div>
+          <div class="journey-track">
+            <div class="journey-line" aria-hidden="true"></div>
+            <div class="journey-packet" aria-hidden="true"></div>
+            <div class="journey-node" style="--i:0">
+              <div class="ico"><svg viewBox="0 0 24 24"><use href="#icon-robot"/></svg></div>
+              <b>Agent IA</b><span>Prépare le dossier</span>
+            </div>
+            <div class="journey-node" style="--i:1">
+              <div class="ico"><svg viewBox="0 0 24 24"><use href="#icon-route"/></svg></div>
+              <b>API HumanLayer</b><span>Route la demande</span>
+            </div>
+            <div class="journey-node" style="--i:2" data-tone="amber">
+              <div class="ico"><svg viewBox="0 0 24 24"><use href="#icon-target"/></svg></div>
+              <b>Seuil Arbitrium</b><span>Évalue le niveau</span>
+            </div>
+            <div class="journey-node" style="--i:3" data-tone="amber">
+              <div class="ico"><svg viewBox="0 0 24 24"><use href="#icon-user"/></svg></div>
+              <b>Sentinel</b><span>Décide et justifie</span>
+            </div>
+            <div class="journey-node" style="--i:4" data-tone="green">
+              <div class="ico"><svg viewBox="0 0 24 24"><use href="#icon-check"/></svg></div>
+              <b>Décision</b><span>Loggée et opposable</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="layers-result" data-reveal>
+          <p><strong>Résultat&nbsp;:</strong> l’IA peut aller jusqu’au bout du processus, sans casser la compliance.</p>
+          <span class="chip"><svg class="hl-icon"><use href="#icon-users"/></svg>Conçu avec des équipes Legal, Risk et Compliance</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 04 RESPONSABILITÉ ============ -->
+    <section class="section evidence" id="responsabilite" aria-labelledby="evidence-title">
+      <div class="container evidence-grid">
+        <div class="evidence-copy">
+          <p class="eyebrow is-amber" data-reveal><span>04</span>Qui décide&#8239;?</p>
+          <h2 class="h2" id="evidence-title" data-reveal>HumanLayer n’automatise pas <em class="serif grad-human">la décision</em>.</h2>
+          <p class="lede" data-reveal>Il orchestre l’intervention d’un Sentinel identifié, qualifié et responsable. Chaque décision est&nbsp;:</p>
+          <ul class="props" data-stagger data-props>
+            <li class="prop" tabindex="0" data-prop="attributed">
+              <span class="ico"><svg viewBox="0 0 24 24"><use href="#icon-user"/></svg></span>
+              <span><b>Attribuée</b><small>à une personne réelle</small></span>
+            </li>
+            <li class="prop" tabindex="0" data-prop="timestamped">
+              <span class="ico"><svg viewBox="0 0 24 24"><use href="#icon-timer"/></svg></span>
+              <span><b>Horodatée</b><small>date et heure de la décision</small></span>
+            </li>
+            <li class="prop" tabindex="0" data-prop="justified">
+              <span class="ico"><svg viewBox="0 0 24 24"><use href="#icon-pen"/></svg></span>
+              <span><b>Justifiée</b><small>commentaires et justification</small></span>
+            </li>
+            <li class="prop" tabindex="0" data-prop="audited">
+              <span class="ico"><svg viewBox="0 0 24 24"><use href="#icon-search"/></svg></span>
+              <span><b>Auditée</b><small>journal exportable, chaîne de preuve</small></span>
+            </li>
+          </ul>
+          <div class="anti" data-reveal>
+            <svg class="hl-icon" aria-hidden="true"><use href="#icon-block"/></svg>
+            <div>
+              <strong>Ce que HumanLayer évite</strong>
+              <p>Automatiser des décisions sans responsable humain identifié.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="evidence-visual" data-reveal="scale">
+          <article class="record" data-record data-inview aria-label="Exemple de registre de décision">
+            <header class="record-head">
+              <div class="record-id">
+                <span class="k">Registre de décision</span>
+                <code data-scramble>dec_01J9ZQ4M7K</code>
+              </div>
+              <span class="chip is-amber">Niveau 3 · Autorité</span>
+            </header>
+            <dl class="record-fields">
+              <div class="rf" data-prop="attributed" style="--i:0"><dt>Sentinel</dt><dd>S-0142 · Analyste crédit certifié</dd></div>
+              <div class="rf" data-prop="timestamped" style="--i:1"><dt>Horodatage</dt><dd><code>2026-03-12 · 14:32:07 UTC</code></dd></div>
+              <div class="rf" data-prop="justified" style="--i:2"><dt>Justification</dt><dd><q>Historique de remboursement stable sur 36 mois&#8239;; ratio d’endettement conforme à la politique.</q></dd></div>
+              <div class="rf" data-prop="audited" style="--i:3"><dt>Audit</dt><dd>Contexte IA, décision, horodatage, identité — exportable</dd></div>
+            </dl>
+            <div class="record-stamp" aria-hidden="true">Approuvée</div>
+            <footer class="record-foot"><span>Dossier préparé par l’IA</span><span>Retour à l’agent · prêt à exécuter</span></footer>
+          </article>
+          <p class="record-caption">Exemple illustratif, données fictives.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 05 CAS D’USAGE ============ -->
+    <section class="section usecases" id="usecases" aria-labelledby="uc-title">
+      <div class="container">
+        <div class="section-head is-split">
+          <p class="eyebrow" data-reveal><span>05</span>Cas d’usage</p>
+          <h2 class="h2" id="uc-title" data-reveal>Là où la responsabilité <em class="serif grad-human">compte</em>.</h2>
+          <p class="lede" data-reveal style="--d:120ms">HumanLayer s’intègre dans tous les secteurs où une décision engage quelqu’un. L’IA prépare, le Sentinel tranche.</p>
+        </div>
+
+        <div class="uc" data-uc data-reveal>
+          <div class="uc-tabs" role="tablist" aria-label="Secteurs">
+            <button class="uc-tab" role="tab" id="uc-t1" aria-controls="uc-p1" aria-selected="true"><svg class="hl-icon"><use href="#icon-bank"/></svg>Crédit &amp; Risk<span class="bar"></span></button>
+            <button class="uc-tab" role="tab" id="uc-t2" aria-controls="uc-p2" aria-selected="false" tabindex="-1"><svg class="hl-icon"><use href="#icon-scale"/></svg>Legal &amp; M&amp;A<span class="bar"></span></button>
+            <button class="uc-tab" role="tab" id="uc-t3" aria-controls="uc-p3" aria-selected="false" tabindex="-1"><svg class="hl-icon"><use href="#icon-medical"/></svg>Santé &amp; Diagnostics<span class="bar"></span></button>
+            <button class="uc-tab" role="tab" id="uc-t4" aria-controls="uc-p4" aria-selected="false" tabindex="-1"><svg class="hl-icon"><use href="#icon-users"/></svg>RH &amp; Recrutement<span class="bar"></span></button>
+            <button class="uc-tab" role="tab" id="uc-t5" aria-controls="uc-p5" aria-selected="false" tabindex="-1"><svg class="hl-icon"><use href="#icon-factory"/></svg>Conformité industrielle<span class="bar"></span></button>
+            <button class="uc-tab" role="tab" id="uc-t6" aria-controls="uc-p6" aria-selected="false" tabindex="-1"><svg class="hl-icon"><use href="#icon-shield"/></svg>Assurance &amp; Sinistres<span class="bar"></span></button>
+            <button class="uc-tab" role="tab" id="uc-t7" aria-controls="uc-p7" aria-selected="false" tabindex="-1"><svg class="hl-icon"><use href="#icon-receipt"/></svg>Dépenses &amp; Procurement<span class="bar"></span></button>
+            <button class="uc-tab" role="tab" id="uc-t8" aria-controls="uc-p8" aria-selected="false" tabindex="-1"><svg class="hl-icon"><use href="#icon-lock"/></svg>Cybersécurité &amp; Accès<span class="bar"></span></button>
+          </div>
+
+          <div class="uc-panels">
+            <article class="card uc-panel" role="tabpanel" id="uc-p1" aria-labelledby="uc-t1">
+              <div class="uc-panel-head"><span class="ico"><svg class="hl-icon"><use href="#icon-bank"/></svg></span><h3>Crédit &amp; Risk</h3></div>
+              <p class="uc-quote">«&#8239;L’IA a analysé 200 dossiers de crédit. Pour ce client, le scoring est en zone grise (480). Faut-il approuver le prêt de 50&#8239;000&nbsp;€&#8239;?&#8239;»</p>
+              <div class="uc-flow">
+                <div class="uc-step"><span class="k">L’IA</span><p>Prépare le dossier complet avec historique et recommandation.</p></div>
+                <div class="uc-arrow" aria-hidden="true"><span></span></div>
+                <div class="uc-step is-human"><span class="k">Le Sentinel</span><p>Un analyste crédit certifié tranche sous 2&nbsp;h (SLA sur mesure).</p></div>
+              </div>
+              <div class="uc-foot"><span class="chip is-green">Décision opposable + audit trail</span></div>
+            </article>
+            <article class="card uc-panel" role="tabpanel" id="uc-p2" aria-labelledby="uc-t2" hidden>
+              <div class="uc-panel-head"><span class="ico"><svg class="hl-icon"><use href="#icon-scale"/></svg></span><h3>Legal &amp; M&amp;A</h3></div>
+              <p class="uc-quote">«&#8239;Sur 500 contrats analysés, 12 contiennent une clause de changement de contrôle. Cette clause §4.2.b est-elle acceptable&#8239;?&#8239;»</p>
+              <div class="uc-flow">
+                <div class="uc-step"><span class="k">L’IA</span><p>Identifie les points critiques de chaque contrat.</p></div>
+                <div class="uc-arrow" aria-hidden="true"><span></span></div>
+                <div class="uc-step is-human"><span class="k">Le Sentinel</span><p>Un juriste qualifié valide chaque clause à risque, avec commentaire.</p></div>
+              </div>
+              <div class="uc-foot"><span class="chip is-green">Opinion juridique qualifiée</span></div>
+            </article>
+            <article class="card uc-panel" role="tabpanel" id="uc-p3" aria-labelledby="uc-t3" hidden>
+              <div class="uc-panel-head"><span class="ico"><svg class="hl-icon"><use href="#icon-medical"/></svg></span><h3>Santé &amp; Diagnostics</h3></div>
+              <p class="uc-quote">«&#8239;L’algorithme détecte une anomalie sur l’IRM du patient #4521. Probabilité de tumeur&nbsp;: 78&nbsp;%. Confirmer le diagnostic&#8239;?&#8239;»</p>
+              <div class="uc-flow">
+                <div class="uc-step"><span class="k">L’IA</span><p>Pré-analyse l’imagerie et signale l’anomalie.</p></div>
+                <div class="uc-arrow" aria-hidden="true"><span></span></div>
+                <div class="uc-step is-human"><span class="k">Le Sentinel</span><p>Un radiologue habilité valide ou ajuste le diagnostic sous 30&nbsp;min (SLA sur mesure).</p></div>
+              </div>
+              <div class="uc-foot"><span class="chip is-green">Responsabilité médicale assumée</span></div>
+            </article>
+            <article class="card uc-panel" role="tabpanel" id="uc-p4" aria-labelledby="uc-t4" hidden>
+              <div class="uc-panel-head"><span class="ico"><svg class="hl-icon"><use href="#icon-users"/></svg></span><h3>RH &amp; Recrutement</h3></div>
+              <p class="uc-quote">«&#8239;3 candidats présélectionnés par l’IA. Le candidat B a un trou de 2 ans dans son CV. Exception au processus&#8239;?&#8239;»</p>
+              <div class="uc-flow">
+                <div class="uc-step"><span class="k">L’IA</span><p>Préfiltre et prépare les dossiers.</p></div>
+                <div class="uc-arrow" aria-hidden="true"><span></span></div>
+                <div class="uc-step is-human"><span class="k">Le Sentinel</span><p>Un DRH valide les décisions sensibles, avec justification.</p></div>
+              </div>
+              <div class="uc-foot"><span class="chip is-green">Non-discrimination documentée</span></div>
+            </article>
+            <article class="card uc-panel" role="tabpanel" id="uc-p5" aria-labelledby="uc-t5" hidden>
+              <div class="uc-panel-head"><span class="ico"><svg class="hl-icon"><use href="#icon-factory"/></svg></span><h3>Conformité industrielle</h3></div>
+              <p class="uc-quote">«&#8239;Le lot #7823 présente une déviation de 0,3&nbsp;% sur la spécification. Sous le seuil critique, mais au-dessus de la tolérance. Libérer le lot&#8239;?&#8239;»</p>
+              <div class="uc-flow">
+                <div class="uc-step"><span class="k">L’IA</span><p>Détecte les déviations sur la ligne de production.</p></div>
+                <div class="uc-arrow" aria-hidden="true"><span></span></div>
+                <div class="uc-step is-human"><span class="k">Le Sentinel</span><p>Un responsable qualité habilité décide de la libération.</p></div>
+              </div>
+              <div class="uc-foot"><span class="chip is-green">Traçabilité FDA / ISO</span></div>
+            </article>
+            <article class="card uc-panel" role="tabpanel" id="uc-p6" aria-labelledby="uc-t6" hidden>
+              <div class="uc-panel-head"><span class="ico"><svg class="hl-icon"><use href="#icon-shield"/></svg></span><h3>Assurance &amp; Sinistres</h3></div>
+              <p class="uc-quote">«&#8239;Déclaration de sinistre auto&nbsp;: photos analysées, témoignages croisés. Incohérence détectée sur le moment des faits. Fraude&#8239;?&#8239;»</p>
+              <div class="uc-flow">
+                <div class="uc-step"><span class="k">L’IA</span><p>Signale les dossiers suspects.</p></div>
+                <div class="uc-arrow" aria-hidden="true"><span></span></div>
+                <div class="uc-step is-human"><span class="k">Le Sentinel</span><p>Un expert mandaté statue sur l’indemnisation.</p></div>
+              </div>
+              <div class="uc-foot"><span class="chip is-green">Décision contestable documentée</span></div>
+            </article>
+            <article class="card uc-panel" role="tabpanel" id="uc-p7" aria-labelledby="uc-t7" hidden>
+              <div class="uc-panel-head"><span class="ico"><svg class="hl-icon"><use href="#icon-receipt"/></svg></span><h3>Dépenses &amp; Procurement</h3></div>
+              <p class="uc-quote">«&#8239;Demande d’achat logiciel SaaS&nbsp;: 45&#8239;000&nbsp;€/an. Budget non prévu. 3 devis obtenus. Exception budgétaire&#8239;?&#8239;»</p>
+              <div class="uc-flow">
+                <div class="uc-step"><span class="k">L’IA</span><p>Valide la conformité de la demande.</p></div>
+                <div class="uc-arrow" aria-hidden="true"><span></span></div>
+                <div class="uc-step is-human"><span class="k">Le Sentinel</span><p>Un directeur financier approuve les exceptions selon la politique.</p></div>
+              </div>
+              <div class="uc-foot"><span class="chip is-green">Contrôle interne + vitesse</span></div>
+            </article>
+            <article class="card uc-panel" role="tabpanel" id="uc-p8" aria-labelledby="uc-t8" hidden>
+              <div class="uc-panel-head"><span class="ico"><svg class="hl-icon"><use href="#icon-lock"/></svg></span><h3>Cybersécurité &amp; Accès</h3></div>
+              <p class="uc-quote">«&#8239;Demande d’accès admin au serveur de prod. Justification&nbsp;: “debug urgent”. Utilisateur&nbsp;: dev junior, 22&nbsp;h&nbsp;30. Approuver&#8239;?&#8239;»</p>
+              <div class="uc-flow">
+                <div class="uc-step"><span class="k">L’IA</span><p>Évalue le risque et le contexte de la demande.</p></div>
+                <div class="uc-arrow" aria-hidden="true"><span></span></div>
+                <div class="uc-step is-human"><span class="k">Le Sentinel</span><p>Un RSSI valide les accès sensibles sous SLA prioritaire (option Enterprise).</p></div>
+              </div>
+              <div class="uc-foot"><span class="chip is-green">Zero-trust + audit complet</span></div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 06 API ============ -->
+    <section class="section api" id="api" aria-labelledby="api-title">
+      <div class="container api-grid">
+        <div class="api-copy">
+          <p class="eyebrow" data-reveal><span>06</span>Développeurs</p>
+          <h2 class="h2" id="api-title" data-reveal>Decision-as-an-<em class="serif grad-machine">API</em>.</h2>
+          <p class="lede" data-reveal>HumanLayer s’intègre comme Stripe ou Twilio — mais pour la décision. Arbitrium est exposé comme un état d’escalade dans le système.</p>
+
+          <div class="endpoints" data-stagger>
+            <div class="endpoint"><span class="method is-post">POST</span><code>/api/v1/decisions</code><span>Soumettre un dossier ou un second avis</span></div>
+            <div class="endpoint"><span class="method is-get">GET</span><code>/api/v1/decisions?id=</code><span>Statut, SLA et décision signée</span></div>
+            <div class="endpoint"><span class="method is-get">GET</span><code>/api/v1/decisions?agent_id=</code><span>Historique d’un agent</span></div>
+            <div class="endpoint"><span class="method is-get">GET</span><code>/api/v1/decision-key</code><span>Clé publique de vérification</span></div>
+          </div>
+
+          <div class="api-group" data-reveal>
+            <h3>Webhooks</h3>
+            <div class="chip-row">
+              <span class="chip is-mono is-green">decision.completed</span>
+              <span class="chip is-mono">decision.rejected</span>
+              <span class="chip is-mono">decision.escalated</span>
+              <span class="chip is-mono is-amber">sla.breached</span>
+            </div>
+          </div>
+          <div class="api-group" data-reveal>
+            <h3>Intégration</h3>
+            <div class="chip-row">
+              <span class="chip">REST / JSON</span>
+              <span class="chip">Webhooks signés (HMAC)</span>
+              <span class="chip">Décisions signées (Ed25519)</span>
+              <span class="chip">Tout framework d’agents</span>
+            </div>
+          </div>
+          <div data-reveal>
+            <a href="developers/" class="btn btn-primary" data-magnetic>Voir la doc API <svg class="hl-icon btn-arrow" aria-hidden="true"><use href="#icon-arrow"/></svg></a>
+          </div>
+        </div>
+
+        <div class="console" data-console data-reveal="scale">
+          <div class="console-bar">
+            <div class="console-lights" aria-hidden="true"><i></i><i></i><i></i></div>
+            <div class="console-tabs" role="tablist" aria-label="Exemples de code">
+              <button class="console-tab" role="tab" id="ct-1" aria-controls="cp-1" aria-selected="true">submit.py</button>
+              <button class="console-tab" role="tab" id="ct-2" aria-controls="cp-2" aria-selected="false" tabindex="-1">verify_webhook.py</button>
+              <button class="console-tab" role="tab" id="ct-3" aria-controls="cp-3" aria-selected="false" tabindex="-1">webhook.json</button>
+            </div>
+            <button class="console-copy" type="button" data-copy><svg class="hl-icon" aria-hidden="true"><use href="#icon-copy"/></svg><span>Copier</span></button>
+          </div>
+          <div class="console-body">
+<pre class="console-panel" id="cp-1" role="tabpanel" aria-labelledby="ct-1"><code><span class="ln"><span class="tk-k">import</span> requests</span>
+<span class="ln"></span>
+<span class="ln">API = <span class="tk-s">"https://humanlayer.systems/api/v1/decisions"</span></span>
+<span class="ln">HEADERS = {<span class="tk-s">"x-api-key"</span>: <span class="tk-s">"hl_live_..."</span>}</span>
+<span class="ln"></span>
+<span class="ln"><span class="tk-c"># Seuil Arbitrium franchi : on soumet le dossier</span></span>
+<span class="ln">created = requests.<span class="tk-f">post</span>(API, headers=HEADERS, json={</span>
+<span class="ln">    <span class="tk-s">"agent_id"</span>: <span class="tk-s">"agent-credit"</span>,</span>
+<span class="ln">    <span class="tk-s">"request_type"</span>: <span class="tk-s">"compliance"</span>,  <span class="tk-c"># niveau 1, SLA 30 min</span></span>
+<span class="ln">    <span class="tk-s">"domain"</span>: <span class="tk-s">"finance"</span>,</span>
+<span class="ln">    <span class="tk-s">"summary"</span>: <span class="tk-s">"KYC : correspondance partielle. Valider ?"</span>,</span>
+<span class="ln">    <span class="tk-s">"context_json"</span>: {<span class="tk-s">"customer_id"</span>: <span class="tk-s">"c_4521"</span>},</span>
+<span class="ln">    <span class="tk-s">"callback_url"</span>: <span class="tk-s">"https://votre-app.example/hl"</span>,</span>
+<span class="ln">}).<span class="tk-f">json</span>()</span>
+<span class="ln"></span>
+<span class="ln"><span class="tk-c"># Suivi (ou attente du webhook signé)</span></span>
+<span class="ln">res = requests.<span class="tk-f">get</span>(API, headers=HEADERS,</span>
+<span class="ln">                   params={<span class="tk-s">"id"</span>: created[<span class="tk-s">"request_id"</span>]})</span>
+<span class="ln">req = res.<span class="tk-f">json</span>()[<span class="tk-s">"request"</span>]</span>
+<span class="ln"></span>
+<span class="ln"><span class="tk-k">if</span> req[<span class="tk-s">"verdict"</span>] == <span class="tk-s">"approved"</span>:</span>
+<span class="ln">    <span class="tk-f">continue_workflow</span>(req[<span class="tk-s">"decision"</span>])  <span class="tk-c"># signée Ed25519</span></span></code></pre>
+<pre class="console-panel" id="cp-2" role="tabpanel" aria-labelledby="ct-2" hidden><code><span class="ln"><span class="tk-k">import</span> hmac, hashlib, time</span>
+<span class="ln"></span>
+<span class="ln"><span class="tk-k">def</span> <span class="tk-f">verify_webhook</span>(headers, raw_body, secret):</span>
+<span class="ln">    <span class="tk-c"># X-HumanLayer-Signature: t=1700000000,v1=&lt;hmac&gt;</span></span>
+<span class="ln">    parts = <span class="tk-f">dict</span>(p.<span class="tk-f">split</span>(<span class="tk-s">"="</span>, <span class="tk-n">1</span>)</span>
+<span class="ln">                 <span class="tk-k">for</span> p <span class="tk-k">in</span> headers[<span class="tk-s">"X-HumanLayer-Signature"</span>].<span class="tk-f">split</span>(<span class="tk-s">","</span>))</span>
+<span class="ln">    <span class="tk-k">if</span> <span class="tk-f">abs</span>(time.<span class="tk-f">time</span>() - <span class="tk-f">int</span>(parts[<span class="tk-s">"t"</span>])) &gt; <span class="tk-n">300</span>:</span>
+<span class="ln">        <span class="tk-k">return</span> <span class="tk-k">False</span>  <span class="tk-c"># trop ancien : rejeu</span></span>
+<span class="ln">    signed = parts[<span class="tk-s">"t"</span>].<span class="tk-f">encode</span>() + <span class="tk-s">b"."</span> + raw_body</span>
+<span class="ln">    expected = hmac.<span class="tk-f">new</span>(secret.<span class="tk-f">encode</span>(), signed,</span>
+<span class="ln">                        hashlib.sha256).<span class="tk-f">hexdigest</span>()</span>
+<span class="ln">    <span class="tk-k">return</span> hmac.<span class="tk-f">compare_digest</span>(expected, parts[<span class="tk-s">"v1"</span>])</span></code></pre>
+<pre class="console-panel" id="cp-3" role="tabpanel" aria-labelledby="ct-3" hidden><code><span class="ln"><span class="tk-c">// POST vers votre callback_url (X-HumanLayer-Event: decision.completed)</span></span>
+<span class="ln">{</span>
+<span class="ln">  <span class="tk-p">"id"</span>: <span class="tk-s">"evt_3c9e…"</span>,</span>
+<span class="ln">  <span class="tk-p">"type"</span>: <span class="tk-s">"decision.completed"</span>,</span>
+<span class="ln">  <span class="tk-p">"data"</span>: {</span>
+<span class="ln">    <span class="tk-p">"request_id"</span>: <span class="tk-s">"8b1f2c4e-…"</span>,</span>
+<span class="ln">    <span class="tk-p">"status"</span>: <span class="tk-s">"decided"</span>,</span>
+<span class="ln">    <span class="tk-p">"verdict"</span>: <span class="tk-s">"approved"</span>,</span>
+<span class="ln">    <span class="tk-p">"reasoning"</span>: <span class="tk-s">"Conforme à la politique interne."</span>,</span>
+<span class="ln">    <span class="tk-p">"sentinel_ref"</span>: <span class="tk-s">"S-4F2A9C"</span>,</span>
+<span class="ln">    <span class="tk-p">"signed_at"</span>: <span class="tk-s">"2026-03-12T14:32:07Z"</span>,</span>
+<span class="ln">    <span class="tk-p">"signature"</span>: <span class="tk-s">"base64…"</span>,</span>
+<span class="ln">    <span class="tk-p">"signed_payload"</span>: <span class="tk-s">"{…}"</span></span>
+<span class="ln">  }</span>
+<span class="ln">}</span></code></pre>
+          </div>
+          <div class="console-status" aria-live="off"><span class="dot"></span><span data-console-status>Prêt · <b>POST /api/v1/decisions</b></span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 07 POURQUOI ============ -->
+    <section class="section why" id="why" aria-labelledby="why-title">
+      <div class="container">
+        <div class="section-head is-split">
+          <p class="eyebrow" data-reveal><span>07</span>Différenciation</p>
+          <h2 class="h2" id="why-title" data-reveal>Pas une marketplace de tâches. <em class="serif grad-human">Une infrastructure de responsabilité.</em></h2>
+          <p class="lede" data-reveal style="--d:120ms">Ce que vous achetez n’est pas du temps humain&nbsp;: c’est une autorité vérifiée, branchée sur vos agents, avec la preuve à l’appui.</p>
+        </div>
+
+        <div class="bento" data-stagger>
+          <article class="card spotlight tile is-wide">
+            <div class="tile-copy">
+              <span class="k">Verified Authority Network</span>
+              <h3>Un réseau de Sentinels vérifiés</h3>
+              <p>Sentinels qualifiés, accréditations traçables. Qualifications et habilitations contrôlées avant toute activation.</p>
+            </div>
+            <div class="tile-visual" aria-hidden="true">
+              <svg class="net" viewBox="0 0 560 190" preserveAspectRatio="xMidYMid meet">
+                <defs>
+                  <radialGradient id="coreGrad"><stop offset="0" stop-color="#7cf0f8"/><stop offset="1" stop-color="#3d7bff"/></radialGradient>
+                </defs>
+                <g>
+                  <line class="net-edge" x1="280" y1="95" x2="70" y2="40"/>
+                  <line class="net-edge" x1="280" y1="95" x2="60" y2="150"/>
+                  <line class="net-edge" x1="280" y1="95" x2="170" y2="95"/>
+                  <line class="net-edge" x1="280" y1="95" x2="390" y2="30"/>
+                  <line class="net-edge" x1="280" y1="95" x2="500" y2="60"/>
+                  <line class="net-edge" x1="280" y1="95" x2="480" y2="160"/>
+                  <line class="net-edge" x1="280" y1="95" x2="360" y2="170"/>
+                  <line class="net-edge" x1="280" y1="95" x2="200" y2="170"/>
+                </g>
+                <g class="net-node" style="--i:0"><circle cx="70" cy="40" r="15"/><circle class="v" cx="81" cy="29" r="4"/><text x="92" y="44">Juriste</text></g>
+                <g class="net-node" style="--i:1"><circle cx="60" cy="150" r="15"/><circle class="v" cx="71" cy="139" r="4"/><text x="82" y="154">Médecin</text></g>
+                <g class="net-node" style="--i:2"><circle cx="170" cy="95" r="12"/><circle class="v" cx="179" cy="86" r="4"/><text x="120" y="72">Notaire</text></g>
+                <g class="net-node" style="--i:3"><circle cx="390" cy="30" r="13"/><circle class="v" cx="400" cy="20" r="4"/><text x="410" y="34">Analyste crédit</text></g>
+                <g class="net-node" style="--i:4"><circle cx="500" cy="60" r="12"/><circle class="v" cx="509" cy="51" r="4"/><text x="452" y="88">RSSI</text></g>
+                <g class="net-node" style="--i:5"><circle cx="480" cy="160" r="15"/><circle class="v" cx="491" cy="149" r="4"/><text x="400" y="186">Radiologue</text></g>
+                <g class="net-node" style="--i:6"><circle cx="360" cy="170" r="11"/><circle class="v" cx="368" cy="161" r="4"/><text x="300" y="186">Ingénieur</text></g>
+                <g class="net-node" style="--i:7"><circle cx="200" cy="170" r="11"/><circle class="v" cx="208" cy="161" r="4"/><text x="150" y="186">DRH</text></g>
+                <g class="net-core"><circle class="halo" cx="280" cy="95" r="30"/><circle cx="280" cy="95" r="30"/><text x="280" y="99" text-anchor="middle">HL</text></g>
+              </svg>
+            </div>
+          </article>
+
+          <article class="card spotlight tile">
+            <div class="tile-copy">
+              <span class="k">Decision-as-an-API</span>
+              <h3>Branché sur vos agents</h3>
+              <p>Endpoints, formats, intégrations agents.</p>
+            </div>
+            <div class="mini-term" aria-hidden="true">
+              <div><span class="text-green">POST</span><span>/api/v1/decisions</span></div>
+              <div><span class="text-cyan">GET</span><span>/api/v1/decisions?id=</span></div>
+              <div><span class="text-cyan">GET</span><span>/api/v1/decision-key</span></div>
+              <div><span class="text-amber">HOOK</span><span>decision.completed<span class="caret"></span></span></div>
+            </div>
+          </article>
+
+          <article class="card spotlight tile">
+            <div class="tile-copy">
+              <span class="k">Audit by Design</span>
+              <h3>La preuve, par défaut</h3>
+              <p>Preuve, logs, contexte, versioning.</p>
+            </div>
+            <div class="audit-log" aria-hidden="true">
+              <ul>
+                <li><span>14:32:07</span><b>APPROUVÉE</b><span>dec_4Kx9 · crédit</span></li>
+                <li><span>14:31:52</span><b class="is-review">SECOND AVIS</b><span>dec_8Pq2 · juridique</span></li>
+                <li><span>14:30:18</span><b>APPROUVÉE</b><span>dec_2Lm7 · accès</span></li>
+                <li><span>14:29:44</span><b class="is-rejected">REFUSÉE</b><span>dec_9Tw3 · sinistre</span></li>
+                <li><span>14:28:03</span><b>APPROUVÉE</b><span>dec_6Hn1 · qualité</span></li>
+                <li><span>14:27:36</span><b>APPROUVÉE</b><span>dec_1Zc5 · dépense</span></li>
+                <li><span>14:32:07</span><b>APPROUVÉE</b><span>dec_4Kx9 · crédit</span></li>
+                <li><span>14:31:52</span><b class="is-review">SECOND AVIS</b><span>dec_8Pq2 · juridique</span></li>
+                <li><span>14:30:18</span><b>APPROUVÉE</b><span>dec_2Lm7 · accès</span></li>
+                <li><span>14:29:44</span><b class="is-rejected">REFUSÉE</b><span>dec_9Tw3 · sinistre</span></li>
+                <li><span>14:28:03</span><b>APPROUVÉE</b><span>dec_6Hn1 · qualité</span></li>
+                <li><span>14:27:36</span><b>APPROUVÉE</b><span>dec_1Zc5 · dépense</span></li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card spotlight tile is-wide">
+            <div class="tile-copy">
+              <span class="k">SLA garantis</span>
+              <h3>Des minutes, pas des jours</h3>
+              <p>Délais garantis, escalades, fallback.</p>
+            </div>
+            <div class="sla-visual" aria-hidden="true">
+              <div class="sla-ring-wrap">
+                <div class="sla-ring"></div>
+                <div class="sla-center"><b>SLA</b><small>Suivi en continu</small></div>
+              </div>
+              <ul class="sla-tiers">
+                <li>Conformité <b>30&nbsp;min</b></li>
+                <li>Jugement expert <b>2&nbsp;h</b></li>
+                <li>Autorité habilitée <b>4&nbsp;h ou sur mesure</b></li>
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <div class="trust">
+          <div class="trust-head">
+            <h3 data-reveal>Confiance &amp; conformité</h3>
+            <p data-reveal>Conçu pour les équipes Legal, Risk et Compliance.</p>
+          </div>
+          <div class="trust-grid" data-stagger>
+            <div class="trust-item"><span class="ico"><svg class="hl-icon"><use href="#icon-fingerprint"/></svg></span><div><b>Identité vérifiée</b><p>Qualifications et habilitations contrôlées.</p></div></div>
+            <div class="trust-item"><span class="ico"><svg class="hl-icon"><use href="#icon-clipboard"/></svg></span><div><b>Journal d’audit</b><p>Exportable, décisions signées (Ed25519).</p></div></div>
+            <div class="trust-item"><span class="ico"><svg class="hl-icon"><use href="#icon-shield"/></svg></span><div><b>Escalades automatiques</b><p>Dépassement de SLA, second avis, réassignation.</p></div></div>
+            <div class="trust-item"><span class="ico"><svg class="hl-icon"><use href="#icon-lock"/></svg></span><div><b>Sécurité renforcée</b><p>MFA obligatoire pour les Sentinels, secrets chiffrés (AES-256).</p></div></div>
+            <div class="trust-item"><span class="ico"><svg class="hl-icon"><use href="#icon-chart"/></svg></span><div><b>Minimisation des données</b><p>Collecte limitée au strict nécessaire.</p></div></div>
+            <div class="trust-item"><span class="ico"><svg class="hl-icon"><use href="#icon-check"/></svg></span><div><b>Conformité</b><p>Hébergement certifié SOC&nbsp;2 Type&nbsp;II&#8239;; processus alignés RGPD et Loi&nbsp;25.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 08 TARIFS ============ -->
+    <section class="section pricing" id="pricing" aria-labelledby="pricing-title">
+      <div class="container">
+        <div class="section-head is-center">
+          <p class="eyebrow" data-reveal><span>08</span>Tarification</p>
+          <h2 class="h2" id="pricing-title" data-reveal>Facturation à la décision. <em class="serif grad-human">Pas à l’heure.</em></h2>
+          <p class="lede" data-reveal style="--d:120ms">Payez pour la valeur, pas pour le temps. Chaque niveau correspond à un type de responsabilité et d’expertise&nbsp;; jusqu’à 60&nbsp;% de chaque décision revient au Sentinel qui la rend.</p>
+        </div>
+
+        <div class="plans" data-stagger>
+          <article class="card spotlight plan">
+            <div class="plan-head">
+              <span class="plan-level">Niveau 1 · Validation de conformité</span>
+              <h3>Conformité</h3>
+              <p>Validation de règles et politiques.</p>
+            </div>
+            <div class="price"><span class="price-amount">20&nbsp;€</span><span class="price-unit">/ décision</span></div>
+            <div class="plan-body">
+              <ul class="plan-features">
+                <li>Vérification structurée</li>
+                <li>SLA 30 minutes</li>
+                <li>Audit trail complet</li>
+                <li>Sentinels vérifiés</li>
+              </ul>
+              <div class="plan-examples">
+                <span class="k">Exemples</span>
+                <div class="chip-row"><span class="chip">KYC/AML</span><span class="chip">RGPD</span><span class="chip">Validation de dépenses</span><span class="chip">Politiques internes</span></div>
+              </div>
+              <p class="plan-value"><svg class="hl-icon"><use href="#icon-sparkle"/></svg>Valeur&nbsp;: rapidité + responsabilité + audit</p>
+            </div>
+            <a href="/client/inscription.html#compliance" class="btn btn-ghost btn-full">Commencer</a>
+          </article>
+
+          <article class="card plan is-featured">
+            <span class="beam" aria-hidden="true"></span>
+            <div class="plan-head">
+              <span class="plan-level">Niveau 2 · Jugement contextuel</span>
+              <div class="plan-title"><h3>Jugement expert</h3><span class="chip is-amber">Populaire</span></div>
+              <p>Quand les règles ne suffisent plus.</p>
+            </div>
+            <div class="price"><span class="price-amount">100&nbsp;€</span><span class="price-unit">/ décision</span></div>
+            <div class="plan-body">
+              <ul class="plan-features">
+                <li>Expertise sectorielle</li>
+                <li>SLA 2 heures</li>
+                <li>Commentaires détaillés</li>
+                <li>Second avis disponible</li>
+              </ul>
+              <div class="plan-examples">
+                <span class="k">Exemples</span>
+                <div class="chip-row"><span class="chip">Clause contractuelle acceptable&#8239;?</span><span class="chip">Exception au processus&#8239;?</span><span class="chip">Anomalie à escalader&#8239;?</span></div>
+              </div>
+              <p class="plan-value"><svg class="hl-icon"><use href="#icon-sparkle"/></svg>Valeur&nbsp;: vous achetez du jugement, pas du temps</p>
+            </div>
+            <a href="/client/inscription.html#expert" class="btn btn-amber btn-full" data-magnetic>Commencer</a>
+          </article>
+
+          <article class="card spotlight plan">
+            <div class="plan-head">
+              <span class="plan-level">Niveau 3 · Autorité décisionnelle</span>
+              <h3>Autorité habilitée</h3>
+              <p>Acte final par une personne qualifiée.</p>
+            </div>
+            <div class="price"><span class="price-amount">250&nbsp;€</span><span class="price-unit">/ décision</span></div>
+            <div class="plan-body">
+              <ul class="plan-features">
+                <li>Visa d’un professionnel habilité</li>
+                <li>SLA 4&nbsp;h ou sur mesure</li>
+                <li>Responsabilité assumée</li>
+                <li>Preuve signée et exportable</li>
+              </ul>
+              <div class="plan-examples">
+                <span class="k">Exemples</span>
+                <div class="chip-row"><span class="chip">Visa juridique</span><span class="chip">Décision de crédit</span><span class="chip">Validation médicale</span><span class="chip">Approbation réglementaire</span></div>
+              </div>
+              <p class="plan-value"><svg class="hl-icon"><use href="#icon-sparkle"/></svg>Valeur&nbsp;: responsabilité assumée + forte barrière à l’entrée</p>
+            </div>
+            <a href="/client/inscription.html#authority" class="btn btn-ghost btn-full">Commencer</a>
+          </article>
+        </div>
+
+        <div class="card enterprise" data-reveal>
+          <p><strong>Options Enterprise&nbsp;:</strong> SLA premium, pools dédiés, gouvernance, intégrations, reporting.</p>
+          <a href="contact.html" class="btn btn-primary" data-magnetic>Obtenir une grille tarifaire <svg class="hl-icon btn-arrow" aria-hidden="true"><use href="#icon-arrow"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 09 SENTINELS ============ -->
+    <section class="section sentinels" id="sentinels" aria-labelledby="sentinel-title">
+      <div class="container sentinel-grid">
+        <div class="sentinel-copy">
+          <p class="eyebrow is-amber" data-reveal><span>09</span>Rejoindre le réseau</p>
+          <h2 class="h2" id="sentinel-title" data-reveal>Vous êtes expert&#8239;? <em class="serif grad-human">Devenez Sentinel.</em></h2>
+          <p class="lede" data-reveal>Juriste, médecin, analyste, RSSI… Monétisez votre autorité décisionnelle en validant les demandes des agents IA. Flexibilité totale, revenus à la décision.</p>
+          <div class="professions" data-stagger>
+            <span class="chip">Juristes</span><span class="chip">Médecins</span><span class="chip">Analystes</span><span class="chip">RSSI</span><span class="chip">Notaires</span><span class="chip">Ingénieurs</span>
+          </div>
+          <div data-reveal>
+            <a href="apply.html" class="btn btn-amber btn-lg" data-magnetic><svg class="hl-icon" aria-hidden="true"><use href="#icon-user"/></svg>Postuler comme Sentinel</a>
+          </div>
+          <p class="note" data-reveal>Examen diligent de votre candidature.</p>
+        </div>
+
+        <div data-reveal="scale">
+          <div class="sentinel-demo" data-sentinel-demo>
+            <div class="sentinel-demo-top">
+              <div class="who"><span class="avatar">S</span><span>Portail Sentinel · Juridique</span></div>
+              <span class="sla-count" data-countdown="7199">SLA 01:59:59</span>
+            </div>
+            <div class="request">
+              <div class="request-meta"><span class="chip is-amber">Nouvelle demande · Niveau 2</span><span class="chip is-mono">dec_8Pq2</span></div>
+              <h4>Clause §4.2.b — changement de contrôle</h4>
+              <p>Sur 500 contrats analysés, 12 contiennent cette clause. L’IA a identifié les points critiques et joint le contexte complet.</p>
+              <div class="request-meta"><span class="chip">Legal &amp; M&amp;A</span><span class="chip">Dossier préparé par l’IA</span></div>
+            </div>
+            <div class="request-actions">
+              <button type="button" class="btn btn-ghost" data-act="reject">Refuser</button>
+              <button type="button" class="btn btn-amber" data-act="approve">Approuver</button>
+            </div>
+            <div class="request-signed" role="status">
+              <svg class="hl-icon hl-md" aria-hidden="true"><use href="#icon-check"/></svg>
+              <div><span data-signed-text>Décision enregistrée&nbsp;: horodatée, justifiée, archivée.</span><code data-signed-meta></code></div>
+            </div>
+          </div>
+          <p class="sentinel-demo-caption">Aperçu illustratif du portail Sentinel. Cliquez pour trancher.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA FINAL ============ -->
+    <section class="final" id="cta" aria-labelledby="final-title">
+      <div class="final-horizon" aria-hidden="true"></div>
+      <div class="container final-inner">
+        <h2 id="final-title" class="grad-title" data-reveal="blur">Déployez des agents IA… <em class="serif grad-human">sans perdre le contrôle.</em></h2>
+        <p class="lede" data-reveal>HumanLayer rend l’autonomie auditable, responsable et opposable.</p>
+        <div class="ctas" data-reveal>
+          <a href="/client/inscription.html" class="btn btn-primary btn-lg" data-magnetic>Commencer maintenant <svg class="hl-icon btn-arrow" aria-hidden="true"><use href="#icon-arrow"/></svg></a>
+          <a href="contact.html" class="btn btn-ghost btn-lg">Nous contacter</a>
+        </div>
+        <p class="vision" data-reveal>À mesure que l’IA progresse, HumanLayer définit <strong>quand ne pas automatiser</strong>.</p>
+      </div>
+    </section>
+  </main>
+
+<!-- layout:footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="brand" aria-label="HumanLayer, accueil">
+            <img src="logo-mark.png" width="30" height="30" alt="">
+            <span class="brand-name">Human<span>Layer</span></span>
+          </a>
+          <p>La couche d’autorité décisionnelle pour agents IA.</p>
+          <address>
+            HumanLayer Systems Inc.<br>
+            1250, avenue de la Station, Shawinigan (Québec) G9N&nbsp;8K9<br>
+            <a href="mailto:humanlayer@probalink.com">humanlayer@probalink.com</a>
+          </address>
+        </div>
+        <nav class="footer-cols" aria-label="Pied de page">
+          <div class="footer-col">
+            <h2>Produit</h2>
+            <ul>
+              <li><a href="#arbitrium">Arbitrium</a></li>
+              <li><a href="#solution">Solution</a></li>
+              <li><a href="#usecases">Cas d’usage</a></li>
+              <li><a href="#pricing">Tarifs</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h2>Développeurs</h2>
+            <ul>
+              <li><a href="developers/">Documentation API</a></li>
+              <li><a href="faq-developpeurs.html">FAQ développeurs</a></li>
+              <li><a href="/client/">Espace client</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h2>Réseau</h2>
+            <ul>
+              <li><a href="apply.html">Devenir Sentinel</a></li>
+              <li><a href="/sentinel/">Portail Sentinel</a></li>
+              <li><a href="faq-decideurs.html">FAQ Sentinels</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h2>Entreprise</h2>
+            <ul>
+              <li><a href="faq.html">FAQ</a></li>
+              <li><a href="security.html">Sécurité</a></li>
+              <li><a href="privacy.html">Confidentialité</a></li>
+              <li><a href="terms.html">Conditions</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div class="footer-wordmark" aria-hidden="true">HumanLayer</div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <span>© 2026 HumanLayer Systems Inc. Tous droits réservés.</span>
+        <span>Conçu au Québec · <a href="index-en.html" lang="en" hreflang="en">English version</a></span>
+        <span class="footer-credit">Propulsé par <a href="https://in6.ai" target="_blank" rel="noopener">in6.ai</a></span>
+      </div>
+    </div>
+  </footer>
+<!-- /layout:footer -->
+
+  <script src="script.js" defer></script>
+</body>
+
+</html>

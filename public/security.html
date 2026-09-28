@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sécurité — HumanLayer</title>
+    <meta name="description" content="Mesures de sécurité et protection des données chez HumanLayer Systems.">
+
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://humanlayer.systems/security.html">
+<!-- layout:head -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"
+    rel="stylesheet">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="logo-mark.png">
+  <link rel="stylesheet" href="styles.css">
+  <meta name="theme-color" content="#04060b">
+  <script>
+    document.documentElement.classList.add('js');
+    setTimeout(function () { if (!window.__hlReady) document.documentElement.classList.remove('js'); }, 2500);
+  </script>
+<!-- /layout:head -->
+</head>
+
+<body>
+
+    
+<!-- layout:header -->
+  <a class="skip-link" href="#main">Aller au contenu</a>
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <header class="site-header" id="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand" aria-label="HumanLayer, accueil">
+        <img src="logo-mark.png" width="30" height="30" alt="">
+        <span class="brand-name">Human<span>Layer</span></span>
+      </a>
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a href="index.html#problem">Problème</a>
+        <a href="index.html#arbitrium">Arbitrium</a>
+        <a href="index.html#solution">Solution</a>
+        <a href="index.html#usecases">Cas d’usage</a>
+        <a href="index.html#api">API</a>
+        <a href="index.html#pricing">Tarifs</a>
+        <a href="apply.html">Devenir Sentinel</a>
+        <a href="faq.html">FAQ</a>
+      </nav>
+      <div class="nav-actions">
+        <div class="lang-switch" aria-label="Langue">
+          <a href="security.html" lang="fr" aria-current="true">FR</a>
+          <a href="security-en.html" lang="en" hreflang="en">EN</a>
+        </div>
+        <a href="/client/" class="nav-login">Espace client</a>
+        <a href="/client/inscription.html" class="btn btn-primary btn-sm" data-magnetic>Commencer</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu"
+          aria-label="Ouvrir le menu"><span></span><span></span></button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobile-menu" hidden>
+      <nav aria-label="Navigation mobile">
+        <a href="index.html#problem" style="--i:0">Problème <small>01</small></a>
+        <a href="index.html#arbitrium" style="--i:1">Arbitrium <small>02</small></a>
+        <a href="index.html#solution" style="--i:2">Solution <small>03</small></a>
+        <a href="index.html#usecases" style="--i:3">Cas d’usage <small>05</small></a>
+        <a href="index.html#api" style="--i:4">API <small>06</small></a>
+        <a href="index.html#pricing" style="--i:5">Tarifs <small>08</small></a>
+        <a href="apply.html" style="--i:6">Devenir Sentinel <small>→</small></a>
+        <a href="faq.html" style="--i:7">FAQ <small>→</small></a>
+        <a href="/client/" style="--i:8">Espace client <small>→</small></a>
+      </nav>
+      <div class="mobile-menu-foot">
+        <div class="lang-switch" aria-label="Langue">
+          <a href="security.html" lang="fr" aria-current="true">FR</a>
+          <a href="security-en.html" lang="en" hreflang="en">EN</a>
+        </div>
+        <a href="/client/inscription.html" class="btn btn-primary btn-lg">Commencer maintenant</a>
+      </div>
+    </div>
+  </header>
+<!-- /layout:header -->
+
+  <main id="main">
+
+    <section class="legal-page">
+        <div class="container">
+            <div class="legal-hero">
+                <a href="index.html" class="legal-back">← Retour à l’accueil</a>
+                <div class="legal-eyebrow">Sécurité</div>
+                <h1 class="legal-title">Sécurité</h1>
+                <p class="legal-summary">Des contrôles de niveau entreprise protègent chaque décision et chaque donnée
+                    sensible traitée par HumanLayer.</p>
+                <div class="legal-meta">
+                    <span>Dernière mise à jour : septembre 2026</span>
+                    <span>humanlayer@probalink.com</span>
+                </div>
+            </div>
+
+            <div class="legal-card">
+                <div class="legal-content">
+                    <p>HumanLayer traite des décisions qui engagent des professionnels et des organisations. Cette page décrit les mesures effectivement en place ; elle est mise à jour à chaque évolution.</p>
+                    <h2>Infrastructure</h2>
+                    <ul>
+                        <li><strong>Chiffrement en transit :</strong> toutes les communications passent en HTTPS (TLS 1.2 et plus, TLS 1.3 lorsque le navigateur le permet), avec HSTS.</li>
+                        <li><strong>Secrets chiffrés au repos :</strong> les secrets de double authentification sont chiffrés en AES-256-GCM ; les clés d’API ne sont conservées que sous forme d’empreinte SHA-256 ; les mots de passe sont hachés avec scrypt.</li>
+                        <li><strong>Hébergement :</strong> infrastructure cloud certifiée SOC 2 Type II. Le code serveur n’est pas publié avec le site.</li>
+                        <li><strong>Isolation :</strong> chaque clé d’API n’accède qu’à ses propres demandes, chaque client qu’à ses clés et décisions, chaque Sentinel qu’aux dossiers qui lui sont assignés.</li>
+                        <li><strong>Navigateur :</strong> politique de sécurité du contenu (CSP) stricte, intégration en iframe interdite, portails exclus de l’indexation.</li>
+                    </ul>
+                    <h2>Authentification et accès</h2>
+                    <ul>
+                        <li>Double authentification (TOTP) obligatoire pour tous les Sentinels : elle ne peut pas être désactivée, seulement renouvelée, et un code déjà utilisé est refusé.</li>
+                        <li>Accès administrateur protégé par mot de passe et second facteur obligatoire.</li>
+                        <li>Rôles séparés (administration, Sentinels, clients), chacun avec son propre secret de signature des sessions.</li>
+                        <li>Sessions de 12 h au plus, avec déconnexion automatique ; le statut du compte est revérifié à chaque requête, si bien qu’une suspension prend effet immédiatement.</li>
+                        <li>Tentatives limitées : blocage temporaire après 5 échecs de connexion sur un compte, limites par adresse IP et par clé d’API.</li>
+                        <li>Journal d’audit des connexions et des actions sensibles (décisions, clés d’API, habilitations, double authentification), exportable.</li>
+                    </ul>
+                    <h2>Intégrité des décisions</h2>
+                    <ul>
+                        <li>Chaque décision est signée (Ed25519) : identifiants, verdict, empreinte de la justification, pseudonyme du Sentinel et horodatage. La clé publique est publiée (<code>/api/v1/decision-key</code>) : toute altération est détectable.</li>
+                        <li>Une seule décision finale par demande, enregistrée de façon atomique.</li>
+                        <li>Webhooks signés (HMAC-SHA256, secret propre à chaque clé d’API) ; adresses de rappel limitées à HTTPS et aux hôtes publics.</li>
+                        <li>SLA suivis en continu : tout dépassement est signalé et la demande est réassignée automatiquement.</li>
+                    </ul>
+                    <h2>Vérification des Sentinels</h2>
+                    <ul>
+                        <li>Vérification d’identité avant activation</li>
+                        <li>Validation des qualifications professionnelles et habilitations</li>
+                        <li>Suspension possible à tout moment, avec effet immédiat</li>
+                        <li>Traçabilité complète de chaque décision</li>
+                    </ul>
+                    <h2>Conformité réglementaire</h2>
+                    <ul>
+                        <li>RGPD (Règlement général sur la protection des données)</li>
+                        <li>Loi 25 (Québec)</li>
+                        <li>SOC 2 Type II (en cours de certification)</li>
+                        <li>ISO 27001 (planifié)</li>
+                    </ul>
+                    <h2>Signalement de vulnérabilités</h2>
+                    <p>Si vous découvrez une faille de sécurité, écrivez-nous à <strong>humanlayer@probalink.com</strong>. Nous nous engageons à traiter tout signalement dans les 24 heures.</p>
+                    <h2>Tests et revues</h2>
+                    <ul>
+                        <li>Tests automatisés de l’authentification, de la double authentification, des limites de tentatives, de la signature des décisions et de l’isolation des données, exécutés à chaque modification.</li>
+                        <li>Revue de sécurité du code (dernière : septembre 2026).</li>
+                        <li>Tests d’intrusion par un tiers indépendant : planifiés.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+  </main>
+
+<!-- layout:footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="brand" aria-label="HumanLayer, accueil">
+            <img src="logo-mark.png" width="30" height="30" alt="">
+            <span class="brand-name">Human<span>Layer</span></span>
+          </a>
+          <p>La couche d’autorité décisionnelle pour agents IA.</p>
+          <address>
+            HumanLayer Systems Inc.<br>
+            1250, avenue de la Station, Shawinigan (Québec) G9N&nbsp;8K9<br>
+            <a href="mailto:humanlayer@probalink.com">humanlayer@probalink.com</a>
+          </address>
+        </div>
+        <nav class="footer-cols" aria-label="Pied de page">
+          <div class="footer-col">
+            <h2>Produit</h2>
+            <ul>
+              <li><a href="index.html#arbitrium">Arbitrium</a></li>
+              <li><a href="index.html#solution">Solution</a></li>
+              <li><a href="index.html#usecases">Cas d’usage</a></li>
+              <li><a href="index.html#pricing">Tarifs</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h2>Développeurs</h2>
+            <ul>
+              <li><a href="developers/">Documentation API</a></li>
+              <li><a href="faq-developpeurs.html">FAQ développeurs</a></li>
+              <li><a href="/client/">Espace client</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h2>Réseau</h2>
+            <ul>
+              <li><a href="apply.html">Devenir Sentinel</a></li>
+              <li><a href="/sentinel/">Portail Sentinel</a></li>
+              <li><a href="faq-decideurs.html">FAQ Sentinels</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h2>Entreprise</h2>
+            <ul>
+              <li><a href="faq.html">FAQ</a></li>
+              <li><a href="security.html">Sécurité</a></li>
+              <li><a href="privacy.html">Confidentialité</a></li>
+              <li><a href="terms.html">Conditions</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div class="footer-wordmark" aria-hidden="true">HumanLayer</div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <span>© 2026 HumanLayer Systems Inc. Tous droits réservés.</span>
+        <span>Conçu au Québec · <a href="security-en.html" lang="en" hreflang="en">English version</a></span>
+        <span class="footer-credit">Propulsé par <a href="https://in6.ai" target="_blank" rel="noopener">in6.ai</a></span>
+      </div>
+    </div>
+  </footer>
+<!-- /layout:footer -->
+
+    <script src="script.js" defer></script>
+</body>
+
+</html>

@@ -1,6 +1,14 @@
 {
   "name": "humanlayer-site",
   "private": true,
+  "scripts": {
+    "test": "node --test \"tests/**/*.test.mjs\"",
+    "secrets": "node scripts/generate-secrets.mjs",
+    "layout": "python3 scripts/sync-layout.py"
+  },
+  "engines": {
+    "node": ">=20"
+  },
   "dependencies": {
     "@libsql/client": "^0.14.0"
   }

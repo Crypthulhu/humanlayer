@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ — HumanLayer</title>
+    <meta name="description"
+        content="Questions fréquentes sur HumanLayer - La couche d'autorité décisionnelle pour agents IA.">
+<!-- layout:head -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"
+    rel="stylesheet">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="logo-mark.png">
+  <link rel="stylesheet" href="styles.css">
+  <meta name="theme-color" content="#04060b">
+  <script>
+    document.documentElement.classList.add('js');
+    setTimeout(function () { if (!window.__hlReady) document.documentElement.classList.remove('js'); }, 2500);
+  </script>
+<!-- /layout:head -->
+</head>
+
+<body>
+    <!-- SVG Icons Sprite -->
+    
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <!-- Brain - Central AI icon -->
+        <symbol id="icon-brain" viewBox="0 0 24 24">
+            <path
+                d="M12 2C9.5 2 7.5 3.5 7 5.5C5.5 5.5 4 7 4 9c0 1.5 1 3 2.5 3.5C6 14 7 16 9 17v3c0 .5.5 1 1 1h4c.5 0 1-.5 1-1v-3c2-1 3-3 2.5-4.5C19 12 20 10.5 20 9c0-2-1.5-3.5-3-3.5C16.5 3.5 14.5 2 12 2z"
+                fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M9 10c0-1 1-2 3-2s3 1 3 2M9 14h6" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" />
+            <circle cx="9" cy="10" r="1" fill="currentColor" />
+            <circle cx="15" cy="10" r="1" fill="currentColor" />
+        </symbol>
+        <!-- Arrow Right -->
+        <symbol id="icon-arrow" viewBox="0 0 24 24">
+            <path d="M4 12h16M14 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </symbol>
+        <!-- Briefcase/Business -->
+        <symbol id="icon-briefcase" viewBox="0 0 24 24">
+            <rect x="2" y="7" width="20" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2M12 12v3M2 12h20" fill="none" stroke="currentColor"
+                stroke-width="1.5" />
+        </symbol>
+        <!-- User/Person -->
+        <symbol id="icon-user" viewBox="0 0 24 24">
+            <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M4 20c0-4 4-6 8-6s8 2 8 6" fill="none" stroke="currentColor" stroke-width="1.5" />
+        </symbol>
+        <!-- Clipboard/Checklist -->
+        <symbol id="icon-clipboard" viewBox="0 0 24 24">
+            <path d="M8 4H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2" fill="none"
+                stroke="currentColor" stroke-width="1.5" />
+            <rect x="8" y="2" width="8" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M8 12h8M8 16h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </symbol>
+        <!-- Lightning/Bolt -->
+        <symbol id="icon-bolt" viewBox="0 0 24 24">
+            <path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linejoin="round" />
+        </symbol>
+        <!-- Money/Currency -->
+        <symbol id="icon-money" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M12 6v12M8 10h6a2 2 0 010 4H8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </symbol>
+        <!-- Sparkle/Magic -->
+        <symbol id="icon-sparkle" viewBox="0 0 24 24">
+            <path d="M12 2l2 6 6 2-6 2-2 6-2-6-6-2 6-2 2-6z" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linejoin="round" />
+            <circle cx="19" cy="5" r="1.5" fill="currentColor" />
+            <circle cx="5" cy="19" r="1" fill="currentColor" />
+        </symbol>
+        <!-- Target/Bullseye -->
+        <symbol id="icon-target" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="12" cy="12" r="2" fill="currentColor" />
+            <path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </symbol>
+    </svg>
+    
+<!-- layout:header -->
+  <a class="skip-link" href="#main">Aller au contenu</a>
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <header class="site-header" id="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand" aria-label="HumanLayer, accueil">
+        <img src="logo-mark.png" width="30" height="30" alt="">
+        <span class="brand-name">Human<span>Layer</span></span>
+      </a>
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a href="index.html#problem">Problème</a>
+        <a href="index.html#arbitrium">Arbitrium</a>
+        <a href="index.html#solution">Solution</a>
+        <a href="index.html#usecases">Cas d’usage</a>
+        <a href="index.html#api">API</a>
+        <a href="index.html#pricing">Tarifs</a>
+        <a href="apply.html">Devenir Sentinel</a>
+        <a href="faq.html" aria-current="page">FAQ</a>
+      </nav>
+      <div class="nav-actions">
+        <div class="lang-switch" aria-label="Langue">
+          <a href="faq.html" lang="fr" aria-current="true">FR</a>
+          <a href="faq-en.html" lang="en" hreflang="en">EN</a>
+        </div>
+        <a href="/client/" class="nav-login">Espace client</a>
+        <a href="/client/inscription.html" class="btn btn-primary btn-sm" data-magnetic>Commencer</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu"
+          aria-label="Ouvrir le menu"><span></span><span></span></button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobile-menu" hidden>
+      <nav aria-label="Navigation mobile">
+        <a href="index.html#problem" style="--i:0">Problème <small>01</small></a>
+        <a href="index.html#arbitrium" style="--i:1">Arbitrium <small>02</small></a>
+        <a href="index.html#solution" style="--i:2">Solution <small>03</small></a>
+        <a href="index.html#usecases" style="--i:3">Cas d’usage <small>05</small></a>
+        <a href="index.html#api" style="--i:4">API <small>06</small></a>
+        <a href="index.html#pricing" style="--i:5">Tarifs <small>08</small></a>
+        <a href="apply.html" style="--i:6">Devenir Sentinel <small>→</small></a>
+        <a href="faq.html" style="--i:7">FAQ <small>→</small></a>
+        <a href="/client/" style="--i:8">Espace client <small>→</small></a>
+      </nav>
+      <div class="mobile-menu-foot">
+        <div class="lang-switch" aria-label="Langue">
+          <a href="faq.html" lang="fr" aria-current="true">FR</a>
+          <a href="faq-en.html" lang="en" hreflang="en">EN</a>
+        </div>
+        <a href="/client/inscription.html" class="btn btn-primary btn-lg">Commencer maintenant</a>
+      </div>
+    </div>
+  </header>
+<!-- /layout:header -->
+
+  <main id="main">
+
+    <!-- FAQ Page Header -->
+    <section class="faq-hero">
+        <div class="container">
+            <div class="faq-hero-content reveal">
+                <span class="label">FAQ</span>
+                <h1>Questions fréquentes</h1>
+                <p>Tout ce que vous devez savoir sur HumanLayer</p>
+            </div>
+            <!-- FAQ Tabs -->
+            <div class="faq-tabs reveal-stagger">
+                <a href="faq.html" class="faq-tab active">Général</a>
+                <a href="faq-investisseurs.html" class="faq-tab">Investisseurs</a>
+                <a href="faq-developpeurs.html" class="faq-tab">Développeurs</a>
+                <a href="faq-decideurs.html" class="faq-tab">Sentinels</a>
+                <a href="faq-risque.html" class="faq-tab">Risque</a>
+                <a href="faq-ethique.html" class="faq-tab">Éthique</a>
+                <a href="faq-regulateurs.html" class="faq-tab">Régulateurs</a>
+                <a href="faq-annexe.html" class="faq-tab">Annexe</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Content -->
+    <section class="faq faq-page">
+        <div class="container">
+
+            <!-- FAQ Category: Général -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-brain" />
+                    </svg>
+                    Général
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Qu’est-ce que HumanLayer ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>HumanLayer est une <strong>couche d’autorité décisionnelle pour agents IA</strong>.</p>
+                        <p>Elle permet à un agent IA d’obtenir, via API, une décision humaine qualifiée, documentée et
+                            juridiquement opposable, lorsque l’automatisation seule n’est pas suffisante.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Qu’est-ce qu’Arbitrium ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Arbitrium est la couche où un agent autonome doit s’arrêter et demander une décision humaine.
+                            Ce n’est pas une personne, mais un seuil du système.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Qu’est-ce qu’un Sentinel ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Un Sentinel est un expert habilité qui rend une décision traçable lorsque le système atteint
+                            Arbitrium.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>HumanLayer prend-il des décisions à la place des humains ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Non. Jamais.</strong> HumanLayer n’est pas Sentinel.</p>
+                        <p>Toutes les décisions sont prises par :</p>
+                        <ul>
+                            <li>un humain identifié</li>
+                            <li>qualifié et habilité</li>
+                            <li>agissant dans un cadre défini</li>
+                            <li>avec une trace complète du contexte et du raisonnement</li>
+                        </ul>
+                        <p>HumanLayer orchestre, trace et garantit le processus — <strong>pas le contenu de la
+                                décision</strong>.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Pourquoi est-ce nécessaire ? Nos agents IA fonctionnent déjà.</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Vos agents IA fonctionnent… <strong>jusqu’au moment où une responsabilité humaine est
+                                requise</strong>.</p>
+                        <p>Dans la plupart des organisations, ce moment provoque :</p>
+                        <ul>
+                            <li>des interruptions manuelles</li>
+                            <li>des validations hors système</li>
+                            <li>des délais imprévisibles</li>
+                            <li>une traçabilité insuffisante</li>
+                        </ul>
+                        <p>HumanLayer permet de <strong>passer ce seuil sans casser la conformité</strong>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Category: Clients & usage -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-briefcase" />
+                    </svg>
+                    Clients & usage
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Qui est le client de HumanLayer ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Les <strong>organisations qui déploient des agents IA</strong> : banques, assureurs,
+                            hôpitaux, industriels, grandes entreprises.</p>
+                        <p>Les agents IA sont des utilisateurs techniques de l’API, pas des clients contractuels.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Pourquoi faire appel à HumanLayer si nous avons déjà des experts en interne ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Parce que le problème n’est pas l’expertise, mais :</p>
+                        <ul>
+                            <li>la disponibilité</li>
+                            <li>la priorisation</li>
+                            <li>la traçabilité</li>
+                            <li>le SLA</li>
+                            <li>l’intégration avec l’IA</li>
+                        </ul>
+                        <p>HumanLayer :</p>
+                        <ul>
+                            <li>mobilise des Sentinels au moment critique</li>
+                            <li>sous délai garanti</li>
+                            <li>avec un format structuré</li>
+                            <li>et une preuve exploitable en audit</li>
+                        </ul>
+                        <p>Vous continuez à utiliser vos experts internes. HumanLayer agit comme <strong>backstop,
+                                extension et couche de résilience</strong>.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Quand HumanLayer est-il le plus utile ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Typiquement :</p>
+                        <ul>
+                            <li>hors heures ouvrées</li>
+                            <li>lors de pics de charge</li>
+                            <li>pour des expertises rares</li>
+                            <li>lorsqu’un second avis indépendant est requis</li>
+                            <li>quand la traçabilité est critique (audit, litige, régulateur)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Category: Sentinels & responsabilité -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-user" />
+                    </svg>
+                    Sentinels & responsabilité
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Qui sont les Sentinels sur HumanLayer ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Des <strong>professionnels qualifiés</strong> :</p>
+                        <ul>
+                            <li>juristes</li>
+                            <li>analystes crédit</li>
+                            <li>médecins</li>
+                            <li>compliance officers</li>
+                            <li>experts sectoriels</li>
+                        </ul>
+                        <p>Leurs identités, qualifications et habilitations sont <strong>vérifiées et tracées</strong>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Qui est responsable de la décision ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>La responsabilité appartient :</p>
+                        <ul>
+                            <li>au <strong>Sentinel</strong> qui rend la décision</li>
+                            <li>dans le cadre contractuel et réglementaire applicable</li>
+                        </ul>
+                        <p>HumanLayer fournit : la traçabilité, le contexte, la preuve — mais <strong>n’endosse jamais
+                                la décision</strong>.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Peut-on limiter ce que les Sentinels peuvent valider ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Oui.</strong> Chaque organisation définit :</p>
+                        <ul>
+                            <li>les types de décisions autorisées</li>
+                            <li>les niveaux de validation</li>
+                            <li>les règles d’escalade</li>
+                            <li>les cas de refus automatique</li>
+                        </ul>
+                        <p>HumanLayer applique ces politiques <strong>by design</strong>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Category: Compliance & audit -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-clipboard" />
+                    </svg>
+                    Compliance & audit
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>HumanLayer est-il compatible avec les exigences réglementaires ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>HumanLayer est conçu pour :</p>
+                        <ul>
+                            <li>auditabilité</li>
+                            <li>traçabilité</li>
+                            <li>responsabilité humaine</li>
+                            <li>séparation des rôles</li>
+                        </ul>
+                        <p>Il facilite la conformité avec : exigences réglementaires, audits internes, contrôles
+                            externes.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Que voit-on lors d’un audit ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Un <strong>artefact clair</strong> :</p>
+                        <ul>
+                            <li>quel agent IA a soumis la demande</li>
+                            <li>quel contexte a été fourni</li>
+                            <li>qui a décidé</li>
+                            <li>quand</li>
+                            <li>sur quelle base</li>
+                            <li>avec quelle justification</li>
+                        </ul>
+                        <p class="faq-highlight">👉 Pas de mails flous. Pas de Slack perdu.<br>👉 Une chaîne de preuve
+                            exploitable.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>HumanLayer stocke-t-il des données sensibles ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>HumanLayer applique une logique de <strong>minimisation des données</strong> :</p>
+                        <ul>
+                            <li>uniquement les éléments nécessaires à la décision</li>
+                            <li>accès restreint</li>
+                            <li>compartimentation stricte</li>
+                        </ul>
+                        <p>Les modalités exactes dépendent du déploiement (standard / enterprise).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Category: Technique & API -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-bolt" />
+                    </svg>
+                    Technique & API
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Comment s’intègre HumanLayer ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Comme une <strong>API d’infrastructure</strong> :</p>
+                        <ul>
+                            <li>appel synchrone ou asynchrone</li>
+                            <li>webhooks</li>
+                            <li>SDKs (Python, TypeScript)</li>
+                            <li>intégration avec frameworks d’agents</li>
+                        </ul>
+                        <p>Pour un agent IA, HumanLayer est un <strong>outil appelable</strong>.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Que se passe-t-il si aucun Sentinel ne répond à temps ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>HumanLayer gère :</p>
+                        <ul>
+                            <li>les timeouts</li>
+                            <li>les escalades</li>
+                            <li>les fallback</li>
+                            <li>les refus par défaut</li>
+                        </ul>
+                        <p>Le comportement est <strong>configurable par l’organisation</strong>.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Peut-on utiliser uniquement nos propres Sentinels internes ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Oui.</strong> HumanLayer peut fonctionner :</p>
+                        <ul>
+                            <li>avec des Sentinels internes</li>
+                            <li>avec des Sentinels externes</li>
+                            <li>ou un mix des deux</li>
+                        </ul>
+                        <p>HumanLayer reste la <strong>couche d’orchestration et de preuve</strong>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Category: Business & pricing -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-money" />
+                    </svg>
+                    Business & pricing
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Comment est facturé HumanLayer ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>À la décision, pas au temps.</strong></p>
+                        <p>Exemples :</p>
+                        <ul>
+                            <li>validation conformité</li>
+                            <li>jugement expert</li>
+                            <li>autorité habilitée</li>
+                        </ul>
+                        <p>Le pricing reflète : la valeur, le risque couvert, le niveau de responsabilité.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Pourquoi ce modèle est-il rentable ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Parce qu’une décision humaine :</p>
+                        <ul>
+                            <li>évite des risques majeurs</li>
+                            <li>débloque des workflows entiers</li>
+                            <li>remplace des frictions coûteuses</li>
+                        </ul>
+                        <p>C’est une <strong>dépense directement corrélée à la valeur créée</strong>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Category: Vision & éthique -->
+            <div class="faq-category reveal">
+                <h3 class="faq-category-title">
+                    <svg class="hl-icon">
+                        <use href="#icon-sparkle" />
+                    </svg>
+                    Vision & éthique
+                </h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>HumanLayer encourage-t-il une délégation excessive à l’IA ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Non.</strong> HumanLayer fait l’inverse : il force l’IA à reconnaître ses limites.
+                        </p>
+                        <p>HumanLayer définit :</p>
+                        <ul>
+                            <li>quand l’IA peut agir seule</li>
+                            <li>et quand elle doit s’arrêter</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Quel est l’objectif long terme ?</span>
+                        <svg class="faq-chevron">
+                            <use href="#icon-arrow" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Faire de HumanLayer la <strong>couche standard de responsabilité humaine pour systèmes
+                                autonomes</strong>.</p>
+                        <p>À terme :</p>
+                        <ul>
+                            <li>les agents IA sauront quand demander une validation</li>
+                            <li>les organisations pourront automatiser sans perdre le contrôle</li>
+                            <li>la responsabilité restera humaine, mais orchestrée par le logiciel</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Closing statement -->
+            <div class="faq-closing reveal">
+                <div class="glass-card">
+                    <p class="faq-closing-text">
+                        <svg class="hl-icon hl-lg">
+                            <use href="#icon-brain" />
+                        </svg>
+                        <em>HumanLayer n’automatise pas la décision.<br>
+                            <strong>Il automatise la responsabilité humaine autour de l’IA.</strong></em>
+                    </p>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="faq-cta reveal">
+                <p>Prêt à commencer ?</p>
+                <a href="/client/inscription.html" class="btn btn-primary">
+                    <svg class="hl-icon">
+                        <use href="#icon-target" />
+                    </svg>
+                    Commencer
+                </a>
+            </div>
+        </div>
+    </section>
+  </main>
+
+<!-- layout:footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="brand" aria-label="HumanLayer, accueil">
+            <img src="logo-mark.png" width="30" height="30" alt="">
+            <span class="brand-name">Human<span>Layer</span></span>
+          </a>
+          <p>La couche d’autorité décisionnelle pour agents IA.</p>
+          <address>
+            HumanLayer Systems Inc.<br>
+            1250, avenue de la Station, Shawinigan (Québec) G9N&nbsp;8K9<br>
+            <a href="mailto:humanlayer@probalink.com">humanlayer@probalink.com</a>
+          </address>
+        </div>
+        <nav class="footer-cols" aria-label="Pied de page">
+          <div class="footer-col">
+            <h2>Produit</h2>
+            <ul>
+              <li><a href="index.html#arbitrium">Arbitrium</a></li>
+              <li><a href="index.html#solution">Solution</a></li>
+              <li><a href="index.html#usecases">Cas d’usage</a></li>
+              <li><a href="index.html#pricing">Tarifs</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h2>Développeurs</h2>
+            <ul>
+              <li><a href="developers/">Documentation API</a></li>
+              <li><a href="faq-developpeurs.html">FAQ développeurs</a></li>
+              <li><a href="/client/">Espace client</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h2>Réseau</h2>
+            <ul>
+              <li><a href="apply.html">Devenir Sentinel</a></li>
+              <li><a href="/sentinel/">Portail Sentinel</a></li>
+              <li><a href="faq-decideurs.html">FAQ Sentinels</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h2>Entreprise</h2>
+            <ul>
+              <li><a href="faq.html">FAQ</a></li>
+              <li><a href="security.html">Sécurité</a></li>
+              <li><a href="privacy.html">Confidentialité</a></li>
+              <li><a href="terms.html">Conditions</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div class="footer-wordmark" aria-hidden="true">HumanLayer</div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <span>© 2026 HumanLayer Systems Inc. Tous droits réservés.</span>
+        <span>Conçu au Québec · <a href="faq-en.html" lang="en" hreflang="en">English version</a></span>
+        <span class="footer-credit">Propulsé par <a href="https://in6.ai" target="_blank" rel="noopener">in6.ai</a></span>
+      </div>
+    </div>
+  </footer>
+<!-- /layout:footer -->
+    <script src="script.js" defer></script>
+
+</body>
+
+</html>

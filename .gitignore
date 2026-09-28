@@ -1,2 +1,12 @@
 # Local Netlify folder
 .netlify
+
+# Dépendances et secrets locaux
+node_modules/
+.env
+.env.*
+!.env.example
+
+# Archives et fichiers système
+*.zip
+.DS_Store
