@@ -304,7 +304,7 @@
                         <p>HumanLayer:</p>
                         <ul>
                             <li>mobilizes Sentinels at the critical moment</li>
-                            <li>under a guaranteed timeline</li>
+                            <li>within a target time per level (30 min, 2 h or 4 h), tracked and escalated on breach</li>
                             <li>with a structured format</li>
                             <li>and audit-ready evidence</li>
                         </ul>
@@ -390,14 +390,7 @@
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p><strong>Yes.</strong> Each organization defines:</p>
-                        <ul>
-                            <li>the types of authorized decisions</li>
-                            <li>validation levels</li>
-                            <li>escalation rules</li>
-                            <li>auto-rejection cases</li>
-                        </ul>
-                        <p>HumanLayer enforces these policies <strong>by design</strong>.</p>
+                        <p><strong>Partly.</strong> For each request you choose the level (compliance, judgment, signature), the domain and, if needed, the jurisdiction: only an active Sentinel of that domain (and jurisdiction) receives it. Your plan sets which levels your API keys may use. Escalation rules are the same for everyone: reassignment to another Sentinel on SLA breach, at most three times. There are no automatic refusal rules: your agent decides when to ask for a decision.</p>
                     </div>
                 </div>
             </div>
@@ -443,7 +436,7 @@
                         <ul>
                             <li>which AI agent submitted the request</li>
                             <li>what context was provided</li>
-                            <li>who decided</li>
+                            <li>which Sentinel decided (a pseudonymous reference that HumanLayer links to an identified person)</li>
                             <li>when</li>
                             <li>on what basis</li>
                             <li>with what justification</li>
@@ -467,7 +460,7 @@
                             <li>restricted access</li>
                             <li>strict compartmentalization</li>
                         </ul>
-                        <p>Exact modalities depend on the deployment (standard / enterprise).</p>
+                        <p>The same rules apply to every plan, Enterprise included: you choose what you send (summary up to 5,000 characters, context_json up to 50 KB), and each Sentinel only sees requests assigned to them.</p>
                     </div>
                 </div>
             </div>
@@ -491,10 +484,10 @@
                     <div class="faq-answer">
                         <p>As an <strong>infrastructure API</strong>:</p>
                         <ul>
-                            <li>synchronous or asynchronous calls</li>
+                            <li>asynchronous calls: POST /api/v1/decisions, then the decision by webhook or via GET /api/v1/decisions?id=…</li>
                             <li>webhooks</li>
-                            <li>SDKs (Python, TypeScript)</li>
-                            <li>integration with agent frameworks</li>
+                            <li>a plain REST API (x-api-key header), no SDK to install</li>
+                            <li>callable as a tool from any agent framework that can call an HTTP API</li>
                         </ul>
                         <p>For an AI agent, HumanLayer is a <strong>callable tool</strong>.</p>
                     </div>
@@ -508,14 +501,8 @@
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p>HumanLayer handles:</p>
-                        <ul>
-                            <li>timeouts</li>
-                            <li>escalations</li>
-                            <li>fallbacks</li>
-                            <li>default rejections</li>
-                        </ul>
-                        <p>Behavior is <strong>configurable by the organization</strong>.</p>
+                        <p>Past the level’s SLA, HumanLayer sends a signed sla.breached webhook (once, if you set callback_url) and reassigns the request to another qualified Sentinel, up to three times.</p>
+                        <p>No decision is ever made by default: the request stays open until a Sentinel decides. You can lengthen a request’s SLA (sla_minutes, 7 days max), never shorten it.</p>
                     </div>
                 </div>
 
@@ -527,12 +514,7 @@
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p><strong>Yes.</strong> HumanLayer can work:</p>
-                        <ul>
-                            <li>with internal Sentinels</li>
-                            <li>with external Sentinels</li>
-                            <li>or a mix of both</li>
-                        </ul>
+                        <p><strong>Not at this time.</strong> Requests go to HumanLayer’s Sentinel network, by domain and jurisdiction. Reserving Sentinels for your organization (your in-house experts, for instance) is not available today: contact us if you need it.</p>
                         <p>HumanLayer remains the <strong>orchestration and evidence layer</strong>.</p>
                     </div>
                 </div>
@@ -603,10 +585,10 @@
                     </button>
                     <div class="faq-answer">
                         <p><strong>No.</strong> HumanLayer does the opposite: it forces AI to recognize its limits.</p>
-                        <p>HumanLayer defines:</p>
+                        <p>You define, in your agent:</p>
                         <ul>
                             <li>when AI can act on its own</li>
-                            <li>and when it must stop</li>
+                            <li>and when it must stop and call HumanLayer</li>
                         </ul>
                     </div>
                 </div>
@@ -646,8 +628,8 @@
 
             <!-- CTA -->
             <div class="faq-cta reveal">
-                <p>A question not covered here?</p>
-                <a href="/client/inscription.html" class="btn btn-primary">
+                <p>Ready to get started?</p>
+                <a href="/client/registration.html" class="btn btn-primary">
                     <svg class="hl-icon">
                         <use href="#icon-target" />
                     </svg>

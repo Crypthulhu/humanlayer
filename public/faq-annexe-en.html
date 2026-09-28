@@ -225,8 +225,8 @@
                     <h2>5. Governance and control</h2>
 
                     <h3>5.1 Decision policies</h3>
-                    <p>HumanLayer provides technical means allowing the Client Organization to apply its own decision policies.</p>
-                    <p>HumanLayer does not define, interpret, or evaluate these policies.</p>
+                    <p>HumanLayer lets the Client Organization choose, for each request, the Decision level, the domain of expertise, the jurisdiction and, where relevant, an extended deadline; the rules that trigger requests are the responsibility of the Client Organization and its AI Agents.</p>
+                    <p>HumanLayer does not define, interpret, or evaluate the Client Organization's decision policies.</p>
 
                     <h3>5.2 Human Decision-Maker verification</h3>
                     <p>The verification mechanisms implemented by HumanLayer are intended solely to check the declarative existence of qualifications or authorizations communicated by Human Decision-Makers.</p>
@@ -240,8 +240,8 @@
                     <h3>5.3 Deactivation and control</h3>
                     <p>The Client Organization may at any time:</p>
                     <ul>
-                        <li>restrict certain categories of Decisions,</li>
-                        <li>suspend API calls,</li>
+                        <li>revoke one or more API keys from its client portal, which immediately blocks the related calls,</li>
+                        <li>ask HumanLayer to suspend a key or change plan,</li>
                         <li>disable HumanLayer services entirely.</li>
                     </ul>
                 </div>
@@ -254,8 +254,8 @@
                     <p>A Decision error does not engage HumanLayer's liability as long as the Decision was rendered by an identified Human Decision-Maker based on traceable Decision Context.</p>
 
                     <h3>6.2 Erroneous or incomplete context</h3>
-                    <p>HumanLayer keeps a faithful trace of the Decision Context as transmitted by the AI Agent.</p>
-                    <p>It is up to the Human Decision-Maker to accept, refuse, or request additional information.</p>
+                    <p>HumanLayer keeps a faithful trace of the Decision Context as received (summary capped at 5,000 characters, context_json at 50 KB).</p>
+                    <p>It is up to the Human Decision-Maker to approve, reject — in particular for insufficient context — or escalate the request to another Human Decision-Maker.</p>
 
                     <h3>6.3 Decision SLAs</h3>
                     <p>Decision SLAs constitute obligations of means, not result.</p>
@@ -266,7 +266,7 @@
 
                 <!-- Section 7 -->
                 <div class="legal-section">
-                    <h2>7. Ethics et exclusions d'usage</h2>
+                    <h2>7. Ethics and usage exclusions</h2>
 
                     <h3>7.1 Prohibited uses</h3>
                     <p>Use of HumanLayer is strictly prohibited for any Decision aiming in particular to:
@@ -305,7 +305,7 @@
                     <p>HumanLayer is designed to enable effective human oversight in accordance with applicable regulations for automated systems and AI.</p>
 
                     <h3>9.2 Jurisdictions</h3>
-                    <p>Each Decision is rendered by a Human Decision-Maker declaring they are authorized to act in the applicable jurisdiction, under the exclusive responsibility of the Human Decision-Maker and the Client Organization.</p>
+                    <p>When the Client Organization states a jurisdiction in its request, the Decision is rendered by a Human Decision-Maker declaring they are authorized to act in that jurisdiction, under the exclusive responsibility of the Human Decision-Maker and the Client Organization.</p>
                 </div>
 
                 <!-- Section 10 -->

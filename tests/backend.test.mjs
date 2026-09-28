@@ -24,6 +24,7 @@ import sentinelLogin from '../netlify/functions/sentinel-login.mjs';
 import sentinelTotp from '../netlify/functions/sentinel-totp.mjs';
 import sentinelProfile from '../netlify/functions/sentinel-profile.mjs';
 import decisionKey from '../netlify/functions/decision-key.mjs';
+import { purgeTechnicalData } from '../netlify/lib/retention.mjs';
 
 const ADMIN_PASSWORD = 'correct horse battery staple';
 let conn;
@@ -412,4 +413,33 @@ test('webhooks : URL de rappel filtrée et signature HMAC vérifiable', async ()
   const body = JSON.stringify({ type: 'decision.completed' });
   const expected = crypto.createHmac('sha256', a).update(`1700000000.${body}`).digest('hex');
   assert.equal(signWebhook(a, 1700000000, body), expected);
+});
+
+test('conservation : adresses IP effacées après 12 mois, compteurs expirés supprimés', async () => {
+  const old = new Date(Date.now() - 400 * 24 * 3600 * 1000).toISOString();
+  const recent = new Date(Date.now() - 30 * 24 * 3600 * 1000).toISOString();
+  const nowSec = Math.floor(Date.now() / 1000);
+  await conn.batch([
+    { sql: "INSERT INTO audit_log (id, created_at, actor_type, action, ip) VALUES ('audit-old', ?, 'system', 'test', '203.0.113.200')", args: [old] },
+    { sql: "INSERT INTO audit_log (id, created_at, actor_type, action, ip) VALUES ('audit-new', ?, 'system', 'test', '203.0.113.201')", args: [recent] },
+    { sql: "INSERT INTO decisions (id, request_id, sentinel_id, verdict, reasoning, signed_at, ip_address) VALUES ('dec-old', 'req-old', 's', 'escalated', 'x', ?, '203.0.113.202')", args: [old] },
+    { sql: "INSERT INTO decisions (id, request_id, sentinel_id, verdict, reasoning, signed_at, ip_address) VALUES ('dec-new', 'req-new', 's', 'escalated', 'x', ?, '203.0.113.203')", args: [recent] },
+    { sql: "INSERT INTO rate_limits (key, window_start, count) VALUES ('login:client:fail:old@corp.test', ?, 3)", args: [nowSec - 2 * 86400] },
+    { sql: "INSERT INTO rate_limits (key, window_start, count) VALUES ('login:client:fail:new@corp.test', ?, 1)", args: [nowSec - 60] },
+    { sql: "INSERT INTO rate_limits (key, window_start, count) VALUES ('admin:totp:last_step', ?, 0) ON CONFLICT(key) DO NOTHING", args: [currentStep() - 10] },
+  ], 'write');
+
+  const stats = await purgeTechnicalData(conn);
+  assert.ok(stats.audit_ips >= 1 && stats.decision_ips >= 1 && stats.counters >= 1, JSON.stringify(stats));
+  const ip = async (sql, id) => (await conn.execute({ sql, args: [id] })).rows[0];
+  assert.equal((await ip('SELECT ip FROM audit_log WHERE id = ?', 'audit-old')).ip, null);
+  assert.equal((await ip('SELECT ip FROM audit_log WHERE id = ?', 'audit-new')).ip, '203.0.113.201');
+  assert.equal((await ip('SELECT ip_address FROM decisions WHERE id = ?', 'dec-old')).ip_address, null);
+  assert.equal((await ip('SELECT ip_address FROM decisions WHERE id = ?', 'dec-new')).ip_address, '203.0.113.203');
+  // L'entrée du journal et la décision restent : seule l'adresse disparaît.
+  assert.ok(await ip('SELECT id FROM audit_log WHERE id = ?', 'audit-old'));
+  const keys = (await conn.execute("SELECT key FROM rate_limits WHERE key LIKE 'login:client:fail:%' OR key = 'admin:totp:last_step'")).rows.map((r) => r.key);
+  assert.ok(!keys.includes('login:client:fail:old@corp.test'));
+  assert.ok(keys.includes('login:client:fail:new@corp.test'));
+  assert.ok(keys.includes('admin:totp:last_step'));
 });

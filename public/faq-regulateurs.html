@@ -320,7 +320,7 @@
                             <li>exports de décisions</li>
                             <li>journaux d’accès</li>
                             <li>règles de gouvernance</li>
-                            <li>politiques appliquées</li>
+                            <li>règles de routage et d’escalade appliquées</li>
                         </ul>
                         <p class="faq-highlight">Les modalités sont définies contractuellement avec les clients.</p>
                     </div>
@@ -346,12 +346,11 @@
                     <div class="faq-answer">
                         <p>HumanLayer :</p>
                         <ul>
-                            <li>identifie la juridiction applicable à chaque décision</li>
-                            <li>restreint l’accès aux Sentinels habilités localement</li>
-                            <li>adapte les règles selon le cadre légal</li>
+                            <li>enregistre la juridiction que vous indiquez dans chaque demande (champ <code>jurisdiction</code>)</li>
+                            <li>ne confie alors la demande qu’à un Sentinel ayant déclaré cette juridiction ; à défaut, elle reste en attente plutôt que d’être confiée hors juridiction</li>
+                            <li>n’applique aucun filtre de juridiction si vous n’en indiquez pas</li>
                         </ul>
-                        <p class="faq-highlight">👉 Une décision est toujours rendue dans un cadre juridictionnel
-                            valide.</p>
+                        <p class="faq-highlight">👉 Indiquez toujours la juridiction lorsque le cadre légal l’exige.</p>
                     </div>
                 </div>
             </div>
@@ -373,7 +372,7 @@
             <!-- CTA -->
             <div class="faq-cta reveal">
                 <p>Questions sur la conformité ?</p>
-                <a href="/client/inscription.html" class="btn btn-primary">
+                <a href="contact.html" class="btn btn-primary">
                     <svg class="hl-icon">
                         <use href="#icon-scale" />
                     </svg>

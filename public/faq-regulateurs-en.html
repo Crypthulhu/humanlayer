@@ -313,13 +313,13 @@
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p><strong>Oui.</strong></p>
+                        <p><strong>Yes.</strong></p>
                         <p>HumanLayer can provide:</p>
                         <ul>
                             <li>decision exports</li>
                             <li>access logs</li>
                             <li>governance rules</li>
-                            <li>applied policies</li>
+                            <li>routing and escalation rules applied</li>
                         </ul>
                         <p class="faq-highlight">Terms are defined contractually with clients.</p>
                     </div>
@@ -345,11 +345,11 @@
                     <div class="faq-answer">
                         <p>HumanLayer:</p>
                         <ul>
-                            <li>identifies the applicable jurisdiction for each decision</li>
-                            <li>restricts access to locally authorized Sentinels</li>
-                            <li>adapts rules to the legal framework</li>
+                            <li>records the jurisdiction you state in each request (<code>jurisdiction</code> field)</li>
+                            <li>then only assigns it to a Sentinel who declared that jurisdiction; otherwise the request waits rather than going outside the jurisdiction</li>
+                            <li>applies no jurisdiction filter if you don’t state one</li>
                         </ul>
-                        <p class="faq-highlight">👉 A decision is always rendered within a valid jurisdictional framework.</p>
+                        <p class="faq-highlight">👉 Always state the jurisdiction when the legal framework requires it.</p>
                     </div>
                 </div>
             </div>
@@ -371,7 +371,7 @@
             <!-- CTA -->
             <div class="faq-cta reveal">
                 <p>Questions about compliance?</p>
-                <a href="/client/inscription.html" class="btn btn-primary">
+                <a href="contact-en.html" class="btn btn-primary">
                     <svg class="hl-icon">
                         <use href="#icon-scale" />
                     </svg>

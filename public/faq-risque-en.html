@@ -228,7 +228,7 @@
                         <ul>
                             <li>never decides</li>
                             <li>never modifies the decision</li>
-                            <li>never hides the Sentinel's identity</li>
+                            <li>always keeps the link between the decision and the Sentinel’s identity (the client sees a pseudonymous reference)</li>
                         </ul>
                         <p class="faq-highlight">👉 HumanLayer provides the evidence, not the decision.</p>
                     </div>
@@ -255,15 +255,14 @@
                         <p>HumanLayer implements several safeguards:</p>
                         <ul>
                             <li>strict scope of authorized decisions</li>
-                            <li>full logging of all actions</li>
-                            <li>anomaly detection (atypical decision patterns)</li>
+                            <li>logging of sensitive actions (logins, decisions, API keys, exports)</li>
                             <li>possibility of immediate suspension</li>
                         </ul>
                         <p>Client organizations can:</p>
                         <ul>
-                            <li>exclude a Sentinel</li>
+                            <li>report a Sentinel to HumanLayer, which can suspend them</li>
                             <li>require a second opinion</li>
-                            <li>trigger a targeted audit</li>
+                            <li>export their signed decisions and ask HumanLayer for a targeted audit</li>
                         </ul>
                         <p class="faq-highlight">👉 Abuse is more visible, not less.</p>
                     </div>
@@ -289,14 +288,14 @@
                     <div class="faq-answer">
                         <p>HumanLayer:</p>
                         <ul>
-                            <li>logs exactly the context provided by the AI</li>
+                            <li>records the context as received (summary capped at 5,000 characters, context_json at 50 KB)</li>
                             <li>timestamps the information</li>
-                            <li>keeps versions</li>
+                            <li>makes it read-only once submitted</li>
                         </ul>
                         <p>The Sentinel:</p>
                         <ul>
                             <li>decides based on that context</li>
-                            <li>can refuse or request more information</li>
+                            <li>can reject with a justification (e.g., insufficient context) or escalate to another Sentinel</li>
                         </ul>
                         <p class="faq-highlight">👉 In case of incident, it's always possible to determine:</p>
                         <ul>
@@ -332,8 +331,7 @@
                             <li>uses intended to circumvent regulations</li>
                             <li>requests outside the defined scope</li>
                         </ul>
-                        <p>Automatic rejection rules can be configured.<br>
-                            Certain categories of decisions are excluded by design.</p>
+                        <p>The API rejects requests outside your plan or outside supported domains; unlawful uses are excluded by contract, and HumanLayer can suspend an API key.</p>
                     </div>
                 </div>
             </div>
@@ -412,32 +410,26 @@
                 </div>
             </div>
 
-            <!-- Real-time blocking -->
+            <!-- Blocking an action -->
             <div class="faq-category reveal">
                 <h3 class="faq-category-title">
                     <svg class="hl-icon">
                         <use href="#icon-stop" />
                     </svg>
-                    Real-time blocking
+                    Blocking an action
                 </h3>
 
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span>Can a dangerous decision be blocked in real time?</span>
+                        <span>Can a dangerous action be stopped?</span>
                         <svg class="faq-chevron">
                             <use href="#icon-arrow" />
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p><strong>Yes.</strong></p>
-                        <p>Organizations can define:</p>
-                        <ul>
-                            <li>risk thresholds</li>
-                            <li>automatic rejection rules</li>
-                            <li>mandatory escalations</li>
-                            <li>multi-signature validations</li>
-                        </ul>
-                        <p class="faq-highlight">👉 A decision cannot slip through unnoticed.</p>
+                        <p><strong>Yes, if your agent waits for the decision.</strong></p>
+                        <p>HumanLayer never approves anything automatically: until a Sentinel has rendered an <code>approved</code> decision, justified and signed, your agent should not act. If in doubt, request a second opinion (<code>second_opinion_of</code>). Risk thresholds, automatic rejection rules, mandatory escalations and multi-signature validations are not available.</p>
+                        <p class="faq-highlight">👉 No approval without a signed human decision.</p>
                     </div>
                 </div>
             </div>
@@ -459,7 +451,7 @@
             <!-- CTA -->
             <div class="faq-cta reveal">
                 <p>Questions about security?</p>
-                <a href="/client/inscription.html" class="btn btn-primary">
+                <a href="contact-en.html" class="btn btn-primary">
                     <svg class="hl-icon">
                         <use href="#icon-shield" />
                     </svg>

@@ -229,7 +229,7 @@
                         <ul>
                             <li>ne décide jamais</li>
                             <li>ne modifie jamais la décision</li>
-                            <li>ne masque jamais l’identité Sentinel</li>
+                            <li>conserve toujours le lien entre la décision et l’identité du Sentinel (le client voit une référence pseudonyme)</li>
                         </ul>
                         <p class="faq-highlight">👉 HumanLayer fournit la preuve, pas la décision.</p>
                     </div>
@@ -256,15 +256,14 @@
                         <p>HumanLayer met en place plusieurs garde-fous :</p>
                         <ul>
                             <li>périmètre strict des décisions autorisées</li>
-                            <li>journalisation complète de toutes les actions</li>
-                            <li>détection d’anomalies (patterns de décisions atypiques)</li>
+                            <li>journalisation des actions sensibles (connexions, décisions, clés d’API, exports)</li>
                             <li>possibilité de suspension immédiate</li>
                         </ul>
                         <p>Les organisations clientes peuvent :</p>
                         <ul>
-                            <li>exclure un Sentinel</li>
+                            <li>signaler un Sentinel à HumanLayer, qui peut le suspendre</li>
                             <li>exiger un second avis</li>
-                            <li>déclencher un audit ciblé</li>
+                            <li>exporter leurs décisions signées et demander un audit ciblé à HumanLayer</li>
                         </ul>
                         <p class="faq-highlight">👉 L’abus est plus visible, pas moins.</p>
                     </div>
@@ -290,14 +289,14 @@
                     <div class="faq-answer">
                         <p>HumanLayer :</p>
                         <ul>
-                            <li>trace exactement le contexte fourni par l’IA</li>
+                            <li>enregistre le contexte tel que reçu (résumé limité à 5 000 caractères, context_json à 50 Ko)</li>
                             <li>horodate les informations</li>
-                            <li>conserve les versions</li>
+                            <li>le rend non modifiable après envoi</li>
                         </ul>
                         <p>Le Sentinel :</p>
                         <ul>
                             <li>décide sur la base de ce contexte</li>
-                            <li>peut refuser ou demander plus d’informations</li>
+                            <li>peut rejeter en motivant (contexte insuffisant, par exemple) ou escalader vers un autre Sentinel</li>
                         </ul>
                         <p class="faq-highlight">👉 En cas d’incident, il est toujours possible de déterminer :</p>
                         <ul>
@@ -333,8 +332,7 @@
                             <li>les usages visant à contourner une réglementation</li>
                             <li>les demandes hors périmètre défini</li>
                         </ul>
-                        <p>Des règles de refus automatique peuvent être configurées.<br>
-                            Certaines catégories de décisions sont exclues par design.</p>
+                        <p>L’API refuse les demandes hors de votre forfait ou hors des domaines pris en charge ; les usages illicites sont exclus par contrat, et HumanLayer peut suspendre une clé d’API.</p>
                     </div>
                 </div>
             </div>
@@ -357,9 +355,9 @@
                     </button>
                     <div class="faq-answer">
                         <ul>
-                            <li><strong>La décision</strong> : le Sentinel</li>
-                            <li><strong>Le cadre d’utilisation</strong> : l’organisation cliente</li>
-                            <li><strong>L’orchestration et la traçabilité</strong> : HumanLayer</li>
+                            <li><strong>La décision</strong> : le Sentinel</li>
+                            <li><strong>Le cadre d’utilisation</strong> : l’organisation cliente</li>
+                            <li><strong>L’orchestration et la traçabilité</strong> : HumanLayer</li>
                         </ul>
                         <p class="faq-highlight">Cette séparation claire est essentielle et contractuelle.</p>
                     </div>
@@ -413,32 +411,26 @@
                 </div>
             </div>
 
-            <!-- Blocage en temps réel -->
+            <!-- Blocage d’une action -->
             <div class="faq-category reveal">
                 <h3 class="faq-category-title">
                     <svg class="hl-icon">
                         <use href="#icon-stop" />
                     </svg>
-                    Blocage en temps réel
+                    Blocage d’une action
                 </h3>
 
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span>Peut-on bloquer une décision dangereuse en temps réel ?</span>
+                        <span>Peut-on empêcher une action dangereuse de passer ?</span>
                         <svg class="faq-chevron">
                             <use href="#icon-arrow" />
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p><strong>Oui.</strong></p>
-                        <p>Les organisations peuvent définir :</p>
-                        <ul>
-                            <li>des seuils de risque</li>
-                            <li>des règles de refus automatique</li>
-                            <li>des escalades obligatoires</li>
-                            <li>des validations multi-signatures</li>
-                        </ul>
-                        <p class="faq-highlight">👉 Une décision ne peut pas "passer en douce".</p>
+                        <p><strong>Oui, si votre agent attend la décision.</strong></p>
+                        <p>HumanLayer n’approuve jamais rien automatiquement : tant qu’un Sentinel n’a pas rendu une décision <code>approved</code>, justifiée et signée, votre agent ne doit pas agir. En cas de doute, demandez un second avis (<code>second_opinion_of</code>). Seuils de risque, règles de refus automatique, escalades obligatoires et validations multi-signatures ne sont pas proposés.</p>
+                        <p class="faq-highlight">👉 Aucune approbation sans décision humaine signée.</p>
                     </div>
                 </div>
             </div>
@@ -460,7 +452,7 @@
             <!-- CTA -->
             <div class="faq-cta reveal">
                 <p>Des questions sur la sécurité ?</p>
-                <a href="/client/inscription.html" class="btn btn-primary">
+                <a href="contact.html" class="btn btn-primary">
                     <svg class="hl-icon">
                         <use href="#icon-shield" />
                     </svg>

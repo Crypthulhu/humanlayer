@@ -266,7 +266,7 @@
                         <ul>
                             <li>examiner un dossier préparé par une IA</li>
                             <li>rendre une décision selon votre expertise et vos habilitations</li>
-                            <li>documenter votre raisonnement de façon structurée</li>
+                            <li>justifier votre décision par écrit (justification obligatoire)</li>
                         </ul>
                         <p>Vous êtes :</p>
                         <ul>
@@ -331,11 +331,11 @@
                         </ul>
                         <p><strong>Niveau 3 — Autorité habilitée</strong></p>
                         <ul>
-                            <li>signatures qualifiées</li>
+                            <li>approbations formelles relevant de votre habilitation</li>
                             <li>décisions réglementées</li>
                             <li>actes engageants légalement</li>
                         </ul>
-                        <p class="faq-highlight">Vous ne serez jamais sollicité au-delà de vos habilitations.</p>
+                        <p class="faq-highlight">Les demandes vous sont confiées selon votre domaine d’expertise et, lorsqu’elle est précisée, la juridiction. Si une demande dépasse vos habilitations, escaladez-la en justifiant votre choix : elle sera confiée à un autre Sentinel.</p>
                     </div>
                 </div>
             </div>
@@ -358,19 +358,14 @@
                     </button>
                     <div class="faq-answer">
                         <p><strong>💰 Partage de revenus, par décision</strong></p>
-                        <p>Vous êtes rémunéré par décision validée, pas à l’heure.</p>
+                        <p>Vous êtes rémunéré pour chaque décision rendue (approbation ou rejet motivé), pas à l’heure.</p>
                         <p>Exemple indicatif :</p>
                         <ul>
                             <li>décision de conformité : 10 à 12 €</li>
                             <li>jugement expert : 50 à 60 €</li>
                             <li>autorité habilitée : 125 à 150 €</li>
                         </ul>
-                        <p>Le montant dépend :</p>
-                        <ul>
-                            <li>du niveau de responsabilité</li>
-                            <li>de la complexité</li>
-                            <li>du SLA</li>
-                        </ul>
+                        <p>Le montant dépend du niveau de la décision (fourchettes ci-dessus).</p>
                         <p class="faq-highlight">👉 Vous êtes payé pour votre responsabilité, pas pour votre
                             disponibilité passive.</p>
                     </div>
@@ -386,12 +381,7 @@
                     <div class="faq-answer">
                         <p>L’organisation cliente paie HumanLayer pour la décision.</p>
                         <p>HumanLayer reverse au Sentinel jusqu’à 60 % du prix de la décision ; le reste finance la vérification des habilitations, l’orchestration des SLA, la traçabilité et la plateforme.</p>
-                        <p>Le pourcentage dépend :</p>
-                        <ul>
-                            <li>du niveau de décision</li>
-                            <li>de votre qualification</li>
-                            <li>du SLA accepté</li>
-                        </ul>
+                        <p>Le pourcentage dépend du niveau de décision et ne dépasse jamais 60 %.</p>
                         <p class="faq-highlight">Le modèle est transparent et contractuel.</p>
                     </div>
                 </div>
@@ -421,12 +411,13 @@
                             <li>ciblées</li>
                             <li>à forte valeur</li>
                         </ul>
-                        <p>Vous choisissez :</p>
+                        <p>À la candidature, vous indiquez :</p>
                         <ul>
-                            <li>vos plages de disponibilité</li>
-                            <li>les types de décisions acceptées</li>
-                            <li>les SLA que vous êtes prêt à assurer</li>
+                            <li>votre domaine d’expertise</li>
+                            <li>vos juridictions</li>
+                            <li>votre capacité (interventions ponctuelles, régulières mais limitées, soutenues ou prioritaires)</li>
                         </ul>
+                        <p>Les demandes vous sont ensuite assignées automatiquement, au Sentinel le moins chargé d’abord ; le délai dépend du niveau (30 min, 2 h ou 4 h). Une demande que vous ne pouvez pas traiter peut être escaladée.</p>
                         <p class="faq-highlight">👉 Aucune exclusivité imposée.</p>
                     </div>
                 </div>
@@ -502,12 +493,11 @@
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p><strong>Oui, à tout moment.</strong></p>
+                        <p><strong>Oui, tant que la demande vous est assignée.</strong></p>
                         <p>Vous pouvez :</p>
                         <ul>
-                            <li>refuser un dossier</li>
-                            <li>demander une escalade</li>
-                            <li>décliner hors périmètre</li>
+                            <li>la rejeter : c’est une décision sur le fond, motivée et transmise au client</li>
+                            <li>l’escalader en justifiant votre choix (hors périmètre, conflit d’intérêts) : elle est alors confiée à un autre Sentinel</li>
                         </ul>
                         <p class="faq-highlight">Aucune pénalité pour refus justifié.</p>
                     </div>
@@ -531,14 +521,9 @@
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p><strong>Oui, mais pas comme dans une marketplace.</strong></p>
-                        <p>Les critères portent sur :</p>
-                        <ul>
-                            <li>respect des SLA</li>
-                            <li>clarté de la justification</li>
-                            <li>cohérence décisionnelle</li>
-                        </ul>
-                        <p class="faq-highlight">👉 Jamais sur le sens de la décision.</p>
+                        <p><strong>Pas comme dans une marketplace.</strong></p>
+                        <p>Votre candidature reçoit un score initial, calculé à partir des informations déclarées (expérience, habilitation, qualifications, capacité) ; à charge égale, il départage les Sentinels d’un même domaine lors de l’assignation. Les dépassements de délai sont horodatés dans le journal.</p>
+                        <p class="faq-highlight">👉 Le sens de vos décisions n’entre jamais dans ce score.</p>
                     </div>
                 </div>
             </div>
@@ -565,7 +550,7 @@
                             <li>Vérification d’identité</li>
                             <li>Vérification des qualifications</li>
                             <li>Entretien (selon niveau)</li>
-                            <li>Définition des périmètres et SLA</li>
+                            <li>Activation du compte : domaine, juridictions, double authentification obligatoire</li>
                         </ul>
                         <p>L’objectif est :</p>
                         <ul>
@@ -590,8 +575,7 @@
                             <li>l’identification claire</li>
                             <li>la responsabilité assumée</li>
                         </ul>
-                        <p class="faq-highlight">Votre identité est visible aux parties concernées, dans le respect du
-                            cadre contractuel.</p>
+                        <p class="faq-highlight">Vous êtes pseudonymisé : le client voit une référence stable (S-XXXXXX) jointe à chaque décision signée ; HumanLayer conserve le lien avec votre identité, communicable aux parties habilitées dans le respect du cadre contractuel.</p>
                     </div>
                 </div>
             </div>

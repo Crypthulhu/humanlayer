@@ -734,7 +734,7 @@
             <h3 style="font-size: 1.05rem; margin: 0 0 8px;">Activez la double authentification</h3>
             <p style="font-size: 0.88rem; color: var(--text-secondary); margin: 0 0 14px;">Elle est obligatoire pour tous les Sentinels. Scannez ce code avec votre application d’authentification (Google Authenticator, 1Password, Authy…), puis saisissez le code à 6 chiffres affiché.</p>
             <div id="enrollQr" style="width: 200px; margin: 0 auto 12px; padding: 10px; background: #fff; border-radius: 10px; border: 1px solid var(--border);"></div>
-            <p style="font-size: 0.8rem; color: var(--text-muted); text-align: center; margin: 0 0 14px;">Saisie manuelle : <code id="enrollSecret" style="word-break: break-all;"></code><br><a id="enrollLink" href="#" style="color: var(--primary);">Ouvrir dans l’application</a></p>
+            <p style="font-size: 0.8rem; color: var(--text-muted); text-align: center; margin: 0 0 14px;">Saisie manuelle : <code id="enrollSecret" style="word-break: break-all;"></code><br><a id="enrollLink" href="#" style="color: var(--primary);">Ouvrir dans l’application</a></p>
             <form class="login-form" onsubmit="confirmEnrollment(event)">
                 <input type="text" id="enrollCode" placeholder="Code à 6 chiffres" maxlength="6" pattern="[0-9]{6}" inputmode="numeric" autocomplete="one-time-code" required style="text-align:center; letter-spacing:0.3em; font-size:1.1rem;">
                 <button type="submit" class="btn btn-primary" style="justify-content: center;">Activer et continuer</button>
@@ -768,7 +768,7 @@
                 <div class="stat-value" id="statApproved">–</div>
             </div>
             <div class="stat-card stat-rate">
-                <div class="stat-label">Taux d'approbation</div>
+                <div class="stat-label">Taux d’approbation</div>
                 <div class="stat-value" id="statRate">–</div>
             </div>
         </div>

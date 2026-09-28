@@ -279,7 +279,7 @@
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p><strong>Yes, natively.</strong></p>
+                        <p><strong>Yes.</strong></p>
                         <p>HumanLayer is designed to:</p>
                         <ul>
                             <li>be called as a tool</li>
@@ -288,7 +288,8 @@
                         </ul>
                         <p>Mental model:</p>
                         <pre class="faq-code">if confidence < threshold or risk == "high":
-    decision = humanlayer.request(...)</pre>
+    r = requests.post(API, headers={"x-api-key": KEY}, json=case)
+    # then a signed webhook, or GET /api/v1/decisions?id=…</pre>
                     </div>
                 </div>
             </div>
@@ -310,11 +311,10 @@
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p><strong>Both.</strong></p>
-                        <p><strong>Async (recommended)</strong><br>You create a decision request, continue your workflow, and listen to webhooks.</p>
-                        <p><strong>Sync (blocking)</strong><br>Possible for fast decisions with a short SLA.
-                        </p>
-                        <p>In all cases, delays are explicitly declared and contractual.</p>
+                        <p><strong>Asynchronous.</strong></p>
+                        <p>You create a request (POST /api/v1/decisions): the response is immediate (request_id, status, sla_minutes, expires_at) and your workflow continues. The decision then reaches you by signed webhook; you can also fetch it via GET /api/v1/decisions?id=…</p>
+                        <p>No blocking mode: the shortest SLA is 30 min (compliance level).</p>
+                        <p>Each request's deadline is stated as soon as it is created (sla_minutes, expires_at).</p>
                     </div>
                 </div>
 
@@ -328,16 +328,12 @@
                     <div class="faq-answer">
                         <p>A decision is a <strong>structured object</strong>, with:</p>
                         <ul>
-                            <li>a type (<code>compliance_check</code>, <code>expert_judgment</code>,
-                                <code>authorized_decision</code>)
-                            </li>
-                            <li>a level (1, 2, or 3)</li>
-                            <li>context provided by AI</li>
-                            <li>a status (<code>pending</code>, <code>approved</code>, <code>rejected</code>,
-                                <code>escalated</code>, <code>timeout</code>)
-                            </li>
-                            <li>a human justification</li>
-                            <li>audit metadata</li>
+                            <li>a type (<code>request_type</code>: <code>compliance</code>, <code>judgment</code> or <code>signature</code>)</li>
+                            <li>a level (<code>level</code>: 1, 2 or 3)</li>
+                            <li>the context provided by the agent (<code>summary</code>, <code>context_json</code>)</li>
+                            <li>a status (<code>pending</code>, <code>assigned</code>, <code>decided</code>, <code>sla_breached</code>) and the latest decision (<code>verdict</code>: <code>approved</code>, <code>rejected</code> or <code>escalated</code>)</li>
+                            <li>the Sentinel’s justification (<code>reasoning</code>)</li>
+                            <li>an Ed25519 signature (<code>signature</code>, <code>signed_payload</code>, <code>key_id</code>) and timestamps</li>
                         </ul>
                         <p class="faq-highlight">👉 This is not free text. It's an artifact a system can use.</p>
                     </div>
@@ -363,7 +359,7 @@
                     <div class="faq-answer">
                         <p>Only:</p>
                         <ul>
-                            <li>the strictly necessary context</li>
+                            <li>the summary and context your agent sent: it is up to you to include only what is needed</li>
                             <li>the AI-prepared elements</li>
                             <li>the required fields to decide</li>
                         </ul>
@@ -380,14 +376,8 @@
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p><strong>Yes.</strong></p>
-                        <p>HumanLayer can work with:</p>
-                        <ul>
-                            <li>internal Sentinels</li>
-                            <li>external Sentinels</li>
-                            <li>or a mix of both</li>
-                        </ul>
-                        <p>In all cases, HumanLayer remains:</p>
+                        <p><strong>Not at this time.</strong> Requests go to HumanLayer’s Sentinel network, by domain and jurisdiction; reserving Sentinels for your organization is not available today.</p>
+                        <p>HumanLayer remains:</p>
                         <ul>
                             <li>the orchestration layer</li>
                             <li>the source of truth</li>
@@ -414,15 +404,8 @@
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p>HumanLayer handles:</p>
-                        <ul>
-                            <li>timeouts</li>
-                            <li>automatic escalations</li>
-                            <li>default rejections</li>
-                            <li>configurable fallbacks</li>
-                        </ul>
-                        <p>Behavior is <strong>deterministic and configurable</strong>.</p>
-                        <p class="faq-highlight">Your code never stays blocked indefinitely.</p>
+                        <p>Past the SLA, a signed sla.breached webhook is sent (once) and the request is automatically reassigned to another qualified Sentinel, up to three times. No decision is ever made by default, and nothing is configurable apart from a longer SLA (sla_minutes).</p>
+                        <p class="faq-highlight">Since the API is asynchronous, your code never waits: your agent decides what to do while no decision has been rendered.</p>
                     </div>
                 </div>
 
@@ -434,14 +417,7 @@
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p><strong>Yes.</strong></p>
-                        <p>You can define:</p>
-                        <ul>
-                            <li>binary decisions</li>
-                            <li>conditional decisions</li>
-                            <li>decisions with required fields</li>
-                            <li>decisions with thresholds</li>
-                        </ul>
+                        <p><strong>Yes, always.</strong> Every final decision is binary: <code>approved</code> or <code>rejected</code>, with a mandatory written justification (at least 10 characters), and signed. The Sentinel can also escalate the request to another Sentinel. Conditional decisions, custom response fields and thresholds are not available: state your criteria in <code>summary</code> or <code>context_json</code>.</p>
                         <p class="faq-highlight">HumanLayer does not allow ambiguous decisions.</p>
                     </div>
                 </div>
@@ -454,14 +430,7 @@
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p><strong>Yes.</strong></p>
-                        <p>Natively:</p>
-                        <ul>
-                            <li>escalade automatique</li>
-                            <li>second Sentinel</li>
-                            <li>multi-signature validation</li>
-                            <li>quorum (enterprise configuration)</li>
-                        </ul>
+                        <p><strong>Yes.</strong> Send a new request with <code>second_opinion_of</code> (the decided request’s ID): another Sentinel, who never handled the case and does not see the first verdict, renders their own signed decision. One second opinion per request, billed as a new decision at the same level. The assigned Sentinel can also escalate the case on their own. Multi-signature validation and quorum are not available.</p>
                     </div>
                 </div>
             </div>
@@ -484,7 +453,7 @@
                     </button>
                     <div class="faq-answer">
                         <p><strong>No. Never.</strong></p>
-                        <p>HumanLayer :</p>
+                        <p>HumanLayer:</p>
                         <ul>
                             <li>does not generate decisions</li>
                             <li>does not modify the human response</li>
@@ -513,13 +482,13 @@
                     </button>
                     <div class="faq-answer">
                         <ul>
-                            <li>API key / OAuth authentication</li>
-                            <li>Scopes per decision type</li>
+                            <li>API key authentication (x-api-key header), stored only as a SHA-256 hash</li>
+                            <li>Decision levels allowed by each key’s plan</li>
                             <li>Organization isolation</li>
                             <li>Access logs</li>
-                            <li>Encryption in transit and at rest</li>
+                            <li>Encryption in transit (HTTPS required, webhooks included); two-factor secrets encrypted (AES-256-GCM); API keys and passwords stored as hashes</li>
                         </ul>
-                        <p class="faq-highlight">Sentinels can only access the cases assigned to them.</p>
+                        <p class="faq-highlight">A Sentinel can only access the cases assigned to them and those they already decided or escalated.</p>
                     </div>
                 </div>
             </div>
@@ -543,10 +512,10 @@
                     <div class="faq-answer">
                         <p>You can extract:</p>
                         <ul>
-                            <li>the full decision history</li>
+                            <li>a JSON export of your signed decisions from the client portal (5,000 most recent requests, latest decision of each)</li>
                             <li>the justifications</li>
                             <li>the timestamps</li>
-                            <li>the Sentinel identities</li>
+                            <li>the Sentinel’s pseudonymous reference (S-XXXXXX); the real identity stays with HumanLayer</li>
                         </ul>
                         <p class="faq-highlight">👉 No need to reconstruct from application logs.</p>
                     </div>
@@ -633,7 +602,7 @@
                             <li>human governance</li>
                             <li>audit-grade traceability</li>
                             <li>decision SLAs</li>
-                            <li>agent-native integration</li>
+                            <li>an API designed to be called by agents</li>
                         </ul>
                         <p class="faq-highlight">👉 HumanLayer saves you months, even years.</p>
                     </div>
@@ -656,7 +625,7 @@
             <!-- CTA -->
             <div class="faq-cta reveal">
                 <p>Ready to integrate?</p>
-                <a href="/client/inscription.html" class="btn btn-primary">
+                <a href="developers/index-en.html" class="btn btn-primary">
                     <svg class="hl-icon">
                         <use href="#icon-terminal" />
                     </svg>

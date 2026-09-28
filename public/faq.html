@@ -279,7 +279,7 @@
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p>Les <strong>organisations qui déploient des agents IA</strong> : banques, assureurs,
+                        <p>Les <strong>organisations qui déploient des agents IA</strong> : banques, assureurs,
                             hôpitaux, industriels, grandes entreprises.</p>
                         <p>Les agents IA sont des utilisateurs techniques de l’API, pas des clients contractuels.</p>
                     </div>
@@ -304,7 +304,7 @@
                         <p>HumanLayer :</p>
                         <ul>
                             <li>mobilise des Sentinels au moment critique</li>
-                            <li>sous délai garanti</li>
+                            <li>dans un délai cible par niveau (30 min, 2 h ou 4 h), suivi et escaladé en cas de dépassement</li>
                             <li>avec un format structuré</li>
                             <li>et une preuve exploitable en audit</li>
                         </ul>
@@ -350,7 +350,7 @@
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p>Des <strong>professionnels qualifiés</strong> :</p>
+                        <p>Des <strong>professionnels qualifiés</strong> :</p>
                         <ul>
                             <li>juristes</li>
                             <li>analystes crédit</li>
@@ -389,14 +389,7 @@
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p><strong>Oui.</strong> Chaque organisation définit :</p>
-                        <ul>
-                            <li>les types de décisions autorisées</li>
-                            <li>les niveaux de validation</li>
-                            <li>les règles d’escalade</li>
-                            <li>les cas de refus automatique</li>
-                        </ul>
-                        <p>HumanLayer applique ces politiques <strong>by design</strong>.</p>
+                        <p><strong>En partie.</strong> Pour chaque demande, vous choisissez le niveau (conformité, jugement, signature), le domaine d’expertise et, si besoin, la juridiction : seul un Sentinel actif de ce domaine (et de cette juridiction) la reçoit. Votre forfait détermine les niveaux accessibles à vos clés d’API. Les règles d’escalade sont les mêmes pour tous : réassignation à un autre Sentinel en cas de dépassement du délai, trois fois au plus. Aucun refus automatique n’est proposé : c’est votre agent qui décide quand solliciter une décision.</p>
                     </div>
                 </div>
             </div>
@@ -438,11 +431,11 @@
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p>Un <strong>artefact clair</strong> :</p>
+                        <p>Un <strong>artefact clair</strong> :</p>
                         <ul>
                             <li>quel agent IA a soumis la demande</li>
                             <li>quel contexte a été fourni</li>
-                            <li>qui a décidé</li>
+                            <li>quel Sentinel a décidé (référence pseudonyme, que HumanLayer rattache à une personne identifiée)</li>
                             <li>quand</li>
                             <li>sur quelle base</li>
                             <li>avec quelle justification</li>
@@ -460,13 +453,13 @@
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p>HumanLayer applique une logique de <strong>minimisation des données</strong> :</p>
+                        <p>HumanLayer applique une logique de <strong>minimisation des données</strong> :</p>
                         <ul>
                             <li>uniquement les éléments nécessaires à la décision</li>
                             <li>accès restreint</li>
                             <li>compartimentation stricte</li>
                         </ul>
-                        <p>Les modalités exactes dépendent du déploiement (standard / enterprise).</p>
+                        <p>Les mêmes règles s’appliquent à tous les forfaits, Enterprise compris : vous choisissez ce que vous transmettez (résumé de 5 000 caractères et context_json de 50 Ko au plus), et chaque Sentinel ne voit que les demandes qui lui ont été confiées.</p>
                     </div>
                 </div>
             </div>
@@ -488,12 +481,12 @@
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p>Comme une <strong>API d’infrastructure</strong> :</p>
+                        <p>Comme une <strong>API d’infrastructure</strong> :</p>
                         <ul>
-                            <li>appel synchrone ou asynchrone</li>
+                            <li>appel asynchrone : POST /api/v1/decisions, puis décision par webhook ou via GET /api/v1/decisions?id=…</li>
                             <li>webhooks</li>
-                            <li>SDKs (Python, TypeScript)</li>
-                            <li>intégration avec frameworks d’agents</li>
+                            <li>une API REST simple (en-tête x-api-key), sans SDK à installer</li>
+                            <li>un appel possible comme outil depuis tout framework d’agents capable d’interroger une API HTTP</li>
                         </ul>
                         <p>Pour un agent IA, HumanLayer est un <strong>outil appelable</strong>.</p>
                     </div>
@@ -507,14 +500,8 @@
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p>HumanLayer gère :</p>
-                        <ul>
-                            <li>les timeouts</li>
-                            <li>les escalades</li>
-                            <li>les fallback</li>
-                            <li>les refus par défaut</li>
-                        </ul>
-                        <p>Le comportement est <strong>configurable par l’organisation</strong>.</p>
+                        <p>Au-delà du délai du niveau, HumanLayer envoie un webhook signé sla.breached (une seule fois, si vous avez fourni callback_url) et réassigne la demande à un autre Sentinel qualifié, trois fois au plus.</p>
+                        <p>Aucune décision n’est jamais prise par défaut : la demande reste ouverte jusqu’à ce qu’un Sentinel tranche. Vous pouvez allonger le délai d’une demande (sla_minutes, 7 jours au plus), jamais le raccourcir.</p>
                     </div>
                 </div>
 
@@ -526,12 +513,7 @@
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p><strong>Oui.</strong> HumanLayer peut fonctionner :</p>
-                        <ul>
-                            <li>avec des Sentinels internes</li>
-                            <li>avec des Sentinels externes</li>
-                            <li>ou un mix des deux</li>
-                        </ul>
+                        <p><strong>Pas pour l’instant.</strong> Les demandes sont confiées au réseau de Sentinels de HumanLayer, selon le domaine et la juridiction. Réserver des Sentinels à votre organisation (vos experts internes, par exemple) n’est pas proposé aujourd’hui : contactez-nous si c’est un besoin.</p>
                         <p>HumanLayer reste la <strong>couche d’orchestration et de preuve</strong>.</p>
                     </div>
                 </div>
@@ -603,10 +585,10 @@
                     <div class="faq-answer">
                         <p><strong>Non.</strong> HumanLayer fait l’inverse : il force l’IA à reconnaître ses limites.
                         </p>
-                        <p>HumanLayer définit :</p>
+                        <p>Vous définissez, dans votre agent :</p>
                         <ul>
                             <li>quand l’IA peut agir seule</li>
-                            <li>et quand elle doit s’arrêter</li>
+                            <li>et quand elle doit s’arrêter et solliciter HumanLayer</li>
                         </ul>
                     </div>
                 </div>

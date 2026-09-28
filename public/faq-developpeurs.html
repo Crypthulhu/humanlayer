@@ -280,7 +280,7 @@
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p><strong>Oui, nativement.</strong></p>
+                        <p><strong>Oui.</strong></p>
                         <p>HumanLayer est conçu pour :</p>
                         <ul>
                             <li>être appelé comme un tool</li>
@@ -289,7 +289,8 @@
                         </ul>
                         <p>Exemple mental :</p>
                         <pre class="faq-code">if confidence < threshold or risk == "high":
-    decision = humanlayer.request(...)</pre>
+    r = requests.post(API, headers={"x-api-key": KEY}, json=dossier)
+    # puis webhook signé, ou GET /api/v1/decisions?id=…</pre>
                     </div>
                 </div>
             </div>
@@ -305,43 +306,37 @@
 
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span>Est-ce synchrone ou asynchrone ?</span>
+                        <span>Est-ce synchrone ou asynchrone ?</span>
                         <svg class="faq-chevron">
                             <use href="#icon-arrow" />
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p><strong>Les deux.</strong></p>
-                        <p><strong>Asynchrone (recommandé)</strong><br>Vous créez une demande de décision, vous continuez
-                            votre workflow, vous écoutez les webhooks.</p>
-                        <p><strong>Synchrone (bloquant)</strong><br>Possible pour des décisions rapides avec SLA court.
-                        </p>
-                        <p>Dans tous les cas, les délais sont explicitement déclarés et contractuels.</p>
+                        <p><strong>Asynchrone.</strong></p>
+                        <p>Vous créez une demande (POST /api/v1/decisions) : la réponse est immédiate (request_id, status, sla_minutes, expires_at) et votre workflow continue. La décision vous parvient ensuite par webhook signé ; vous pouvez aussi la consulter via GET /api/v1/decisions?id=…</p>
+                        <p>Pas de mode bloquant : le délai le plus court est de 30 min (niveau conformité).</p>
+                        <p>Le délai de chaque demande est annoncé dès sa création (sla_minutes, expires_at).</p>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span>À quoi ressemble une décision côté API ?</span>
+                        <span>À quoi ressemble une décision côté API ?</span>
                         <svg class="faq-chevron">
                             <use href="#icon-arrow" />
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p>Une décision est un <strong>objet structuré</strong>, avec :</p>
+                        <p>Une décision est un <strong>objet structuré</strong>, avec :</p>
                         <ul>
-                            <li>un type (<code>compliance_check</code>, <code>expert_judgment</code>,
-                                <code>authorized_decision</code>)
-                            </li>
-                            <li>un niveau (1, 2 ou 3)</li>
-                            <li>un contexte fourni par l'IA</li>
-                            <li>un statut (<code>pending</code>, <code>approved</code>, <code>rejected</code>,
-                                <code>escalated</code>, <code>timeout</code>)
-                            </li>
-                            <li>une justification humaine</li>
-                            <li>des métadonnées d'audit</li>
+                            <li>un type (<code>request_type</code> : <code>compliance</code>, <code>judgment</code> ou <code>signature</code>)</li>
+                            <li>un niveau (<code>level</code> : 1, 2 ou 3)</li>
+                            <li>le contexte fourni par l’agent (<code>summary</code>, <code>context_json</code>)</li>
+                            <li>un statut (<code>pending</code>, <code>assigned</code>, <code>decided</code>, <code>sla_breached</code>) et la dernière décision (<code>verdict</code> : <code>approved</code>, <code>rejected</code> ou <code>escalated</code>)</li>
+                            <li>la justification du Sentinel (<code>reasoning</code>)</li>
+                            <li>une signature Ed25519 (<code>signature</code>, <code>signed_payload</code>, <code>key_id</code>) et des horodatages</li>
                         </ul>
-                        <p class="faq-highlight">👉 Ce n'est pas un texte libre. C'est un artefact exploitable par un
+                        <p class="faq-highlight">👉 Ce n’est pas un texte libre. C’est un artefact exploitable par un
                             système.</p>
                     </div>
                 </div>
@@ -358,43 +353,37 @@
 
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span>Que voit le Sentinel ?</span>
+                        <span>Que voit le Sentinel ?</span>
                         <svg class="faq-chevron">
                             <use href="#icon-arrow" />
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p>Uniquement :</p>
+                        <p>Uniquement :</p>
                         <ul>
-                            <li>le contexte strictement nécessaire</li>
-                            <li>les éléments préparés par l'IA</li>
+                            <li>le résumé et le contexte transmis par votre agent : à vous de n’y mettre que le nécessaire</li>
+                            <li>les éléments préparés par l’IA</li>
                             <li>les champs requis pour décider</li>
                         </ul>
-                        <p>Pas d'accès global au système, pas de données inutiles.</p>
+                        <p>Pas d’accès global au système, pas de données inutiles.</p>
                         <p class="faq-highlight">👉 Minimisation by design.</p>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span>Puis-je utiliser uniquement des Sentinels internes ?</span>
+                        <span>Puis-je utiliser uniquement des Sentinels internes ?</span>
                         <svg class="faq-chevron">
                             <use href="#icon-arrow" />
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p><strong>Oui.</strong></p>
-                        <p>HumanLayer peut fonctionner avec :</p>
+                        <p><strong>Pas pour l’instant.</strong> Les demandes sont confiées au réseau de Sentinels de HumanLayer, selon le domaine et la juridiction ; réserver des Sentinels à votre organisation n’est pas proposé aujourd’hui.</p>
+                        <p>HumanLayer reste :</p>
                         <ul>
-                            <li>des Sentinels internes</li>
-                            <li>des Sentinels externes</li>
-                            <li>ou un mix des deux</li>
-                        </ul>
-                        <p>Dans tous les cas, HumanLayer reste :</p>
-                        <ul>
-                            <li>la couche d'orchestration</li>
+                            <li>la couche d’orchestration</li>
                             <li>la source de vérité</li>
-                            <li>la preuve d'audit</li>
+                            <li>la preuve d’audit</li>
                         </ul>
                     </div>
                 </div>
@@ -411,60 +400,39 @@
 
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span>Et si personne ne répond ?</span>
+                        <span>Et si personne ne répond ?</span>
                         <svg class="faq-chevron">
                             <use href="#icon-arrow" />
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p>HumanLayer gère :</p>
-                        <ul>
-                            <li>timeouts</li>
-                            <li>escalades automatiques</li>
-                            <li>refus par défaut</li>
-                            <li>fallback configurables</li>
-                        </ul>
-                        <p>Le comportement est <strong>déterministe et configurable</strong>.</p>
-                        <p class="faq-highlight">Votre code ne reste jamais bloqué indéfiniment.</p>
+                        <p>Au-delà du délai, un webhook signé sla.breached vous est envoyé (une fois) et la demande est réassignée automatiquement à un autre Sentinel qualifié, trois fois au plus. Aucune décision n’est prise par défaut, et rien n’est configurable hormis un délai plus long (sla_minutes).</p>
+                        <p class="faq-highlight">L’API étant asynchrone, votre code n’attend jamais : c’est à votre agent de décider quoi faire tant qu’aucune décision n’est rendue.</p>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span>Peut-on forcer une décision "oui / non" ?</span>
+                        <span>Peut-on forcer une décision "oui / non" ?</span>
                         <svg class="faq-chevron">
                             <use href="#icon-arrow" />
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p><strong>Oui.</strong></p>
-                        <p>Vous pouvez définir :</p>
-                        <ul>
-                            <li>décisions binaires</li>
-                            <li>décisions conditionnelles</li>
-                            <li>décisions avec champs obligatoires</li>
-                            <li>décisions avec seuils</li>
-                        </ul>
+                        <p><strong>Oui, c’est la règle.</strong> Toute décision finale est binaire : <code>approved</code> ou <code>rejected</code>, avec une justification écrite obligatoire (10 caractères au moins), et signée. Le Sentinel peut aussi escalader la demande vers un autre Sentinel. Les décisions conditionnelles, les champs de réponse personnalisés et les seuils ne sont pas proposés : précisez vos critères dans <code>summary</code> ou <code>context_json</code>.</p>
                         <p class="faq-highlight">HumanLayer ne laisse pas de décisions ambiguës.</p>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span>Peut-on demander un second avis ?</span>
+                        <span>Peut-on demander un second avis ?</span>
                         <svg class="faq-chevron">
                             <use href="#icon-arrow" />
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p><strong>Oui.</strong></p>
-                        <p>Nativement :</p>
-                        <ul>
-                            <li>escalade automatique</li>
-                            <li>second Sentinel</li>
-                            <li>validation multi-signature</li>
-                            <li>quorum (selon configuration enterprise)</li>
-                        </ul>
+                        <p><strong>Oui.</strong> Envoyez une nouvelle demande avec <code>second_opinion_of</code> (l’identifiant de la demande tranchée) : un autre Sentinel, qui n’a jamais traité le dossier et ne voit pas le premier verdict, rend sa propre décision signée. Un seul second avis par demande, facturé comme une nouvelle décision du même niveau. Le Sentinel assigné peut aussi escalader le dossier de lui-même. La validation multi-signature et le quorum ne sont pas proposés.</p>
                     </div>
                 </div>
             </div>
@@ -480,14 +448,14 @@
 
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span>HumanLayer décide-t-il à ma place ?</span>
+                        <span>HumanLayer décide-t-il à ma place ?</span>
                         <svg class="faq-chevron">
                             <use href="#icon-arrow" />
                         </svg>
                     </button>
                     <div class="faq-answer">
                         <p><strong>Non. Jamais.</strong></p>
-                        <p>HumanLayer :</p>
+                        <p>HumanLayer :</p>
                         <ul>
                             <li>ne génère pas de décision</li>
                             <li>ne modifie pas la réponse humaine</li>
@@ -509,21 +477,20 @@
 
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span>Quid de la sécurité ?</span>
+                        <span>Quid de la sécurité ?</span>
                         <svg class="faq-chevron">
                             <use href="#icon-arrow" />
                         </svg>
                     </button>
                     <div class="faq-answer">
                         <ul>
-                            <li>Authentification par API key / OAuth</li>
-                            <li>Scopes par type de décision</li>
+                            <li>Authentification par clé d’API (en-tête x-api-key), stockée uniquement sous forme d’empreinte SHA-256</li>
+                            <li>Niveaux de décision autorisés selon le forfait de chaque clé</li>
                             <li>Isolation par organisation</li>
-                            <li>Journaux d'accès</li>
-                            <li>Chiffrement en transit et au repos</li>
+                            <li>Journaux d’accès</li>
+                            <li>Chiffrement en transit (HTTPS obligatoire, webhooks compris) ; secrets de double authentification chiffrés (AES-256-GCM) ; clés d’API et mots de passe stockés sous forme d’empreinte</li>
                         </ul>
-                        <p class="faq-highlight">Les Sentinels n'ont accès qu'aux dossiers qui leur sont
-                            assignés.</p>
+                        <p class="faq-highlight">Un Sentinel n’a accès qu’aux dossiers qui lui sont assignés et à ceux qu’il a déjà tranchés ou escaladés.</p>
                     </div>
                 </div>
             </div>
@@ -539,18 +506,18 @@
 
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span>Que se passe-t-il en cas d'audit ou d'incident ?</span>
+                        <span>Que se passe-t-il en cas d’audit ou d’incident ?</span>
                         <svg class="faq-chevron">
                             <use href="#icon-arrow" />
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p>Vous pouvez extraire :</p>
+                        <p>Vous pouvez extraire :</p>
                         <ul>
-                            <li>l'historique complet des décisions</li>
+                            <li>un export JSON de vos décisions signées depuis l’espace client (5 000 demandes les plus récentes, dernière décision de chacune)</li>
                             <li>les justifications</li>
                             <li>les horodatages</li>
-                            <li>les identités Sentinels</li>
+                            <li>la référence pseudonyme du Sentinel (S-XXXXXX), l’identité réelle restant conservée par HumanLayer</li>
                         </ul>
                         <p class="faq-highlight">👉 Pas besoin de reconstituer à partir de logs applicatifs.</p>
                     </div>
@@ -568,18 +535,18 @@
 
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span>En quoi est-ce différent d'un simple "approval workflow" ?</span>
+                        <span>En quoi est-ce différent d’un simple "approval workflow" ?</span>
                         <svg class="faq-chevron">
                             <use href="#icon-arrow" />
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p>Un workflow classique :</p>
+                        <p>Un workflow classique :</p>
                         <ul>
                             <li>ne vérifie pas les qualifications</li>
-                            <li>n'engage pas la responsabilité</li>
+                            <li>n’engage pas la responsabilité</li>
                             <li>ne fournit pas de preuve opposable</li>
-                            <li>n'est pas pensé pour l'IA</li>
+                            <li>n’est pas pensé pour l’IA</li>
                         </ul>
                         <p class="faq-highlight">HumanLayer traite la décision comme un <strong>acte engageant</strong>,
                             pas un clic.</p>
@@ -598,14 +565,14 @@
 
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span>Est-ce que ça va ralentir mon système ?</span>
+                        <span>Est-ce que ça va ralentir mon système ?</span>
                         <svg class="faq-chevron">
                             <use href="#icon-arrow" />
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p><strong>Oui — là où c'est volontaire.</strong></p>
-                        <p>HumanLayer est appelé :</p>
+                        <p><strong>Oui — là où c’est volontaire.</strong></p>
+                        <p>HumanLayer est appelé :</p>
                         <ul>
                             <li>uniquement sur des points critiques</li>
                             <li>quand ralentir est préférable à prendre un risque</li>
@@ -621,24 +588,24 @@
                     <svg class="hl-icon">
                         <use href="#icon-building" />
                     </svg>
-                    Pourquoi HumanLayer ?
+                    Pourquoi HumanLayer ?
                 </h3>
 
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span>Pourquoi ne pas faire ça "en interne" ?</span>
+                        <span>Pourquoi ne pas faire ça "en interne" ?</span>
                         <svg class="faq-chevron">
                             <use href="#icon-arrow" />
                         </svg>
                     </button>
                     <div class="faq-answer">
-                        <p>Parce que vous devriez construire :</p>
+                        <p>Parce que vous devriez construire :</p>
                         <ul>
-                            <li>un système d'assignation</li>
+                            <li>un système d’assignation</li>
                             <li>une gouvernance humaine</li>
                             <li>une traçabilité audit-grade</li>
                             <li>des SLA décisionnels</li>
-                            <li>une intégration agent-native</li>
+                            <li>une API pensée pour être appelée par des agents</li>
                         </ul>
                         <p class="faq-highlight">👉 HumanLayer vous fait gagner des mois, voire des années.</p>
                     </div>
@@ -652,8 +619,8 @@
                         <svg class="hl-icon hl-lg">
                             <use href="#icon-code" />
                         </svg>
-                        <em>En une phrase, pour un développeur sceptique :</em><br>
-                        <strong>HumanLayer est ce que vous appelez quand votre code sait quoi faire, mais n'a pas le droit
+                        <em>En une phrase, pour un développeur sceptique :</em><br>
+                        <strong>HumanLayer est ce que vous appelez quand votre code sait quoi faire, mais n’a pas le droit
                             de le faire.</strong>
                     </p>
                 </div>
@@ -661,8 +628,8 @@
 
             <!-- CTA -->
             <div class="faq-cta reveal">
-                <p>Prêt à intégrer ?</p>
-                <a href="/client/inscription.html" class="btn btn-primary">
+                <p>Prêt à intégrer ?</p>
+                <a href="developers/" class="btn btn-primary">
                     <svg class="hl-icon">
                         <use href="#icon-terminal" />
                     </svg>

@@ -732,8 +732,8 @@
 
             <div class="docs-header" id="overview">
                 <h1>API <span>HumanLayer</span> <span class="version-badge">v1</span></h1>
-                <p>Intégrez des décisions humaines qualifiées dans vos agents IA via une API REST. Votre agent automatise par défaut ; quand une demande franchit le seuil Arbitrium, il la soumet à HumanLayer, qui la route vers un Sentinel habilité et renvoie une décision justifiée, horodatée et <strong>signée</strong>.</p>
-                <p><strong>URL de base :</strong> <code>https://humanlayer.systems/api/v1</code></p>
+                <p>Intégrez des décisions humaines qualifiées dans vos agents IA via une API REST. Votre agent automatise par défaut ; quand une demande franchit le seuil Arbitrium, il la soumet à HumanLayer, qui la route vers un Sentinel habilité et renvoie une décision justifiée, horodatée et <strong>signée</strong>.</p>
+                <p><strong>URL de base :</strong> <code>https://humanlayer.systems/api/v1</code></p>
             </div>
 
             <!-- ═══ Auth ═══ -->
@@ -746,7 +746,7 @@
                 </div>
                 <ul>
                     <li>Créez et révoquez vos clés dans l’<a href="/client/">espace client</a> (jusqu’à 5 clés actives).</li>
-                    <li>La clé complète n’est affichée qu’une fois : HumanLayer n’en conserve que l’empreinte SHA-256.</li>
+                    <li>La clé complète n’est affichée qu’une fois : HumanLayer n’en conserve que l’empreinte SHA-256.</li>
                     <li>Chaque clé reçoit un secret de signature des webhooks (<code>whsec_…</code>), lui aussi affiché à la création.</li>
                 </ul>
                 <div class="alert alert-info">
@@ -792,12 +792,12 @@
                     <div class="flow-node"><div class="flow-node-icon icon-decision">✓</div><div class="flow-node-label">Décision signée</div><div class="flow-node-sub">Webhook + API</div></div>
                 </div>
                 <ol>
-                    <li>L’agent <strong>soumet</strong> la demande : <code>POST /api/v1/decisions</code>.</li>
+                    <li>L’agent <strong>soumet</strong> la demande : <code>POST /api/v1/decisions</code>.</li>
                     <li>HumanLayer la <strong>route</strong> vers un Sentinel actif du bon domaine (et de la bonne juridiction), dont la double authentification est configurée, en privilégiant le moins chargé.</li>
-                    <li>Le Sentinel <strong>tranche</strong> (<code>approved</code> ou <code>rejected</code>, justification obligatoire) ou <strong>escalade</strong> pour un second avis : la demande passe alors à un autre Sentinel.</li>
-                    <li>La décision est <strong>signée</strong> (Ed25519) et vous est livrée par webhook ; elle reste consultable via <code>GET /api/v1/decisions?id=…</code>.</li>
+                    <li>Le Sentinel <strong>tranche</strong> (<code>approved</code> ou <code>rejected</code>, justification obligatoire) ou <strong>escalade</strong> pour un second avis : la demande passe alors à un autre Sentinel.</li>
+                    <li>La décision est <strong>signée</strong> (Ed25519) et vous est livrée par webhook ; elle reste consultable via <code>GET /api/v1/decisions?id=…</code>.</li>
                     <li>Si le SLA est dépassé, vous recevez <code>sla.breached</code> et la demande est réassignée automatiquement (trois escalades au plus). Le contrôle tourne toutes les 5 minutes.</li>
-                    <li>Une fois la demande tranchée, vous pouvez demander un <a href="#second-opinion">second avis</a> : un autre Sentinel reprend le dossier sans connaître le premier verdict.</li>
+                    <li>Une fois la demande tranchée, vous pouvez demander un <a href="#second-opinion">second avis</a> : un autre Sentinel reprend le dossier sans connaître le premier verdict.</li>
                 </ol>
             </section>
 
@@ -815,12 +815,12 @@
                             <tr><td><span class="param-name">agent_name</span></td><td><span class="param-type">string</span></td><td><span class="param-optional">optionnel</span></td><td>Nom lisible de l’agent</td></tr>
                             <tr><td><span class="param-name">request_type</span></td><td><span class="param-type">string</span></td><td><span class="param-required">requis</span></td><td><code>compliance</code> | <code>judgment</code> | <code>signature</code> (voir les niveaux)</td></tr>
                             <tr><td><span class="param-name">domain</span></td><td><span class="param-type">string</span></td><td><span class="param-required">requis</span></td><td><code>legal</code>, <code>finance</code>, <code>compliance</code>, <code>medical</code>, <code>accounting</code>, <code>hr</code>, <code>insurance</code>, <code>quality</code>, <code>security</code>, <code>other</code></td></tr>
-                            <tr><td><span class="param-name">jurisdiction</span></td><td><span class="param-type">string</span></td><td><span class="param-optional">optionnel</span></td><td>Juridiction exigée (ex. « Québec », « France »)</td></tr>
+                            <tr><td><span class="param-name">jurisdiction</span></td><td><span class="param-type">string</span></td><td><span class="param-optional">optionnel</span></td><td>Juridiction exigée (ex. « Québec », « France »)</td></tr>
                             <tr><td><span class="param-name">summary</span></td><td><span class="param-type">string</span></td><td><span class="param-required">requis</span></td><td>La question posée au Sentinel (5 000 caractères max.)</td></tr>
                             <tr><td><span class="param-name">context_json</span></td><td><span class="param-type">object</span></td><td><span class="param-optional">optionnel</span></td><td>Dossier structuré préparé par l’IA (50 Ko max.)</td></tr>
                             <tr><td><span class="param-name">priority</span></td><td><span class="param-type">string</span></td><td><span class="param-optional">optionnel</span></td><td><code>low</code> | <code>normal</code> (défaut) | <code>high</code> | <code>urgent</code></td></tr>
                             <tr><td><span class="param-name">sla_minutes</span></td><td><span class="param-type">integer</span></td><td><span class="param-optional">optionnel</span></td><td>Délai plus long que l’engagement du niveau (10 080 max.)</td></tr>
-                            <tr><td><span class="param-name">callback_url</span></td><td><span class="param-type">string</span></td><td><span class="param-optional">optionnel</span></td><td>URL de webhook : HTTPS obligatoire, hôte public (les adresses privées et internes sont refusées)</td></tr>
+                            <tr><td><span class="param-name">callback_url</span></td><td><span class="param-type">string</span></td><td><span class="param-optional">optionnel</span></td><td>URL de webhook : HTTPS obligatoire, hôte public (les adresses privées et internes sont refusées)</td></tr>
                         </tbody>
                     </table>
                     <h3>Réponse (200)</h3>
@@ -837,8 +837,8 @@
 }</pre>
                     </div>
                     <div class="alert alert-warning">
-                        <strong>⚠️ Statut « pending »</strong>
-                        Si aucun Sentinel qualifié n’est disponible, la demande reste <code>pending</code> ; le routage est retenté toutes les 5 minutes. L’identité du Sentinel n’est jamais exposée : <code>sentinel_ref</code> est un pseudonyme stable.
+                        <strong>⚠️ Statut « pending »</strong>
+                        Si aucun Sentinel qualifié n’est disponible, la demande reste <code>pending</code> ; le routage est retenté toutes les 5 minutes. L’identité du Sentinel n’est jamais exposée : <code>sentinel_ref</code> est un pseudonyme stable.
                     </div>
                 </div>
             </section>
@@ -848,8 +848,8 @@
                 <h2>Suivre une demande</h2>
                 <div class="endpoint-card method-get">
                     <div><span class="endpoint-method">GET</span> <span class="endpoint-path">/api/v1/decisions?id={request_id}</span></div>
-                    <p class="endpoint-desc">Renvoie l’état de la demande, son SLA et, une fois tranchée, la décision signée. Préférez les webhooks au sondage ; si vous sondez, espacez les appels d’au moins 15 secondes.</p>
-                    <h3>Réponse (200) : demande tranchée</h3>
+                    <p class="endpoint-desc">Renvoie l’état de la demande, son SLA et, une fois tranchée, la décision signée. Préférez les webhooks au sondage ; si vous sondez, espacez les appels d’au moins 15 secondes.</p>
+                    <h3>Réponse (200) : demande tranchée</h3>
                     <div class="code-block">
                         <div class="code-header"><span class="code-lang">json</span></div>
 <pre class="code-body">{
@@ -917,7 +917,7 @@
                     </div>
                     <div class="alert alert-info">
                         <strong>Un seul second avis par demande</strong>
-                        Il n’est possible que sur une demande tranchée (sinon <code>409 not_decided</code>) et une seule fois (<code>409 second_opinion_exists</code>). La demande d’origine expose ensuite <code>second_opinion_id</code>, le second avis <code>second_opinion_of</code>. Chaque verdict est signé séparément ; s’ils divergent, la suite vous appartient.
+                        Il n’est possible que sur une demande tranchée (sinon <code>409 not_decided</code>) et une seule fois (<code>409 second_opinion_exists</code>). La demande d’origine expose ensuite <code>second_opinion_id</code>, le second avis <code>second_opinion_of</code>. Chaque verdict est signé séparément ; s’ils divergent, la suite vous appartient.
                     </div>
                 </div>
             </section>
@@ -934,17 +934,17 @@
             <!-- ═══ Webhooks ═══ -->
             <section class="doc-section" id="webhook">
                 <h2>Webhooks signés</h2>
-                <p>Si vous fournissez <code>callback_url</code>, HumanLayer y envoie un <code>POST</code> JSON à chaque événement :</p>
+                <p>Si vous fournissez <code>callback_url</code>, HumanLayer y envoie un <code>POST</code> JSON à chaque événement :</p>
                 <table class="param-table">
                     <thead><tr><th>Événement</th><th>Quand</th></tr></thead>
                     <tbody>
                         <tr><td><span class="param-name">decision.completed</span></td><td>Le Sentinel a approuvé</td></tr>
                         <tr><td><span class="param-name">decision.rejected</span></td><td>Le Sentinel a refusé</td></tr>
-                        <tr><td><span class="param-name">decision.escalated</span></td><td>Second avis demandé : la demande passe à un autre Sentinel</td></tr>
-                        <tr><td><span class="param-name">sla.breached</span></td><td>Le délai est dépassé ; réassignation automatique</td></tr>
+                        <tr><td><span class="param-name">decision.escalated</span></td><td>Second avis demandé : la demande passe à un autre Sentinel</td></tr>
+                        <tr><td><span class="param-name">sla.breached</span></td><td>Le délai est dépassé ; réassignation automatique</td></tr>
                     </tbody>
                 </table>
-                <p>En-têtes : <code>X-HumanLayer-Event</code>, <code>X-HumanLayer-Delivery</code> et <code>X-HumanLayer-Signature: t=&lt;horodatage&gt;,v1=&lt;hmac&gt;</code>, où <code>v1</code> est le HMAC-SHA256 hexadécimal de <code>t + "." + corps brut</code> avec le secret <code>whsec_…</code> de votre clé. Chaque événement est livré une fois (délai de 5 s) ; en cas d’échec, l’état reste consultable par l’API (<code>webhook_status</code>).</p>
+                <p>En-têtes : <code>X-HumanLayer-Event</code>, <code>X-HumanLayer-Delivery</code> et <code>X-HumanLayer-Signature: t=&lt;horodatage&gt;,v1=&lt;hmac&gt;</code>, où <code>v1</code> est le HMAC-SHA256 hexadécimal de <code>t + "." + corps brut</code> avec le secret <code>whsec_…</code> de votre clé. Chaque événement est livré une fois (délai de 5 s) ; en cas d’échec, l’état reste consultable par l’API (<code>webhook_status</code>).</p>
                 <div class="code-block">
                     <div class="code-header"><span class="code-lang">python</span><button class="code-copy" onclick="copyCode(this)">Copier</button></div>
 <pre class="code-body"><span class="hl-kw">import</span> hmac, hashlib, time
@@ -962,7 +962,7 @@
             <!-- ═══ Verify ═══ -->
             <section class="doc-section" id="verify">
                 <h2>Vérifier une décision</h2>
-                <p>Chaque décision est signée en Ed25519 sur le champ <code>signed_payload</code> (JSON canonique : identifiants, verdict, empreinte SHA-256 de la justification, pseudonyme du Sentinel, horodatage, <code>key_id</code>). Toute modification ultérieure invalide la signature.</p>
+                <p>Chaque décision est signée en Ed25519 sur le champ <code>signed_payload</code> (JSON canonique : identifiants, verdict, empreinte SHA-256 de la justification, pseudonyme du Sentinel, horodatage, <code>key_id</code>). Toute modification ultérieure invalide la signature.</p>
                 <div class="code-block">
                     <div class="code-header"><span class="code-lang">javascript (Node.js)</span><button class="code-copy" onclick="copyCode(this)">Copier</button></div>
 <pre class="code-body"><span class="hl-kw">import</span> crypto <span class="hl-kw">from</span> <span class="hl-str">'node:crypto'</span>;
@@ -987,10 +987,10 @@
                         <tr><td><span class="param-name">pending</span></td><td>En attente d’un Sentinel disponible</td></tr>
                         <tr><td><span class="param-name">assigned</span></td><td>Assignée à un Sentinel, dans les délais</td></tr>
                         <tr><td><span class="param-name">sla_breached</span></td><td>Délai dépassé et aucun autre Sentinel disponible pour l’instant</td></tr>
-                        <tr><td><span class="param-name">decided</span></td><td>Tranchée : <code>verdict</code> vaut <code>approved</code> ou <code>rejected</code></td></tr>
+                        <tr><td><span class="param-name">decided</span></td><td>Tranchée : <code>verdict</code> vaut <code>approved</code> ou <code>rejected</code></td></tr>
                     </tbody>
                 </table>
-                <p>Une escalade (<code>escalated</code>) n’est pas un statut final : la demande repasse à <code>assigned</code> auprès d’un autre Sentinel, et <code>escalation_count</code> augmente.</p>
+                <p>Une escalade (<code>escalated</code>) n’est pas un statut final : la demande repasse à <code>assigned</code> auprès d’un autre Sentinel, et <code>escalation_count</code> augmente.</p>
             </section>
 
             <!-- ═══ Errors ═══ -->
@@ -1007,7 +1007,7 @@
                         <tr><td>409</td><td><code>not_decided</code>, <code>second_opinion_exists</code></td><td>Second avis sur une demande pas encore tranchée, ou déjà demandé</td></tr>
                         <tr><td>413</td><td><code>payload_too_large</code></td><td>Corps supérieur à 64 Ko</td></tr>
                         <tr><td>429</td><td><code>rate_limited</code>, <code>daily_limit_reached</code></td><td>Plus de 60 demandes par minute et par clé, ou quota du forfait atteint. Respectez l’en-tête <code>Retry-After</code>.</td></tr>
-                        <tr><td>500</td><td><code>server_error</code></td><td>Erreur interne : réessayez avec un délai croissant</td></tr>
+                        <tr><td>500</td><td><code>server_error</code></td><td>Erreur interne : réessayez avec un délai croissant</td></tr>
                     </tbody>
                 </table>
             </section>

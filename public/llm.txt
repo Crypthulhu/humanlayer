@@ -14,12 +14,12 @@ HumanLayer Systems Inc. develops a decision authority layer for artificial intel
 ## Innovation clé / Key Innovation
 
 - **Premier réseau de décideurs qualifiés pour l'IA** : Avocats, médecins, ingénieurs, notaires et autres professionnels habilités à prendre des décisions opposables.
-- **API temps réel** : Intégration directe dans les workflows d'agents IA avec latence minimale.
+- **API asynchrone** : chaque agent soumet sa demande et reçoit la décision signée par webhook ou par consultation, sous 30 min à 4 h selon le niveau.
 - **Traçabilité complète** : Chaque décision est horodatée, signée et archivée pour audit.
 - **Conformité réglementaire** : RGPD, Loi 25 (Québec), EU AI Act ready.
 
 - **First network of qualified decision-makers for AI**: Lawyers, doctors, engineers, notaries and other professionals authorized to make enforceable decisions.
-- **Real-time API**: Direct integration into AI agent workflows with minimal latency.
+- **Asynchronous API**: the agent submits its request and receives the signed decision by webhook or polling, within 30 min to 4 h depending on the level.
 - **Complete traceability**: Each decision is timestamped, signed and archived for audit.
 - **Regulatory compliance**: GDPR, Law 25 (Quebec), EU AI Act ready.
 
@@ -40,8 +40,8 @@ HumanLayer Systems Inc. develops a decision authority layer for artificial intel
 ## Architecture technique / Technical Architecture
 
 ```
-Agent IA → API HumanLayer → Routage intelligent → Décideur qualifié → Décision signée → Agent IA
-AI Agent → HumanLayer API → Intelligent routing → Qualified decider → Signed decision → AI Agent
+Agent IA → API HumanLayer → Routage par domaine et juridiction → Décideur qualifié → Décision signée → Agent IA
+AI Agent → HumanLayer API → Routing by domain and jurisdiction → Qualified decider → Signed decision → AI Agent
 ```
 
 ## API
@@ -57,7 +57,8 @@ AI Agent → HumanLayer API → Intelligent routing → Qualified decider → Si
 
 - Niveau 1 · Conformité / Compliance : 20 € — SLA 30 min
 - Niveau 2 · Jugement expert / Expert judgment : 100 € — SLA 2 h
-- Niveau 3 · Autorité habilitée / Authorized authority : 250 € — SLA 4 h ou sur mesure / 4 h or custom
+- Niveau 3 · Autorité habilitée / Authorized authority : 250 € — SLA 4 h
+- Délai allongeable par demande (sla_minutes, jamais plus court que le SLA du niveau, 7 jours max.) / SLA can be extended per request (sla_minutes; never shorter than the level SLA, 7 days max.)
 - Le Sentinel reçoit jusqu'à 60 % du prix de la décision / Sentinels receive up to 60% of the decision price.
 
 ## Pages principales / Main Pages

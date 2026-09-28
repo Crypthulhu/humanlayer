@@ -242,9 +242,8 @@
                     <h2>5. Gouvernance et contrôle</h2>
 
                     <h3>5.1 Politiques décisionnelles</h3>
-                    <p>HumanLayer met à disposition des moyens techniques permettant à l’Organisation Cliente
-                        d’appliquer ses propres politiques décisionnelles.</p>
-                    <p>HumanLayer ne définit, n’interprète ni n’évalue ces politiques.</p>
+                    <p>HumanLayer permet à l’Organisation Cliente de choisir, pour chaque demande, le niveau de Décision, le domaine d’expertise, la juridiction et, le cas échéant, un délai allongé ; les règles de déclenchement des demandes relèvent de l’Organisation Cliente et de ses Agents IA.</p>
+                    <p>HumanLayer ne définit, n’interprète ni n’évalue les politiques décisionnelles de l’Organisation Cliente.</p>
 
                     <h3>5.2 Vérification des Décideurs humains</h3>
                     <p>Les mécanismes de vérification mis en œuvre par HumanLayer visent exclusivement à contrôler
@@ -259,8 +258,8 @@
                     <h3>5.3 Désactivation et contrôle</h3>
                     <p>L’Organisation Cliente peut à tout moment :</p>
                     <ul>
-                        <li>restreindre certaines catégories de Décisions,</li>
-                        <li>suspendre les appels API,</li>
+                        <li>révoquer une ou plusieurs clés d’API depuis son espace client, ce qui bloque immédiatement les appels correspondants,</li>
+                        <li>demander à HumanLayer la suspension d’une clé ou un changement de forfait,</li>
                         <li>désactiver totalement les services HumanLayer.</li>
                     </ul>
                 </div>
@@ -274,8 +273,8 @@
                         été rendue par un Décideur humain identifié sur la base d’un Contexte de Décision traçable.</p>
 
                     <h3>6.2 Contexte erroné ou incomplet</h3>
-                    <p>HumanLayer conserve une trace fidèle du Contexte de Décision tel que transmis par l’Agent IA.</p>
-                    <p>Il appartient au Décideur humain d’accepter, refuser ou solliciter des compléments d’information.</p>
+                    <p>HumanLayer conserve une trace fidèle du Contexte de Décision tel que reçu (résumé limité à 5 000 caractères, context_json à 50 Ko).</p>
+                    <p>Il appartient au Décideur humain d’approuver, de rejeter — notamment pour contexte insuffisant — ou d’escalader la demande vers un autre Décideur humain.</p>
 
                     <h3>6.3 SLA Décisionnels</h3>
                     <p>Les SLA Décisionnels constituent des obligations de moyens et non de résultat.</p>
@@ -330,9 +329,7 @@
                         réglementations applicables en matière de systèmes automatisés et d’IA.</p>
 
                     <h3>9.2 Juridictions</h3>
-                    <p>Chaque Décision est rendue par un Décideur humain déclarant être habilité à intervenir dans la
-                        juridiction applicable, sous la responsabilité exclusive du Décideur humain et de l’Organisation
-                        Cliente.</p>
+                    <p>Lorsque l’Organisation Cliente indique une juridiction dans sa demande, la Décision est rendue par un Décideur humain déclarant être habilité à intervenir dans cette juridiction, sous la responsabilité exclusive du Décideur humain et de l’Organisation Cliente.</p>
                 </div>
 
                 <!-- Section 10 -->

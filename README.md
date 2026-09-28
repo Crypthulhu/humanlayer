@@ -53,8 +53,10 @@ npm run secrets -- --admin-password "mot de passe administrateur"
 Ne changez pas `DECISION_SIGNING_KEY` sans raison : les décisions déjà signées
 ne se vérifient qu'avec l'ancienne clé publique.
 
-La fonction planifiée `sla-sweeper` s'exécute toutes les 5 minutes. Elle signale
-les SLA dépassés et réassigne les demandes à un autre Sentinel.
+Deux fonctions planifiées tournent en production :
+
+- `sla-sweeper`, toutes les 5 minutes, signale les SLA dépassés et réassigne les demandes à un autre Sentinel ;
+- `data-retention`, chaque jour, efface les adresses IP de plus de 12 mois et les compteurs de tentatives expirés, comme l'annonce la politique de confidentialité.
 
 ### Au premier déploiement de cette version
 
